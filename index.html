@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>デイリーレポートダッシュボード</title>
+<title>SEEDダッシュボード</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -29,6 +29,15 @@
   --plan-text: #1A4FA0;
   --plan-border: #BDD3F8;
   --slack: #4A154B;
+  --playwright: #C25219;
+  --playwright-bg: #FEF3E2;
+  --playwright-border: #F5D0A9;
+  --director: #5C3D9E;
+  --director-bg: #F0EDFD;
+  --director-border: #CBBFF8;
+  --producer: #1D9E75;
+  --producer-bg: #E1F5EE;
+  --producer-border: #A8DEC8;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -43,7 +52,7 @@ body {
 
 .page-header {
   max-width: 1100px;
-  margin: 0 auto 2rem;
+  margin: 0 auto 1.25rem;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -87,6 +96,42 @@ body {
   flex-shrink: 0;
 }
 
+/* ── Tab Navigation ── */
+.tab-nav-wrapper {
+  max-width: 1100px;
+  margin: 0 auto 1.5rem;
+  border-bottom: 2px solid var(--border);
+}
+
+.tab-nav { display: flex; }
+
+.tab-btn {
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  padding: 10px 22px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+
+.tab-btn:hover { color: var(--text-primary); }
+
+.tab-btn.active {
+  color: var(--seed);
+  border-bottom-color: var(--seed);
+  font-weight: 700;
+}
+
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* ── Dashboard ── */
 .metrics {
   max-width: 1100px;
   margin: 0 auto 1.5rem;
@@ -141,11 +186,7 @@ body {
   color: var(--text-secondary);
 }
 
-.leg-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-}
+.leg-dot { width: 10px; height: 10px; border-radius: 50%; }
 
 .grid {
   max-width: 1100px;
@@ -184,18 +225,8 @@ body {
   flex-shrink: 0;
 }
 
-.member-name {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 1px;
-}
-
-.member-date {
-  font-size: 11px;
-  color: var(--text-tertiary);
-  font-family: 'DM Mono', monospace;
-}
+.member-name { font-size: 15px; font-weight: 700; color: var(--text-primary); margin-bottom: 1px; }
+.member-date { font-size: 11px; color: var(--text-tertiary); font-family: 'DM Mono', monospace; }
 
 .group { margin-bottom: 10px; }
 .group:last-child { margin-bottom: 0; }
@@ -213,8 +244,8 @@ body {
 }
 
 .gl-urgent { background: var(--urgent-bg); color: var(--urgent-text); border: 1px solid var(--urgent-border); }
-.gl-wip { background: var(--wip-bg); color: var(--wip-text); border: 1px solid var(--wip-border); }
-.gl-plan { background: var(--plan-bg); color: var(--plan-text); border: 1px solid var(--plan-border); }
+.gl-wip    { background: var(--wip-bg);    color: var(--wip-text);    border: 1px solid var(--wip-border); }
+.gl-plan   { background: var(--plan-bg);   color: var(--plan-text);   border: 1px solid var(--plan-border); }
 
 .task {
   font-size: 12.5px;
@@ -233,18 +264,235 @@ body {
 .task.soil { border-left-color: var(--soil); }
 .task.seed { border-left-color: var(--seed); }
 
-.tag {
-  font-size: 10px;
-  font-weight: 700;
-  padding: 1px 6px;
-  border-radius: 8px;
-  flex-shrink: 0;
-  letter-spacing: 0.03em;
-}
-
+.tag { font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 8px; flex-shrink: 0; letter-spacing: 0.03em; }
 .tag-soil { background: var(--soil-bg); color: var(--soil-text); }
 .tag-seed { background: var(--seed-bg); color: var(--seed-text); }
 
+/* ── HR Requirements ── */
+.hr-container { max-width: 1100px; margin: 0 auto; }
+
+.hr-intro {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.hr-intro p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+.hr-intro strong { color: var(--text-primary); }
+
+.role-tab-nav { display: flex; gap: 8px; margin-bottom: 1.25rem; flex-wrap: wrap; }
+
+.role-tab-btn {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 24px;
+  padding: 8px 22px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.role-tab-btn:hover { border-color: var(--text-secondary); color: var(--text-primary); }
+.role-tab-btn.active[data-role="playwright"] { background: var(--playwright-bg); border-color: var(--playwright); color: var(--playwright); font-weight: 700; }
+.role-tab-btn.active[data-role="director"]   { background: var(--director-bg);   border-color: var(--director);   color: var(--director);   font-weight: 700; }
+.role-tab-btn.active[data-role="producer"]   { background: var(--producer-bg);   border-color: var(--producer);   color: var(--producer);   font-weight: 700; }
+
+.role-content { display: none; }
+.role-content.active { display: block; }
+
+.role-header { border-radius: 14px; padding: 1.5rem; margin-bottom: 1.25rem; }
+.role-header.playwright { background: var(--playwright-bg); border: 1px solid var(--playwright-border); }
+.role-header.director   { background: var(--director-bg);   border: 1px solid var(--director-border); }
+.role-header.producer   { background: var(--producer-bg);   border: 1px solid var(--producer-border); }
+
+.role-title { font-size: 20px; font-weight: 700; margin-bottom: 10px; }
+.role-title.playwright { color: var(--playwright); }
+.role-title.director   { color: var(--director); }
+.role-title.producer   { color: var(--producer); }
+
+.role-tobe {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.6;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.role-sub { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+
+.req-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 1.25rem;
+}
+
+.req-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+}
+
+.req-card-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.req-item {
+  display: flex;
+  gap: 8px;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--bg);
+  align-items: flex-start;
+}
+.req-item:last-child { border-bottom: none; }
+
+.req-id {
+  font-size: 10px;
+  font-weight: 700;
+  font-family: 'DM Mono', monospace;
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+  padding-top: 2px;
+  min-width: 28px;
+}
+
+.req-name { font-size: 13px; color: var(--text-primary); line-height: 1.5; }
+
+.special-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.special-card-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.special-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+
+.special-item { background: var(--bg); border-radius: 8px; padding: 10px 12px; }
+.special-id { font-size: 10px; font-weight: 700; font-family: 'DM Mono', monospace; color: var(--text-tertiary); margin-bottom: 4px; }
+.special-name { font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+.special-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+
+.insights-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.insights-card-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.insight-item {
+  display: flex;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--bg);
+  align-items: flex-start;
+}
+.insight-item:last-child { border-bottom: none; }
+
+.insight-num {
+  font-size: 11px;
+  font-weight: 700;
+  font-family: 'DM Mono', monospace;
+  background: var(--bg);
+  color: var(--text-secondary);
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.insight-text { font-size: 13px; color: var(--text-primary); line-height: 1.5; }
+.insight-text strong { color: var(--text-primary); }
+.insight-basis { font-size: 11.5px; color: var(--text-secondary); margin-top: 2px; line-height: 1.5; }
+
+.summary-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.summary-card-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.summary-list { list-style: none; counter-reset: list-counter; }
+
+.summary-list li {
+  font-size: 13px;
+  color: var(--text-primary);
+  padding: 6px 0 6px 26px;
+  border-bottom: 1px solid var(--bg);
+  position: relative;
+  line-height: 1.5;
+  counter-increment: list-counter;
+}
+
+.summary-list li:last-child { border-bottom: none; }
+
+.summary-list li::before {
+  content: counter(list-counter);
+  position: absolute;
+  left: 0;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: 'DM Mono', monospace;
+  color: var(--text-tertiary);
+  top: 8px;
+}
+
+/* ── Footer ── */
 .footer {
   max-width: 1100px;
   margin: 2rem auto 0;
@@ -263,6 +511,8 @@ body {
   .metrics { grid-template-columns: repeat(2, 1fr); }
   .page-header { flex-direction: column; }
   .header-right { text-align: left; }
+  .req-grid { grid-template-columns: 1fr; }
+  .special-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -270,7 +520,7 @@ body {
 
 <div class="page-header">
   <div class="header-left">
-    <h1>デイリーレポートダッシュボード</h1>
+    <h1>SEEDダッシュボード</h1>
     <div class="header-meta">
       <span class="badge badge-slack">
         <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M6 15a2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2h2v2zM7 15a2 2 0 0 1 2-2 2 2 0 0 1 2 2v5a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-5zM9 7a2 2 0 0 1-2-2 2 2 0 0 1 2-2 2 2 0 0 1 2 2v2H9zM9 8a2 2 0 0 1 2 2 2 2 0 0 1-2 2H4a2 2 0 0 1-2-2 2 2 0 0 1 2-2h5zM17 10a2 2 0 0 1 2-2 2 2 0 0 1 2 2 2 2 0 0 1-2 2h-2v-2zM16 10a2 2 0 0 1-2 2 2 2 0 0 1-2-2V5a2 2 0 0 1 2-2 2 2 0 0 1 2 2v5zM14 18a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2v-2h2zM14 17a2 2 0 0 1-2-2 2 2 0 0 1 2-2h5a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-5z"/></svg>
@@ -286,196 +536,607 @@ body {
   </div>
 </div>
 
-<div class="metrics">
-  <div class="metric">
-    <div class="metric-label">投稿メンバー</div>
-    <div class="metric-value">8</div>
-  </div>
-  <div class="metric">
-    <div class="metric-label">緊急タスク</div>
-    <div class="metric-value red">3</div>
-  </div>
-  <div class="metric">
-    <div class="metric-label">進行中タスク</div>
-    <div class="metric-value amber">22</div>
-  </div>
-  <div class="metric">
-    <div class="metric-label">今後予定</div>
-    <div class="metric-value blue">12</div>
+<div class="tab-nav-wrapper">
+  <div class="tab-nav">
+    <button class="tab-btn active" data-tab="dashboard">ダッシュボード</button>
+    <button class="tab-btn" data-tab="hr">人材要件仮説</button>
   </div>
 </div>
 
-<div class="legend">
-  <div class="leg"><div class="leg-dot" style="background:var(--soil)"></div>SOIL</div>
-  <div class="leg"><div class="leg-dot" style="background:var(--seed)"></div>SEED</div>
-  <div class="leg"><div class="leg-dot" style="background:var(--border)"></div>共通</div>
-</div>
+<!-- ════ Dashboard Tab ════ -->
+<div id="tab-dashboard" class="tab-content active">
 
-<div class="grid">
-
-  <div class="card">
-    <div class="card-header">
-      <div class="avatar" style="background:#E6F1FB;color:#0C447C">髙田</div>
-      <div>
-        <div class="member-name">髙田 郁実</div>
-        <div class="member-date">2026/05/21</div>
-      </div>
+  <div class="metrics">
+    <div class="metric">
+      <div class="metric-label">投稿メンバー</div>
+      <div class="metric-value">8</div>
     </div>
-    <div class="group">
-      <div class="group-label gl-urgent">⚠ 緊急（今日中）</div>
-      <div class="task soil">採択者決定レポートの内容確認と確認依頼<span class="tag tag-soil">SOIL</span></div>
-      <div class="task seed">Claudeでbox内ファイル参照→拓さんに再度連絡<span class="tag tag-seed">SEED</span></div>
+    <div class="metric">
+      <div class="metric-label">緊急タスク</div>
+      <div class="metric-value red">3</div>
     </div>
-    <div class="group">
-      <div class="group-label gl-wip">⚡ 進行中（今週中）</div>
-      <div class="task soil">採択者決定広報の進捗確認<span class="tag tag-soil">SOIL</span></div>
-      <div class="task soil">SOIL Web日本語サイトの進捗確認<span class="tag tag-soil">SOIL</span></div>
-      <div class="task seed">外部説明用の概要資料作成<span class="tag tag-seed">SEED</span></div>
+    <div class="metric">
+      <div class="metric-label">進行中タスク</div>
+      <div class="metric-value amber">22</div>
     </div>
-    <div class="group">
-      <div class="group-label gl-plan">📅 今後予定</div>
-      <div class="task soil">Webへ掲載するjournal記事の進行<span class="tag tag-soil">SOIL</span></div>
-      <div class="task soil">SOIL Web WORKSの更新に向けた情報整理<span class="tag tag-soil">SOIL</span></div>
-      <div class="task seed">各職能別プログラムに関する事務サポ<span class="tag tag-seed">SEED</span></div>
+    <div class="metric">
+      <div class="metric-label">今後予定</div>
+      <div class="metric-value blue">12</div>
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-header">
-      <div class="avatar" style="background:#E1F5EE;color:#085041">横堀</div>
-      <div>
-        <div class="member-name">横堀 応彦</div>
-        <div class="member-date">2026/05/21</div>
-      </div>
-    </div>
-    <div class="group">
-      <div class="group-label gl-wip">⚡ 進行中（今週中）</div>
-      <div class="task">時田さんにリサーチ計画を相談</div>
-      <div class="task">小村さんの報告書内容確認</div>
-      <div class="task">アウトプットリストの更新</div>
-      <div class="task">日芸学生レポートの確認</div>
-    </div>
+  <div class="legend">
+    <div class="leg"><div class="leg-dot" style="background:var(--soil)"></div>SOIL</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--seed)"></div>SEED</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--border)"></div>共通</div>
   </div>
 
-  <div class="card">
-    <div class="card-header">
-      <div class="avatar" style="background:#FAEEDA;color:#633806">佐々木</div>
-      <div>
-        <div class="member-name">佐々木 明音</div>
-        <div class="member-date">2026/05/21〜22</div>
+  <div class="grid">
+
+    <div class="card">
+      <div class="card-header">
+        <div class="avatar" style="background:#E6F1FB;color:#0C447C">髙田</div>
+        <div>
+          <div class="member-name">髙田 郁実</div>
+          <div class="member-date">2026/05/21</div>
+        </div>
+      </div>
+      <div class="group">
+        <div class="group-label gl-urgent">⚠ 緊急（今日中）</div>
+        <div class="task soil">採択者決定レポートの内容確認と確認依頼<span class="tag tag-soil">SOIL</span></div>
+        <div class="task seed">Claudeでbox内ファイル参照→拓さんに再度連絡<span class="tag tag-seed">SEED</span></div>
+      </div>
+      <div class="group">
+        <div class="group-label gl-wip">⚡ 進行中（今週中）</div>
+        <div class="task soil">採択者決定広報の進捗確認<span class="tag tag-soil">SOIL</span></div>
+        <div class="task soil">SOIL Web日本語サイトの進捗確認<span class="tag tag-soil">SOIL</span></div>
+        <div class="task seed">外部説明用の概要資料作成<span class="tag tag-seed">SEED</span></div>
+      </div>
+      <div class="group">
+        <div class="group-label gl-plan">📅 今後予定</div>
+        <div class="task soil">Webへ掲載するjournal記事の進行<span class="tag tag-soil">SOIL</span></div>
+        <div class="task soil">SOIL Web WORKSの更新に向けた情報整理<span class="tag tag-soil">SOIL</span></div>
+        <div class="task seed">各職能別プログラムに関する事務サポ<span class="tag tag-seed">SEED</span></div>
       </div>
     </div>
-    <div class="group">
-      <div class="group-label gl-wip">⚡ 進行中</div>
-      <div class="task">4/29講義録の作成（今週中に終わらせたい）</div>
-    </div>
-    <div class="group">
-      <div class="group-label gl-plan">📅 今後予定</div>
-      <div class="task">5/13講義録の作成</div>
-      <div class="task">5/19講義録の作成</div>
-    </div>
-  </div>
 
-  <div class="card">
-    <div class="card-header">
-      <div class="avatar" style="background:#FBEAF0;color:#72243E">鈴木</div>
-      <div>
-        <div class="member-name">鈴木 萌加</div>
-        <div class="member-date">2026/05/21〜22</div>
+    <div class="card">
+      <div class="card-header">
+        <div class="avatar" style="background:#E1F5EE;color:#085041">横堀</div>
+        <div>
+          <div class="member-name">横堀 応彦</div>
+          <div class="member-date">2026/05/21</div>
+        </div>
+      </div>
+      <div class="group">
+        <div class="group-label gl-wip">⚡ 進行中（今週中）</div>
+        <div class="task">時田さんにリサーチ計画を相談</div>
+        <div class="task">小村さんの報告書内容確認</div>
+        <div class="task">アウトプットリストの更新</div>
+        <div class="task">日芸学生レポートの確認</div>
       </div>
     </div>
-    <div class="group">
-      <div class="group-label gl-wip">⚡ 進行中</div>
-      <div class="task">エディンバラフライト候補</div>
-      <div class="task">交流会のパブ探し</div>
-      <div class="task">英語プログラム帯同者出欠フォームの作成</div>
-    </div>
-    <div class="group">
-      <div class="group-label gl-plan">📅 今後予定</div>
-      <div class="task">2期生個別MTG</div>
-    </div>
-  </div>
 
-  <div class="card">
-    <div class="card-header">
-      <div class="avatar" style="background:#EEEDFE;color:#3C3489">Ma</div>
-      <div>
-        <div class="member-name">Mayumi</div>
-        <div class="member-date">2026/05/21〜22</div>
+    <div class="card">
+      <div class="card-header">
+        <div class="avatar" style="background:#FAEEDA;color:#633806">佐々木</div>
+        <div>
+          <div class="member-name">佐々木 明音</div>
+          <div class="member-date">2026/05/21〜22</div>
+        </div>
+      </div>
+      <div class="group">
+        <div class="group-label gl-wip">⚡ 進行中</div>
+        <div class="task">4/29講義録の作成（今週中に終わらせたい）</div>
+      </div>
+      <div class="group">
+        <div class="group-label gl-plan">📅 今後予定</div>
+        <div class="task">5/13講義録の作成</div>
+        <div class="task">5/19講義録の作成</div>
       </div>
     </div>
-    <div class="group">
-      <div class="group-label gl-urgent">⚠ 緊急（今日中）</div>
-      <div class="task soil">進捗報告会の登壇資料修正対応<span class="tag tag-soil">SOIL</span></div>
-      <div class="task seed">奥山先生対応<span class="tag tag-seed">SEED</span></div>
-      <div class="task seed">進捗報告会の追加参加者連絡<span class="tag tag-seed">SEED</span></div>
-    </div>
-    <div class="group">
-      <div class="group-label gl-plan">📅 今後予定</div>
-      <div class="task soil">今年度予算確定<span class="tag tag-soil">SOIL</span></div>
-      <div class="task seed">リサーチャー ヒアリング相手に発行依頼催促<span class="tag tag-seed">SEED</span></div>
-      <div class="task seed">アドバイザリーに請求書発行依頼<span class="tag tag-seed">SEED</span></div>
-      <div class="task seed">今年度予算確定<span class="tag tag-seed">SEED</span></div>
-    </div>
-  </div>
 
-  <div class="card">
-    <div class="card-header">
-      <div class="avatar" style="background:#FAECE7;color:#712B13">川名</div>
-      <div>
-        <div class="member-name">川名 幸宏</div>
-        <div class="member-date">2026/05/21</div>
+    <div class="card">
+      <div class="card-header">
+        <div class="avatar" style="background:#FBEAF0;color:#72243E">鈴木</div>
+        <div>
+          <div class="member-name">鈴木 萌加</div>
+          <div class="member-date">2026/05/21〜22</div>
+        </div>
+      </div>
+      <div class="group">
+        <div class="group-label gl-wip">⚡ 進行中</div>
+        <div class="task">エディンバラフライト候補</div>
+        <div class="task">交流会のパブ探し</div>
+        <div class="task">英語プログラム帯同者出欠フォームの作成</div>
+      </div>
+      <div class="group">
+        <div class="group-label gl-plan">📅 今後予定</div>
+        <div class="task">2期生個別MTG</div>
       </div>
     </div>
-    <div class="group">
-      <div class="group-label gl-wip">⚡ 進行中（今週中）</div>
-      <div class="task">日芸 奥山先生対応</div>
-      <div class="task">桐朋後期ゲスト、覚書対応</div>
-      <div class="task">演出育成資料</div>
-    </div>
-  </div>
 
-  <div class="card">
-    <div class="card-header">
-      <div class="avatar" style="background:#EAF3DE;color:#27500A">赤羽</div>
-      <div>
-        <div class="member-name">赤羽 ひろみ</div>
-        <div class="member-date">2026/05/21</div>
+    <div class="card">
+      <div class="card-header">
+        <div class="avatar" style="background:#EEEDFE;color:#3C3489">Ma</div>
+        <div>
+          <div class="member-name">Mayumi</div>
+          <div class="member-date">2026/05/21〜22</div>
+        </div>
+      </div>
+      <div class="group">
+        <div class="group-label gl-urgent">⚠ 緊急（今日中）</div>
+        <div class="task soil">進捗報告会の登壇資料修正対応<span class="tag tag-soil">SOIL</span></div>
+        <div class="task seed">奥山先生対応<span class="tag tag-seed">SEED</span></div>
+        <div class="task seed">進捗報告会の追加参加者連絡<span class="tag tag-seed">SEED</span></div>
+      </div>
+      <div class="group">
+        <div class="group-label gl-plan">📅 今後予定</div>
+        <div class="task soil">今年度予算確定<span class="tag tag-soil">SOIL</span></div>
+        <div class="task seed">リサーチャー ヒアリング相手に発行依頼催促<span class="tag tag-seed">SEED</span></div>
+        <div class="task seed">アドバイザリーに請求書発行依頼<span class="tag tag-seed">SEED</span></div>
+        <div class="task seed">今年度予算確定<span class="tag tag-seed">SEED</span></div>
       </div>
     </div>
-    <div class="group">
-      <div class="group-label gl-wip">⚡ 進行中（今週中）</div>
-      <div class="task">プロデューサー講座ゼミ案まとめ</div>
-    </div>
-  </div>
 
-  <div class="card">
-    <div class="card-header">
-      <div class="avatar" style="background:#F1EFE8;color:#444441">倉沢</div>
-      <div>
-        <div class="member-name">倉沢 麻里江</div>
-        <div class="member-date">2026/05/21〜22</div>
+    <div class="card">
+      <div class="card-header">
+        <div class="avatar" style="background:#FAECE7;color:#712B13">川名</div>
+        <div>
+          <div class="member-name">川名 幸宏</div>
+          <div class="member-date">2026/05/21</div>
+        </div>
+      </div>
+      <div class="group">
+        <div class="group-label gl-wip">⚡ 進行中（今週中）</div>
+        <div class="task">日芸 奥山先生対応</div>
+        <div class="task">桐朋後期ゲスト、覚書対応</div>
+        <div class="task">演出育成資料</div>
       </div>
     </div>
-    <div class="group">
-      <div class="group-label gl-wip">⚡ 進行中</div>
-      <div class="task">劇作家企画 クライテリアBrainstorming</div>
-      <div class="task">劇作家企画 契約条件</div>
-      <div class="task">劇作家企画 Playwriting book</div>
-    </div>
-    <div class="group">
-      <div class="group-label gl-plan">📅 今後予定</div>
-      <div class="task">Emmaさん連絡</div>
-      <div class="task">前川さん連絡</div>
-    </div>
-  </div>
 
-</div>
+    <div class="card">
+      <div class="card-header">
+        <div class="avatar" style="background:#EAF3DE;color:#27500A">赤羽</div>
+        <div>
+          <div class="member-name">赤羽 ひろみ</div>
+          <div class="member-date">2026/05/21</div>
+        </div>
+      </div>
+      <div class="group">
+        <div class="group-label gl-wip">⚡ 進行中（今週中）</div>
+        <div class="task">プロデューサー講座ゼミ案まとめ</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="avatar" style="background:#F1EFE8;color:#444441">倉沢</div>
+        <div>
+          <div class="member-name">倉沢 麻里江</div>
+          <div class="member-date">2026/05/21〜22</div>
+        </div>
+      </div>
+      <div class="group">
+        <div class="group-label gl-wip">⚡ 進行中</div>
+        <div class="task">劇作家企画 クライテリアBrainstorming</div>
+        <div class="task">劇作家企画 契約条件</div>
+        <div class="task">劇作家企画 Playwriting book</div>
+      </div>
+      <div class="group">
+        <div class="group-label gl-plan">📅 今後予定</div>
+        <div class="task">Emmaさん連絡</div>
+        <div class="task">前川さん連絡</div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /#tab-dashboard -->
+
+<!-- ════ HR Requirements Tab ════ -->
+<div id="tab-hr" class="tab-content">
+  <div class="hr-container">
+
+    <div class="hr-intro">
+      <p>
+        <strong>SEEDが育てたい3つの職能</strong> ── 劇作家・演出家・プロデューサー。各役割のToBeモデルは、ソウル・ロンドン・ニューヨークへのリサーチ派遣（フェーズ0）報告書をもとにClaudeが統合整理。マインドセット（根）→ 知識・スキル（幹）→ 経験（実）の3層構造で要件を定義しています。
+      </p>
+    </div>
+
+    <div class="role-tab-nav">
+      <button class="role-tab-btn active" data-role="playwright">劇作家</button>
+      <button class="role-tab-btn" data-role="director">演出家</button>
+      <button class="role-tab-btn" data-role="producer">プロデューサー</button>
+    </div>
+
+    <!-- ── 劇作家 ── -->
+    <div id="role-playwright" class="role-content active">
+      <div class="role-header playwright">
+        <div class="role-title playwright">劇作家 ToBe モデル</div>
+        <div class="role-tobe">「普遍的な人間の物語を、日本固有の感性で書き、世界に届けられる劇作家」</div>
+        <div class="role-sub">書く技術だけでなく、演劇全体を知り、他者と協働し、自分の作品の価値を言語化して届けることができる人材。</div>
+      </div>
+
+      <div class="req-grid">
+        <div class="req-card">
+          <div class="req-card-title">◎ マインドセット（最優先）</div>
+          <div class="req-item"><span class="req-id">M-1</span><span class="req-name">書き続ける意志・作家としてのアイデンティティ</span></div>
+          <div class="req-item"><span class="req-id">M-2</span><span class="req-name">自分の文化・社会への深い関心</span></div>
+          <div class="req-item"><span class="req-id">M-3</span><span class="req-name">他者と協働することへの開放性</span></div>
+        </div>
+        <div class="req-card">
+          <div class="req-card-title">◎ 知識（最優先）</div>
+          <div class="req-item"><span class="req-id">K-1</span><span class="req-name">演劇の構造・戯曲の論理（ドラマトゥルギー）</span></div>
+          <div class="req-item"><span class="req-id">K-2</span><span class="req-name">古典・同時代の戯曲を読む習慣</span></div>
+          <div class="req-item"><span class="req-id">K-3</span><span class="req-name">演劇全体のプロセス理解</span></div>
+          <div class="req-item"><span class="req-id">K-4</span><span class="req-name">日本文化・伝統芸能・社会史への理解</span></div>
+          <div class="req-item"><span class="req-id">K-5</span><span class="req-name">助成金・企画書・契約の実務知識</span></div>
+        </div>
+        <div class="req-card">
+          <div class="req-card-title">◎ スキル（最優先）</div>
+          <div class="req-item"><span class="req-id">S-1</span><span class="req-name">書く技術（セリフ・構造・シーン）</span></div>
+          <div class="req-item"><span class="req-id">S-2</span><span class="req-name">自作を語る・言語化する力</span></div>
+          <div class="req-item"><span class="req-id">S-3</span><span class="req-name">他者のフィードバックを受け取る力</span></div>
+        </div>
+        <div class="req-card">
+          <div class="req-card-title">◎ 経験（最優先）</div>
+          <div class="req-item"><span class="req-id">E-1</span><span class="req-name">演劇の現場を体験してから書く</span></div>
+          <div class="req-item"><span class="req-id">E-2</span><span class="req-name">書いた作品が俳優に声に出される経験</span></div>
+          <div class="req-item"><span class="req-id">E-3</span><span class="req-name">定期的に書き続ける習慣・反復練習</span></div>
+        </div>
+      </div>
+
+      <div class="special-card">
+        <div class="special-card-title">劇作家特化要件 ── 継続・デビュー支援</div>
+        <div class="special-grid">
+          <div class="special-item">
+            <div class="special-id">D-1</div>
+            <div class="special-name">pathway の整備</div>
+            <div class="special-desc">上演まで導く道筋の整備。デビューの機会・次の仕事がなければ継続できない。</div>
+          </div>
+          <div class="special-item">
+            <div class="special-id">D-2</div>
+            <div class="special-name">ドラマターグ・メンターとの関係</div>
+            <div class="special-desc">ARKOはドラマターグをつけて「守る」。若手劇作家を守り育てる伴走者が必要。</div>
+          </div>
+          <div class="special-item">
+            <div class="special-id">D-3</div>
+            <div class="special-name">演出家・劇場とのマッチング機会</div>
+            <div class="special-desc">公募・競争だけに頼らない、劇作家と演出家が出会う場が必要。</div>
+          </div>
+          <div class="special-item">
+            <div class="special-id">D-4</div>
+            <div class="special-name">経済的基盤との両立</div>
+            <div class="special-desc">劇作だけで生活できなくても書き続けられる多様な選択肢の提示。</div>
+          </div>
+          <div class="special-item">
+            <div class="special-id">D-5</div>
+            <div class="special-name">戯曲の出版・アーカイブ</div>
+            <div class="special-desc">翻訳と出版が次の上演・海外展開につながる連鎖を生む。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="insights-card">
+        <div class="insights-card-title">リサーチが示す5つの示唆</div>
+        <div class="insight-item">
+          <div class="insight-num">1</div>
+          <div>
+            <div class="insight-text"><strong>書く前に現場を見せよ</strong></div>
+            <div class="insight-basis">ミン・セロム・前川・キム・マディン：「演劇の創作プロセスを知ってから書くと理解が早い」</div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <div class="insight-num">2</div>
+          <div>
+            <div class="insight-text"><strong>遠回りは武器になる</strong></div>
+            <div class="insight-basis">ユン・ジュホ（社会人経験）・ファン・スア（詩人→劇作家）：多様なキャリアパスがむしろ作家を豊かにする。</div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <div class="insight-num">3</div>
+          <div>
+            <div class="insight-text"><strong>守る仕組みと育てる仕組みはセット</strong></div>
+            <div class="insight-basis">ARKOの設計思想：「才能ある劇作家が演劇界を離れないよう守ること」が育成と同じくらい重要。</div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <div class="insight-num">4</div>
+          <div>
+            <div class="insight-text"><strong>競争より出会いの場を</strong></div>
+            <div class="insight-basis">キム・マディン：「常に競争にさらされている苦しさ。演出家・俳優・劇場との平和的なマッチングの場が必要」</div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <div class="insight-num">5</div>
+          <div>
+            <div class="insight-text"><strong>戯曲を残す・届ける仕組みが連鎖を生む</strong></div>
+            <div class="insight-basis">阿部・ウィリアム・グレゴリー：英訳・出版・リーディングの積み重ねが次の上演・海外展開につながる。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="summary-card">
+        <div class="summary-card-title">SEEDが育てたい劇作家像</div>
+        <ol class="summary-list">
+          <li>どんな状況でも書き続ける意志と、作家としての誇りを持っている</li>
+          <li>自分の文化・社会・歴史を深く知り、それを作品に昇華できる</li>
+          <li>演劇全体のプロセスを知った上で書いている</li>
+          <li>演出家・俳優・ドラマターグと対等に協働できる</li>
+          <li>自作の価値を言語化し、海外に向けて伝えられる</li>
+          <li>助成金・企画書など制作実務ができ、自立した活動基盤を持てる</li>
+          <li>書き続けられる生活と創作のバランスを、多様な形で模索できる</li>
+        </ol>
+      </div>
+    </div><!-- /#role-playwright -->
+
+    <!-- ── 演出家 ── -->
+    <div id="role-director" class="role-content">
+      <div class="role-header director">
+        <div class="role-title director">演出家 ToBe モデル</div>
+        <div class="role-tobe">「作品の探求を導き、多様なアーティストと協働しながら、日本の物語を世界に届けられる演出家」</div>
+        <div class="role-sub">自分のビジョンを押しつけるのではなく、チーム全体の才能を引き出しながら作品を立体化する。日本固有の感性と世界の文脈を橋渡しできる存在。</div>
+      </div>
+
+      <div class="req-grid">
+        <div class="req-card">
+          <div class="req-card-title">◎ マインドセット（最優先）</div>
+          <div class="req-item"><span class="req-id">M-1</span><span class="req-name">探求を導く姿勢（答えを押しつけない）</span></div>
+          <div class="req-item"><span class="req-id">M-2</span><span class="req-name">カンパニー参加者へのリスペクト</span></div>
+          <div class="req-item"><span class="req-id">M-3</span><span class="req-name">愛 ── 作品・演劇・人への</span></div>
+        </div>
+        <div class="req-card">
+          <div class="req-card-title">◎ 知識（最優先）</div>
+          <div class="req-item"><span class="req-id">K-1</span><span class="req-name">戯曲・テキストを読み込む力</span></div>
+          <div class="req-item"><span class="req-id">K-2</span><span class="req-name">演技メソッド・共通言語の理解</span></div>
+          <div class="req-item"><span class="req-id">K-3</span><span class="req-name">演劇史・世界の演出家への理解</span></div>
+          <div class="req-item"><span class="req-id">K-4</span><span class="req-name">日本の文化・伝統芸能・精神的価値観</span></div>
+        </div>
+        <div class="req-card">
+          <div class="req-card-title">◎ スキル（最優先）</div>
+          <div class="req-item"><span class="req-id">S-1</span><span class="req-name">聞く力（俳優・スタッフの声を受け取る）</span></div>
+          <div class="req-item"><span class="req-id">S-2</span><span class="req-name">コラボレーション技術（全職種と対等に対話）</span></div>
+          <div class="req-item"><span class="req-id">S-3</span><span class="req-name">作品のビジョンを言語化・共有する力</span></div>
+          <div class="req-item"><span class="req-id">S-4</span><span class="req-name">稽古場のリーダーシップ・空気づくり</span></div>
+        </div>
+        <div class="req-card">
+          <div class="req-card-title">◎ 経験（最優先）</div>
+          <div class="req-item"><span class="req-id">E-1</span><span class="req-name">優秀な演出家のアシスタント経験</span></div>
+          <div class="req-item"><span class="req-id">E-2</span><span class="req-name">実際に演出する経験（規模を問わず）</span></div>
+          <div class="req-item"><span class="req-id">E-3</span><span class="req-name">多様な職種・分野との協働創作体験</span></div>
+          <div class="req-item"><span class="req-id">E-4</span><span class="req-name">現場体験（劇場で働く・見る）</span></div>
+        </div>
+      </div>
+
+      <div class="special-card">
+        <div class="special-card-title">演出家特化要件 ── キャリア形成支援</div>
+        <div class="special-grid">
+          <div class="special-item">
+            <div class="special-id">D-1</div>
+            <div class="special-name">メンターとの出会いを設計する</div>
+            <div class="special-desc">偶然に委ねず、優秀な演出家と若手が出会える場・制度を意図的に作る。</div>
+          </div>
+          <div class="special-item">
+            <div class="special-id">D-2</div>
+            <div class="special-name">小さくても演出できる場を確保</div>
+            <div class="special-desc">「空き倉庫でいい、まず作れ」（バートレット・シャー）。実際に演出できる機会を保障。</div>
+          </div>
+          <div class="special-item">
+            <div class="special-id">D-3</div>
+            <div class="special-name">劇作家・プロデューサーとのマッチング</div>
+            <div class="special-desc">良い戯曲・良いプロデューサーとの出会いがキャリアを動かす。縦割りでなく横断的な場が必要。</div>
+          </div>
+          <div class="special-item">
+            <div class="special-id">D-4</div>
+            <div class="special-name">アシスタント・インターンシップの制度化</div>
+            <div class="special-desc">「アシスタント経験が最大の学び」（ランドー・シャー）。国内外派遣制度が有効。</div>
+          </div>
+          <div class="special-item">
+            <div class="special-id">D-5</div>
+            <div class="special-name">海外演出の実践機会</div>
+            <div class="special-desc">日本の作品を海外で演出する、または海外劇場で演出する実践の場。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="insights-card">
+        <div class="insights-card-title">リサーチが示す5つの示唆</div>
+        <div class="insight-item">
+          <div class="insight-num">1</div>
+          <div>
+            <div class="insight-text"><strong>演出家はメンターと実践でしか育たない</strong></div>
+            <div class="insight-basis">NY全員が「大学教育には限界がある。最善はメンターの近くで見て、実際に演出すること」と一致して語った。</div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <div class="insight-num">2</div>
+          <div>
+            <div class="insight-text"><strong>キャリアを急がせるな</strong></div>
+            <div class="insight-basis">ブロードウェイデビューが40代でも遅くない。焦りが「安全な選択肢」を選ばせる。長期的視野でのキャリア設計が必要。</div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <div class="insight-num">3</div>
+          <div>
+            <div class="insight-text"><strong>コラボレーションは技術として教えられる</strong></div>
+            <div class="insight-basis">「全員が同等のアーティストとして対話する」感覚は訓練で習得できる。ヒエラルキーを前提にした日本の現場文化を変えるには教育からのアプローチが有効。</div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <div class="insight-num">4</div>
+          <div>
+            <div class="insight-text"><strong>他言語・異文化での演出が感度を上げる</strong></div>
+            <div class="insight-basis">言葉に頼れない環境が感情・身体・空間への感度を高める。海外経験は比較の眼だけでなく演出力そのものを鍛える。</div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <div class="insight-num">5</div>
+          <div>
+            <div class="insight-text"><strong>日本固有の感性は武器だが、普遍的な人間ドラマに昇華する技術が必要</strong></div>
+            <div class="insight-basis">バイヨーク・リー・木村早智：「日本文化に触れた体験で終わらせず、海外の人が自分を投影できるところまで届ける」</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="summary-card">
+        <div class="summary-card-title">SEEDが育てたい演出家像</div>
+        <ol class="summary-list">
+          <li>答えを押しつけず、チームの才能を引き出しながら探求を導ける</li>
+          <li>演技メソッド・ムーブメント・デザインの共通言語で全職種と対話できる</li>
+          <li>戯曲を深く読み、日本文化の文脈を理解した上で作品を立体化できる</li>
+          <li>稽古場に安全で創造的な空気を作れるリーダーシップがある</li>
+          <li>英語・異言語の環境でも、感情・身体・空間で演出できる</li>
+          <li>日本固有の感性を、海外の観客が自分を投影できる普遍的な物語に昇華できる</li>
+          <li>長期的な視野でキャリアを積み上げ、メンターとして後進にも貢献できる</li>
+        </ol>
+      </div>
+    </div><!-- /#role-director -->
+
+    <!-- ── プロデューサー ── -->
+    <div id="role-producer" class="role-content">
+      <div class="role-header producer">
+        <div class="role-title producer">プロデューサー ToBe モデル</div>
+        <div class="role-tobe">「日本にしかない物語を理解し、世界に届けることができるプロデューサー」</div>
+        <div class="role-sub">クリエイターの守り手であり、作品の翻訳者であり、国際市場との橋渡し役。「作りたい人」と「届けたい人」を繋ぎ、両者の言語で対話できる人材。</div>
+      </div>
+
+      <div class="req-grid">
+        <div class="req-card">
+          <div class="req-card-title">◎ マインドセット（最優先）</div>
+          <div class="req-item"><span class="req-id">M-1</span><span class="req-name">コラボレーションを喜びとして捉える姿勢</span></div>
+          <div class="req-item"><span class="req-id">M-2</span><span class="req-name">自分の文化への誇りと相対化能力</span></div>
+          <div class="req-item"><span class="req-id">M-3</span><span class="req-name">届けたい・売りたいという欲望</span></div>
+        </div>
+        <div class="req-card">
+          <div class="req-card-title">◎ 知識（最優先）</div>
+          <div class="req-item"><span class="req-id">K-1</span><span class="req-name">演劇の構造・ドラマトゥルギー基礎</span></div>
+          <div class="req-item"><span class="req-id">K-2</span><span class="req-name">日本の文化・伝統芸能への理解</span></div>
+          <div class="req-item"><span class="req-id">K-3</span><span class="req-name">制作実務・プロデュース基礎知識</span></div>
+        </div>
+        <div class="req-card">
+          <div class="req-card-title">◎ スキル（最優先）</div>
+          <div class="req-item"><span class="req-id">S-1</span><span class="req-name">コラボレーション技術</span></div>
+          <div class="req-item"><span class="req-id">S-2</span><span class="req-name">英語コミュニケーション・ピッチ力</span></div>
+          <div class="req-item"><span class="req-id">S-3</span><span class="req-name">作品・プロジェクトの価値言語化</span></div>
+        </div>
+        <div class="req-card">
+          <div class="req-card-title">◎ 経験（最優先）</div>
+          <div class="req-item"><span class="req-id">E-1</span><span class="req-name">現場体験（観客・作り手双方）</span></div>
+          <div class="req-item"><span class="req-id">E-2</span><span class="req-name">協働創作の実践経験</span></div>
+        </div>
+      </div>
+
+      <div class="special-card">
+        <div class="special-card-title">プロデューサー特化要件（P機能）</div>
+        <div class="special-grid">
+          <div class="special-item">
+            <div class="special-id">P-1</div>
+            <div class="special-name">戦略的思考</div>
+            <div class="special-desc">「良い作品があれば売れる」から脱却。適切な市場・タイミング・フォーマットを考えられる。</div>
+          </div>
+          <div class="special-item">
+            <div class="special-id">P-2</div>
+            <div class="special-name">アーティストの守り手</div>
+            <div class="special-desc">才能ある作家を演劇界に「残す」ことがプロデューサーの使命のひとつ。</div>
+          </div>
+          <div class="special-item">
+            <div class="special-id">P-3</div>
+            <div class="special-name">ネットワーク構築力（ハブ力）</div>
+            <div class="special-desc">クリエイター・劇場・資金者・翻訳者・メディアを繋ぐハブになれる。</div>
+          </div>
+          <div class="special-item">
+            <div class="special-id">P-4</div>
+            <div class="special-name">劇作家・演出家マッチング能力</div>
+            <div class="special-desc">劇作と演出への深い理解があってこそ機能するマッチング。</div>
+          </div>
+          <div class="special-item">
+            <div class="special-id">P-5</div>
+            <div class="special-name">継続する力</div>
+            <div class="special-desc">ドゥサン「20年続けて信用が育った」。長期的関係・信用の蓄積に価値を置く。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="insights-card">
+        <div class="insights-card-title">リサーチが示す5つの示唆</div>
+        <div class="insight-item">
+          <div class="insight-num">1</div>
+          <div>
+            <div class="insight-text"><strong>育成とpathwayはセットで設計せよ</strong></div>
+            <div class="insight-basis">阿部・アグボルアエ氏：「上演まで導くpathwayの整備が育成と同じくらい重要」</div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <div class="insight-num">2</div>
+          <div>
+            <div class="insight-text"><strong>レジデンシー的仕組みが有効</strong></div>
+            <div class="insight-basis">ターンリー（ロンドン）：「劇場のデスク1つが作家のキャリアを変える」</div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <div class="insight-num">3</div>
+          <div>
+            <div class="insight-text"><strong>「売りたい人」と「作りたい人」のマッチングが鍵</strong></div>
+            <div class="insight-basis">前川：エンタメとアートの溝を埋める対話の場づくりが必要。</div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <div class="insight-num">4</div>
+          <div>
+            <div class="insight-text"><strong>小さく始めて継続する</strong></div>
+            <div class="insight-basis">ドゥサン20年、Out of the Wings 10年。いずれも小さな会合から始まっている。</div>
+          </div>
+        </div>
+        <div class="insight-item">
+          <div class="insight-num">5</div>
+          <div>
+            <div class="insight-text"><strong>共通言語の整備が協働の土台</strong></div>
+            <div class="insight-basis">木村早智：「ラバンと言えばすぐにみんなわかる」。演技・ドラマトゥルギー・制作実務の共通語彙が必要。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="summary-card">
+        <div class="summary-card-title">SEEDが育てたいプロデューサー像</div>
+        <ol class="summary-list">
+          <li>英語で交渉・ピッチができる</li>
+          <li>日本の文化的価値を自分の言葉で伝えられる</li>
+          <li>企画書・助成金申請・契約など制作実務ができる</li>
+          <li>クリエイターと対等に協働できる</li>
+          <li>作品を「なぜ今・なぜ世界に届けるのか」を語れる</li>
+          <li>アーティストを守りながら、世界市場に送り出す意志がある</li>
+          <li>長期的なコミュニティ・信用の蓄積に価値を置ける</li>
+        </ol>
+      </div>
+    </div><!-- /#role-producer -->
+
+  </div><!-- /.hr-container -->
+</div><!-- /#tab-hr -->
 
 <div class="footer">
   <span>#101-会議関連 のデイリーレポートより自動生成</span>
   <span>2026/05/25 生成</span>
 </div>
+
+<script>
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+  });
+});
+
+document.querySelectorAll('.role-tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.role-tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.role-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('role-' + btn.dataset.role).classList.add('active');
+  });
+});
+</script>
 
 </body>
 </html>
