@@ -1,0 +1,40 @@
+name: Update Daily Report Dashboard
+
+on:
+  schedule:
+    - cron: '0 0 * * 1-5'  # 毎週月〜金 09:00 JST (UTC 00:00)
+  workflow_dispatch:         # 手動実行も可能
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install anthropic slack-sdk
+
+      - name: Generate dashboard
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          SLACK_CHANNEL_ID: C0974GKQQTD
+        run: python generate_dashboard.py
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --staged --quiet || git commit -m "Update dashboard $(date +'%Y/%m/%d %H:%M JST')"
+          git push
