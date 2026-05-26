@@ -79,7 +79,7 @@ def parse_reports_with_claude(messages):
     return {"date": "", "reports": []}
 
 def generate_html(data):
-    """解析結果からHTMLを生成"""
+    """template.html を読み込んで解析結果を埋め込んだ HTML を生成"""
     reports = data.get("reports", [])
     date_str = data.get("date", "")
     now = datetime.now(JST).strftime("%Y/%m/%d %H:%M JST")
@@ -143,85 +143,17 @@ def generate_html(data):
           {urgent_html}{wip_html}{plan_html}
         </div>"""
 
-    html = f"""<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>デイリーレポートダッシュボード</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
-<style>
-:root {{
-  --bg:#F7F6F2;--surface:#fff;--border:#E5E3DC;
-  --text:#1A1916;--muted:#6B6860;--hint:#A8A69F;
-  --soil:#1D9E75;--soil-bg:#E1F5EE;--soil-text:#085041;
-  --seed:#378ADD;--seed-bg:#E6F1FB;--seed-text:#0C447C;
-}}
-*{{box-sizing:border-box;margin:0;padding:0}}
-body{{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text);padding:2rem;min-height:100vh}}
-.page-header{{max-width:1100px;margin:0 auto 1.5rem;display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap}}
-h1{{font-size:22px;font-weight:700;letter-spacing:-0.02em;margin-bottom:6px}}
-.meta{{display:flex;align-items:center;gap:8px;flex-wrap:wrap}}
-.badge{{font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;display:inline-block}}
-.badge-slack{{background:#4A154B;color:#fff}}
-.badge-date{{background:var(--border);color:var(--muted)}}
-.updated{{font-size:12px;color:var(--hint);text-align:right}}
-.metrics{{max-width:1100px;margin:0 auto 1.25rem;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}}
-.metric{{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1rem 1.25rem}}
-.metric-label{{font-size:11px;color:var(--hint);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px}}
-.metric-value{{font-size:28px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-0.03em}}
-.metric-value.red{{color:#C0392B}}.metric-value.amber{{color:#9A6500}}.metric-value.blue{{color:#1A4FA0}}
-.legend{{max-width:1100px;margin:0 auto 1rem;display:flex;gap:14px;flex-wrap:wrap}}
-.leg{{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--muted)}}
-.leg-dot{{width:9px;height:9px;border-radius:50%}}
-.grid{{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(2,1fr);gap:12px}}
-.card{{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.25rem}}
-.card-header{{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border)}}
-.avatar{{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}}
-.member-name{{font-size:14px;font-weight:700}}.member-date{{font-size:11px;color:var(--hint);font-family:'DM Mono',monospace}}
-.group{{margin-bottom:9px}}.group:last-child{{margin-bottom:0}}
-.group-label{{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;margin-bottom:6px}}
-.gl-urgent{{background:#FEF0EE;color:#C0392B;border:1px solid #F5C4B3}}
-.gl-wip{{background:#FEF9EE;color:#9A6500;border:1px solid #FAD894}}
-.gl-plan{{background:#EEF4FE;color:#1A4FA0;border:1px solid #BDD3F8}}
-.task{{font-size:12.5px;padding:4px 0 4px 11px;border-left:2.5px solid var(--border);margin-left:4px;margin-bottom:3px;line-height:1.5;display:flex;align-items:baseline;gap:5px;flex-wrap:wrap}}
-.task.soil{{border-left-color:var(--soil)}}.task.seed{{border-left-color:var(--seed)}}
-.tag{{font-size:10px;font-weight:700;padding:1px 6px;border-radius:8px;flex-shrink:0}}
-.tag-soil{{background:var(--soil-bg);color:var(--soil-text)}}.tag-seed{{background:var(--seed-bg);color:var(--seed-text)}}
-.footer{{max-width:1100px;margin:2rem auto 0;padding-top:1rem;border-top:1px solid var(--border);font-size:11px;color:var(--hint);display:flex;justify-content:space-between}}
-@media(max-width:700px){{body{{padding:1rem}}.grid{{grid-template-columns:1fr}}.metrics{{grid-template-columns:repeat(2,1fr)}}}}
-</style>
-</head>
-<body>
-<div class="page-header">
-  <div>
-    <h1>デイリーレポートダッシュボード</h1>
-    <div class="meta">
-      <span class="badge badge-slack">#101-会議関連</span>
-      <span class="badge badge-date">{date_str}</span>
-      <span class="badge badge-date">{len(reports)}名</span>
-    </div>
-  </div>
-  <div class="updated">最終更新<br>{now}</div>
-</div>
-<div class="metrics">
-  <div class="metric"><div class="metric-label">投稿メンバー</div><div class="metric-value">{len(reports)}</div></div>
-  <div class="metric"><div class="metric-label">緊急タスク</div><div class="metric-value red">{total_urgent}</div></div>
-  <div class="metric"><div class="metric-label">進行中タスク</div><div class="metric-value amber">{total_wip}</div></div>
-  <div class="metric"><div class="metric-label">今後予定</div><div class="metric-value blue">{total_plan}</div></div>
-</div>
-<div class="legend">
-  <div class="leg"><div class="leg-dot" style="background:var(--soil)"></div>SOIL</div>
-  <div class="leg"><div class="leg-dot" style="background:var(--seed)"></div>SEED</div>
-  <div class="leg"><div class="leg-dot" style="background:var(--border)"></div>共通</div>
-</div>
-<div class="grid">{cards_html}</div>
-<div class="footer">
-  <span>Slackデイリーレポートより自動生成（毎朝9:00更新）</span>
-  <span>i9mix/seed-soil</span>
-</div>
-</body>
-</html>"""
+    with open("template.html", "r", encoding="utf-8") as f:
+        html = f.read()
+
+    html = html.replace("%%DATE%%", date_str)
+    html = html.replace("%%MEMBER_COUNT%%", str(len(reports)))
+    html = html.replace("%%TOTAL_URGENT%%", str(total_urgent))
+    html = html.replace("%%TOTAL_WIP%%", str(total_wip))
+    html = html.replace("%%TOTAL_PLAN%%", str(total_plan))
+    html = html.replace("%%NOW%%", now)
+    html = html.replace("%%CARDS%%", cards_html)
+
     return html
 
 def main():
