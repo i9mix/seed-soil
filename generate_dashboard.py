@@ -12,15 +12,18 @@ CHANNEL_ID = os.environ.get("SLACK_CHANNEL_ID", "C0974GKQQTD")
 
 JST = timezone(timedelta(hours=9))
 
-def get_recent_thread_ts(client):
-    """チャンネルから直近の朝礼スレッドのtsを取得"""
-    result = client.conversations_history(channel=CHANNEL_ID, limit=30)
+def get_recent_threads(client, max_threads=4):
+    """直近 max_threads 件の朝礼スレッドの (ts, date_str) リストを返す（新しい順）"""
+    result = client.conversations_history(channel=CHANNEL_ID, limit=50)
+    threads = []
     for msg in result["messages"]:
         text = msg.get("text", "")
-        # 日付パターン（朝礼スレッドの親メッセージ）
-        if re.search(r"20\d{2}[\/\-]\d{1,2}[\/\-]\d{1,2}", text) and msg.get("reply_count", 0) > 0:
-            return msg["ts"]
-    return None
+        m = re.search(r"(20\d{2}[\/\-]\d{1,2}[\/\-]\d{1,2})", text)
+        if m and msg.get("reply_count", 0) > 0:
+            threads.append((msg["ts"], m.group(1)))
+            if len(threads) >= max_threads:
+                break
+    return threads
 
 def get_thread_messages(client, thread_ts):
     """スレッドのメッセージを全件取得"""
@@ -78,6 +81,32 @@ def parse_reports_with_claude(messages):
         return json.loads(match.group())
     return {"date": "", "reports": []}
 
+def collect_all_reports(slack_client):
+    """直近4スレッド（約3日分）からメンバーごとの最新レポートを収集する"""
+    threads = get_recent_threads(slack_client, max_threads=4)
+    if not threads:
+        return {"date": "", "reports": []}
+
+    latest_date = threads[0][1]
+    member_reports = {}  # name -> report dict（最新日付のものを優先）
+
+    for thread_ts, date_str in threads:
+        messages = get_thread_messages(slack_client, thread_ts)
+        if not messages:
+            continue
+        data = parse_reports_with_claude(messages)
+        for r in data.get("reports", []):
+            name = r.get("name", "")
+            if name and name not in member_reports:
+                r["date"] = date_str  # スレッドの日付を付与
+                member_reports[name] = r
+
+    return {
+        "date": latest_date,
+        "reports": list(member_reports.values()),
+    }
+
+
 def generate_html(data):
     """template.html を読み込んで解析結果を埋め込んだ HTML を生成"""
     reports = data.get("reports", [])
@@ -115,6 +144,8 @@ def generate_html(data):
     for i, r in enumerate(reports):
         bg, color = avatar_colors[i % len(avatar_colors)]
         name = r.get("name", "")
+        report_date = r.get("date", date_str)
+        is_past = report_date != date_str
         urgent = r.get("urgent", [])
         wip = r.get("wip", [])
         plan = r.get("plan", [])
@@ -134,11 +165,17 @@ def generate_html(data):
             tasks = "".join(f'<div class="task {task_class(t)}">{t}{tag_html(t)}</div>' for t in plan)
             plan_html = f'<div class="group"><div class="group-label gl-plan">📅 今後予定</div>{tasks}</div>'
 
+        past_badge = '<span class="badge-past">過去レポート</span>' if is_past else ""
+        card_class = "card card-past" if is_past else "card"
+
         cards_html += f"""
-        <div class="card">
+        <div class="{card_class}">
           <div class="card-header">
             <div class="avatar" style="background:{bg};color:{color}">{initials(name)}</div>
-            <div><div class="member-name">{name}</div><div class="member-date">{date_str}</div></div>
+            <div>
+              <div class="member-name">{name}{past_badge}</div>
+              <div class="member-date">{report_date}</div>
+            </div>
           </div>
           {urgent_html}{wip_html}{plan_html}
         </div>"""
@@ -159,22 +196,14 @@ def generate_html(data):
 def main():
     slack_client = WebClient(token=SLACK_BOT_TOKEN)
 
-    print("Slackからメッセージを取得中...")
-    thread_ts = get_recent_thread_ts(slack_client)
-    if not thread_ts:
-        print("朝礼スレッドが見つかりませんでした")
-        return
+    print("Slackから直近3日分のメッセージを収集中...")
+    data = collect_all_reports(slack_client)
 
-    messages = get_thread_messages(slack_client, thread_ts)
-    print(f"{len(messages)}件のレポートを取得")
-
-    if not messages:
+    if not data.get("reports"):
         print("デイリーレポートが見つかりませんでした")
         return
 
-    print("Claude APIで解析中...")
-    data = parse_reports_with_claude(messages)
-    print(f"{len(data.get('reports', []))}名分のタスクを抽出")
+    print(f"{len(data['reports'])}名分のタスクを収集")
 
     print("HTMLを生成中...")
     html = generate_html(data)
