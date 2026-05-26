@@ -214,6 +214,50 @@ body {
 .summary-list li:last-child { border-bottom: none; }
 .summary-list li::before { content: counter(list-counter); position: absolute; left: 0; font-size: 11px; font-weight: 700; font-family: 'DM Mono', monospace; color: var(--text-tertiary); top: 8px; }
 
+/* ── Meetings ── */
+.meetings-container { max-width: 1100px; margin: 0 auto; }
+
+.meeting-group { margin-bottom: 2rem; }
+.meeting-group-title {
+  font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--text-tertiary); margin-bottom: 10px; padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.meeting-row {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+  padding: 1rem 1.25rem; margin-bottom: 8px;
+  display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+}
+.meeting-round {
+  font-size: 11px; font-weight: 700; font-family: 'DM Mono', monospace;
+  background: var(--seed-bg); color: var(--seed-text);
+  border: 1px solid var(--border); border-radius: 20px;
+  padding: 4px 12px; flex-shrink: 0; white-space: nowrap;
+}
+.meeting-info { flex: 1; min-width: 140px; }
+.meeting-name { font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 2px; }
+.meeting-date { font-size: 11px; color: var(--text-tertiary); font-family: 'DM Mono', monospace; }
+.meeting-docs { display: flex; gap: 8px; flex-wrap: wrap; }
+
+.doc-btn {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 12px; font-weight: 500; padding: 6px 14px;
+  border-radius: 8px; border: 1.5px solid var(--border);
+  background: var(--surface); color: var(--text-secondary);
+  cursor: pointer; text-decoration: none;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  white-space: nowrap;
+}
+.doc-btn:hover { border-color: var(--seed); color: var(--seed); background: var(--seed-bg); }
+.doc-btn-icon { font-size: 13px; }
+
+.meeting-add-hint {
+  font-size: 12px; color: var(--text-tertiary); padding: 10px 4px;
+  border: 1.5px dashed var(--border); border-radius: 10px;
+  text-align: center; margin-top: 4px;
+}
+
 /* ── Footer ── */
 .footer { max-width: 1100px; margin: 2rem auto 0; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 11px; color: var(--text-tertiary); display: flex; justify-content: space-between; }
 
@@ -245,6 +289,7 @@ body {
   <div class="tab-nav">
     <button class="tab-btn active" data-tab="dashboard">ダッシュボード</button>
     <button class="tab-btn" data-tab="hr">人材要件仮説（仮）</button>
+    <button class="tab-btn" data-tab="meetings">会議資料</button>
   </div>
 </div>
 
@@ -509,6 +554,62 @@ body {
 
   </div><!-- /.hr-container -->
 </div><!-- /#tab-hr -->
+
+<!-- ════ Meetings Tab ════ -->
+<div id="tab-meetings" class="tab-content">
+  <div class="meetings-container">
+
+    <!-- ── アドバイザリーボード定例 ── -->
+    <!-- 新しい会議グループを追加する場合は <div class="meeting-group"> ブロックをここにコピー -->
+    <div class="meeting-group">
+      <div class="meeting-group-title">アドバイザリーボード定例</div>
+
+      <!-- 新しい回を追加する場合は <div class="meeting-row"> ブロックをここにコピーして回数・日付・ファイルを更新 -->
+
+      <div class="meeting-row">
+        <div class="meeting-round">第1回</div>
+        <div class="meeting-info">
+          <div class="meeting-name">アドバイザリーボード定例</div>
+          <div class="meeting-date">2025/11/05</div>
+        </div>
+        <div class="meeting-docs">
+          <a class="doc-btn" href="meetings/第1回_アドバイザリーボード定例.pdf" target="_blank">
+            <span class="doc-btn-icon">📄</span>資料
+          </a>
+        </div>
+      </div>
+
+      <div class="meeting-row">
+        <div class="meeting-round">第2回</div>
+        <div class="meeting-info">
+          <div class="meeting-name">アドバイザリーボード定例</div>
+          <div class="meeting-date">2026/02/13</div>
+        </div>
+        <div class="meeting-docs">
+          <a class="doc-btn" href="meetings/第2回_アドバイザリーボード定例.pdf" target="_blank">
+            <span class="doc-btn-icon">📄</span>資料
+          </a>
+        </div>
+      </div>
+
+      <div class="meeting-row">
+        <div class="meeting-round">第3回</div>
+        <div class="meeting-info">
+          <div class="meeting-name">アドバイザリーボード定例</div>
+          <div class="meeting-date">2026/04/17</div>
+        </div>
+        <div class="meeting-docs">
+          <a class="doc-btn" href="meetings/第3回_アドバイザリーボード定例.pdf" target="_blank">
+            <span class="doc-btn-icon">📄</span>資料
+          </a>
+        </div>
+      </div>
+
+      <div class="meeting-add-hint">＋ 次回以降の資料・議事録はここに追加</div>
+    </div>
+
+  </div>
+</div><!-- /#tab-meetings -->
 
 <div class="footer">
   <span>Slackデイリーレポートより自動生成（毎朝9:00更新）</span>
