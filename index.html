@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
@@ -136,6 +136,8 @@ body {
 .tag { font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 8px; flex-shrink: 0; }
 .tag-soil { background: var(--soil-bg); color: var(--soil-text); }
 .tag-seed { background: var(--seed-bg); color: var(--seed-text); }
+.card-past { border-color: #FAD894; opacity: 0.85; }
+.badge-past { font-size: 10px; font-weight: 700; padding: 1px 7px; border-radius: 8px; background: var(--wip-bg); color: var(--wip-text); border: 1px solid var(--wip-border); margin-left: 5px; vertical-align: middle; }
 
 /* ── HR Requirements ── */
 .hr-container { max-width: 1100px; margin: 0 auto; }
@@ -214,50 +216,6 @@ body {
 .summary-list li:last-child { border-bottom: none; }
 .summary-list li::before { content: counter(list-counter); position: absolute; left: 0; font-size: 11px; font-weight: 700; font-family: 'DM Mono', monospace; color: var(--text-tertiary); top: 8px; }
 
-/* ── Meetings ── */
-.meetings-container { max-width: 1100px; margin: 0 auto; }
-
-.meeting-group { margin-bottom: 2rem; }
-.meeting-group-title {
-  font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
-  color: var(--text-tertiary); margin-bottom: 10px; padding-bottom: 8px;
-  border-bottom: 1px solid var(--border);
-}
-
-.meeting-row {
-  background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
-  padding: 1rem 1.25rem; margin-bottom: 8px;
-  display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
-}
-.meeting-round {
-  font-size: 11px; font-weight: 700; font-family: 'DM Mono', monospace;
-  background: var(--seed-bg); color: var(--seed-text);
-  border: 1px solid var(--border); border-radius: 20px;
-  padding: 4px 12px; flex-shrink: 0; white-space: nowrap;
-}
-.meeting-info { flex: 1; min-width: 140px; }
-.meeting-name { font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 2px; }
-.meeting-date { font-size: 11px; color: var(--text-tertiary); font-family: 'DM Mono', monospace; }
-.meeting-docs { display: flex; gap: 8px; flex-wrap: wrap; }
-
-.doc-btn {
-  display: inline-flex; align-items: center; gap: 5px;
-  font-size: 12px; font-weight: 500; padding: 6px 14px;
-  border-radius: 8px; border: 1.5px solid var(--border);
-  background: var(--surface); color: var(--text-secondary);
-  cursor: pointer; text-decoration: none;
-  transition: border-color 0.15s, color 0.15s, background 0.15s;
-  white-space: nowrap;
-}
-.doc-btn:hover { border-color: var(--seed); color: var(--seed); background: var(--seed-bg); }
-.doc-btn-icon { font-size: 13px; }
-
-.meeting-add-hint {
-  font-size: 12px; color: var(--text-tertiary); padding: 10px 4px;
-  border: 1.5px dashed var(--border); border-radius: 10px;
-  text-align: center; margin-top: 4px;
-}
-
 /* ── Footer ── */
 .footer { max-width: 1100px; margin: 2rem auto 0; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 11px; color: var(--text-tertiary); display: flex; justify-content: space-between; }
 
@@ -278,28 +236,27 @@ body {
     <h1>SEEDダッシュボード</h1>
     <div class="meta">
       <span class="badge badge-slack">#101-会議関連</span>
-      <span class="badge badge-date">2026/05/26</span>
-      <span class="badge badge-date">4名</span>
+      <span class="badge badge-date">2026/05/2</span>
+      <span class="badge badge-date">6名</span>
     </div>
   </div>
-  <div class="updated">最終更新<br>2026/05/26 13:25 JST</div>
+  <div class="updated">最終更新<br>2026/05/27 12:58 JST</div>
 </div>
 
 <div class="tab-nav-wrapper">
   <div class="tab-nav">
     <button class="tab-btn active" data-tab="dashboard">ダッシュボード</button>
     <button class="tab-btn" data-tab="hr">人材要件仮説（仮）</button>
-    <button class="tab-btn" data-tab="meetings">会議資料</button>
   </div>
 </div>
 
 <!-- ════ Dashboard Tab ════ -->
 <div id="tab-dashboard" class="tab-content active">
   <div class="metrics">
-    <div class="metric"><div class="metric-label">投稿メンバー</div><div class="metric-value">4</div></div>
-    <div class="metric"><div class="metric-label">緊急タスク</div><div class="metric-value red">6</div></div>
-    <div class="metric"><div class="metric-label">進行中タスク</div><div class="metric-value amber">9</div></div>
-    <div class="metric"><div class="metric-label">今後予定</div><div class="metric-value blue">12</div></div>
+    <div class="metric"><div class="metric-label">投稿メンバー</div><div class="metric-value">6</div></div>
+    <div class="metric"><div class="metric-label">緊急タスク</div><div class="metric-value red">3</div></div>
+    <div class="metric"><div class="metric-label">進行中タスク</div><div class="metric-value amber">10</div></div>
+    <div class="metric"><div class="metric-label">今後予定</div><div class="metric-value blue">15</div></div>
   </div>
   <div class="legend">
     <div class="leg"><div class="leg-dot" style="background:var(--soil)"></div>SOIL</div>
@@ -309,31 +266,63 @@ body {
   <div class="grid">
         <div class="card">
           <div class="card-header">
-            <div class="avatar" style="background:#E6F1FB;color:#0C447C">赤羽</div>
-            <div><div class="member-name">赤羽ひろみ</div><div class="member-date">2026/05/26</div></div>
+            <div class="avatar" style="background:#E6F1FB;color:#0C447C">髙田</div>
+            <div>
+              <div class="member-name">髙田郁実</div>
+              <div class="member-date">2026/05/2</div>
+            </div>
           </div>
-          <div class="group"><div class="group-label gl-wip">⚡ 進行中</div><div class="task ">プロデューサー講座まとめ - 全体設計まとめ：目指す人材要件</div><div class="task ">プロデューサー講座まとめ - 全体設計まとめ：講座を通じて得られる価値</div><div class="task ">プロデューサー講座まとめ - 全体設計まとめ：長期的視座の中での位置付け</div><div class="task ">プロデューサー講座まとめ - 具体的手法：対象</div><div class="task ">プロデューサー講座まとめ - 具体的手法：実施人数</div><div class="task ">プロデューサー講座まとめ - 具体的手法：頻度など</div></div><div class="group"><div class="group-label gl-plan">📅 今後予定</div><div class="task ">5/29(金)達哉さん打ち合わせに向けて整理</div></div>
+          <div class="group"><div class="group-label gl-urgent">⚠ 緊急（今日中）</div><div class="task soil">SOIL 採択者決定レポート修正<span class="tag tag-soil">SOIL</span></div><div class="task seed">SEED DB整理<span class="tag tag-seed">SEED</span></div></div><div class="group"><div class="group-label gl-wip">⚡ 進行中</div><div class="task soil">SOIL Web日本語サイトの進捗確認<span class="tag tag-soil">SOIL</span></div><div class="task seed">SEED 外部説明用の概要資料作成<span class="tag tag-seed">SEED</span></div></div><div class="group"><div class="group-label gl-plan">📅 今後予定</div><div class="task soil">SOIL Webへ掲載するjournal記事の進行<span class="tag tag-soil">SOIL</span></div><div class="task soil">SOIL Web WORKSの更新に向けた情報整理<span class="tag tag-soil">SOIL</span></div><div class="task seed">SEED 各職能別プログラムに関する事務サポ<span class="tag tag-seed">SEED</span></div></div>
         </div>
         <div class="card">
           <div class="card-header">
             <div class="avatar" style="background:#E1F5EE;color:#085041">Ma</div>
-            <div><div class="member-name">Mayumi</div><div class="member-date">2026/05/26</div></div>
+            <div>
+              <div class="member-name">Mayumi</div>
+              <div class="member-date">2026/05/2</div>
+            </div>
           </div>
-          <div class="group"><div class="group-label gl-urgent">⚠ 緊急（今日中）</div><div class="task soil">[SOIL] 事務局者覚書確認<span class="tag tag-soil">SOIL</span></div><div class="task seed">[SEED] 16:30〜 奥山先生MTG<span class="tag tag-seed">SEED</span></div></div><div class="group"><div class="group-label gl-plan">📅 今後予定</div><div class="task soil">[SOIL] 今年度予算確定<span class="tag tag-soil">SOIL</span></div><div class="task soil">[SOIL] フライト検討<span class="tag tag-soil">SOIL</span></div><div class="task seed">[SEED] リサーチャー ヒアリング相手に発行依頼 催促<span class="tag tag-seed">SEED</span></div><div class="task seed">[SEED] アドバイザリーに請求書発行依頼<span class="tag tag-seed">SEED</span></div><div class="task seed">[SEED] 阿部さん、前川さんに 請求書発行依頼 催促<span class="tag tag-seed">SEED</span></div><div class="task seed">[SEED] 今年度予算確定<span class="tag tag-seed">SEED</span></div></div>
+          <div class="group"><div class="group-label gl-urgent">⚠ 緊急（今日中）</div><div class="task soil">SOIL 事務局者覚書確認<span class="tag tag-soil">SOIL</span></div></div><div class="group"><div class="group-label gl-plan">📅 今後予定</div><div class="task soil">SOIL 今年度予算確定<span class="tag tag-soil">SOIL</span></div><div class="task soil">SOIL フライト検討<span class="tag tag-soil">SOIL</span></div><div class="task seed">SEED リサーチャー ヒアリング相手に発行依頼 催促<span class="tag tag-seed">SEED</span></div><div class="task seed">SEED アドバイザリーに請求書発行依頼<span class="tag tag-seed">SEED</span></div><div class="task seed">SEED 阿部さん、前川さんに 請求書発行依頼 催促<span class="tag tag-seed">SEED</span></div><div class="task seed">SEED 今年度予算確定<span class="tag tag-seed">SEED</span></div></div>
         </div>
         <div class="card">
           <div class="card-header">
             <div class="avatar" style="background:#FAEEDA;color:#633806">佐々</div>
-            <div><div class="member-name">佐々木明音</div><div class="member-date">2026/05/26</div></div>
+            <div>
+              <div class="member-name">佐々木明音</div>
+              <div class="member-date">2026/05/2</div>
+            </div>
           </div>
-          <div class="group"><div class="group-label gl-urgent">⚠ 緊急（今日中）</div><div class="task ">boxに講義データをアップロード</div></div><div class="group"><div class="group-label gl-wip">⚡ 進行中</div><div class="task ">5/13講義録の作成</div></div><div class="group"><div class="group-label gl-plan">📅 今後予定</div><div class="task ">5/18講義録の作成</div><div class="task ">5/25講義録の作成</div></div>
+          <div class="group"><div class="group-label gl-wip">⚡ 進行中</div><div class="task ">5/13講義録の作成</div></div><div class="group"><div class="group-label gl-plan">📅 今後予定</div><div class="task ">5/18講義録の作成</div><div class="task ">5/25講義録の作成</div></div>
         </div>
         <div class="card">
           <div class="card-header">
-            <div class="avatar" style="background:#FBEAF0;color:#72243E">髙田</div>
-            <div><div class="member-name">髙田郁実</div><div class="member-date">2026/05/26</div></div>
+            <div class="avatar" style="background:#FBEAF0;color:#72243E">赤羽</div>
+            <div>
+              <div class="member-name">赤羽ひろみ</div>
+              <div class="member-date">2026/05/2</div>
+            </div>
           </div>
-          <div class="group"><div class="group-label gl-urgent">⚠ 緊急（今日中）</div><div class="task soil">[SOIL] 採択者決定レポート修正<span class="tag tag-soil">SOIL</span></div><div class="task soil">[SOIL] まりえさんに翻訳依頼接続<span class="tag tag-soil">SOIL</span></div><div class="task seed">[SEED] DB整理<span class="tag tag-seed">SEED</span></div></div><div class="group"><div class="group-label gl-wip">⚡ 進行中</div><div class="task soil">[SOIL] SOIL Web日本語サイトの進捗確認<span class="tag tag-soil">SOIL</span></div><div class="task seed">[SEED] 外部説明用の概要資料作成<span class="tag tag-seed">SEED</span></div></div><div class="group"><div class="group-label gl-plan">📅 今後予定</div><div class="task soil">[SOIL] Webへ掲載するjournal記事の進行<span class="tag tag-soil">SOIL</span></div><div class="task soil">[SOIL] SOIL Web WORKSの更新に向けた情報整理<span class="tag tag-soil">SOIL</span></div><div class="task seed">[SEED] 各職能別プログラムに関する事務サポ<span class="tag tag-seed">SEED</span></div></div>
+          <div class="group"><div class="group-label gl-wip">⚡ 進行中</div><div class="task ">プロデューサー講座まとめ 全体設計まとめ（目指す人材要件 / 講座を通じて得られる価値 / 長期的視座の中での位置付け）</div><div class="task ">プロデューサー講座まとめ 具体的手法（対象 / 実施人数 / 頻度など）</div></div><div class="group"><div class="group-label gl-plan">📅 今後予定</div><div class="task ">5/29(金)達哉さん打ち合わせに向けて整理</div></div>
+        </div>
+        <div class="card card-past">
+          <div class="card-header">
+            <div class="avatar" style="background:#EEEDFE;color:#3C3489">鈴木</div>
+            <div>
+              <div class="member-name">鈴木萌加<span class="badge-past">過去レポート</span></div>
+              <div class="member-date">2026/05/22</div>
+            </div>
+          </div>
+          <div class="group"><div class="group-label gl-wip">⚡ 進行中</div><div class="task ">エディンバラフライト候補</div><div class="task ">交流会のパブ探し</div><div class="task ">英語プログラム帯同者出欠フォームの作成</div></div><div class="group"><div class="group-label gl-plan">📅 今後予定</div><div class="task ">2期生個別MTG</div></div>
+        </div>
+        <div class="card card-past">
+          <div class="card-header">
+            <div class="avatar" style="background:#FAECE7;color:#712B13">MK</div>
+            <div>
+              <div class="member-name">Marie Kurasawa<span class="badge-past">過去レポート</span></div>
+              <div class="member-date">2026/05/22</div>
+            </div>
+          </div>
+          <div class="group"><div class="group-label gl-wip">⚡ 進行中</div><div class="task ">劇作家企画 - 契約条件</div><div class="task ">劇作家企画 - Playwriting book</div></div><div class="group"><div class="group-label gl-plan">📅 今後予定</div><div class="task ">Emmaさん連絡</div><div class="task ">前川さん連絡</div></div>
         </div></div>
 </div><!-- /#tab-dashboard -->
 
@@ -555,62 +544,6 @@ body {
   </div><!-- /.hr-container -->
 </div><!-- /#tab-hr -->
 
-<!-- ════ Meetings Tab ════ -->
-<div id="tab-meetings" class="tab-content">
-  <div class="meetings-container">
-
-    <!-- ── アドバイザリーボード定例 ── -->
-    <!-- 新しい会議グループを追加する場合は <div class="meeting-group"> ブロックをここにコピー -->
-    <div class="meeting-group">
-      <div class="meeting-group-title">アドバイザリーボード定例</div>
-
-      <!-- 新しい回を追加する場合は <div class="meeting-row"> ブロックをここにコピーして回数・日付・ファイルを更新 -->
-
-      <div class="meeting-row">
-        <div class="meeting-round">第1回</div>
-        <div class="meeting-info">
-          <div class="meeting-name">アドバイザリーボード定例</div>
-          <div class="meeting-date">2025/11/05</div>
-        </div>
-        <div class="meeting-docs">
-          <a class="doc-btn" href="meetings/第1回_アドバイザリーボード定例.pdf" target="_blank">
-            <span class="doc-btn-icon">📄</span>資料
-          </a>
-        </div>
-      </div>
-
-      <div class="meeting-row">
-        <div class="meeting-round">第2回</div>
-        <div class="meeting-info">
-          <div class="meeting-name">アドバイザリーボード定例</div>
-          <div class="meeting-date">2026/02/13</div>
-        </div>
-        <div class="meeting-docs">
-          <a class="doc-btn" href="meetings/第2回_アドバイザリーボード定例.pdf" target="_blank">
-            <span class="doc-btn-icon">📄</span>資料
-          </a>
-        </div>
-      </div>
-
-      <div class="meeting-row">
-        <div class="meeting-round">第3回</div>
-        <div class="meeting-info">
-          <div class="meeting-name">アドバイザリーボード定例</div>
-          <div class="meeting-date">2026/04/17</div>
-        </div>
-        <div class="meeting-docs">
-          <a class="doc-btn" href="meetings/第3回_アドバイザリーボード定例.pdf" target="_blank">
-            <span class="doc-btn-icon">📄</span>資料
-          </a>
-        </div>
-      </div>
-
-      <div class="meeting-add-hint">＋ 次回以降の資料・議事録はここに追加</div>
-    </div>
-
-  </div>
-</div><!-- /#tab-meetings -->
-
 <div class="footer">
   <span>Slackデイリーレポートより自動生成（毎朝9:00更新）</span>
   <span>i9mix/seed-soil</span>
@@ -638,4 +571,3 @@ document.querySelectorAll('.role-tab-btn').forEach(btn => {
 
 </body>
 </html>
-
