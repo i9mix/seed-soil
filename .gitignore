@@ -1,0 +1,15 @@
+# ローカル専用設定
+.agents/settings.local.json
+.claude/settings.local.json
+
+# 一時ファイル
+0_temp/
+
+# OS生成ファイル
+.DS_Store
+Thumbs.db
+
+# エディタ設定
+.vscode/
+*.swp
+*.swo
