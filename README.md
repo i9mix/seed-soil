@@ -1,4 +1,6 @@
-# SEED — 事業開発・管理リポジトリ
+# SEED — 事業開発・管理リポジトリ（seed-soil）
+
+JPASN事業関連のリポジトリ。
 
 ## 1. Project Summary
 
