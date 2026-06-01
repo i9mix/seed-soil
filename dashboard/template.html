@@ -216,6 +216,50 @@ body {
 .summary-list li:last-child { border-bottom: none; }
 .summary-list li::before { content: counter(list-counter); position: absolute; left: 0; font-size: 11px; font-weight: 700; font-family: 'DM Mono', monospace; color: var(--text-tertiary); top: 8px; }
 
+/* ── About ── */
+.about-container { max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; gap: 2rem; }
+.about-hero { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 2.5rem 2rem; text-align: center; }
+.about-hero-label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--seed); font-family: 'DM Mono', monospace; margin-bottom: 0.75rem; }
+.about-hero-copy { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); line-height: 1.4; margin-bottom: 1rem; }
+.about-hero-sub { font-size: 14px; color: var(--text-secondary); line-height: 1.8; max-width: 640px; margin: 0 auto; }
+.about-section-title { font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+.about-role-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+@media (max-width: 700px) { .about-role-grid { grid-template-columns: 1fr; } }
+.about-role-card { background: var(--surface); border: 1.5px solid var(--border); border-radius: 14px; padding: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; }
+.about-role-card.playwright { border-top: 4px solid var(--playwright); }
+.about-role-card.director   { border-top: 4px solid var(--director); }
+.about-role-card.producer   { border-top: 4px solid var(--producer); }
+.about-role-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
+.about-role-badge.playwright { background: var(--playwright-bg); color: var(--playwright); }
+.about-role-badge.director   { background: var(--director-bg);   color: var(--director); }
+.about-role-badge.producer   { background: var(--producer-bg);   color: var(--producer); }
+.about-role-name { font-size: 17px; font-weight: 700; color: var(--text-primary); }
+.about-role-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.7; }
+.about-bg-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.5rem 1.75rem; }
+.about-bg-body { font-size: 14px; color: var(--text-secondary); line-height: 1.85; }
+.about-bg-body + .about-bg-body { margin-top: 0.75rem; }
+.about-milestone-list { display: flex; flex-direction: column; gap: 0; }
+.about-ms-row { display: flex; align-items: flex-start; gap: 1rem; padding: 0.85rem 0; border-bottom: 1px solid var(--border); }
+.about-ms-row:last-child { border-bottom: none; }
+.about-ms-date { font-size: 12px; font-family: 'DM Mono', monospace; color: var(--text-tertiary); min-width: 80px; padding-top: 2px; }
+.about-ms-dot { width: 10px; height: 10px; border-radius: 50%; margin-top: 4px; flex-shrink: 0; }
+.about-ms-dot.done { background: var(--soil); }
+.about-ms-dot.wip  { background: var(--wip-text); }
+.about-ms-dot.plan { background: var(--seed); }
+.about-ms-text { font-size: 14px; color: var(--text-primary); line-height: 1.5; }
+.about-ms-text span { font-size: 12px; color: var(--text-tertiary); margin-left: 8px; }
+.about-ms-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem 1.75rem; }
+.about-org-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+@media (max-width: 600px) { .about-org-grid { grid-template-columns: 1fr; } }
+.about-org-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.1rem 1.25rem; }
+.about-org-role { font-size: 11px; font-weight: 700; letter-spacing: 0.05em; color: var(--text-tertiary); margin-bottom: 4px; }
+.about-org-name { font-size: 15px; font-weight: 700; color: var(--text-primary); }
+.about-advisor-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.about-advisor-chip { font-size: 12px; padding: 5px 14px; border-radius: 20px; background: var(--seed-bg); color: var(--seed-text); border: 1px solid #BDD3F8; font-weight: 500; }
+.about-link-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.about-link-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; padding: 8px 18px; border-radius: 10px; border: 1.5px solid var(--border); background: var(--surface); color: var(--text-secondary); text-decoration: none; transition: border-color 0.15s, color 0.15s, background 0.15s; }
+.about-link-btn:hover { border-color: var(--seed); color: var(--seed); background: var(--seed-bg); }
+
 /* ── Meetings ── */
 .meetings-container { max-width: 1100px; margin: 0 auto; }
 .meeting-group { margin-bottom: 2rem; }
@@ -343,6 +387,7 @@ body {
 <div class="tab-nav-wrapper">
   <div class="tab-nav">
     <button class="tab-btn active" data-tab="dashboard">ダッシュボード</button>
+    <button class="tab-btn" data-tab="about">事業概要</button>
     <button class="tab-btn" data-tab="hr">人材要件仮説（仮）</button>
     <button class="tab-btn" data-tab="progress">プログラム進捗</button>
     <button class="tab-btn" data-tab="timeline">スケジュール</button>
@@ -366,6 +411,149 @@ body {
   </div>
   <div class="grid">%%CARDS%%</div>
 </div><!-- /#tab-dashboard -->
+
+<!-- ════ About Tab ════ -->
+<div id="tab-about" class="tab-content">
+  <div class="about-container">
+
+    <!-- Hero -->
+    <div class="about-hero">
+      <div class="about-hero-label">SEED — Summer Education for Excellence in Drama</div>
+      <div class="about-hero-copy">次世代の舞台芸術家を、世界へ。</div>
+      <div class="about-hero-sub">
+        Broadway・West End を見据えた国際展開を軸に、日本の演劇界を担う<br>
+        劇作家・演出家・プロデューサーを育成するプログラムです。<br>
+        2027年3月の事業実施に向け、portport Inc. が主導して開発を進めています。
+      </div>
+    </div>
+
+    <!-- 3職能カード -->
+    <div>
+      <div class="about-section-title">育成する3つの職能</div>
+      <div class="about-role-grid">
+        <div class="about-role-card playwright">
+          <span class="about-role-badge playwright">劇作家</span>
+          <div class="about-role-name">Playwright</div>
+          <div class="about-role-desc">
+            オリジナル作品を生み出し、IPとして国際展開できる戯曲を書く力を育てる。
+            物語構造・テーマ設計・英語圏市場での通用性を包括的に学ぶ。
+          </div>
+        </div>
+        <div class="about-role-card director">
+          <span class="about-role-badge director">演出家</span>
+          <div class="about-role-name">Director</div>
+          <div class="about-role-desc">
+            テキストを舞台空間として具現化し、異文化の観客にも届く演出力を養う。
+            ビジュアル・ドラマトゥルギーから国際共同制作の実践まで。
+          </div>
+        </div>
+        <div class="about-role-card producer">
+          <span class="about-role-badge producer">プロデューサー</span>
+          <div class="about-role-name">Producer</div>
+          <div class="about-role-desc">
+            作品を事業として成立させ、海外市場へ届けるプロデューサーを育成。
+            ファイナンス・権利処理・マーケット戦略・チームビルディングを習得する。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 事業背景 -->
+    <div>
+      <div class="about-section-title">事業背景・課題認識</div>
+      <div class="about-bg-card">
+        <p class="about-bg-body">
+          日本の演劇界は高い創作力を持ちながら、Broadway・West End への進出を阻む構造的な課題を抱えている。
+          権利処理・英語圏向けの台本開発・国際共同制作のノウハウが体系化されておらず、
+          次世代の担い手が「どうすれば世界に届くか」を学ぶ場がほとんど存在しない。
+        </p>
+        <p class="about-bg-body">
+          SEEDは演劇業界のインフラ整備を目的とし、
+          <strong>JPASN（日本舞台芸術ネットワーク）</strong>・<strong>SOIL</strong> との連携のもと、
+          産業全体の経済規模拡大を視野に入れた人材育成モデルを構築する。
+        </p>
+      </div>
+    </div>
+
+    <!-- マイルストーン -->
+    <div>
+      <div class="about-section-title">主要マイルストーン</div>
+      <div class="about-ms-card">
+        <div class="about-milestone-list">
+          <div class="about-ms-row">
+            <div class="about-ms-date">2025/11</div>
+            <div class="about-ms-dot done"></div>
+            <div class="about-ms-text">アドバイザリーボード第1回定例 <span>事業構想の共有・フィードバック収集</span></div>
+          </div>
+          <div class="about-ms-row">
+            <div class="about-ms-date">2026/02</div>
+            <div class="about-ms-dot done"></div>
+            <div class="about-ms-text">アドバイザリーボード第2回定例 <span>カリキュラム骨子レビュー</span></div>
+          </div>
+          <div class="about-ms-row">
+            <div class="about-ms-date">2026/04</div>
+            <div class="about-ms-dot done"></div>
+            <div class="about-ms-text">アドバイザリーボード第3回定例 <span>サマースクール設計レビュー</span></div>
+          </div>
+          <div class="about-ms-row">
+            <div class="about-ms-date">2026 夏</div>
+            <div class="about-ms-dot plan"></div>
+            <div class="about-ms-text">サマースクール 開催 <span>受講生選考・プログラム実施</span></div>
+          </div>
+          <div class="about-ms-row">
+            <div class="about-ms-date">2027/03</div>
+            <div class="about-ms-dot plan"></div>
+            <div class="about-ms-text">事業実施（目標） <span>カリキュラム実装フェーズ完了</span></div>
+          </div>
+        </div>
+      </div>
+      <div style="font-size:11px; color:var(--text-tertiary); margin-top:8px; padding-left:4px;">
+        <span style="display:inline-flex;align-items:center;gap:4px;margin-right:14px;"><span style="width:8px;height:8px;border-radius:50%;background:var(--soil);display:inline-block;"></span>完了</span>
+        <span style="display:inline-flex;align-items:center;gap:4px;"><span style="width:8px;height:8px;border-radius:50%;background:var(--seed);display:inline-block;"></span>予定</span>
+        &nbsp;詳細は「スケジュール」タブを参照
+      </div>
+    </div>
+
+    <!-- 体制 -->
+    <div>
+      <div class="about-section-title">運営体制</div>
+      <div class="about-org-grid">
+        <div class="about-org-card">
+          <div class="about-org-role">事業責任者</div>
+          <div class="about-org-name">伊藤 達哉</div>
+        </div>
+        <div class="about-org-card">
+          <div class="about-org-role">事務局長</div>
+          <div class="about-org-name">野村 善文</div>
+        </div>
+      </div>
+      <div class="about-org-card" style="margin-top:1rem;">
+        <div class="about-org-role">アドバイザリーボード</div>
+        <div class="about-advisor-list">
+          <span class="about-advisor-chip">奥山 緑</span>
+          <span class="about-advisor-chip">高萩 宏</span>
+          <span class="about-advisor-chip">福井 健策</span>
+          <span class="about-advisor-chip">松田 誠</span>
+          <span class="about-advisor-chip">渡辺 ミキ</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- リンク -->
+    <div>
+      <div class="about-section-title">関連リンク</div>
+      <div class="about-link-row">
+        <a class="about-link-btn" href="https://github.com/i9mix/seed-soil" target="_blank">
+          <span>📁</span> GitHub リポジトリ
+        </a>
+        <a class="about-link-btn" href="#" style="opacity:0.45; pointer-events:none;">
+          <span>📊</span> 事業概要 PPT（作成中）
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div><!-- /#tab-about -->
 
 <!-- ════ HR Requirements Tab ════ -->
 <div id="tab-hr" class="tab-content">
