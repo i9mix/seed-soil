@@ -29,6 +29,7 @@ jobs:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           SLACK_CHANNEL_ID: C0974GKQQTD
+        working-directory: dashboard
         run: python generate_dashboard.py
 
       - name: Commit and push
@@ -36,6 +37,6 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git pull --rebase origin main
-          git add index.html
+          git add dashboard/index.html
           git diff --staged --quiet || git commit -m "Update dashboard $(date +'%Y/%m/%d %H:%M JST')"
           git push
