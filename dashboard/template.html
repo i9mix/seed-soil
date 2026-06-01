@@ -216,6 +216,61 @@ body {
 .summary-list li:last-child { border-bottom: none; }
 .summary-list li::before { content: counter(list-counter); position: absolute; left: 0; font-size: 11px; font-weight: 700; font-family: 'DM Mono', monospace; color: var(--text-tertiary); top: 8px; }
 
+/* ── Program Progress ── */
+.prog-container { max-width: 1100px; margin: 0 auto; }
+.prog-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 1.25rem; }
+.prog-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem; }
+.prog-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+.prog-card-title { font-size: 15px; font-weight: 700; }
+.prog-card-title.playwright { color: var(--playwright); }
+.prog-card-title.director   { color: var(--director); }
+.prog-card-title.producer   { color: var(--producer); }
+.prog-card-title.general    { color: var(--seed); }
+.prog-owner { font-size: 11px; color: var(--text-tertiary); }
+.prog-phase { margin-bottom: 10px; }
+.prog-phase:last-child { margin-bottom: 0; }
+.prog-phase-name { font-size: 11px; font-weight: 700; color: var(--text-secondary); margin-bottom: 6px; letter-spacing: 0.04em; }
+.prog-item { display: flex; align-items: flex-start; gap: 8px; padding: 5px 0; border-bottom: 1px solid var(--bg); font-size: 12.5px; line-height: 1.5; }
+.prog-item:last-child { border-bottom: none; }
+.status-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+.dot-done   { background: var(--soil); }
+.dot-wip    { background: #F0A500; }
+.dot-open   { background: #C0392B; }
+.dot-plan   { background: #BDD3F8; }
+.prog-legend { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 1rem; }
+.prog-leg { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--text-secondary); }
+
+/* ── Timeline ── */
+.tl-container { max-width: 1100px; margin: 0 auto; }
+.tl-section { margin-bottom: 1.5rem; }
+.tl-section-title { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+.tl-row { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--bg); align-items: flex-start; }
+.tl-row:last-child { border-bottom: none; }
+.tl-date { font-size: 11.5px; font-family: 'DM Mono', monospace; color: var(--text-secondary); flex-shrink: 0; width: 90px; margin-top: 2px; }
+.tl-label { font-size: 13px; color: var(--text-primary); line-height: 1.5; flex: 1; }
+.tl-label .tl-note { font-size: 11px; color: var(--text-tertiary); display: block; }
+.tl-chips { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 3px; }
+.tl-chip { font-size: 10px; font-weight: 700; padding: 1px 7px; border-radius: 8px; }
+.chip-pw { background: var(--playwright-bg); color: var(--playwright); }
+.chip-dr { background: var(--director-bg); color: var(--director); }
+.chip-pr { background: var(--producer-bg); color: var(--producer); }
+.chip-ge { background: var(--seed-bg); color: var(--seed-text); }
+.chip-all { background: var(--bg); color: var(--text-secondary); border: 1px solid var(--border); }
+.chip-key { background: #FEF0EE; color: var(--urgent-text); border: 1px solid var(--urgent-border); }
+
+/* ── People Map ── */
+.people-container { max-width: 1100px; margin: 0 auto; }
+.people-section { margin-bottom: 1.5rem; }
+.people-section-title { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+.people-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.person-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1rem; }
+.person-name { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+.person-org  { font-size: 11px; color: var(--text-tertiary); margin-bottom: 8px; }
+.person-role { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+.person-chips { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 6px; }
+.status-tbd { border: 1px dashed var(--border); }
+.status-tbd .person-name { color: var(--text-secondary); }
+
 /* ── Footer ── */
 .footer { max-width: 1100px; margin: 2rem auto 0; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 11px; color: var(--text-tertiary); display: flex; justify-content: space-between; }
 
@@ -226,6 +281,8 @@ body {
   .page-header { flex-direction: column; }
   .req-grid { grid-template-columns: 1fr; }
   .special-grid { grid-template-columns: 1fr; }
+  .prog-grid { grid-template-columns: 1fr; }
+  .people-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -247,6 +304,9 @@ body {
   <div class="tab-nav">
     <button class="tab-btn active" data-tab="dashboard">ダッシュボード</button>
     <button class="tab-btn" data-tab="hr">人材要件仮説（仮）</button>
+    <button class="tab-btn" data-tab="progress">プログラム進捗</button>
+    <button class="tab-btn" data-tab="timeline">スケジュール</button>
+    <button class="tab-btn" data-tab="people">関係者マップ</button>
   </div>
 </div>
 
@@ -483,6 +543,230 @@ body {
 
   </div><!-- /.hr-container -->
 </div><!-- /#tab-hr -->
+
+<!-- ════ Program Progress Tab ════ -->
+<div id="tab-progress" class="tab-content">
+  <div class="prog-container">
+    <div class="prog-legend">
+      <div class="prog-leg"><div class="status-dot dot-done"></div>確定・完了</div>
+      <div class="prog-leg"><div class="status-dot dot-wip"></div>検討中</div>
+      <div class="prog-leg"><div class="status-dot dot-open"></div>未着手・白紙</div>
+      <div class="prog-leg"><div class="status-dot dot-plan"></div>予定</div>
+    </div>
+    <div class="prog-grid">
+      <div class="prog-card">
+        <div class="prog-card-header">
+          <div class="prog-card-title playwright">劇作家プログラム</div>
+          <div class="prog-owner">★ 倉沢</div>
+        </div>
+        <div class="prog-phase">
+          <div class="prog-phase-name">PHASE 0 — プレ授業（8/31〜9/7）</div>
+          <div class="prog-item"><div class="status-dot dot-done"></div>5日間カリキュラム骨格（午前講義／午後実践）確定</div>
+          <div class="prog-item"><div class="status-dot dot-done"></div>国内ゲスト確定（前川知大・鹿目由紀・一川華）</div>
+          <div class="prog-item"><div class="status-dot dot-wip"></div>海外ゲスト講師交渉中（Maeve McKeown / Abi Zakarian）</div>
+          <div class="prog-item"><div class="status-dot dot-open"></div>予算策定（Phase 0予算会議 未実施）</div>
+        </div>
+        <div class="prog-phase">
+          <div class="prog-phase-name">選考1 — プロット提出（9/20締切）</div>
+          <div class="prog-item"><div class="status-dot dot-done"></div>提出要件・評価基準の骨格確定</div>
+          <div class="prog-item"><div class="status-dot dot-wip"></div>評価クライテリアのブラッシュアップ（未完）</div>
+          <div class="prog-item"><div class="status-dot dot-open"></div>審査員3名の確定</div>
+        </div>
+        <div class="prog-phase">
+          <div class="prog-phase-name">PHASE 1 — メンターシップ（11月〜4月）</div>
+          <div class="prog-item"><div class="status-dot dot-done"></div>Writer's room 月別テーマ設計済み</div>
+          <div class="prog-item"><div class="status-dot dot-wip"></div>メンタートレーニング担当：Emma McKee（交渉中）</div>
+          <div class="prog-item"><div class="status-dot dot-open"></div>メンター5名の確定・マッチング方法</div>
+        </div>
+        <div class="prog-phase">
+          <div class="prog-phase-name">PHASE 2 — Traverse Theatre（2027/9）</div>
+          <div class="prog-item"><div class="status-dot dot-done"></div>Traverse Theatre（Gareth Nicholls）との基本合意</div>
+          <div class="prog-item"><div class="status-dot dot-wip"></div>スケジュール余裕の確保（Traverse側から要請あり）</div>
+          <div class="prog-item"><div class="status-dot dot-open"></div>上演形式（Rehearsed Reading / Full Production）確定</div>
+        </div>
+      </div>
+      <div class="prog-card">
+        <div class="prog-card-header">
+          <div class="prog-card-title director">演出家プログラム</div>
+          <div class="prog-owner">★ 川名・佐々木</div>
+        </div>
+        <div class="prog-phase">
+          <div class="prog-phase-name">PHASE 1 — 講座シリーズ（オープン）</div>
+          <div class="prog-item"><div class="status-dot dot-wip"></div>演劇メソッド4種の選定・講師検討中</div>
+          <div class="prog-item"><div class="status-dot dot-wip"></div>観劇プログラム・ビジョン言語化ワーク構想中</div>
+          <div class="prog-item"><div class="status-dot dot-open"></div>メンター候補の確定（最重要・完全未定）</div>
+        </div>
+        <div class="prog-phase">
+          <div class="prog-phase-name">PHASE 2 — Paidインターン</div>
+          <div class="prog-item"><div class="status-dot dot-wip"></div>埼玉芸術劇場・世田谷PTへの種まき中</div>
+          <div class="prog-item"><div class="status-dot dot-open"></div>インターン受け入れ先の正式確定（7/27 JPASN総会が目標）</div>
+          <div class="prog-item"><div class="status-dot dot-open"></div>海外演出家インターン（最理想・難易度高）</div>
+        </div>
+        <div class="prog-phase">
+          <div class="prog-phase-name">選考</div>
+          <div class="prog-item"><div class="status-dot dot-done"></div>選考あり（書類＋面接）の方針確定</div>
+          <div class="prog-item"><div class="status-dot dot-open"></div>選考試験の内容設計（「演出プランとは」で白紙）</div>
+          <div class="prog-item"><div class="status-dot dot-open"></div>評価基準の言語化</div>
+        </div>
+      </div>
+      <div class="prog-card">
+        <div class="prog-card-header">
+          <div class="prog-card-title producer">プロデューサープログラム</div>
+          <div class="prog-owner">★ 赤羽・大野</div>
+        </div>
+        <div class="prog-phase">
+          <div class="prog-phase-name">PHASE 1 — 座学オープン講座（9〜10月）</div>
+          <div class="prog-item"><div class="status-dot dot-done"></div>6テーマのカリキュラム骨格確定</div>
+          <div class="prog-item"><div class="status-dot dot-wip"></div>登壇候補者との調整中（骨董通り法律事務所・田中みゆき等）</div>
+          <div class="prog-item"><div class="status-dot dot-open"></div>海外プロデューサー4カ国（未確定）</div>
+          <div class="prog-item"><div class="status-dot dot-open"></div>人材要件「下流レイヤー」の具体化（横堀さん宿題）</div>
+        </div>
+        <div class="prog-phase">
+          <div class="prog-phase-name">PHASE 2 — 実践（1〜3月）</div>
+          <div class="prog-item"><div class="status-dot dot-done"></div>メンター3名確定（東宝・ホリプロ・ゴーチ）</div>
+          <div class="prog-item"><div class="status-dot dot-wip"></div>Paidインターン位置づけ議論中（国内 vs 海外）</div>
+          <div class="prog-item"><div class="status-dot dot-open"></div>インターン受け入れ先3〜5プロダクション確定</div>
+        </div>
+        <div class="prog-phase">
+          <div class="prog-phase-name">選考</div>
+          <div class="prog-item"><div class="status-dot dot-done"></div>筆記テスト＋面談の2段階方式確定</div>
+          <div class="prog-item"><div class="status-dot dot-wip"></div>テスト問題設計（座学6テーマからの出題）</div>
+        </div>
+      </div>
+      <div class="prog-card">
+        <div class="prog-card-header">
+          <div class="prog-card-title general">一般教養講座</div>
+          <div class="prog-owner">★ 野村・赤羽</div>
+        </div>
+        <div class="prog-phase">
+          <div class="prog-phase-name">確定テーマ</div>
+          <div class="prog-item"><div class="status-dot dot-done"></div>知的財産・著作権（福井健策弁護士の問題提起）</div>
+          <div class="prog-item"><div class="status-dot dot-done"></div>海外展開の法務・契約基礎</div>
+          <div class="prog-item"><div class="status-dot dot-done"></div>ハラスメント対策・労働倫理</div>
+          <div class="prog-item"><div class="status-dot dot-done"></div>英語コミュニケーション基礎</div>
+        </div>
+        <div class="prog-phase">
+          <div class="prog-phase-name">検討テーマ</div>
+          <div class="prog-item"><div class="status-dot dot-wip"></div>舞台芸術の歴史・批評リテラシー</div>
+          <div class="prog-item"><div class="status-dot dot-wip"></div>日本の文化・伝統芸能の基礎</div>
+          <div class="prog-item"><div class="status-dot dot-wip"></div>国際的な演劇トレンド（DEI・アクセシビリティ）</div>
+          <div class="prog-item"><div class="status-dot dot-wip"></div>資金調達の基礎（助成金・スポンサー）</div>
+        </div>
+        <div class="prog-phase">
+          <div class="prog-phase-name">設計課題</div>
+          <div class="prog-item"><div class="status-dot dot-open"></div>プロデューサー座学との棲み分け整理</div>
+          <div class="prog-item"><div class="status-dot dot-open"></div>選考1筆記テストとの連動設計</div>
+          <div class="prog-item"><div class="status-dot dot-open"></div>社会人（JPASN会員）参加設計</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /#tab-progress -->
+
+<!-- ════ Timeline Tab ════ -->
+<div id="tab-timeline" class="tab-content">
+  <div class="tl-container">
+    <div class="tl-section">
+      <div class="tl-section-title">2026年 6〜7月</div>
+      <div class="tl-row"><div class="tl-date">〜7月14日</div><div class="tl-label">プレ授業・プロット提出 募集要項開示<div class="tl-chips"><span class="tl-chip chip-pw">劇作家</span></div></div></div>
+      <div class="tl-row"><div class="tl-date">7月27日</div><div class="tl-label"><strong>JPASN会員総会</strong> — インターン受け入れ先確保の追い込み<span class="tl-note">演出家・プロデューサーPaidインターン先の最終調整目標</span><div class="tl-chips"><span class="tl-chip chip-key">重要期限</span><span class="tl-chip chip-dr">演出家</span><span class="tl-chip chip-pr">プロデューサー</span></div></div></div>
+    </div>
+    <div class="tl-section">
+      <div class="tl-section-title">2026年 8月</div>
+      <div class="tl-row"><div class="tl-date">8月14日</div><div class="tl-label">プレ授業 募集締切<div class="tl-chips"><span class="tl-chip chip-pw">劇作家</span></div></div></div>
+      <div class="tl-row"><div class="tl-date">8月17日</div><div class="tl-label">プレ授業 参加者決定・通知<div class="tl-chips"><span class="tl-chip chip-pw">劇作家</span></div></div></div>
+      <div class="tl-row"><div class="tl-date">8月24日週</div><div class="tl-label">おしごとナビ 第一弾WEB公開（演出含む）<div class="tl-chips"><span class="tl-chip chip-all">全体</span></div></div></div>
+      <div class="tl-row"><div class="tl-date">8月31日</div><div class="tl-label">劇作家プレ授業 開始（〜9/7、5日間）<span class="tl-note">午前:講義 / 午後:実践。前川知大・鹿目由紀・一川華 登壇</span><div class="tl-chips"><span class="tl-chip chip-pw">劇作家</span></div></div></div>
+    </div>
+    <div class="tl-section">
+      <div class="tl-section-title">2026年 9月</div>
+      <div class="tl-row"><div class="tl-date">9月7〜9日</div><div class="tl-label"><strong>サマースクール合宿（候補）</strong> — 箱根 Lime Resorts<span class="tl-note">3職種合流。フェーズ3の集大成</span><div class="tl-chips"><span class="tl-chip chip-key">重要期限</span><span class="tl-chip chip-all">全体</span></div></div></div>
+      <div class="tl-row"><div class="tl-date">9月7日</div><div class="tl-label">劇作家プレ授業 終了<div class="tl-chips"><span class="tl-chip chip-pw">劇作家</span></div></div></div>
+      <div class="tl-row"><div class="tl-date">9月20日</div><div class="tl-label">劇作家 選考1 プロット提出締切<span class="tl-note">A4 2枚程度のストーリープロット＋パーソナルステートメント</span><div class="tl-chips"><span class="tl-chip chip-pw">劇作家</span></div></div></div>
+      <div class="tl-row"><div class="tl-date">9〜10月</div><div class="tl-label">プロデューサー 座学オープン講座（Phase 1）<span class="tl-note">6テーマ＋特別セッション。定員20名</span><div class="tl-chips"><span class="tl-chip chip-pr">プロデューサー</span></div></div></div>
+      <div class="tl-row"><div class="tl-date">9月25〜27日</div><div class="tl-label">Performing Arts Base 2026 — オープン講座<span class="tl-note">三職能各1講座程度</span><div class="tl-chips"><span class="tl-chip chip-all">全体</span></div></div></div>
+    </div>
+    <div class="tl-section">
+      <div class="tl-section-title">2026年 10〜11月</div>
+      <div class="tl-row"><div class="tl-date">10月16日</div><div class="tl-label">劇作家 選考1 合格通知<div class="tl-chips"><span class="tl-chip chip-pw">劇作家</span></div></div></div>
+      <div class="tl-row"><div class="tl-date">10月31日</div><div class="tl-label">劇作家 メンターマッチング確定<div class="tl-chips"><span class="tl-chip chip-pw">劇作家</span></div></div></div>
+      <div class="tl-row"><div class="tl-date">11月〜</div><div class="tl-label">劇作家 メンターシップ Phase 1 開始<span class="tl-note">最大10名。月1回メンター1on1＋Writer's room</span><div class="tl-chips"><span class="tl-chip chip-pw">劇作家</span></div></div></div>
+    </div>
+    <div class="tl-section">
+      <div class="tl-section-title">2027年 1〜4月</div>
+      <div class="tl-row"><div class="tl-date">1〜2月</div><div class="tl-label">プロデューサー メンターセッション（企画の種を育てる）<span class="tl-note">東宝・ホリプロ・ゴーチ リサーチャー3名がメンター</span><div class="tl-chips"><span class="tl-chip chip-pr">プロデューサー</span></div></div></div>
+      <div class="tl-row"><div class="tl-date">1〜3月</div><div class="tl-label">プロデューサー・演出家 Paidインターン<span class="tl-note">毛色の違う3〜5プロダクション。1日からでも可</span><div class="tl-chips"><span class="tl-chip chip-pr">プロデューサー</span><span class="tl-chip chip-dr">演出家</span></div></div></div>
+      <div class="tl-row"><div class="tl-date">1月24〜31日</div><div class="tl-label">劇作家 中間報告会（進捗報告・希望者リーディング）<div class="tl-chips"><span class="tl-chip chip-pw">劇作家</span></div></div></div>
+      <div class="tl-row"><div class="tl-date">4月末</div><div class="tl-label">劇作家 最終報告会（10名×15分 自作発表）<div class="tl-chips"><span class="tl-chip chip-pw">劇作家</span></div></div></div>
+    </div>
+    <div class="tl-section">
+      <div class="tl-section-title">2027年 5月〜9月</div>
+      <div class="tl-row"><div class="tl-date">5月31日</div><div class="tl-label">劇作家 選考2 翻訳締切（日英ファーストドラフト）<div class="tl-chips"><span class="tl-chip chip-pw">劇作家</span></div></div></div>
+      <div class="tl-row"><div class="tl-date">6月30日</div><div class="tl-label">劇作家 選考2 合格者決定（約5名）<div class="tl-chips"><span class="tl-chip chip-pw">劇作家</span></div></div></div>
+      <div class="tl-row"><div class="tl-date">2027年9月</div><div class="tl-label"><strong>Traverse Theatre リーディング（エディンバラ）</strong><span class="tl-note">渡英・本番上演。Rehearsed Reading / Work in Progress</span><div class="tl-chips"><span class="tl-chip chip-key">重要期限</span><span class="tl-chip chip-pw">劇作家</span></div></div></div>
+    </div>
+  </div>
+</div><!-- /#tab-timeline -->
+
+<!-- ════ People Map Tab ════ -->
+<div id="tab-people" class="tab-content">
+  <div class="people-container">
+    <div class="people-section">
+      <div class="people-section-title">portport / SEED 運営チーム</div>
+      <div class="people-grid">
+        <div class="person-card"><div class="person-name">伊藤 達哉</div><div class="person-org">portport Inc.</div><div class="person-role">事業責任者（◎ 最高責任者）</div><div class="person-chips"><span class="tl-chip chip-all">全体</span></div></div>
+        <div class="person-card"><div class="person-name">野村 善文</div><div class="person-org">portport Inc.</div><div class="person-role">事務局長。サマースクール全体設計、選考管理、一般教養</div><div class="person-chips"><span class="tl-chip chip-all">全体</span><span class="tl-chip chip-ge">一般教養</span></div></div>
+        <div class="person-card"><div class="person-name">赤羽 ひろみ</div><div class="person-org">portport Inc.</div><div class="person-role">サマースクール全体設計、プロデューサープログラム★</div><div class="person-chips"><span class="tl-chip chip-pr">プロデューサー</span><span class="tl-chip chip-ge">一般教養</span></div></div>
+        <div class="person-card"><div class="person-name">髙田 郁実</div><div class="person-org">portport Inc.</div><div class="person-role">サマースクール全体設計、演出家プログラム事務、全体進行管理</div><div class="person-chips"><span class="tl-chip chip-dr">演出家</span><span class="tl-chip chip-all">全体</span></div></div>
+        <div class="person-card"><div class="person-name">川名 幸宏</div><div class="person-org">portport Inc.</div><div class="person-role">演出家プログラム★、大学連携担当</div><div class="person-chips"><span class="tl-chip chip-dr">演出家</span></div></div>
+        <div class="person-card"><div class="person-name">倉沢 麻里江</div><div class="person-org">portport Inc.</div><div class="person-role">劇作家プログラム★</div><div class="person-chips"><span class="tl-chip chip-pw">劇作家</span></div></div>
+        <div class="person-card"><div class="person-name">大野</div><div class="person-org">portport Inc.</div><div class="person-role">プロデューサープログラム担当</div><div class="person-chips"><span class="tl-chip chip-pr">プロデューサー</span></div></div>
+        <div class="person-card"><div class="person-name">佐々木 明音</div><div class="person-org">portport Inc.</div><div class="person-role">演出家プログラム担当</div><div class="person-chips"><span class="tl-chip chip-dr">演出家</span></div></div>
+        <div class="person-card"><div class="person-name">横堀 応彦</div><div class="person-org">portport Inc.</div><div class="person-role">リサーチ・カリキュラム実装責任者、選考アドバイザー</div><div class="person-chips"><span class="tl-chip chip-all">全体</span></div></div>
+        <div class="person-card"><div class="person-name">遠藤 真有美</div><div class="person-org">portport Inc.</div><div class="person-role">JPASN連携・会計</div><div class="person-chips"><span class="tl-chip chip-all">全体</span></div></div>
+      </div>
+    </div>
+    <div class="people-section">
+      <div class="people-section-title">アドバイザリーボード</div>
+      <div class="people-grid">
+        <div class="person-card"><div class="person-name">福井 健策</div><div class="person-org">骨董通り法律事務所</div><div class="person-role">知財・著作権専門。一般教養カリキュラム設立の契機となった提言者</div><div class="person-chips"><span class="tl-chip chip-ge">一般教養</span></div></div>
+        <div class="person-card"><div class="person-name">松田 誠</div><div class="person-org">—</div><div class="person-role">アドバイザリーボード。プロデューサー講義 登壇候補</div><div class="person-chips"><span class="tl-chip chip-pr">プロデューサー</span></div></div>
+        <div class="person-card"><div class="person-name">奥山 緑 / 高萩 宏 / 渡辺 ミキ</div><div class="person-org">—</div><div class="person-role">アドバイザリーボードメンバー</div><div class="person-chips"><span class="tl-chip chip-all">全体</span></div></div>
+      </div>
+    </div>
+    <div class="people-section">
+      <div class="people-section-title">劇作家プログラム — ゲスト・メンター候補</div>
+      <div class="people-grid">
+        <div class="person-card"><div class="person-name">前川 知大</div><div class="person-org">国内劇作家</div><div class="person-role">プレ授業ゲスト（9/1）。プログラム内容確認のNext Stepあり</div><div class="person-chips"><span class="tl-chip chip-pw">劇作家</span></div></div>
+        <div class="person-card"><div class="person-name">鹿目 由紀</div><div class="person-org">国内劇作家</div><div class="person-role">プレ授業ゲスト（9/2）</div><div class="person-chips"><span class="tl-chip chip-pw">劇作家</span></div></div>
+        <div class="person-card"><div class="person-name">一川 華</div><div class="person-org">国内劇作家</div><div class="person-role">プレ授業ゲスト（9/3）</div><div class="person-chips"><span class="tl-chip chip-pw">劇作家</span></div></div>
+        <div class="person-card"><div class="person-name">阿部 のぞみ</div><div class="person-org">—</div><div class="person-role">プレ授業講義担当候補。リサーチ派遣者（ロンドン）</div><div class="person-chips"><span class="tl-chip chip-pw">劇作家</span></div></div>
+        <div class="person-card"><div class="person-name">倉沢 まりえ</div><div class="person-org">—</div><div class="person-role">プレ授業講義担当候補</div><div class="person-chips"><span class="tl-chip chip-pw">劇作家</span></div></div>
+        <div class="person-card status-tbd"><div class="person-name">Emma McKee</div><div class="person-org">Playwrights Studio Scotland</div><div class="person-role">メンタートレーニング担当 有力候補（交渉中）</div><div class="person-chips"><span class="tl-chip chip-pw">劇作家</span></div></div>
+        <div class="person-card status-tbd"><div class="person-name">Maeve McKeown</div><div class="person-org">Stephen Jeffrey本 エディター</div><div class="person-role">海外ゲスト講師候補（交渉中）</div><div class="person-chips"><span class="tl-chip chip-pw">劇作家</span></div></div>
+        <div class="person-card"><div class="person-name">Gareth Nicholls</div><div class="person-org">Traverse Theatre（エディンバラ）</div><div class="person-role">Artistic Director。Phase 2 上演先。基本合意済み</div><div class="person-chips"><span class="tl-chip chip-pw">劇作家</span></div></div>
+      </div>
+    </div>
+    <div class="people-section">
+      <div class="people-section-title">プロデューサープログラム — メンター・講師候補</div>
+      <div class="people-grid">
+        <div class="person-card"><div class="person-name">小嶋 麻倫子</div><div class="person-org">東宝</div><div class="person-role">メンター（確定）。リサーチ派遣者（ソウル）</div><div class="person-chips"><span class="tl-chip chip-pr">プロデューサー</span></div></div>
+        <div class="person-card"><div class="person-name">井川 荃芬</div><div class="person-org">ホリプロ</div><div class="person-role">メンター（確定）。リサーチ派遣者（NY渡航済）</div><div class="person-chips"><span class="tl-chip chip-pr">プロデューサー</span></div></div>
+        <div class="person-card"><div class="person-name">時田 曜子</div><div class="person-org">ゴーチ・ブラザーズ</div><div class="person-role">メンター（確定）。リサーチ派遣者（ロンドン予定）</div><div class="person-chips"><span class="tl-chip chip-pr">プロデューサー</span></div></div>
+        <div class="person-card"><div class="person-name">福田 博之 / 尾木 晴佳 / 西野 亮廣</div><div class="person-org">—</div><div class="person-role">プロデューサー講義 登壇候補</div><div class="person-chips"><span class="tl-chip chip-pr">プロデューサー</span></div></div>
+        <div class="person-card"><div class="person-name">田中 みゆき</div><div class="person-org">—</div><div class="person-role">アクセシビリティ・多様性セッション 登壇候補</div><div class="person-chips"><span class="tl-chip chip-pr">プロデューサー</span></div></div>
+      </div>
+    </div>
+    <div class="people-section">
+      <div class="people-section-title">演出家プログラム — インターン受け入れ候補</div>
+      <div class="people-grid">
+        <div class="person-card status-tbd"><div class="person-name">埼玉芸術劇場</div><div class="person-org">劇場</div><div class="person-role">Paidインターン受け入れ候補（種まき中）</div><div class="person-chips"><span class="tl-chip chip-dr">演出家</span></div></div>
+        <div class="person-card status-tbd"><div class="person-name">世田谷パブリックシアター</div><div class="person-org">劇場</div><div class="person-role">Paidインターン受け入れ候補（種まき中）</div><div class="person-chips"><span class="tl-chip chip-dr">演出家</span></div></div>
+        <div class="person-card status-tbd"><div class="person-name">海外演出家（未定）</div><div class="person-org">—</div><div class="person-role">最理想のインターン先。難易度最高・完全未定</div><div class="person-chips"><span class="tl-chip chip-dr">演出家</span></div></div>
+      </div>
+    </div>
+  </div>
+</div><!-- /#tab-people -->
 
 <div class="footer">
   <span>Slackデイリーレポートより自動生成（毎朝9:00更新）</span>
