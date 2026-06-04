@@ -1753,13 +1753,57 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
   <div style="overflow-x:auto">
   <table class="ge-common-table">
     <thead>
-      <tr><th>大学・機関</th><th>カバーしていること</th><th>不足しているもの（SEEDが補う）</th></tr>
+      <tr><th>大学・機関</th><th>カバーしていること（確認済）</th><th>不足しているもの（SEEDが補う）</th></tr>
     </thead>
     <tbody>
-      <tr><td><strong>日本大学芸術学部（日芸）</strong></td><td>演劇史（日本・西洋）、各技術実習（照明・美術・音響）、年9本の総合実習、劇場空間での実践</td><td>国際市場の理解、英語での表現・議論、Transfer装置の概念、自分の作品を語る力、商業演劇システムの理解</td></tr>
-      <tr><td><strong>昭和音楽大学 AM</strong></td><td>アートマネジメント実務、英語教育（必修多）、コンサート企画プロデュース実習、50社以上のインターン</td><td>演劇固有の深さ（ドラマトゥルギー等）、「語り続ける」表現訓練、国際フェスティバルの文脈理解</td></tr>
-      <tr><td><strong>桐朋学園芸術短大</strong></td><td>国際展開の視点（文化政策B）、著名劇作家・演出家のゲスト講義（聞く経験）</td><td>自分が「語る」実践、英語での sustained discourse（話し続ける力）</td></tr>
-      <tr style="background:var(--seed-bg)"><td><strong>共通のギャップ → SEEDが担う</strong></td><td colspan="2"><strong>「表現の力」：知識を持っているが、英語で・継続的に・論理的に「話し続ける」訓練がどこの大学でも圧倒的に不足している。これが「氷山の水面」に出るための力。</strong></td></tr>
+      <tr>
+        <td><strong>日本大学芸術学部 演劇学科</strong><br><span style="font-size:10px;color:var(--text-tertiary)">東演連加盟。劇作・演出・企画制作・演技・デザイン技術の3コース10専攻</span></td>
+        <td>演劇史（日本・西洋）、各専攻別技術実習（照明・音響・舞台美術）、学生主導の学内公演（年複数本）、戯曲輪読・集団創作</td>
+        <td>英語での表現・議論、国際市場の理解、商業演劇の財務・法務教育、業界人との体系的接続（単発外部講師が主流）</td>
+      </tr>
+      <tr>
+        <td><strong>玉川大学 演劇・舞踊学科</strong><br><span style="font-size:10px;color:var(--text-tertiary)">東演連加盟。身体表現・舞台創造・芸術応用の3コース</span></td>
+        <td>1年次横断必修（音楽表現・身体表現・舞台技術）、劇場接遇演習、オーディション演習、演劇史・理論、上演実習</td>
+        <td>英語・国際展開の具体的プログラムなし、商業演劇プロデュース、スクリーン演技・映像との接続</td>
+      </tr>
+      <tr>
+        <td><strong>多摩美術大学 演劇舞踊デザイン学科</strong><br><span style="font-size:10px;color:var(--text-tertiary)">東演連加盟。演劇舞踊コース＋劇場美術デザインコース</span></td>
+        <td>演技・振付・劇作・演出・コレオグラフィ演習、舞台美術・照明・衣裳・映像美術、社会的背景を踏まえた演劇史・理論</td>
+        <td>英語・国際展開教育、業界接続の仕組み、商業演劇プロデュース</td>
+      </tr>
+      <tr>
+        <td><strong>桐朋学園芸術短大 演劇専攻</strong><br><span style="font-size:10px;color:var(--text-tertiary)">東演連加盟。2年制。ストレートプレイ・ミュージカル・声優の3コース</span></td>
+        <td>「本を読む力・身体の鍛錬・アンサンブル」の3指針。ボイストレーニング・身体・演技発表会・卒業公演への集中特化</td>
+        <td>俳優育成特化のためプロデューサー・劇作家・演出家育成は対象外。英語・国際展開の記述なし</td>
+      </tr>
+      <tr>
+        <td><strong>桜美林大学 芸術文化学群</strong><br><span style="font-size:10px;color:var(--text-tertiary)">東演連加盟。演劇・ダンス専修 + 2025年度よりプロデュース＆マネジメント領域拡充</span></td>
+        <td>演劇・ダンス・ミュージカル・舞台技術スタッフワーク・アートプロデュース・2025年度より声優・映像演技・テーマパークダンス対応科目新設</td>
+        <td>「グローバルアウトリーチプログラム」が示唆されるが詳細不明。具体的な国際展開教育は未確認</td>
+      </tr>
+      <tr>
+        <td><strong>昭和音楽大学 アートマネジメントコース</strong><br><span style="font-size:10px;color:var(--text-tertiary)">1994年日本初のアートマネジメント教育。米国AAAE認定取得</span></td>
+        <td>アートマネジメント実務（企画・交渉・運営一貫）、<strong>アートマネジメント英語①②必修</strong>、50社超のインターンシップ、3年次：学生企画の公演を実費制作</td>
+        <td>演劇固有のドラマトゥルギー・劇作・演出の深度、自分の作品・ビジョンを継続して「語り続ける」表現訓練</td>
+      </tr>
+      <tr>
+        <td><strong>早稲田大学 文学部 演劇映像コース</strong><br><span style="font-size:10px;color:var(--text-tertiary)">研究・批評系。実技系ではない</span></td>
+        <td>日本古典演劇（能・浄瑠璃・歌舞伎）・民俗芸能・西洋演劇・現代舞台芸術・映画史理論・演劇批評</td>
+        <td>実技・実習なし。国際展開・英語プレゼン・プロデュース実践はカリキュラム外</td>
+      </tr>
+      <tr style="background:var(--seed-bg)">
+        <td colspan="3">
+          <strong>🔬 海外比較で見えてくる構造的ギャップ（RADA・Yale・K-Arts）</strong><br>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:8px;font-size:11.5px">
+            <div><strong style="color:var(--seed-text)">英語・国際交渉</strong>：RADAは国際演劇祭参加が正規プログラム。日本は昭和音大のみ「アートマネジメント英語」を必修化。東演連5校は未整備。</div>
+            <div><strong style="color:var(--seed-text)">商業演劇プロデュース</strong>：Yale Theater Management MFAでは会計・財務・労働法・ガバナンス・資金調達・観客開発を専門課程として設置。日本にはない。</div>
+            <div><strong style="color:var(--seed-text)">ドラマトゥルギーの実践的科目化</strong>：RADAはBA ActingにDramaturgy必修。YaleはMFA独立専攻。日本は理論系にとどまる。</div>
+            <div><strong style="color:var(--seed-text)">業界構造・キャリア設計</strong>：RADAはエージェント・キャスティング・プロデューサーによるセミナーを必修化。Yaleは初日から実務従事。日本は単発外部講師が主流。</div>
+            <div><strong style="color:var(--seed-text)">ミュージカル創作</strong>：K-Artsは Musical Theatre Writing Program（大学院）として国策育成。日本に独立プログラムなし。</div>
+            <div><strong style="color:var(--urgent-text)">共通の最大ギャップ → SEEDが担う</strong>：「表現の力（sustained oral discourse）」——知識を持ちながら、英語で・継続的に・論理的に「話し続ける」訓練が、どの大学でも圧倒的に不足。</div>
+          </div>
+        </td>
+      </tr>
     </tbody>
   </table>
   </div>
@@ -1794,14 +1838,14 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
       <tr><th>共通要件</th><th>P（プロデューサー）</th><th>D（演出家）</th><th>PW（劇作家）</th><th>大学カバー度</th><th>一般教養での扱い方</th></tr>
     </thead>
     <tbody>
-      <tr style="background:#FFF9E0"><td><strong>🆕 表現の力（話し続ける・語る・プレゼン）</strong></td><td>S-3/S-7 ◎</td><td>S-3/S-6 ◎</td><td>S-2/S-6 ◎</td><td style="color:var(--urgent-text);font-weight:700">△ 圧倒的不足</td><td>10分プレゼン訓練・話の展開力・英語 sustained discourse（UNIT E1/E2）</td></tr>
-      <tr><td><strong>市場構造リテラシー（SOIL・3シナリオ）</strong></td><td>K-4/7/8 ◎</td><td>K-7 ○</td><td>K-8 ○</td><td style="color:var(--urgent-text)">✗ ほぼなし</td><td>4列マトリックス・Transfer装置・A/B/C'シナリオ → タブ①</td></tr>
-      <tr><td><strong>コラボレーション・協働姿勢</strong></td><td>M-1・S-1 ◎</td><td>M-1/2・S-2 ◎</td><td>M-3 ◎</td><td style="color:var(--soil)">△ 実習で部分的</td><td>職種横断グループワーク・対話の場（UNIT K2）</td></tr>
-      <tr><td><strong>日本文化への誇りと相対化</strong></td><td>M-2・K-2 ◎</td><td>M-4・K-4 ◎</td><td>M-2・K-4 ◎</td><td style="color:var(--soil)">△ 日本演劇史で基礎</td><td>日本文化の言語化（英語表現まで：UNIT E1）</td></tr>
-      <tr><td><strong>演劇の構造・ドラマトゥルギー</strong></td><td>K-1 ◎</td><td>K-1 ◎</td><td>K-1 ◎</td><td style="color:var(--soil)">○ 日芸・桐朋で基礎</td><td>批評リテラシー・戯曲を英語で議論する（UNIT K1）</td></tr>
-      <tr><td><strong>制作実務基礎（知財・助成金・GM分業）</strong></td><td>K-3/9 ◎</td><td>K-8 ○</td><td>K-5 ◎</td><td style="color:var(--soil)">○ 昭和音大で基礎</td><td>知財・著作権・海外展開実務の概論（UNIT K3）</td></tr>
-      <tr><td><strong>英語コミュニケーション基礎</strong></td><td>S-2 ◎</td><td>S-5 ◎</td><td>S-7 ○</td><td style="color:var(--urgent-text)">△ 読む・聞くはある。話すが弱い</td><td>英語ピッチ→英語 sustained discourse（UNIT E1/E2）</td></tr>
-      <tr><td><strong>転生（Transfer）事例・ロールモデルの理解</strong></td><td>K-4 ◎</td><td>K-7 ○</td><td>K-8 ○</td><td style="color:var(--urgent-text)">✗ ほぼなし</td><td>転生ルート事例解剖（UNIT K2）</td></tr>
+      <tr style="background:#FFF9E0"><td><strong>🆕 表現の力（話し続ける・語る・プレゼン）</strong></td><td>S-3/S-7 ◎</td><td>S-3/S-6 ◎</td><td>S-2/S-6 ◎</td><td style="color:var(--urgent-text);font-weight:700">✗ 全大学で欠如<br><span style="font-size:10px;font-weight:400">RADAは業界人前プレゼン必修。日本は記載なし</span></td><td>10分プレゼン（業界プロの前で）・話の展開力・sustained discourse（UNIT E1/E2）</td></tr>
+      <tr><td><strong>市場構造リテラシー（SOIL・3シナリオ）</strong></td><td>K-4/7/8 ◎</td><td>K-7 ○</td><td>K-8 ○</td><td style="color:var(--urgent-text)">✗ 全大学で欠如<br><span style="font-size:10px">国際市場・Transferの概念なし</span></td><td>4列マトリックス・Transfer装置・A/B/C'シナリオ → タブ①（UNIT K1）</td></tr>
+      <tr><td><strong>コラボレーション・協働姿勢</strong></td><td>M-1・S-1 ◎</td><td>M-1/2・S-2 ◎</td><td>M-3 ◎</td><td style="color:var(--soil)">△ 学内実習で部分的<br><span style="font-size:10px">職種横断の設計は少ない（玉川は1年次横断あり）</span></td><td>3職種混合グループワーク・職種横断対話（UNIT E2）</td></tr>
+      <tr><td><strong>日本文化への誇りと相対化</strong></td><td>M-2・K-2 ◎</td><td>M-4・K-4 ◎</td><td>M-2・K-4 ◎</td><td style="color:var(--soil)">△ 演劇史で基礎あり<br><span style="font-size:10px">早稲田・多摩美は日本伝統芸能も</span></td><td>日本文化の言語化＋英語表現まで（UNIT E1）</td></tr>
+      <tr><td><strong>演劇の構造・ドラマトゥルギー</strong></td><td>K-1 ◎</td><td>K-1 ◎</td><td>K-1 ◎</td><td style="color:var(--soil)">△ 理論系のみ<br><span style="font-size:10px">RADAはBA必修。日本は実践的科目化が弱い</span></td><td>戯曲を「国際的に届くか」の視点で議論（UNIT K2）</td></tr>
+      <tr><td><strong>制作実務基礎（知財・助成金・GM分業）</strong></td><td>K-3/9 ◎</td><td>K-8 ○</td><td>K-5 ◎</td><td style="color:var(--soil)">○ 昭和音大・桜美林で基礎<br><span style="font-size:10px">海外展開・GM分業は日本全大学で未整備</span></td><td>知財・海外契約・GM分業の概論（UNIT K3）</td></tr>
+      <tr><td><strong>英語コミュニケーション</strong></td><td>S-2 ◎</td><td>S-5 ◎</td><td>S-7 ○</td><td style="color:var(--urgent-text)">△ 昭和音大のみ英語必修<br><span style="font-size:10px">東演連5校は「話す英語」ほぼなし</span></td><td>英語ピッチ→10分sustained discourse（UNIT E1/E2）</td></tr>
+      <tr><td><strong>Transfer事例・業界構造・ロールモデル理解</strong></td><td>K-4 ◎</td><td>K-7 ○</td><td>K-8 ○</td><td style="color:var(--urgent-text)">✗ 全大学で欠如<br><span style="font-size:10px">Yaleは初日から劇場実務従事。日本は単発外部講師</span></td><td>Transfer事例解剖（Six/Come from Away/チェルフィッチュ等）（UNIT K2）</td></tr>
     </tbody>
   </table>
   </div>
