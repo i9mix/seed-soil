@@ -368,6 +368,129 @@ body {
   .prog-grid { grid-template-columns: 1fr; }
   .people-grid { grid-template-columns: 1fr; }
 }
+/* ══════ SOIL Map ══════ */
+.soil-container,.ge-container,.rs-container{max-width:1100px;margin:0 auto}
+.soil-section{margin-bottom:2.5rem}
+.soil-section-title{font-size:14px;font-weight:700;color:var(--text-primary);margin-bottom:1rem;padding-bottom:8px;border-bottom:2px solid var(--border);display:flex;align-items:center;gap:8px}
+.soil-intro-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.25rem;margin-bottom:1.5rem;font-size:13.5px;line-height:1.8;color:var(--text-secondary)}
+.axis-note-h{display:flex;justify-content:space-between;font-size:11px;color:var(--text-tertiary);margin-bottom:8px;font-family:'DM Mono',monospace}
+.market-4col{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}
+.market-col{border-radius:12px;padding:1rem;border:1.5px solid var(--border);background:var(--surface);position:relative}
+.market-col.ip-col{background:#EEF4FE;border-color:#BDD3F8}
+.market-col.commercial-col{background:#FEF3E2;border-color:#F5D0A9}
+.market-col.contemporary-col{background:#E1F5EE;border-color:#A8DEC8}
+.market-col.heritage-col{background:#F0EDFD;border-color:#CBBFF8}
+.mc-col-title{font-size:13px;font-weight:700;color:var(--text-primary);margin-bottom:6px}
+.mc-stage-badge{font-size:10px;font-weight:700;color:var(--soil);background:var(--soil-bg);border:1px solid #A8DEC8;padding:2px 7px;border-radius:5px;display:inline-block;margin-bottom:6px}
+.mc-world-ex{font-size:11.5px;color:var(--text-secondary);line-height:1.7;margin-bottom:8px}
+.mc-jp-block{margin-bottom:6px}
+.mc-jp-tag{font-size:10px;font-weight:700;padding:2px 6px;border-radius:5px;display:inline-block;margin-bottom:4px}
+.jp-present{background:#FEF0EE;color:var(--urgent-text)}
+.jp-none{background:#E8E8E8;color:#555;font-style:italic}
+.jp-target{background:var(--seed-bg);color:var(--seed-text)}
+.mc-jp-list{font-size:11px;color:var(--text-secondary);line-height:1.6}
+.mc-zone-tag{font-size:10px;font-weight:700;padding:3px 7px;border-radius:6px;display:inline-block;margin-top:8px}
+.zone-void{background:#E8E8E8;color:#555}
+.zone-dead{background:#FFF3CD;color:#856404}
+.v-axis-heading{font-size:11px;font-weight:700;color:var(--text-tertiary);margin-bottom:6px;letter-spacing:.04em}
+.v-axis-rows{display:flex;flex-direction:column;gap:3px;margin-bottom:10px}
+.v-axis-row{display:flex;align-items:center;gap:8px;padding:4px 10px;border-radius:6px;background:var(--bg);font-size:12px}
+.v-axis-num{font-size:10px;font-weight:700;font-family:'DM Mono';color:var(--text-tertiary);width:18px;flex-shrink:0}
+.vzd-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.vzd-card{border-radius:10px;padding:10px 12px}
+.vzd-void{background:#F0F0F0;border:1px solid #DDD}
+.vzd-dead{background:#FFF9E0;border:1px solid #F5D0A9}
+.vzd-tag{font-size:10px;font-weight:700;color:#555;margin-bottom:4px}
+.vzd-desc{font-size:12px;color:var(--text-secondary);line-height:1.5}
+/* ── Transfer Machine ── */
+.transfer-intro-card{background:var(--seed-bg);border:1px solid #BDD3F8;border-radius:12px;padding:1rem;margin-bottom:12px;font-size:13px;color:var(--seed-text);line-height:1.6}
+.transfer-city-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.transfer-city-title{font-size:12px;font-weight:700;color:var(--text-secondary);margin-bottom:8px;letter-spacing:.06em;text-transform:uppercase}
+.transfer-insts{display:flex;flex-wrap:wrap;gap:6px}
+.transfer-inst{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:5px 10px;font-size:12px;color:var(--text-primary);font-weight:600}
+/* ── Route Table ── */
+.route-table{width:100%;border-collapse:collapse;font-size:12.5px}
+.route-table th{background:var(--bg);padding:8px 10px;text-align:left;font-size:11px;font-weight:700;color:var(--text-secondary);border-bottom:2px solid var(--border)}
+.route-table td{padding:10px;border-bottom:1px solid var(--bg);vertical-align:top;line-height:1.5}
+.route-table tr:hover td{background:var(--bg)}
+.route-lbl{font-size:10px;font-weight:700;padding:2px 6px;border-radius:5px;display:inline-block}
+.route-lbl-a{background:var(--seed-bg);color:var(--seed-text)}
+.route-lbl-b{background:var(--soil-bg);color:var(--soil-text)}
+.route-lbl-main{background:#FFF3CD;color:#856404}
+/* ── Entrance ── */
+.entrance-3col{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.entrance-card{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;padding:1.25rem}
+.entrance-letter{font-size:26px;font-weight:700;font-family:'DM Mono';color:var(--seed);margin-bottom:6px}
+.entrance-title{font-size:13px;font-weight:700;color:var(--text-primary);margin-bottom:6px}
+.entrance-desc{font-size:12px;color:var(--text-secondary);line-height:1.6}
+.entrance-example{font-size:11px;color:var(--text-tertiary);margin-top:8px;padding-top:6px;border-top:1px solid var(--bg)}
+/* ── Scenario ── */
+.scenario-2col{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px}
+.scenario-2col-sub{display:grid;grid-template-columns:1fr 1fr;gap:10px;opacity:.65}
+.sc-card{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;padding:1.25rem}
+.sc-card.main-sc{border-color:var(--seed);box-shadow:0 0 0 3px rgba(55,138,221,.10)}
+.sc-main-badge{font-size:11px;font-weight:700;background:var(--seed-bg);color:var(--seed-text);padding:2px 8px;border-radius:8px;display:inline-block;margin-bottom:8px}
+.sc-letter{font-size:22px;font-weight:700;font-family:'DM Mono';margin-bottom:2px}
+.sc-letter.a{color:var(--seed)}.sc-letter.b{color:var(--soil)}
+.sc-name{font-size:13.5px;font-weight:700;color:var(--text-primary);margin-bottom:8px}
+.sc-desc{font-size:12.5px;color:var(--text-secondary);line-height:1.6;margin-bottom:10px}
+.sc-role-row{font-size:12px;display:flex;gap:6px;align-items:flex-start;margin-bottom:5px}
+.sc-role-chip{font-size:10px;font-weight:700;padding:1px 6px;border-radius:5px;flex-shrink:0;margin-top:2px}
+.sc-role-text{color:var(--text-secondary);line-height:1.4}
+/* ══════ General Education ══════ */
+.ge-section{margin-bottom:2.5rem}
+.ge-section-title{font-size:14px;font-weight:700;color:var(--text-primary);margin-bottom:1rem;padding-bottom:8px;border-bottom:2px solid var(--border)}
+.ge-unit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.ge-unit-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.25rem}
+.ge-unit-id{font-size:10px;font-weight:700;font-family:'DM Mono';color:var(--text-tertiary);letter-spacing:.08em;margin-bottom:6px}
+.ge-unit-theme{font-size:14px;font-weight:700;color:var(--text-primary);margin-bottom:4px}
+.ge-unit-subtitle{font-size:12px;font-weight:600;color:var(--seed);margin-bottom:8px}
+.ge-unit-items{font-size:11.5px;color:var(--text-secondary);line-height:1.8;margin-bottom:8px}
+.ge-unit-goal{font-size:12px;font-weight:600;color:var(--soil-text);background:var(--soil-bg);border-radius:6px;padding:5px 8px;margin-bottom:8px}
+.ge-unit-owner{font-size:11px;color:var(--text-tertiary);padding-top:6px;border-top:1px solid var(--bg)}
+.ge-common-table{width:100%;border-collapse:collapse;font-size:12.5px}
+.ge-common-table th{background:var(--bg);padding:8px 10px;text-align:left;font-size:11px;font-weight:700;color:var(--text-secondary);border-bottom:2px solid var(--border)}
+.ge-common-table td{padding:10px;border-bottom:1px solid var(--bg);vertical-align:top;line-height:1.5}
+.ge-common-table tr:hover td{background:var(--bg)}
+.ge-split-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.ge-split-card{border-radius:12px;padding:1rem}
+.ge-split-left{background:var(--seed-bg);border:1px solid #BDD3F8}
+.ge-split-right{background:var(--surface);border:1px solid var(--border)}
+.ge-split-title{font-size:12px;font-weight:700;margin-bottom:8px;color:var(--text-primary)}
+.ge-split-items{font-size:12px;color:var(--text-secondary);line-height:1.8}
+.ge-flow-badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:8px;margin-bottom:8px}
+.ge-schedule{background:var(--bg);border-radius:12px;padding:1rem}
+.ge-sched-row{display:flex;gap:12px;padding:8px 0;border-bottom:1px solid var(--border)}
+.ge-sched-row:last-child{border-bottom:none}
+.ge-sched-timing{font-size:11px;font-family:'DM Mono';color:var(--text-tertiary);width:110px;flex-shrink:0;padding-top:2px}
+.ge-sched-content{flex:1;font-size:12.5px;color:var(--text-primary);line-height:1.5}
+.ge-sched-units{font-size:11px;color:var(--text-secondary);margin-top:2px}
+/* ══════ Role-Specific ══════ */
+.rs-tab-nav{display:flex;gap:8px;margin-bottom:1.25rem;flex-wrap:wrap}
+.rs-tab-btn{padding:6px 20px;border-radius:20px;border:1.5px solid var(--border);background:var(--surface);font-size:13px;font-weight:700;cursor:pointer;color:var(--text-secondary);transition:all .15s;font-family:'Noto Sans JP',sans-serif}
+.rs-tab-btn[data-rs-role="producer"].active{background:var(--producer-bg);color:var(--producer);border-color:var(--producer)}
+.rs-tab-btn[data-rs-role="director"].active{background:var(--director-bg);color:var(--director);border-color:var(--director)}
+.rs-tab-btn[data-rs-role="playwright"].active{background:var(--playwright-bg);color:var(--playwright);border-color:var(--playwright)}
+.rs-content{display:none}
+.rs-content.active{display:block}
+.rs-section{margin-bottom:2rem}
+.rs-section-title{font-size:12px;font-weight:700;color:var(--text-secondary);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border);letter-spacing:.05em;text-transform:uppercase}
+.rs-table{width:100%;border-collapse:collapse;font-size:12.5px}
+.rs-table th{background:var(--bg);padding:8px 10px;text-align:left;font-size:11px;font-weight:700;color:var(--text-secondary);border-bottom:2px solid var(--border)}
+.rs-table td{padding:10px;border-bottom:1px solid var(--bg);vertical-align:top;line-height:1.5}
+.rs-table tr:hover td{background:var(--bg)}
+.rs-sc{font-size:10px;font-weight:700;padding:1px 5px;border-radius:5px;display:inline-block;margin-left:4px}
+.rs-sc-a{background:var(--seed-bg);color:var(--seed-text)}
+.rs-sc-b{background:var(--soil-bg);color:var(--soil-text)}
+.rs-sc-ab{background:#F0F0F0;color:#555}
+.rs-opp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.rs-opp-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1rem}
+.rs-opp-title{font-size:13px;font-weight:700;color:var(--text-primary);margin-bottom:4px}
+.rs-opp-desc{font-size:12px;color:var(--text-secondary);line-height:1.5}
+.rs-opp-tag{font-size:10px;font-weight:700;padding:2px 6px;border-radius:5px;display:inline-block;margin-bottom:6px}
+.rs-curriculum{background:var(--bg);border-radius:12px;padding:1rem;font-size:12.5px;line-height:1.9;color:var(--text-secondary)}
+.rs-curriculum strong{color:var(--text-primary)}
+@media(max-width:700px){.market-4col{grid-template-columns:repeat(2,1fr)}.entrance-3col,.ge-unit-grid,.transfer-city-grid,.rs-opp-grid{grid-template-columns:1fr}.scenario-2col,.scenario-2col-sub,.ge-split-grid{grid-template-columns:1fr}}
 /* ── Password Gate ── */
 #pw-gate {
   position: fixed; inset: 0; z-index: 9999;
@@ -460,18 +583,21 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
     <h1>SEEDダッシュボード</h1>
     <div class="meta">
       <span class="badge badge-slack">#101-会議関連</span>
-      <span class="badge badge-date">2026/6/1</span>
+      <span class="badge badge-date">2026/6/3</span>
       <span class="badge badge-date">7名</span>
     </div>
   </div>
-  <div class="updated">最終更新<br>2026/06/01 13:14 JST</div>
+  <div class="updated">最終更新<br>2026/06/03 JST</div>
 </div>
 
 <div class="tab-nav-wrapper">
   <div class="tab-nav">
     <button class="tab-btn active" data-tab="dashboard">ダッシュボード</button>
     <button class="tab-btn" data-tab="about">事業概要</button>
-    <button class="tab-btn" data-tab="hr">人材要件仮説（仮）</button>
+    <button class="tab-btn" data-tab="soil-map">① SOIL 戦略マップ</button>
+    <button class="tab-btn" data-tab="hr">② 人材要件 v2</button>
+    <button class="tab-btn" data-tab="general-education">③ 一般教養プログラム</button>
+    <button class="tab-btn" data-tab="role-specific">④ 職能別個別要件</button>
     <button class="tab-btn" data-tab="progress">プログラム進捗</button>
     <button class="tab-btn" data-tab="timeline">スケジュール</button>
     <button class="tab-btn" data-tab="meetings">会議資料</button>
@@ -714,7 +840,10 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 
     <div class="hr-intro">
       <p>
-        <strong>SEEDが育てたい3つの職能</strong> ── 劇作家・演出家・プロデューサー。各役割のToBeモデルは、ソウル・ロンドン・ニューヨークへのリサーチ派遣（フェーズ0）報告書をもとにClaudeが統合整理。マインドセット（根）→ 知識・スキル（幹）→ 経験（実）の3層構造で要件を定義しています。
+        <strong>SEEDが育てたい3つの職能</strong> ── 劇作家・演出家・プロデューサー。各役割のToBeモデルはフェーズ0リサーチ（ソウル・ロンドン・NY）をベースに、<strong>SOIL国際展開戦略フレームワーク</strong>を統合して改訂（v2/v4）。主軸は<span style="color:var(--seed);font-weight:700">シナリオA（トトロ型：IP × 文化機関共同制作）</span>と<span style="color:var(--soil);font-weight:700">シナリオB（ストンプ型：ノンバーバル × フリンジ転生）</span>。マインドセット（根）→ 知識・スキル（幹）→ 経験（実）の3層構造で要件を定義しています。
+      </p>
+      <p style="margin-top:8px;font-size:13px;color:var(--text-secondary)">
+        詳細ドキュメント：<code>talent/roles/</code> 内の各 v2/v4 ファイルおよび <code>0_docs/soil_strategy/international_strategy_framework.md</code>
       </p>
     </div>
 
@@ -727,9 +856,9 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
     <!-- ── 劇作家 ── -->
     <div id="role-playwright" class="role-content active">
       <div class="role-header playwright">
-        <div class="role-title playwright">劇作家 ToBe モデル</div>
-        <div class="role-tobe">「普遍的な人間の物語を、日本固有の感性で書き、世界に届けられる劇作家」</div>
-        <div class="role-sub">書く技術だけでなく、演劇全体を知り、他者と協働し、自分の作品の価値を言語化して届けることができる人材。</div>
+        <div class="role-title playwright">劇作家 ToBe モデル <span style="font-size:11px;font-weight:400;opacity:0.7">v2 SOIL統合</span></div>
+        <div class="role-tobe">「普遍的な人間の物語を、日本固有の感性で書き（または設計し）、世界に届けられる劇作家」</div>
+        <div class="role-sub">シナリオA：翻案・アダプテーションの担い手として、IPの世界観を守りながら現地観客に届く戯曲を書く。シナリオB：ノンバーバル作品の構造設計者（devisor）として、言語なしに物語を成立させる。</div>
       </div>
       <div class="req-grid">
         <div class="req-card">
@@ -737,6 +866,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
           <div class="req-item"><span class="req-id">M-1</span><span class="req-name">書き続ける意志・作家としてのアイデンティティ</span></div>
           <div class="req-item"><span class="req-id">M-2</span><span class="req-name">自分の文化・社会への深い関心</span></div>
           <div class="req-item"><span class="req-id">M-3</span><span class="req-name">他者と協働することへの開放性</span></div>
+          <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">M-4</span><span class="req-name">自作を「IPとして育てる」長期視点 <span class="chip-pr" style="font-size:10px;padding:1px 5px;border-radius:6px">A</span></span></div>
         </div>
         <div class="req-card">
           <div class="req-card-title">◎ 知識（最優先）</div>
@@ -745,28 +875,44 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
           <div class="req-item"><span class="req-id">K-3</span><span class="req-name">演劇全体のプロセス理解</span></div>
           <div class="req-item"><span class="req-id">K-4</span><span class="req-name">日本文化・伝統芸能・社会史への理解</span></div>
           <div class="req-item"><span class="req-id">K-5</span><span class="req-name">助成金・企画書・契約の実務知識</span></div>
+          <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">K-6</span><span class="req-name">翻案・アダプテーションの理論と実践 <span class="chip-pr" style="font-size:10px;padding:1px 5px;border-radius:6px">A</span></span></div>
+          <div class="req-item" style="border-left:2px solid var(--soil);padding-left:6px"><span class="req-id">K-7</span><span class="req-name">ノンバーバル作品の構造・視覚的物語設計 <span class="chip-ge" style="font-size:10px;padding:1px 5px;border-radius:6px">B</span></span></div>
         </div>
         <div class="req-card">
           <div class="req-card-title">◎ スキル（最優先）</div>
           <div class="req-item"><span class="req-id">S-1</span><span class="req-name">書く技術（セリフ・構造・シーン）</span></div>
           <div class="req-item"><span class="req-id">S-2</span><span class="req-name">自作を語る・言語化する力</span></div>
           <div class="req-item"><span class="req-id">S-3</span><span class="req-name">他者のフィードバックを受け取る力</span></div>
+          <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">S-4</span><span class="req-name">翻案・アダプテーションの実践スキル <span class="chip-pr" style="font-size:10px;padding:1px 5px;border-radius:6px">A</span></span></div>
+          <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">S-5</span><span class="req-name">英訳を前提とした戯曲構造の設計 <span class="chip-pr" style="font-size:10px;padding:1px 5px;border-radius:6px">A</span></span></div>
         </div>
         <div class="req-card">
           <div class="req-card-title">◎ 経験（最優先）</div>
           <div class="req-item"><span class="req-id">E-1</span><span class="req-name">演劇の現場を体験してから書く</span></div>
           <div class="req-item"><span class="req-id">E-2</span><span class="req-name">書いた作品が俳優に声に出される経験</span></div>
           <div class="req-item"><span class="req-id">E-3</span><span class="req-name">定期的に書き続ける習慣・反復練習</span></div>
+          <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">E-4</span><span class="req-name">翻案作品の実際の制作・上演体験 <span class="chip-pr" style="font-size:10px;padding:1px 5px;border-radius:6px">A</span></span></div>
+          <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">E-5</span><span class="req-name">自作の国際リーディング・英語上演体験 <span class="chip-pr" style="font-size:10px;padding:1px 5px;border-radius:6px">A</span></span></div>
+          <div class="req-item" style="border-left:2px solid var(--soil);padding-left:6px"><span class="req-id">E-6</span><span class="req-name">ノンバーバル・devising体験 <span class="chip-ge" style="font-size:10px;padding:1px 5px;border-radius:6px">B</span></span></div>
         </div>
       </div>
       <div class="special-card">
-        <div class="special-card-title">劇作家特化要件 ── 継続・デビュー支援</div>
+        <div class="special-card-title">目指すべきロールモデル</div>
         <div class="special-grid">
-          <div class="special-item"><div class="special-id">D-1</div><div class="special-name">pathway の整備</div><div class="special-desc">上演まで導く道筋の整備。デビューの機会・次の仕事がなければ継続できない。</div></div>
+          <div class="special-item"><div class="special-id" style="background:var(--seed-bg);color:var(--seed-text)">A型</div><div class="special-name">前川知大（iaku）</div><div class="special-desc">SEEDリサーチャーとして派遣中の現役劇作家。日本社会の「今」を切り取り国際展開を模索する実践者。</div></div>
+          <div class="special-item"><div class="special-id" style="background:var(--seed-bg);color:var(--seed-text)">A型</div><div class="special-name">Jez Butterworth（英）</div><div class="special-desc">「Jerusalem」等イギリス特有の風土に根ざした戯曲をウエストエンド→ブロードウェイへ転生。特定文化が普遍に届く原理を体現。</div></div>
+          <div class="special-item"><div class="special-id" style="background:var(--soil-bg);color:var(--soil-text)">B型</div><div class="special-name">Pina Bausch（独）</div><div class="special-desc">テキストではなくイメージ・身体・繰り返しで「物語」を成立させるタンツテアターを確立。言語なしに語る構造設計の先駆者。</div></div>
+        </div>
+      </div>
+      <div class="special-card">
+        <div class="special-card-title">劇作家特化要件 ── 継続・デビュー・国際展開支援</div>
+        <div class="special-grid">
+          <div class="special-item"><div class="special-id">D-1</div><div class="special-name">pathway の整備</div><div class="special-desc">上演まで導く道筋の整備。さらに「翻案されるまでのpathway」も設計する。</div></div>
           <div class="special-item"><div class="special-id">D-2</div><div class="special-name">ドラマターグ・メンターとの関係</div><div class="special-desc">ARKOはドラマターグをつけて「守る」。若手劇作家を守り育てる伴走者が必要。</div></div>
           <div class="special-item"><div class="special-id">D-3</div><div class="special-name">演出家・劇場とのマッチング機会</div><div class="special-desc">公募・競争だけに頼らない、劇作家と演出家が出会う場が必要。</div></div>
-          <div class="special-item"><div class="special-id">D-4</div><div class="special-name">経済的基盤との両立</div><div class="special-desc">劇作だけで生活できなくても書き続けられる多様な選択肢の提示。</div></div>
-          <div class="special-item"><div class="special-id">D-5</div><div class="special-name">戯曲の出版・アーカイブ</div><div class="special-desc">翻訳と出版が次の上演・海外展開につながる連鎖を生む。</div></div>
+          <div class="special-item"><div class="special-id" style="border-left:2px solid var(--seed)">D-4</div><div class="special-name">IPホルダー・版権元との接続機会</div><div class="special-desc">出版社・アニメ会社等のIPホルダーと劇作家が出会う場を制度的に設計する（シナリオA）。</div></div>
+          <div class="special-item"><div class="special-id" style="border-left:2px solid var(--seed)">D-5</div><div class="special-name">英訳・国際リーディングの機会</div><div class="special-desc">阿部：「翻訳があれば戯曲を読んでもらえる」。戯曲の英訳→国際リーディング→次の上演・海外展開の連鎖。</div></div>
+          <div class="special-item"><div class="special-id">D-6</div><div class="special-name">経済的基盤との両立</div><div class="special-desc">劇作だけで生活できなくても書き続けられる多様な選択肢の提示。</div></div>
         </div>
       </div>
       <div class="insights-card">
@@ -778,15 +924,17 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
         <div class="insight-item"><div class="insight-num">5</div><div><div class="insight-text"><strong>戯曲を残す・届ける仕組みが連鎖を生む</strong></div><div class="insight-basis">阿部・ウィリアム・グレゴリー：英訳・出版・リーディングの積み重ねが次の上演・海外展開につながる。</div></div></div>
       </div>
       <div class="summary-card">
-        <div class="summary-card-title">SEEDが育てたい劇作家像</div>
+        <div class="summary-card-title">SEEDが育てたい劇作家像 v2</div>
         <ol class="summary-list">
           <li>どんな状況でも書き続ける意志と、作家としての誇りを持っている</li>
           <li>自分の文化・社会・歴史を深く知り、それを作品に昇華できる</li>
           <li>演劇全体のプロセスを知った上で書いている</li>
+          <li><strong>翻案・アダプテーションを自分の重要な劇作ツールとして活用できる</strong>（シナリオA）</li>
+          <li><strong>英訳を前提とした構造で戯曲を設計できる</strong>（シナリオA）</li>
+          <li><strong>ノンバーバル作品の構造を身体・空間・時間で設計できる</strong>（シナリオB）</li>
           <li>演出家・俳優・ドラマターグと対等に協働できる</li>
           <li>自作の価値を言語化し、海外に向けて伝えられる</li>
-          <li>助成金・企画書など制作実務ができ、自立した活動基盤を持てる</li>
-          <li>書き続けられる生活と創作のバランスを、多様な形で模索できる</li>
+          <li><strong>自作をIPとして育てる長期視点を持ち、英訳・国際リーディングへの接続を意識している</strong></li>
         </ol>
       </div>
     </div><!-- /#role-playwright -->
@@ -794,9 +942,9 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
     <!-- ── 演出家 ── -->
     <div id="role-director" class="role-content">
       <div class="role-header director">
-        <div class="role-title director">演出家 ToBe モデル</div>
-        <div class="role-tobe">「作品の探求を導き、多様なアーティストと協働しながら、日本の物語を世界に届けられる演出家」</div>
-        <div class="role-sub">自分のビジョンを押しつけるのではなく、チーム全体の才能を引き出しながら作品を立体化する。日本固有の感性と世界の文脈を橋渡しできる存在。</div>
+        <div class="role-title director">演出家 ToBe モデル <span style="font-size:11px;font-weight:400;opacity:0.7">v2 SOIL統合</span></div>
+        <div class="role-tobe">「作品の探求を導き、多様なアーティストと協働しながら、日本の物語を世界の観客に届けられる演出家」</div>
+        <div class="role-sub">シナリオA：英国・北米の商業演劇文法でIP作品を立体化する。シナリオB：身体・空間・リズムのみで感情と物語を成立させるノンバーバル演出の専門家として機能する。</div>
       </div>
       <div class="req-grid">
         <div class="req-card">
@@ -804,6 +952,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
           <div class="req-item"><span class="req-id">M-1</span><span class="req-name">探求を導く姿勢（答えを押しつけない）</span></div>
           <div class="req-item"><span class="req-id">M-2</span><span class="req-name">カンパニー参加者へのリスペクト</span></div>
           <div class="req-item"><span class="req-id">M-3</span><span class="req-name">愛 ── 作品・演劇・人への</span></div>
+          <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">M-4</span><span class="req-name">日本固有の感性を武器にする自覚</span></div>
         </div>
         <div class="req-card">
           <div class="req-card-title">◎ 知識（最優先）</div>
@@ -811,6 +960,8 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
           <div class="req-item"><span class="req-id">K-2</span><span class="req-name">演技メソッド・共通言語の理解</span></div>
           <div class="req-item"><span class="req-id">K-3</span><span class="req-name">演劇史・世界の演出家への理解</span></div>
           <div class="req-item"><span class="req-id">K-4</span><span class="req-name">日本の文化・伝統芸能・精神的価値観</span></div>
+          <div class="req-item" style="border-left:2px solid var(--soil);padding-left:6px"><span class="req-id">K-5</span><span class="req-name">ムーブメント・身体表現の専門知識 <span class="chip-ge" style="font-size:10px;padding:1px 5px;border-radius:6px">B</span></span></div>
+          <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">K-6</span><span class="req-name">英国・北米商業演劇のシステムと文法 <span class="chip-pr" style="font-size:10px;padding:1px 5px;border-radius:6px">A</span></span></div>
         </div>
         <div class="req-card">
           <div class="req-card-title">◎ スキル（最優先）</div>
@@ -818,6 +969,9 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
           <div class="req-item"><span class="req-id">S-2</span><span class="req-name">コラボレーション技術（全職種と対等に対話）</span></div>
           <div class="req-item"><span class="req-id">S-3</span><span class="req-name">作品のビジョンを言語化・共有する力</span></div>
           <div class="req-item"><span class="req-id">S-4</span><span class="req-name">稽古場のリーダーシップ・空気づくり</span></div>
+          <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">S-5</span><span class="req-name">英語コミュニケーション・異言語での演出</span></div>
+          <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">S-6</span><span class="req-name">文化的翻訳力（普遍的ドラマへの昇華）</span></div>
+          <div class="req-item" style="border-left:2px solid var(--soil);padding-left:6px"><span class="req-id">S-7</span><span class="req-name">ノンバーバル演出技術 <span class="chip-ge" style="font-size:10px;padding:1px 5px;border-radius:6px">B</span></span></div>
         </div>
         <div class="req-card">
           <div class="req-card-title">◎ 経験（最優先）</div>
@@ -825,6 +979,17 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
           <div class="req-item"><span class="req-id">E-2</span><span class="req-name">実際に演出する経験（規模を問わず）</span></div>
           <div class="req-item"><span class="req-id">E-3</span><span class="req-name">多様な職種・分野との協働創作体験</span></div>
           <div class="req-item"><span class="req-id">E-4</span><span class="req-name">現場体験（劇場で働く・見る）</span></div>
+          <div class="req-item" style="border-left:2px solid var(--soil);padding-left:6px"><span class="req-id">E-5</span><span class="req-name">フィジカルシアター・ノンバーバル制作体験 <span class="chip-ge" style="font-size:10px;padding:1px 5px;border-radius:6px">B</span></span></div>
+          <div class="req-item" style="border-left:2px solid var(--soil);padding-left:6px"><span class="req-id">E-6</span><span class="req-name">国際フェスティバルへの出展・参加体験 <span class="chip-ge" style="font-size:10px;padding:1px 5px;border-radius:6px">B</span></span></div>
+        </div>
+      </div>
+      <div class="special-card">
+        <div class="special-card-title">目指すべきロールモデル</div>
+        <div class="special-grid">
+          <div class="special-item"><div class="special-id" style="background:var(--seed-bg);color:var(--seed-text)">A型</div><div class="special-name">Bartlett Sher（米）</div><div class="special-desc">リンカーンセンターでRodgers & Hammerstein作品を現代的に再演出しトニー賞受賞。「探求を導く」演出スタイルと商業の両立を体現。</div></div>
+          <div class="special-item"><div class="special-id" style="background:var(--seed-bg);color:var(--seed-text)">A型</div><div class="special-name">岡田利規（チェルフィッチュ）</div><div class="special-desc">日本語・日本の身体感覚を武器にウィーン・ベルリン等の国際フェスティバルに繋いだ演出家。日本性を普遍的文脈に着地させる技術の体現者。</div></div>
+          <div class="special-item"><div class="special-id" style="background:var(--soil-bg);color:var(--soil-text)">B型</div><div class="special-name">Lloyd Newson（DV8）</div><div class="special-desc">社会的テーマを身体のみで表現するフィジカルシアターを世界規模に展開。言語なしで意味・感情・物語を成立させる演出文法の第一人者。</div></div>
+          <div class="special-item"><div class="special-id" style="background:var(--soil-bg);color:var(--soil-text)">B型</div><div class="special-name">Akram Khan（英）</div><div class="special-desc">南アジアのカタックと現代ダンスを融合し、Royal Ballet等と国際共同制作で世界展開。自文化の身体技術を普遍的感情に変換する技術を確立。</div></div>
         </div>
       </div>
       <div class="special-card">
@@ -832,29 +997,31 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
         <div class="special-grid">
           <div class="special-item"><div class="special-id">D-1</div><div class="special-name">メンターとの出会いを設計する</div><div class="special-desc">偶然に委ねず、優秀な演出家と若手が出会える場・制度を意図的に作る。</div></div>
           <div class="special-item"><div class="special-id">D-2</div><div class="special-name">小さくても演出できる場を確保</div><div class="special-desc">「空き倉庫でいい、まず作れ」（バートレット・シャー）。実際に演出できる機会を保障。</div></div>
-          <div class="special-item"><div class="special-id">D-3</div><div class="special-name">劇作家・プロデューサーとのマッチング</div><div class="special-desc">良い戯曲・良いプロデューサーとの出会いがキャリアを動かす。縦割りでなく横断的な場が必要。</div></div>
+          <div class="special-item"><div class="special-id">D-3</div><div class="special-name">劇作家・プロデューサーとのマッチング</div><div class="special-desc">良い戯曲・良いプロデューサーとの出会いがキャリアを動かす（シナリオA中心）。</div></div>
           <div class="special-item"><div class="special-id">D-4</div><div class="special-name">アシスタント・インターンシップの制度化</div><div class="special-desc">「アシスタント経験が最大の学び」（ランドー・シャー）。国内外派遣制度が有効。</div></div>
-          <div class="special-item"><div class="special-id">D-5</div><div class="special-name">海外演出の実践機会</div><div class="special-desc">日本の作品を海外で演出する、または海外劇場で演出する実践の場。</div></div>
+          <div class="special-item"><div class="special-id">D-5</div><div class="special-name">海外演出の実践機会</div><div class="special-desc">日本の作品を海外で演出する、または海外劇場で演出する実践の場（シナリオA）。</div></div>
+          <div class="special-item"><div class="special-id" style="border-left:2px solid var(--soil)">D-6</div><div class="special-name">フィジカルシアター集中WS</div><div class="special-desc">DV8・Frantic Assembly等のメソッドを体験できるWSへの参加。ノンバーバル演出の入口（シナリオB）。</div></div>
         </div>
       </div>
       <div class="insights-card">
-        <div class="insights-card-title">リサーチが示す5つの示唆</div>
+        <div class="insights-card-title">リサーチ + SOIL統合が示す示唆</div>
         <div class="insight-item"><div class="insight-num">1</div><div><div class="insight-text"><strong>演出家はメンターと実践でしか育たない</strong></div><div class="insight-basis">NY全員が「大学教育には限界がある。最善はメンターの近くで見て、実際に演出すること」と一致して語った。</div></div></div>
-        <div class="insight-item"><div class="insight-num">2</div><div><div class="insight-text"><strong>キャリアを急がせるな</strong></div><div class="insight-basis">ブロードウェイデビューが40代でも遅くない。焦りが「安全な選択肢」を選ばせる。長期的視野でのキャリア設計が必要。</div></div></div>
-        <div class="insight-item"><div class="insight-num">3</div><div><div class="insight-text"><strong>コラボレーションは技術として教えられる</strong></div><div class="insight-basis">「全員が同等のアーティストとして対話する」感覚は訓練で習得できる。教育からのアプローチが有効。</div></div></div>
-        <div class="insight-item"><div class="insight-num">4</div><div><div class="insight-text"><strong>他言語・異文化での演出が感度を上げる</strong></div><div class="insight-basis">言葉に頼れない環境が感情・身体・空間への感度を高める。海外経験は演出力そのものを鍛える。</div></div></div>
-        <div class="insight-item"><div class="insight-num">5</div><div><div class="insight-text"><strong>日本固有の感性は武器だが、普遍的な人間ドラマに昇華する技術が必要</strong></div><div class="insight-basis">バイヨーク・リー・木村早智：「日本文化に触れた体験で終わらせず、海外の人が自分を投影できるところまで届ける」</div></div></div>
+        <div class="insight-item"><div class="insight-num">2</div><div><div class="insight-text"><strong>シナリオを選べ ── 文法が全然違う</strong></div><div class="insight-basis">シナリオA（テキスト文法）とB（身体文法）は両立できるが、どちらを主軸にするかを早期に意識化することが重要。</div></div></div>
+        <div class="insight-item"><div class="insight-num">3</div><div><div class="insight-text"><strong>コラボレーションは技術として教えられる</strong></div><div class="insight-basis">「全員が同等のアーティストとして対話する」感覚は訓練で習得できる。日本の現場文化を変えるには教育からのアプローチが有効。</div></div></div>
+        <div class="insight-item"><div class="insight-num">4</div><div><div class="insight-text"><strong>日本の身体感覚がシナリオBの武器になる</strong></div><div class="insight-basis">能・武道・所作に根ざした身体性は、フィジカルシアターの世界では「希少性」として評価される可能性がある。</div></div></div>
+        <div class="insight-item"><div class="insight-num">5</div><div><div class="insight-text"><strong>フリンジで発見されるための「説明力」が必要</strong></div><div class="insight-basis">転生装置のキュレーターは作品を見るだけでなく語りも聞く。シナリオBでも英語で作品を語れることが転生の条件。</div></div></div>
       </div>
       <div class="summary-card">
-        <div class="summary-card-title">SEEDが育てたい演出家像</div>
+        <div class="summary-card-title">SEEDが育てたい演出家像 v2</div>
         <ol class="summary-list">
           <li>答えを押しつけず、チームの才能を引き出しながら探求を導ける</li>
           <li>演技メソッド・ムーブメント・デザインの共通言語で全職種と対話できる</li>
-          <li>戯曲を深く読み、日本文化の文脈を理解した上で作品を立体化できる</li>
+          <li><strong>商業演劇文法（英国・北米）を理解し、IP作品を立体化できる</strong>（シナリオA）</li>
+          <li><strong>言語なしに身体・空間・リズムのみで感情と物語を成立させられる</strong>（シナリオB）</li>
           <li>稽古場に安全で創造的な空気を作れるリーダーシップがある</li>
           <li>英語・異言語の環境でも、感情・身体・空間で演出できる</li>
           <li>日本固有の感性を、海外の観客が自分を投影できる普遍的な物語に昇華できる</li>
-          <li>長期的な視野でキャリアを積み上げ、メンターとして後進にも貢献できる</li>
+          <li><strong>シナリオA（商業演劇型）またはB（フィジカル型）の戦略を選択して実行できる</strong></li>
         </ol>
       </div>
     </div><!-- /#role-director -->
@@ -862,9 +1029,9 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
     <!-- ── プロデューサー ── -->
     <div id="role-producer" class="role-content">
       <div class="role-header producer">
-        <div class="role-title producer">プロデューサー ToBe モデル</div>
-        <div class="role-tobe">「日本にしかない物語を理解し、世界に届けることができるプロデューサー」</div>
-        <div class="role-sub">クリエイターの守り手であり、作品の翻訳者であり、国際市場との橋渡し役。「作りたい人」と「届けたい人」を繋ぎ、両者の言語で対話できる人材。</div>
+        <div class="role-title producer">プロデューサー ToBe モデル <span style="font-size:11px;font-weight:400;opacity:0.7">v4 SOIL統合</span></div>
+        <div class="role-tobe">「日本にしかないコンテンツを見極め、転生装置と繋がり、世界市場に送り出せるプロデューサー」</div>
+        <div class="role-sub">シナリオA：IPホルダーと文化機関を繋ぎ、NT・Barbican等との共同制作を設計する。シナリオB：ノンバーバル作品をインバウンドでテストし、フリンジから世界展開するIPとして育てる。</div>
       </div>
       <div class="req-grid">
         <div class="req-card">
@@ -872,53 +1039,73 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
           <div class="req-item"><span class="req-id">M-1</span><span class="req-name">コラボレーションを喜びとして捉える姿勢</span></div>
           <div class="req-item"><span class="req-id">M-2</span><span class="req-name">自分の文化への誇りと相対化能力</span></div>
           <div class="req-item"><span class="req-id">M-3</span><span class="req-name">届けたい・売りたいという欲望</span></div>
+          <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">M-4</span><span class="req-name">「転生」を設計する長期視点</span></div>
         </div>
         <div class="req-card">
           <div class="req-card-title">◎ 知識（最優先）</div>
           <div class="req-item"><span class="req-id">K-1</span><span class="req-name">演劇の構造・ドラマトゥルギー基礎</span></div>
           <div class="req-item"><span class="req-id">K-2</span><span class="req-name">日本の文化・伝統芸能への理解</span></div>
           <div class="req-item"><span class="req-id">K-3</span><span class="req-name">制作実務・プロデュース基礎知識</span></div>
+          <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">K-4</span><span class="req-name">SOIL市場構造（4列マトリックス・転生装置）</span></div>
+          <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">K-5</span><span class="req-name">IPライセンス・著作権の国際実務 <span class="chip-pr" style="font-size:10px;padding:1px 5px;border-radius:6px">A</span></span></div>
+          <div class="req-item" style="border-left:2px solid var(--soil);padding-left:6px"><span class="req-id">K-6</span><span class="req-name">フリンジフェスティバルの構造と経済 <span class="chip-ge" style="font-size:10px;padding:1px 5px;border-radius:6px">B</span></span></div>
         </div>
         <div class="req-card">
           <div class="req-card-title">◎ スキル（最優先）</div>
           <div class="req-item"><span class="req-id">S-1</span><span class="req-name">コラボレーション技術</span></div>
           <div class="req-item"><span class="req-id">S-2</span><span class="req-name">英語コミュニケーション・ピッチ力</span></div>
           <div class="req-item"><span class="req-id">S-3</span><span class="req-name">作品・プロジェクトの価値言語化</span></div>
+          <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">S-4</span><span class="req-name">文化的コンテクストの変換（翻訳・媒介）</span></div>
         </div>
         <div class="req-card">
           <div class="req-card-title">◎ 経験（最優先）</div>
           <div class="req-item"><span class="req-id">E-1</span><span class="req-name">現場体験（観客・作り手双方）</span></div>
           <div class="req-item"><span class="req-id">E-2</span><span class="req-name">協働創作の実践経験</span></div>
+          <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">E-3</span><span class="req-name">転生装置との接点体験（フェス・公演視察）</span></div>
+          <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">E-4</span><span class="req-name">国際共同制作への参加・見学 <span class="chip-pr" style="font-size:10px;padding:1px 5px;border-radius:6px">A</span></span></div>
+          <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">E-5</span><span class="req-name">IPホルダーとの交渉・協働経験 <span class="chip-pr" style="font-size:10px;padding:1px 5px;border-radius:6px">A</span></span></div>
+        </div>
+      </div>
+      <div class="special-card">
+        <div class="special-card-title">目指すべきロールモデル</div>
+        <div class="special-grid">
+          <div class="special-item"><div class="special-id" style="background:var(--seed-bg);color:var(--seed-text)">A型</div><div class="special-name">Cameron Mackintosh（英）</div><div class="special-desc">Cats・Les Mis・Phantomをウエストエンド→ブロードウェイ→世界ツアーへ。長期投資と国際ライセンス展開の設計を体現。</div></div>
+          <div class="special-item"><div class="special-id" style="background:var(--seed-bg);color:var(--seed-text)">A型</div><div class="special-name">松田誠（東宝）</div><div class="special-desc">日本産ミュージカルの海外展開を担うSEEDアドバイザリーボードメンバー。国内大手とアーティストの間に立ち海外に橋渡しする日本型プロデュース。</div></div>
+          <div class="special-item"><div class="special-id" style="background:var(--soil-bg);color:var(--soil-text)">B型</div><div class="special-name">Luke Cresswell & Steve McNicholas（英）</div><div class="special-desc">STOMPをフリンジから30年以上の長期公演・世界展開IPに育てた。ノンバーバル作品を繰り返し上演できるフォーマットとして設計する思考。</div></div>
+          <div class="special-item"><div class="special-id" style="background:var(--soil-bg);color:var(--soil-text)">B型</div><div class="special-name">Shim Jae-Won（韓国）</div><div class="special-desc">言語不要のノンバーバル料理ショーNANTA（ナンタ）を観光特化から世界ツアーへ。インバウンドをテストマーケットにしてスケールする戦略。</div></div>
         </div>
       </div>
       <div class="special-card">
         <div class="special-card-title">プロデューサー特化要件（P機能）</div>
         <div class="special-grid">
-          <div class="special-item"><div class="special-id">P-1</div><div class="special-name">戦略的思考</div><div class="special-desc">「良い作品があれば売れる」から脱却。適切な市場・タイミング・フォーマットを考えられる。</div></div>
+          <div class="special-item"><div class="special-id">P-1</div><div class="special-name">戦略的市場選択</div><div class="special-desc">「どのシナリオで・どの壁を越えて・どの入り口から」進むかを判断する力。SOILの4列マトリックスが前提。</div></div>
           <div class="special-item"><div class="special-id">P-2</div><div class="special-name">アーティストの守り手</div><div class="special-desc">才能ある作家を演劇界に「残す」ことがプロデューサーの使命のひとつ。</div></div>
-          <div class="special-item"><div class="special-id">P-3</div><div class="special-name">ネットワーク構築力（ハブ力）</div><div class="special-desc">クリエイター・劇場・資金者・翻訳者・メディアを繋ぐハブになれる。</div></div>
-          <div class="special-item"><div class="special-id">P-4</div><div class="special-name">劇作家・演出家マッチング能力</div><div class="special-desc">劇作と演出への深い理解があってこそ機能するマッチング。</div></div>
-          <div class="special-item"><div class="special-id">P-5</div><div class="special-name">継続する力</div><div class="special-desc">ドゥサン「20年続けて信用が育った」。長期的関係・信用の蓄積に価値を置く。</div></div>
+          <div class="special-item"><div class="special-id" style="border-left:2px solid var(--seed)">P-3</div><div class="special-name">転生装置へのアクセス戦略 ◎</div><div class="special-desc">NT・Barbican・Public Theatreのキュレーターとの関係構築。エジンバラ・アビニョン出展戦略の設計。「資本でも言語でも越えられない壁」を関係で越える。</div></div>
+          <div class="special-item"><div class="special-id" style="border-left:2px solid var(--seed)">P-4</div><div class="special-name">IPライセンス交渉力 ◎</div><div class="special-desc">IPホルダー（出版社・アニメ会社）との権利交渉。国際ライセンス展開の設計。福井健策弁護士等と連携できる知識基盤（シナリオA）。</div></div>
+          <div class="special-item"><div class="special-id">P-5</div><div class="special-name">劇作家・演出家マッチング能力</div><div class="special-desc">劇作と演出への深い理解があってこそ機能するマッチング。</div></div>
+          <div class="special-item"><div class="special-id">P-6</div><div class="special-name">継続する力</div><div class="special-desc">ドゥサン「20年」・STOMP「30年」。長期的関係・信用の蓄積に価値を置く。</div></div>
+          <div class="special-item"><div class="special-id" style="border-left:2px solid var(--soil)">P-7</div><div class="special-name">ノンバーバル作品のフォーマット設計</div><div class="special-desc">再演可能・言語不要・観光向けの作品フォーマットを設計する。インバウンドでテストし世界にスケールする戦略（シナリオB）。</div></div>
         </div>
       </div>
       <div class="insights-card">
-        <div class="insights-card-title">リサーチが示す5つの示唆</div>
+        <div class="insights-card-title">リサーチ + SOIL統合が示す示唆</div>
         <div class="insight-item"><div class="insight-num">1</div><div><div class="insight-text"><strong>育成とpathwayはセットで設計せよ</strong></div><div class="insight-basis">阿部・アグボルアエ氏：「上演まで導くpathwayの整備が育成と同じくらい重要」</div></div></div>
-        <div class="insight-item"><div class="insight-num">2</div><div><div class="insight-text"><strong>レジデンシー的仕組みが有効</strong></div><div class="insight-basis">ターンリー（ロンドン）：「劇場のデスク1つが作家のキャリアを変える」</div></div></div>
+        <div class="insight-item"><div class="insight-num">2</div><div><div class="insight-text"><strong>転生装置との出会いを設計せよ</strong></div><div class="insight-basis">SOIL：「エジンバラ・アビニョンに出る理由はそこにいる転生装置の人たちに会うため」。資本でも言語でも代替できない壁。</div></div></div>
         <div class="insight-item"><div class="insight-num">3</div><div><div class="insight-text"><strong>「売りたい人」と「作りたい人」のマッチングが鍵</strong></div><div class="insight-basis">前川：エンタメとアートの溝を埋める対話の場づくりが必要。</div></div></div>
-        <div class="insight-item"><div class="insight-num">4</div><div><div class="insight-text"><strong>小さく始めて継続する</strong></div><div class="insight-basis">ドゥサン20年、Out of the Wings 10年。いずれも小さな会合から始まっている。</div></div></div>
-        <div class="insight-item"><div class="insight-num">5</div><div><div class="insight-text"><strong>共通言語の整備が協働の土台</strong></div><div class="insight-basis">木村早智：「ラバンと言えばすぐにみんなわかる」。演技・ドラマトゥルギー・制作実務の共通語彙が必要。</div></div></div>
+        <div class="insight-item"><div class="insight-num">4</div><div><div class="insight-text"><strong>IPホルダーを巻き込まないと国際IP領域に入れない</strong></div><div class="insight-basis">SOIL：「国際IP領域に日本がいない」が最大の空白。プロデューサーが橋渡しの鍵（シナリオA）。</div></div></div>
+        <div class="insight-item"><div class="insight-num">5</div><div><div class="insight-text"><strong>シナリオBはテストマーケットから始める</strong></div><div class="insight-basis">ナンタ：「まず国内インバウンドで磨き、世界へ」。完成度より先に市場検証する戦略（シナリオB）。</div></div></div>
       </div>
       <div class="summary-card">
-        <div class="summary-card-title">SEEDが育てたいプロデューサー像</div>
+        <div class="summary-card-title">SEEDが育てたいプロデューサー像 v4</div>
         <ol class="summary-list">
           <li>英語で交渉・ピッチができる</li>
           <li>日本の文化的価値を自分の言葉で伝えられる</li>
           <li>企画書・助成金申請・契約など制作実務ができる</li>
           <li>クリエイターと対等に協働できる</li>
           <li>作品を「なぜ今・なぜ世界に届けるのか」を語れる</li>
-          <li>アーティストを守りながら、世界市場に送り出す意志がある</li>
-          <li>長期的なコミュニティ・信用の蓄積に価値を置ける</li>
+          <li><strong>転生装置（NT・Barbican・Public Theater等）のキュレーターと関係を築ける</strong></li>
+          <li><strong>IPホルダーと演劇界の橋渡し役として機能できる</strong>（シナリオA）</li>
+          <li><strong>シナリオA（IP共同制作型）またはB（フリンジ転生型）の戦略を選択して実行できる</strong></li>
         </ol>
       </div>
     </div><!-- /#role-producer -->
@@ -1190,6 +1377,518 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
   </div>
 </div><!-- /#tab-people -->
 
+<!-- ════ SOIL Map Tab ════ -->
+<div id="tab-soil-map" class="tab-content">
+<div class="soil-container">
+
+<div style="margin-bottom:2rem">
+  <div style="font-size:14px;font-weight:700;color:var(--text-primary);margin-bottom:.75rem;display:flex;align-items:center;gap:8px">
+    <span>日本の舞台芸術国際展開戦略</span>
+    <span style="font-size:11px;font-weight:400;color:var(--text-tertiary);font-family:'DM Mono',monospace">p.11 — 市場構造マップ</span>
+  </div>
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.07)">
+    <img
+      src="strategy-p11.png"
+      alt="日本の舞台芸術国際展開戦略 p.11 — 市場構造マップ"
+      style="width:100%;display:block;border-radius:14px"
+    />
+  </div>
+</div>
+
+<div class="soil-intro-card">
+  <strong>SEED・SOIL 両事業の根幹となる市場認識フレームワーク。</strong>「どの市場を狙うか」「どのルートで転生するか」「誰に届けるか」を整理した戦略地図。
+  SEEDが主軸とするシナリオは <span style="color:var(--seed);font-weight:700">A（トトロ型：IP × 文化機関共同制作）</span> と <span style="color:var(--soil);font-weight:700">B（ストンプ型：ノンバーバル × フリンジ転生）</span>。
+</div>
+
+<!-- Section 1: 4列の市場構造 -->
+<div class="soil-section">
+  <div class="soil-section-title">① 4列の市場構造マップ</div>
+  <div class="axis-note-h">
+    <span>← 複製芸術（ライセンス・フランチャイズ・IP展開が可能）</span>
+    <span>希少芸術（特定のアーティスト・身体・文脈に価値が宿る）→</span>
+  </div>
+  <div class="market-4col">
+    <div class="market-col ip-col">
+      <div class="mc-col-title">国際IP</div>
+      <div class="mc-world-ex">ライオンキング<br>シルク・ド・ソレイユ<br>トトロ（転生中→）</div>
+      <div class="mc-jp-block">
+        <div class="mc-jp-tag jp-none">🇯🇵 現在ここに日本なし</div>
+        <div class="mc-jp-tag jp-target">🎯 シナリオA 最終目標</div>
+      </div>
+      <div class="mc-zone-tag zone-void">← 最大の戦略的空白地帯</div>
+    </div>
+    <div class="market-col commercial-col">
+      <div class="mc-col-title">商業招聘</div>
+      <div class="mc-world-ex">STOMP・ナンタ<br>オペラ座の怪人<br>Come from Away</div>
+      <div class="mc-jp-block">
+        <div class="mc-jp-tag jp-present">🇯🇵 トトロ（転生途上）</div>
+      </div>
+      <div class="mc-jp-tag jp-target" style="margin-top:6px">🎯 シナリオA/B 経由地点</div>
+      <div class="mc-zone-tag zone-void">左下VOID：演劇人のみの商業</div>
+    </div>
+    <div class="market-col contemporary-col">
+      <div class="mc-stage-badge">⭐ 勝負のステージング領域</div>
+      <div class="mc-col-title">現代演劇</div>
+      <div style="font-size:11px;color:var(--text-secondary);margin-bottom:8px;line-height:1.5">最もボリュームが大きい。世界中のプロデューサー・キュレーターが同時に見ている場所。</div>
+      <div class="mc-jp-block">
+        <div class="mc-jp-tag jp-present">🇯🇵 チェルフィッチュ・野田地図</div>
+        <div class="mc-jp-list">SPAC・木下歌舞伎<br>千と千尋・セーラームーン</div>
+      </div>
+      <div class="mc-zone-tag zone-dead">⚠ DEAD ZONE：誰に届けたいか曖昧な自主開催フリンジ</div>
+    </div>
+    <div class="market-col heritage-col">
+      <div class="mc-col-title">文化資産</div>
+      <div class="mc-world-ex">ピナ・バウシュ<br>カニングハム・ダンス<br>Robert Wilson</div>
+      <div class="mc-jp-block">
+        <div class="mc-jp-tag jp-present">🇯🇵 能・歌舞伎・舞踏</div>
+        <div class="mc-jp-list">鈴木メソッド<br>宮城聰（SPAC）</div>
+      </div>
+      <div class="mc-zone-tag zone-void">右上VOID：海外招聘不要な領域</div>
+    </div>
+  </div>
+
+  <div class="v-axis-heading">縦軸：訴求幅（上が広い → 下が狭い）</div>
+  <div class="v-axis-rows">
+    <div class="v-axis-row"><span class="v-axis-num">①</span><span>ファミリー含む全年齢（子供〜大人・世界中どこでも）</span></div>
+    <div class="v-axis-row"><span class="v-axis-num">②</span><span>観光客含む幅広い対象（旅行者・都市エンタメ層）</span></div>
+    <div class="v-axis-row"><span class="v-axis-num">③</span><span>特定の国・文化に帰属する人たち（文化的文脈を共有するコミュニティ）</span></div>
+    <div class="v-axis-row"><span class="v-axis-num">④</span><span>演劇人（演劇界・批評家・フェスティバル層）</span></div>
+  </div>
+  <div class="vzd-grid">
+    <div class="vzd-card vzd-void"><div class="vzd-tag">VOID（右上）</div><div class="vzd-desc">文化資産×ファミリー全年齢 ── わざわざ海外から招聘する理由がない構造的空白</div></div>
+    <div class="vzd-card vzd-void"><div class="vzd-tag">VOID（左下）</div><div class="vzd-desc">商業招聘×演劇人 ── 商業展開しているのに演劇人にしか届かない。構造的失敗</div></div>
+    <div class="vzd-card vzd-dead"><div class="vzd-tag">DEAD ZONE</div><div class="vzd-desc">現代演劇内の中途半端な領域 ── 誰に届けたいかが曖昧な自主開催フリンジ枠。左右両側に存在</div></div>
+  </div>
+</div>
+
+<!-- Section 2: 転生装置 -->
+<div class="soil-section">
+  <div class="soil-section-title">② 転生装置 ── 最も越えにくい壁の核心</div>
+  <div class="transfer-intro-card">
+    <strong>転生装置とは：</strong>文化機関と商業劇場の中間に位置する劇場・機関。広い顧客基盤を持つ文化機関が商業転生の入口になる。<br>
+    「エディンバラ・アビニョンに出る理由はそこにいる転生装置の人たちに会うため」 ── SOIL戦略の核心。<strong>資本でも言語でも代替できない壁。</strong>
+  </div>
+  <div class="transfer-city-grid">
+    <div>
+      <div class="transfer-city-title">🇬🇧 ロンドン</div>
+      <div class="transfer-insts">
+        <div class="transfer-inst">National Theatre</div>
+        <div class="transfer-inst">Barbican</div>
+        <div class="transfer-inst">Arts Theatre</div>
+        <div class="transfer-inst">Donmar Warehouse</div>
+        <div class="transfer-inst">Young Vic</div>
+      </div>
+    </div>
+    <div>
+      <div class="transfer-city-title">🇺🇸 ニューヨーク</div>
+      <div class="transfer-insts">
+        <div class="transfer-inst">Public Theater</div>
+        <div class="transfer-inst">Second Stage</div>
+        <div class="transfer-inst">Ford's Theatre</div>
+      </div>
+      <div style="margin-top:10px">
+        <div class="transfer-city-title">🎭 フェスティバル（転生の場）</div>
+        <div class="transfer-insts">
+          <div class="transfer-inst">Edinburgh Fringe</div>
+          <div class="transfer-inst">Festival d'Avignon</div>
+          <div class="transfer-inst">APAF（東京）</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Section 3: 転生ルート -->
+<div class="soil-section">
+  <div class="soil-section-title">③ 転生ルートの事例</div>
+  <table class="route-table">
+    <thead>
+      <tr><th>パターン</th><th>ルート</th><th>特徴</th><th>シナリオ</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>トトロパターン</strong></td><td>NT → バービカン → ウエストエンド商業</td><td>既存IPで文化機関と共同制作。2〜3年で転生を達成</td><td><span class="route-lbl route-lbl-a route-lbl-main">A 主軸</span></td></tr>
+      <tr><td><strong>Sixパターン</strong></td><td>Edinburgh Fringe → Arts Theatre → ウエストエンド → ブロードウェイ</td><td>予算ほぼゼロからスタート。土着性×ポップスで壁を越えた</td><td><span class="route-lbl route-lbl-b route-lbl-main">B 主軸</span></td></tr>
+      <tr><td><strong>STOMPパターン</strong></td><td>フリンジ発 → 長期公演 → 世界ツアー</td><td>ノンバーバル作品をIPとして設計。30年超の長期展開</td><td><span class="route-lbl route-lbl-b route-lbl-main">B 主軸</span></td></tr>
+      <tr><td><strong>War Horseパターン</strong></td><td>NT制作 → ブロードウェイ商業成功 → ライセンス展開</td><td>文化機関が制作したものが商業転生した典型例</td><td><span class="route-lbl route-lbl-a">A 参照</span></td></tr>
+      <tr><td><strong>Hamiltonパターン</strong></td><td>Public Theater → ブロードウェイ</td><td>英語圏以外への展開はほぼゼロ。歴史観の壁を越えられていない</td><td><span class="route-lbl" style="background:#F0F0F0;color:#666">参考</span></td></tr>
+      <tr><td><strong>場所貸し型</strong></td><td>文化機関に場所代を払って自主公演</td><td>千と千尋・野田地図・セーラームーン。お金で解決できる唯一の入口</td><td><span class="route-lbl" style="background:#F0F0F0;color:#666">現状</span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Section 4: 3つの入り口 -->
+<div class="soil-section">
+  <div class="soil-section-title">④ 3つの入り口（Entrance）</div>
+  <div class="entrance-3col">
+    <div class="entrance-card" style="border-color:var(--seed)">
+      <div class="entrance-letter">A</div>
+      <div class="entrance-title">資本で場所を買う</div>
+      <div class="entrance-desc">文化機関（NT・Barbican等）に場所代を払って自主公演する。お金で解決できる唯一の入口。</div>
+      <div class="entrance-example">事例：千と千尋・野田地図・セーラームーン</div>
+    </div>
+    <div class="entrance-card" style="border-color:var(--seed)">
+      <div class="entrance-letter">B</div>
+      <div class="entrance-title">転生装置と共同制作する</div>
+      <div class="entrance-desc">文化機関と最初から共同で作品を開発する。最も強力な転生方法だが、関係構築が前提。</div>
+      <div class="entrance-example">事例：トトロ（NT × スタジオジブリ）</div>
+    </div>
+    <div class="entrance-card">
+      <div class="entrance-letter">C</div>
+      <div class="entrance-title">フェスティバルから這い上がる</div>
+      <div class="entrance-desc">Edinburgh・Avignon等のフリンジで発見され、転生装置に拾われる。予算ゼロから可能。</div>
+      <div class="entrance-example">事例：Six・チェルフィッチュ</div>
+    </div>
+  </div>
+</div>
+
+<!-- Section 5: シナリオA/B -->
+<div class="soil-section">
+  <div class="soil-section-title">⑤ 4つの戦略シナリオ ── SEEDの主軸はA・B</div>
+  <div class="scenario-2col">
+    <div class="sc-card main-sc">
+      <div class="sc-main-badge">⭐ SEED 主軸シナリオ</div>
+      <div class="sc-letter a">A</div>
+      <div class="sc-name">トトロパターン ── IP × 文化機関共同制作</div>
+      <div class="sc-desc">既存の有名IPを利用したファミリー向けミュージカルを海外機関と共同開発し市場展開する。STEP1：IPを活用した北米・英国の文化施設との共同制作。STEP2：IPの集客力と資本力を使って商業市場に接続。</div>
+      <div class="sc-role-row"><span class="sc-role-chip chip-pr">P</span><span class="sc-role-text">海外文化機関ネットワーク・IPホルダー交渉力・国際共同制作マネジメント</span></div>
+      <div class="sc-role-row"><span class="sc-role-chip chip-dr">D</span><span class="sc-role-text">英国・北米の商業演劇文法・IP制約下の創造性・英語稽古場対応</span></div>
+      <div class="sc-role-row"><span class="sc-role-chip chip-pw">PW</span><span class="sc-role-text">IPの翻案力・英訳を前提とした戯曲構造設計</span></div>
+    </div>
+    <div class="sc-card main-sc">
+      <div class="sc-main-badge">⭐ SEED 主軸シナリオ</div>
+      <div class="sc-letter b">B</div>
+      <div class="sc-name">ストンプパターン ── ノンバーバル × フリンジ転生</div>
+      <div class="sc-desc">国内インバウンド観光をテストマーケットにし、海外の観光需要を狙う。STEP1：国内インバウンド向けにノンバーバル作品を開発。STEP2：フリンジフェスに出展。STEP3：世界IP展開。</div>
+      <div class="sc-role-row"><span class="sc-role-chip chip-pr">P</span><span class="sc-role-text">フリンジフェスネットワーク・インバウンド市場理解・ノンバーバル作品のフォーマット設計</span></div>
+      <div class="sc-role-row"><span class="sc-role-chip chip-dr">D</span><span class="sc-role-text">ノンバーバル・身体表現の専門性・観光客向け作品設計</span></div>
+      <div class="sc-role-row"><span class="sc-role-chip chip-pw">PW</span><span class="sc-role-text">ノンバーバル構造設計（devisor的役割）</span></div>
+    </div>
+  </div>
+  <div class="scenario-2col-sub">
+    <div class="sc-card">
+      <div class="sc-letter" style="color:var(--text-tertiary)">C</div>
+      <div class="sc-name" style="color:var(--text-secondary)">木下歌舞伎パターン（長期投資）</div>
+      <div class="sc-desc">古典・伝統芸能を現代的に再解釈して海外へ。10〜20年単位だが他国が複製できない差別化領域。</div>
+    </div>
+    <div class="sc-card">
+      <div class="sc-letter" style="color:var(--text-tertiary)">D</div>
+      <div class="sc-name" style="color:var(--text-secondary)">チェルフィッチュパターン</div>
+      <div class="sc-desc">国内で評価された作品を国際的文脈に載せてフェスティバル招聘。現代演劇の王道ルート。</div>
+    </div>
+  </div>
+</div>
+
+<!-- Section 6: Japan / 足りない構造 -->
+<div class="soil-section">
+  <div class="soil-section-title">⑥ 足りない人・構造 ── SEEDが埋める空白</div>
+  <div class="special-grid" style="grid-template-columns:repeat(2,1fr);display:grid;gap:10px">
+    <div class="special-item"><div class="special-id" style="background:#FEF0EE;color:var(--urgent-text)">人材</div><div class="special-name">国際共同制作の経験があるプロデューサーがほぼいない</div></div>
+    <div class="special-item"><div class="special-id" style="background:#FEF0EE;color:var(--urgent-text)">人材</div><div class="special-name">海外文化機関のキュレーターと個人的信頼関係を持つ人がいない</div></div>
+    <div class="special-item"><div class="special-id" style="background:#FEF0EE;color:var(--urgent-text)">人材</div><div class="special-name">英語で交渉・契約できる演劇専門の弁護士・エージェントがいない</div></div>
+    <div class="special-item"><div class="special-id" style="background:#FEF0EE;color:var(--urgent-text)">人材</div><div class="special-name">IPホルダーと演劇界を繋ぐブリッジ人材がいない</div></div>
+    <div class="special-item"><div class="special-id" style="background:var(--wip-bg);color:var(--wip-text)">構造</div><div class="special-name">転生装置との継続的関係構築の仕組みがない</div></div>
+    <div class="special-item"><div class="special-id" style="background:var(--wip-bg);color:var(--wip-text)">構造</div><div class="special-name">国際共同制作のための資金スキームがない（文化庁補助金は国内向け）</div></div>
+  </div>
+</div>
+
+</div>
+</div><!-- /#tab-soil-map -->
+
+<!-- ════ General Education Tab ════ -->
+<div id="tab-general-education" class="tab-content">
+<div class="ge-container">
+
+<div class="soil-intro-card">
+  <strong>一般教養プログラムの役割：</strong>3職能が「同じ地図を見て・同じ言語で話せる」ようになる共通土台。職能別プログラムの<em>前</em>に受講することで、各職能固有の学習の解像度を上げる。
+  内容が<strong>選考①の筆記テスト範囲</strong>に連動し、JPASNの正会員（社会人）も参加可能な設計。
+</div>
+
+<!-- 棲み分け -->
+<div class="ge-section">
+  <div class="ge-section-title">一般教養 vs 職能別プログラム ── 棲み分け原則</div>
+  <div class="ge-split-grid">
+    <div class="ge-split-card ge-split-left">
+      <div class="ge-split-title">一般教養がカバーすること</div>
+      <div class="ge-split-items">
+        WHY（なぜこの市場か・なぜこの人材か）<br>
+        地図（世界のどこにいるか・どこを目指すか）<br>
+        概念レベルの共通知識<br>
+        3職種が「知っておくべき」理解
+      </div>
+    </div>
+    <div class="ge-split-card ge-split-right">
+      <div class="ge-split-title">職能別プログラムがカバーすること → タブ④へ</div>
+      <div class="ge-split-items">
+        HOW（どうやって実現するか・どう売るか）<br>
+        各職能固有の技術・スキル・戦略<br>
+        実践スキルレベルの専門知識<br>
+        シナリオ別の具体的アプローチ
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 共通要件の抽出 -->
+<div class="ge-section">
+  <div class="ge-section-title">3職能横断の共通要件 ── 一般教養で扱う根拠</div>
+  <table class="ge-common-table">
+    <thead>
+      <tr><th>共通要件</th><th>プロデューサー</th><th>演出家</th><th>劇作家</th><th>一般教養での扱い方</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>市場構造リテラシー（SOIL）</strong></td><td>K-4 ◎</td><td>—</td><td>—</td><td>4列マトリックス・転生装置・シナリオA/B → タブ①</td></tr>
+      <tr><td><strong>コラボレーション・協働姿勢</strong></td><td>M-1・S-1 ◎</td><td>M-1/2・S-2 ◎</td><td>M-3 ◎</td><td>職種横断グループワーク・対話の場（UNIT 3-B）</td></tr>
+      <tr><td><strong>日本文化への誇りと相対化</strong></td><td>M-2・K-2 ◎</td><td>M-4・K-4 ◎</td><td>M-2・K-4 ◎</td><td>日本文化の言語化ワーク（UNIT 2-C）</td></tr>
+      <tr><td><strong>演劇の構造・ドラマトゥルギー</strong></td><td>K-1 ◎</td><td>K-1 ◎</td><td>K-1 ◎</td><td>戯曲読解・批評リテラシー入門（UNIT 2-A）</td></tr>
+      <tr><td><strong>制作実務基礎（知財・助成金）</strong></td><td>K-3 ◎</td><td>K-8 ○</td><td>K-5 ◎</td><td>知財・著作権・資金調達の概論（UNIT 2-B）</td></tr>
+      <tr><td><strong>英語コミュニケーション基礎</strong></td><td>S-2 ◎</td><td>S-5 ◎</td><td>S-7 ○</td><td>英語ピッチ・自己表現の基礎ワーク（UNIT 3-A）</td></tr>
+      <tr><td><strong>自作・作品を語る力</strong></td><td>S-3 ◎</td><td>S-3 ◎</td><td>S-2 ◎</td><td>言語化ワークショップ（UNIT 2-C/3-A）</td></tr>
+      <tr><td><strong>転生事例・ロールモデルの理解</strong></td><td>K-4 ◎</td><td>—</td><td>—</td><td>ケーススタディ（UNIT 3-C）</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 6ユニット -->
+<div class="ge-section">
+  <div class="ge-section-title">6つのプログラムユニット</div>
+  <div class="ge-unit-grid">
+    <div class="ge-unit-card" style="border-top:3px solid var(--seed)">
+      <div class="ge-unit-id">UNIT 1-A ── 事前（オンライン）</div>
+      <div class="ge-unit-theme">日本の舞台芸術が置かれている位置</div>
+      <div class="ge-unit-subtitle">「なぜ今、海外展開なのか」</div>
+      <div class="ge-unit-items">①日本の演劇業界の現状と市場規模<br>②SEEDが生まれた背景・SOILとの連携<br>③他国との比較（韓国・英国・米国）</div>
+      <div class="ge-unit-goal">→ 「自分がこの事業に関わる意味」を言葉にできる</div>
+      <div class="ge-unit-owner">担当：野村善文・横堀応彦</div>
+    </div>
+    <div class="ge-unit-card" style="border-top:3px solid var(--seed)">
+      <div class="ge-unit-id">UNIT 1-B ── Day 1 午前</div>
+      <div class="ge-unit-theme">世界市場の構造と転生装置</div>
+      <div class="ge-unit-subtitle">「世界の舞台芸術市場はどう動いているか」</div>
+      <div class="ge-unit-items">①4列マトリックス（SOIL戦略マップ）<br>②転生装置の概念と主要機関<br>③3つの入口とシナリオA/B</div>
+      <div class="ge-unit-goal">→ 「自分がどのシナリオで働きたいか」を選択・説明できる</div>
+      <div class="ge-unit-owner">担当：横堀応彦 + SOILリサーチャー</div>
+    </div>
+    <div class="ge-unit-card" style="border-top:3px solid var(--soil)">
+      <div class="ge-unit-id">UNIT 2-A ── Day 1 午後</div>
+      <div class="ge-unit-theme">演劇の共通言語</div>
+      <div class="ge-unit-subtitle">「戯曲を読む・語る・分析する」</div>
+      <div class="ge-unit-items">①ドラマトゥルギー基礎概念<br>②3職種それぞれの戯曲の読み方<br>③批評リテラシー入門</div>
+      <div class="ge-unit-goal">→ 3職種が共通言語で「世界に届くか」を議論できる</div>
+      <div class="ge-unit-owner">担当：倉沢（劇作家）・川名（演出家）</div>
+    </div>
+    <div class="ge-unit-card" style="border-top:3px solid var(--soil)">
+      <div class="ge-unit-id">UNIT 2-B ── 事前（オンライン）</div>
+      <div class="ge-unit-theme">制作の共通言語</div>
+      <div class="ge-unit-subtitle">「演劇の仕事に必要な社会人的知識」</div>
+      <div class="ge-unit-items">①著作権・知的財産の基礎<br>②海外展開の契約・ライセンス概要<br>③助成金・資金調達の種類<br>④ハラスメント対策・労働倫理</div>
+      <div class="ge-unit-goal">→ 「プロデューサーに任せる」から「自分でも最低限理解して判断できる」へ</div>
+      <div class="ge-unit-owner">担当：福井健策弁護士・遠藤真有美</div>
+    </div>
+    <div class="ge-unit-card" style="border-top:3px solid var(--playwright)">
+      <div class="ge-unit-id">UNIT 2-C ── Day 2 午前</div>
+      <div class="ge-unit-theme">自分の文化を語る言語</div>
+      <div class="ge-unit-subtitle">「日本の演劇を英語で・説得力を持って語る」</div>
+      <div class="ge-unit-items">①日本演劇の歴史概要（能〜現代）<br>②日本の精神的価値観の言語化（間・もののあわれ等）<br>③「なぜ日本の演劇が世界に届くのか」を語る練習</div>
+      <div class="ge-unit-goal">→ 海外のキュレーターに「日本演劇の何が面白いか」を5分で説明できる</div>
+      <div class="ge-unit-owner">担当：横堀応彦・SEEDリサーチャーOB</div>
+    </div>
+    <div class="ge-unit-card" style="border-top:3px solid var(--director)">
+      <div class="ge-unit-id">UNIT 3-A/B/C ── Day 2 午後・最終Day</div>
+      <div class="ge-unit-theme">動かしてみる</div>
+      <div class="ge-unit-subtitle">「英語ピッチ・3職種横断WS・事例ケーススタディ」</div>
+      <div class="ge-unit-items">3-A：英語30秒〜2分のピッチ体験（全員）<br>3-B：3職種混合グループワーク（仮想プロジェクト設計）<br>3-C：転生事例ケーススタディ（トトロ・STOMP・Six等）</div>
+      <div class="ge-unit-goal">→ シナリオA/Bを3職種視点で読み、「自分が何をすべきか」を語れる</div>
+      <div class="ge-unit-owner">担当：赤羽・野村（全体統合）</div>
+    </div>
+  </div>
+</div>
+
+<!-- スケジュール -->
+<div class="ge-section">
+  <div class="ge-section-title">プログラム全体スケジュールイメージ</div>
+  <div class="ge-schedule">
+    <div class="ge-sched-row">
+      <div class="ge-sched-timing">事前（オンライン）</div>
+      <div class="ge-sched-content">UNIT 1-A：日本の舞台芸術の現状（事前視聴 + 課題）<div class="ge-sched-units">UNIT 2-B：制作の共通言語（事前視聴）</div></div>
+    </div>
+    <div class="ge-sched-row">
+      <div class="ge-sched-timing">Day 1 午前</div>
+      <div class="ge-sched-content">UNIT 1-B：世界市場の構造と転生装置<div class="ge-sched-units">SOILマップを3職種全員で共有する</div></div>
+    </div>
+    <div class="ge-sched-row">
+      <div class="ge-sched-timing">Day 1 午後</div>
+      <div class="ge-sched-content">UNIT 2-A：ドラマトゥルギー基礎（戯曲リーディング + 分析WS）</div>
+    </div>
+    <div class="ge-sched-row">
+      <div class="ge-sched-timing">Day 2 午前</div>
+      <div class="ge-sched-content">UNIT 2-C：自分の文化を語る言語（日本文化の言語化ワーク）</div>
+    </div>
+    <div class="ge-sched-row">
+      <div class="ge-sched-timing">Day 2 午後</div>
+      <div class="ge-sched-content">UNIT 3-A：英語ピッチ体験（全員 30秒〜2分）</div>
+    </div>
+    <div class="ge-sched-row">
+      <div class="ge-sched-timing">Day 3〜</div>
+      <div class="ge-sched-content"><strong>各職能別プログラムへ → タブ④で確認</strong></div>
+    </div>
+    <div class="ge-sched-row">
+      <div class="ge-sched-timing">最終Day</div>
+      <div class="ge-sched-content">UNIT 3-B：3職種横断グループワーク<div class="ge-sched-units">UNIT 3-C：転生事例ケーススタディ（シナリオA/Bの解剖）</div></div>
+    </div>
+  </div>
+</div>
+
+</div>
+</div><!-- /#tab-general-education -->
+
+<!-- ════ Role-Specific Tab ════ -->
+<div id="tab-role-specific" class="tab-content">
+<div class="rs-container">
+
+<div class="soil-intro-card">
+  <strong>職能別個別要件：</strong>一般教養でカバーされる共通要件を除いた後の、各職能固有の能力・経験・機会の整理。
+  シナリオ <span style="color:var(--seed);font-weight:700">A（トトロ型）</span>・<span style="color:var(--soil);font-weight:700">B（ストンプ型）</span> どちらに対応するかで求められるものが大きく異なる。
+</div>
+
+<div class="rs-tab-nav">
+  <button class="rs-tab-btn active" data-rs-role="producer">プロデューサー</button>
+  <button class="rs-tab-btn" data-rs-role="director">演出家</button>
+  <button class="rs-tab-btn" data-rs-role="playwright">劇作家</button>
+</div>
+
+<!-- ── プロデューサー ── -->
+<div id="rs-producer" class="rs-content active">
+  <div class="rs-section">
+    <div class="rs-section-title">固有の能力（一般教養では扱わないもの）</div>
+    <table class="rs-table">
+      <thead><tr><th>カテゴリ</th><th>要件</th><th>内容</th><th>シナリオ</th></tr></thead>
+      <tbody>
+        <tr><td>スキル</td><td><strong>戦略的市場選択</strong></td><td>「どのシナリオで・どの壁を越えて・どの入口から」進むかを判断する。SOILの4列マトリックスを自プロジェクトに当てはめる力</td><td><span class="rs-sc rs-sc-ab">A・B</span></td></tr>
+        <tr><td>スキル</td><td><strong>転生装置へのアクセス戦略</strong></td><td>NT・Barbican・Public Theatreのキュレーターへのアプローチ実践。Edinburgh・Avignon出展戦略の設計</td><td><span class="rs-sc rs-sc-ab">A・B</span></td></tr>
+        <tr><td>スキル</td><td><strong>IPライセンス交渉の実践</strong></td><td>IPホルダー（出版社・アニメ会社）との権利交渉。ライセンス条件の読み方・交渉進め方・弁護士との連携</td><td><span class="rs-sc rs-sc-a">A</span></td></tr>
+        <tr><td>スキル</td><td><strong>国際共同制作のマネジメント</strong></td><td>文化機関との共同制作スケジュール管理・予算設計・スタッフィング。海外と日本の制作システムの違いをマネジメントに落とし込む</td><td><span class="rs-sc rs-sc-a">A</span></td></tr>
+        <tr><td>スキル</td><td><strong>ノンバーバル作品のフォーマット設計</strong></td><td>再演可能・言語不要・観光向けの作品フォーマット設計。STOMPやナンタが示す「コンテンツIP化」の設計思想</td><td><span class="rs-sc rs-sc-b">B</span></td></tr>
+        <tr><td>スキル</td><td><strong>英語ピッチの実践レベル</strong></td><td>一般教養は「30秒体験」。職能別では実際の交渉・プレゼン・デック作成・フォローアップまで</td><td><span class="rs-sc rs-sc-ab">A・B</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="rs-section">
+    <div class="rs-section-title">固有の経験・機会</div>
+    <div class="rs-opp-grid">
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-ab">A・B</div><div class="rs-opp-title">転生装置への実際の訪問</div><div class="rs-opp-desc">NT・Barbican・Edinburgh等への視察。キュレーターとの実際の対話体験</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-a">A</div><div class="rs-opp-title">IPホルダー交渉ロールプレイ</div><div class="rs-opp-desc">出版社・権利者役との模擬交渉体験。実際の条件・交渉ポイントを使用</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-a">A</div><div class="rs-opp-title">国際共同制作への参加・見学</div><div class="rs-opp-desc">現在進行中の日英・日韓・日米共同制作プロジェクトへの同行・観察</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-ab">A・B</div><div class="rs-opp-title">ビジネスプラン作成演習</div><div class="rs-opp-desc">シナリオA or Bを想定した実際のプロジェクトプランを作成し、先輩プロデューサー・アドバイザーにプレゼン</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-b">B</div><div class="rs-opp-title">Edinburgh・Avignon参加ツアー</div><div class="rs-opp-desc">転生装置の人たちと出会う「場に出る」体験（将来的な設計として）</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-ab">A・B</div><div class="rs-opp-title">メンターとの1on1</div><div class="rs-opp-desc">東宝・ホリプロ・ゴーチ（確定済み）のリサーチャーメンターとのセッション</div></div>
+    </div>
+  </div>
+  <div class="rs-section">
+    <div class="rs-section-title">カリキュラム設計のポイント</div>
+    <div class="rs-curriculum">
+      <strong>座学フェーズ：</strong>IPライセンス実務（福井健策弁護士等）/ 国際共同制作の設計事例（トトロ・デスノート等の経緯）/ シナリオ別プロデュース戦略の立案<br>
+      <strong>実践フェーズ：</strong>IPホルダー交渉ロールプレイ / 転生装置へのピッチ練習 / プロジェクトプランのメンタリング（アドバイザーとの面談）<br>
+      <strong>機会設計：</strong>フェスティバル・文化機関への視察ツアー / インターン先3〜5プロダクション
+    </div>
+  </div>
+</div>
+
+<!-- ── 演出家 ── -->
+<div id="rs-director" class="rs-content">
+  <div class="rs-section">
+    <div class="rs-section-title">固有の能力（一般教養では扱わないもの）</div>
+    <table class="rs-table">
+      <thead><tr><th>カテゴリ</th><th>要件</th><th>内容</th><th>シナリオ</th></tr></thead>
+      <tbody>
+        <tr><td>知識</td><td><strong>英国・北米商業演劇のシステムと文法</strong></td><td>ウエストエンド・ブロードウェイの制作システム（リハーサル期間・スタッフ構成・Union・慣習等）。「商業演劇で演出家に何が求められるか」の理解</td><td><span class="rs-sc rs-sc-a">A</span></td></tr>
+        <tr><td>知識</td><td><strong>フィジカルシアター・ノンバーバルの理論と系譜</strong></td><td>Pina Bausch・DV8・Frantic Assembly・Akram Khan等の作品と思想の深掘り。「なぜ言語なしで感情が成立するか」の理論</td><td><span class="rs-sc rs-sc-b">B</span></td></tr>
+        <tr><td>スキル</td><td><strong>ノンバーバル演出技術の実践</strong></td><td>身体・空間・リズム・沈黙・繰り返しのみで意味と感情を作る演出技術。言語に依存しない稽古場コミュニケーション</td><td><span class="rs-sc rs-sc-b">B</span></td></tr>
+        <tr><td>スキル</td><td><strong>IP制約下での創造性の発揮</strong></td><td>IPの世界観・キャラクター・既存イメージを守りながら、現地観客が自分を投影できる作品に仕上げる演出力</td><td><span class="rs-sc rs-sc-a">A</span></td></tr>
+        <tr><td>スキル</td><td><strong>異言語環境での稽古場マネジメント</strong></td><td>英語・通訳を介した稽古場の進行管理。言葉に頼らない演出指示（感情・イメージ・身体で伝える）</td><td><span class="rs-sc rs-sc-ab">A・B</span></td></tr>
+        <tr><td>スキル</td><td><strong>フリンジ規模での演出設計</strong></td><td>低予算・短期公演・小空間での演出の最適化。「小さいからこそ光る作品」の設計</td><td><span class="rs-sc rs-sc-b">B</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="rs-section">
+    <div class="rs-section-title">固有の経験・機会</div>
+    <div class="rs-opp-grid">
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-b">B</div><div class="rs-opp-title">フィジカルシアター集中WS</div><div class="rs-opp-desc">DV8・Frantic Assembly等のメソッドを体験できる国内外のWSへの参加</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-ab">A・B</div><div class="rs-opp-title">実際に演出する場の確保</div><div class="rs-opp-desc">劇作家が書いた短編・devised作品を実際に演出する体験（サマースクール内2〜3日の集中演出実習）</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-a">A</div><div class="rs-opp-title">異言語環境での演出体験</div><div class="rs-opp-desc">英語話者（留学生・在日外国人俳優等）との稽古場体験。通訳を介した演出の実践</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-ab">A・B</div><div class="rs-opp-title">優秀な演出家のアシスタント機会</div><div class="rs-opp-desc">サマースクールゲスト演出家への質疑・観察。長期的なアシスタント制度への接続</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-ab">A・B</div><div class="rs-opp-title">作品ビジョンプレゼン（英語）</div><div class="rs-opp-desc">自分が演出したい作品のビジョンを英語でキュレーター・プロデューサーに説明する体験</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-ab">A・B</div><div class="rs-opp-title">Paidインターン</div><div class="rs-opp-desc">埼玉芸術劇場・世田谷PT等（交渉中）。毛色の違う3〜5プロダクションで1日からでも可</div></div>
+    </div>
+  </div>
+  <div class="rs-section">
+    <div class="rs-section-title">カリキュラム設計のポイント</div>
+    <div class="rs-curriculum">
+      <strong>シナリオA向け：</strong>商業演劇文法の講義（英国・北米の制作システム解説）/ 戯曲精読・立体化ワーク / 異言語環境での演出実習<br>
+      <strong>シナリオB向け：</strong>フィジカルシアターのメソッド体験WS / ノンバーバル作品の短期演出実習（声なしの制約） / フリンジ向け規模感の演出設計演習<br>
+      <strong>共通：</strong>演出家同士のディスカッション（シナリオ選択の対話）/ メンター演出家との1on1（アドバイザリーボードを活用）
+    </div>
+  </div>
+</div>
+
+<!-- ── 劇作家 ── -->
+<div id="rs-playwright" class="rs-content">
+  <div class="rs-section">
+    <div class="rs-section-title">固有の能力（一般教養では扱わないもの）</div>
+    <table class="rs-table">
+      <thead><tr><th>カテゴリ</th><th>要件</th><th>内容</th><th>シナリオ</th></tr></thead>
+      <tbody>
+        <tr><td>スキル</td><td><strong>翻案・アダプテーションの実践技術</strong></td><td>原作の「魂」を守りながら現地観客に届く形に変換する技術。原作分析→エッセンス抽出→現代・他文化文脈への移植のプロセス</td><td><span class="rs-sc rs-sc-a">A</span></td></tr>
+        <tr><td>スキル</td><td><strong>英訳を前提とした戯曲の書き方</strong></td><td>翻訳されることを意識した文体設計：センテンスの長さ・文化特有の慣用表現の最小化・感情の直接的表現。「翻訳可能な戯曲」を書く訓練</td><td><span class="rs-sc rs-sc-a">A</span></td></tr>
+        <tr><td>スキル</td><td><strong>自作をIPとして設計する視点</strong></td><td>「一回上演して終わり」でなく、英訳→国際リーディング→再演→海外上演のチェーンを見越した設計。続編可能性・キャラクターのIP強度も意識</td><td><span class="rs-sc rs-sc-a">A</span></td></tr>
+        <tr><td>スキル</td><td><strong>ノンバーバル作品の構造設計（devising）</strong></td><td>テキストなしに時間・空間・繰り返し・身体で物語を構造化する技術。演出家・俳優と共同でdeviseするプロセスへの参加</td><td><span class="rs-sc rs-sc-b">B</span></td></tr>
+        <tr><td>スキル</td><td><strong>集中的な反復執筆練習</strong></td><td>毎週1本のシーン作成（ソン・ギウン方式）。短い単位からの積み上げによる戯曲技術の習得。毎日書く習慣の体内化</td><td><span class="rs-sc rs-sc-ab">A・B</span></td></tr>
+        <tr><td>スキル</td><td><strong>国際リーディングへの対応</strong></td><td>英語話者の俳優に戯曲を読んでもらう体験の準備・対話・フィードバック受け取り</td><td><span class="rs-sc rs-sc-a">A</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="rs-section">
+    <div class="rs-section-title">固有の経験・機会</div>
+    <div class="rs-opp-grid">
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-a">A</div><div class="rs-opp-title">翻案ワーク（IPを戯曲化する実習）</div><div class="rs-opp-desc">日本の文学・アニメ・民話等を素材に短編翻案作品を実際に書く体験。演出家・俳優と上演まで進める</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-a">A</div><div class="rs-opp-title">国際リーディング体験</div><div class="rs-opp-desc">書いた作品を英語話者の俳優に読んでもらい、反応・フィードバックを受け取る（プレ授業で実施）</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-ab">A・B</div><div class="rs-opp-title">毎日書き続ける習慣定着</div><div class="rs-opp-desc">サマースクール期間中、毎日短いシーンを書く。「とにかく書く習慣」の体内化（ドン・マクキャンフィル方式）</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-b">B</div><div class="rs-opp-title">devising（共同創作）体験</div><div class="rs-opp-desc">演出家・俳優と共にテキストなし or 最小限の短編作品を共同開発する体験</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-a">A</div><div class="rs-opp-title">ドラマターグとの対話機会</div><div class="rs-opp-desc">書いた作品についてドラマターグ（ゲスト講師）からフィードバックを受ける1on1セッション</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-ab">A・B</div><div class="rs-opp-title">劇作家コミュニティの形成</div><div class="rs-opp-desc">同期の劇作家との作品共有・ディスカッション習慣の形成（ARKOモデル：孤独に書かない）</div></div>
+    </div>
+  </div>
+  <div class="rs-section">
+    <div class="rs-section-title">カリキュラム設計のポイント</div>
+    <div class="rs-curriculum">
+      <strong>シナリオA向け：</strong>翻案ワーク集中実習（素材選定→分析→執筆→発表）/ 「英訳を前提とした書き方」ワーク / 国際リーディング体験（英語俳優との対話）<br>
+      <strong>シナリオB向け：</strong>devising参加体験（演出家・俳優との共同創作）/ ノンバーバル構造設計の入門ワーク<br>
+      <strong>共通：</strong>毎日書く習慣の集中実習（サマースクール全期間）/ 劇作家コミュニティの形成（同期との作品共有）/ メンター・ドラマターグとの1on1 / プレ授業（前川知大・鹿目由紀等）
+    </div>
+  </div>
+</div>
+
+<!-- 機会マトリックス -->
+<div class="rs-section" style="margin-top:2rem">
+  <div class="rs-section-title">3職種共通の「機会設計」サマリー</div>
+  <table class="rs-table">
+    <thead><tr><th>機会</th><th style="text-align:center">P</th><th style="text-align:center">D</th><th style="text-align:center">PW</th><th>どこで提供</th></tr></thead>
+    <tbody>
+      <tr><td>転生装置の概念理解</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td>→ 一般教養 UNIT 1-B</td></tr>
+      <tr><td>転生装置への実際のアクセス</td><td style="text-align:center">◎</td><td style="text-align:center">○</td><td style="text-align:center">○</td><td>→ プロデューサー職能別</td></tr>
+      <tr><td>英語ピッチ基礎体験</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td>→ 一般教養 UNIT 3-A</td></tr>
+      <tr><td>英語ピッチの実践・深化</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td style="text-align:center">○</td><td>→ 各職能別</td></tr>
+      <tr><td>日本文化の言語化</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td>→ 一般教養 UNIT 2-C</td></tr>
+      <tr><td>3職種混合での協働体験</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td>→ 一般教養 UNIT 3-B</td></tr>
+      <tr><td>IP・翻案の実践</td><td style="text-align:center">◎</td><td style="text-align:center">○</td><td style="text-align:center">◎</td><td>→ 各職能別</td></tr>
+      <tr><td>ノンバーバル演出・devising</td><td style="text-align:center">○</td><td style="text-align:center">◎</td><td style="text-align:center">○</td><td>→ 演出家/劇作家職能別</td></tr>
+      <tr><td>メンターとの継続関係</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td>→ 各職能別（全期間）</td></tr>
+    </tbody>
+  </table>
+</div>
+
+</div>
+</div><!-- /#tab-role-specific -->
+
 <div class="footer">
   <span>Slackデイリーレポートより自動生成（毎朝9:00更新）</span>
   <span>i9mix/seed-soil</span>
@@ -1211,6 +1910,15 @@ document.querySelectorAll('.role-tab-btn').forEach(btn => {
     document.querySelectorAll('.role-content').forEach(c => c.classList.remove('active'));
     btn.classList.add('active');
     document.getElementById('role-' + btn.dataset.role).classList.add('active');
+  });
+});
+
+document.querySelectorAll('.rs-tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.rs-tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.rs-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('rs-' + btn.dataset.rsRole).classList.add('active');
   });
 });
 </script>
