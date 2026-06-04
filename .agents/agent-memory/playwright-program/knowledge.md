@@ -3,6 +3,10 @@
 > Boxの資料をもとに構築（2026年5月30日時点）  
 > 出典：劇作家企画書まとめ.docx、Traverse MTG 5月14日.docx、Brainstorming 190526.docx
 
+> **重要参照**：劇作家に求められる国際展開対応能力（IPの翻案力・普遍的言語で語る力・伝統様式の現代語翻訳）は SOIL戦略フレームワークに定義されている。  
+> → `0_docs/soil_strategy/international_strategy_framework.md`  
+> シナリオA（翻案力）・C（伝統×現代語）・D（日本社会の今を普遍的言語で）がカリキュラム設計の前提。
+
 ---
 
 ## 1. プログラムのコンセプト

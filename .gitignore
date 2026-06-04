@@ -13,3 +13,13 @@ Thumbs.db
 .vscode/
 *.swp
 *.swo
+
+# Node.js
+node_modules/
+dashboard/node_modules/
+dashboard/package-lock.json
+
+# PDF生成スクリプト（開発ツール・コミット不要）
+dashboard/render-page.mjs
+dashboard/render-page2.mjs
+dashboard/extract-page.mjs
