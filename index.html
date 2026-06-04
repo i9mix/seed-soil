@@ -465,6 +465,26 @@ body {
 .ge-sched-timing{font-size:11px;font-family:'DM Mono';color:var(--text-tertiary);width:110px;flex-shrink:0;padding-top:2px}
 .ge-sched-content{flex:1;font-size:12.5px;color:var(--text-primary);line-height:1.5}
 .ge-sched-units{font-size:11px;color:var(--text-secondary);margin-top:2px}
+/* ── Program Cards ── */
+.ge-program-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.25rem;margin-bottom:1rem;overflow:hidden}
+.ge-prog-header{display:flex;align-items:center;gap:10px;margin-bottom:1rem;flex-wrap:wrap}
+.ge-prog-num{font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;flex-shrink:0;font-family:'DM Mono',monospace}
+.ge-prog-title{font-size:16px;font-weight:700;color:var(--text-primary);flex:1}
+.ge-prog-badge{font-size:11px;color:var(--text-secondary);background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:2px 10px;white-space:nowrap}
+.ge-prog-body{}
+.ge-prog-desc{font-size:13px;color:var(--text-secondary);line-height:1.8;margin-bottom:1rem}
+.ge-prog-meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1rem}
+.ge-prog-meta-item{background:var(--bg);border-radius:8px;padding:8px 12px}
+.ge-prog-meta-label{font-size:10px;font-weight:700;color:var(--text-tertiary);letter-spacing:.06em;margin-bottom:3px;text-transform:uppercase}
+.ge-prog-meta-val{font-size:12px;color:var(--text-primary);line-height:1.5}
+.ge-prog-req-title{font-size:11px;font-weight:700;color:var(--text-secondary);letter-spacing:.05em;margin-bottom:8px;text-transform:uppercase}
+.ge-prog-reqs{display:flex;flex-wrap:wrap;gap:6px}
+.ge-req-chip{font-size:11.5px;font-weight:600;padding:4px 10px;border-radius:20px;display:flex;align-items:center;gap:6px}
+.ge-req-common{background:var(--bg);color:var(--text-primary);border:1px solid var(--border)}
+.ge-req-prod{background:var(--producer-bg);color:var(--producer);border:1px solid var(--producer-border)}
+.ge-req-dir{background:var(--director-bg);color:var(--director);border:1px solid var(--director-border)}
+.ge-req-pw{background:var(--playwright-bg);color:var(--playwright);border:1px solid var(--playwright-border)}
+.ge-req-ids{font-size:10px;font-weight:400;font-family:'DM Mono',monospace;opacity:.7}
 /* ══════ Role-Specific ══════ */
 .rs-tab-nav{display:flex;gap:8px;margin-bottom:1.25rem;flex-wrap:wrap}
 .rs-tab-btn{padding:6px 20px;border-radius:20px;border:1.5px solid var(--border);background:var(--surface);font-size:13px;font-weight:700;cursor:pointer;color:var(--text-secondary);transition:all .15s;font-family:'Noto Sans JP',sans-serif}
@@ -1703,39 +1723,142 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
   </div>
 </div>
 
-<!-- スケジュール -->
+<!-- 企画概要 -->
 <div class="ge-section">
-  <div class="ge-section-title">プログラム全体スケジュールイメージ</div>
-  <div class="ge-schedule">
-    <div class="ge-sched-row">
-      <div class="ge-sched-timing">事前（オンライン）</div>
-      <div class="ge-sched-content">UNIT 1-A：日本の舞台芸術の現状（事前視聴 + 課題）<div class="ge-sched-units">UNIT 2-B：制作の共通言語（事前視聴）</div></div>
+  <div class="ge-section-title">企画概要 ── 各プログラムと育成する人材要件</div>
+
+  <div style="font-size:12px;color:var(--text-tertiary);margin-bottom:1.25rem;line-height:1.6">
+    事務局長・野村善文が構想する3本の企画を軸に設計。いずれも「継続的に参加できる」形式が特徴。<br>
+    対象は基本的に大学生。有料で社会人（JPASN会員）の受け入れも検討。
+  </div>
+
+  <!-- Program 1 -->
+  <div class="ge-program-card" style="border-left:4px solid var(--seed)">
+    <div class="ge-prog-header">
+      <div class="ge-prog-num" style="background:var(--seed-bg);color:var(--seed-text)">企画 1</div>
+      <div class="ge-prog-title">海外トレンド理解 × 英語</div>
+      <div class="ge-prog-badge">The Stage × British Council Japan × JPASN 連携</div>
     </div>
-    <div class="ge-sched-row">
-      <div class="ge-sched-timing">Day 1 午前</div>
-      <div class="ge-sched-content">UNIT 1-B：世界市場の構造と転生装置<div class="ge-sched-units">SOILマップを3職種全員で共有する</div></div>
-    </div>
-    <div class="ge-sched-row">
-      <div class="ge-sched-timing">Day 1 午後</div>
-      <div class="ge-sched-content">UNIT 2-A：ドラマトゥルギー基礎（戯曲リーディング + 分析WS）</div>
-    </div>
-    <div class="ge-sched-row">
-      <div class="ge-sched-timing">Day 2 午前</div>
-      <div class="ge-sched-content">UNIT 2-C：自分の文化を語る言語（日本文化の言語化ワーク）</div>
-    </div>
-    <div class="ge-sched-row">
-      <div class="ge-sched-timing">Day 2 午後</div>
-      <div class="ge-sched-content">UNIT 3-A：英語ピッチ体験（全員 30秒〜2分）</div>
-    </div>
-    <div class="ge-sched-row">
-      <div class="ge-sched-timing">Day 3〜</div>
-      <div class="ge-sched-content"><strong>各職能別プログラムへ → タブ④で確認</strong></div>
-    </div>
-    <div class="ge-sched-row">
-      <div class="ge-sched-timing">最終Day</div>
-      <div class="ge-sched-content">UNIT 3-B：3職種横断グループワーク<div class="ge-sched-units">UNIT 3-C：転生事例ケーススタディ（シナリオA/Bの解剖）</div></div>
+    <div class="ge-prog-body">
+      <div class="ge-prog-desc">
+        海外演劇誌（<em>The Stage</em> 等）を毎回の教材として英語で読み、ディスカッションを行う定期開催の勉強会。
+        海外で今何が起きているかをリアルタイムで追いながら、英語で「演劇について話す」実践力を同時に鍛える。
+        British Council Japan・JPASNとの共同連携により、業界ネットワークへの接点も提供。
+      </div>
+      <div class="ge-prog-meta-grid">
+        <div class="ge-prog-meta-item">
+          <div class="ge-prog-meta-label">形式</div>
+          <div class="ge-prog-meta-val">定期勉強会（購読記事のリーディング＋英語ディスカッション）</div>
+        </div>
+        <div class="ge-prog-meta-item">
+          <div class="ge-prog-meta-label">対象</div>
+          <div class="ge-prog-meta-val">大学生（3職種共通）、社会人受け入れ検討中</div>
+        </div>
+      </div>
+      <div class="ge-prog-req-title">育成する人材要件</div>
+      <div class="ge-prog-reqs">
+        <span class="ge-req-chip ge-req-common">英語コミュニケーション基礎<span class="ge-req-ids">P:S-2 / D:S-5 / PW:S-7</span></span>
+        <span class="ge-req-chip ge-req-common">国際演劇トレンドの理解<span class="ge-req-ids">P:K-4/6 / D:K-3 / PW:K-9</span></span>
+        <span class="ge-req-chip ge-req-common">批評リテラシー<span class="ge-req-ids">P:K-1 / D:K-1 / PW:K-1</span></span>
+        <span class="ge-req-chip ge-req-common">自文化への誇りと相対化<span class="ge-req-ids">P:M-2 / D:M-4 / PW:M-2</span></span>
+      </div>
     </div>
   </div>
+
+  <!-- Program 2 -->
+  <div class="ge-program-card" style="border-left:4px solid var(--playwright)">
+    <div class="ge-prog-header">
+      <div class="ge-prog-num" style="background:var(--playwright-bg);color:var(--playwright)">企画 2</div>
+      <div class="ge-prog-title">戯曲 Reading Group</div>
+      <div class="ge-prog-badge">海外演劇教育で扱われる戯曲を読む会</div>
+    </div>
+    <div class="ge-prog-body">
+      <div class="ge-prog-desc">
+        英国・韓国・米国の演劇教育プログラムで実際に使われている戯曲を毎回1本選定して読み、ディスカッションを行う。
+        単に読むだけでなく、「なぜこの戯曲が世界で教材として使われているのか」「どこが普遍的か」を3職種の視点で解剖する。
+        劇作家にとっては戯曲技術の吸収、演出家には読み込み力の訓練、プロデューサーには作品価値の言語化の場になる。
+      </div>
+      <div class="ge-prog-meta-grid">
+        <div class="ge-prog-meta-item">
+          <div class="ge-prog-meta-label">形式</div>
+          <div class="ge-prog-meta-val">定期開催のリーディング会（音読 or 黙読 + 全体ディスカッション）</div>
+        </div>
+        <div class="ge-prog-meta-item">
+          <div class="ge-prog-meta-label">対象</div>
+          <div class="ge-prog-meta-val">大学生（3職種共通）、社会人受け入れ検討中</div>
+        </div>
+      </div>
+      <div class="ge-prog-req-title">育成する人材要件</div>
+      <div class="ge-prog-reqs">
+        <span class="ge-req-chip ge-req-common">演劇の構造・ドラマトゥルギー<span class="ge-req-ids">P:K-1 / D:K-1 / PW:K-1</span></span>
+        <span class="ge-req-chip ge-req-pw">戯曲を読む習慣<span class="ge-req-ids">PW:K-2 ◎</span></span>
+        <span class="ge-req-chip ge-req-dir">テキストを読み込む力<span class="ge-req-ids">D:K-1 ◎</span></span>
+        <span class="ge-req-chip ge-req-common">作品・価値を言語化する力<span class="ge-req-ids">P:S-3 / D:S-3 / PW:S-2</span></span>
+        <span class="ge-req-chip ge-req-common">他者と協働する開放性<span class="ge-req-ids">P:M-1 / D:M-1 / PW:M-3</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Program 3 -->
+  <div class="ge-program-card" style="border-left:4px solid var(--soil)">
+    <div class="ge-prog-header">
+      <div class="ge-prog-num" style="background:var(--soil-bg);color:var(--soil-text)">企画 3</div>
+      <div class="ge-prog-title">ポッドキャストシリーズ</div>
+      <div class="ge-prog-badge">海外で活躍する人材からノウハウを獲得</div>
+    </div>
+    <div class="ge-prog-body">
+      <div class="ge-prog-desc">
+        海外の劇場・フェスティバル・制作会社で活躍する日本人や、日本の演劇に関わる海外のキュレーター・プロデューサーにインタビューし、
+        音声コンテンツとして配信するシリーズ。「転生装置の中の人」の生の声を届けることで、
+        学生がリアルなキャリアイメージを持てるようにする。テキスト要約・ディスカッション素材としても活用可能。
+      </div>
+      <div class="ge-prog-meta-grid">
+        <div class="ge-prog-meta-item">
+          <div class="ge-prog-meta-label">形式</div>
+          <div class="ge-prog-meta-val">収録・配信型（随時更新）＋ 視聴後ディスカッション回を適宜設定</div>
+        </div>
+        <div class="ge-prog-meta-item">
+          <div class="ge-prog-meta-label">対象</div>
+          <div class="ge-prog-meta-val">大学生・社会人（非同期で視聴可能、広くリーチできる）</div>
+        </div>
+      </div>
+      <div class="ge-prog-req-title">育成する人材要件</div>
+      <div class="ge-prog-reqs">
+        <span class="ge-req-chip ge-req-common">転生装置・ロールモデルの理解<span class="ge-req-ids">P:K-4 / E-3</span></span>
+        <span class="ge-req-chip ge-req-common">国際演劇トレンドの理解<span class="ge-req-ids">P:K-6 / D:K-3 / PW:K-9</span></span>
+        <span class="ge-req-chip ge-req-common">自文化への誇りと相対化<span class="ge-req-ids">P:M-2 / D:M-4 / PW:M-2</span></span>
+        <span class="ge-req-chip ge-req-prod">英語コミュニケーション（リスニング）<span class="ge-req-ids">P:S-2 / D:S-5</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 補完プログラム（既存ユニットの接続） -->
+  <div style="margin-top:1.5rem;padding:1rem 1.25rem;background:var(--bg);border-radius:12px;border:1px dashed var(--border)">
+    <div style="font-size:12px;font-weight:700;color:var(--text-secondary);margin-bottom:10px;letter-spacing:.05em">上記3企画を補完するその他のプログラム要素</div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;font-size:12px">
+      <div style="padding:8px 10px;background:var(--surface);border-radius:8px;border:1px solid var(--border)">
+        <strong style="color:var(--seed)">知財・制作実務 講義</strong><br>
+        <span style="color:var(--text-secondary)">著作権・契約・助成金の基礎概論（福井健策弁護士等）</span><br>
+        <span style="font-size:11px;color:var(--text-tertiary)">P:K-3/K-5 / D:K-8 / PW:K-5</span>
+      </div>
+      <div style="padding:8px 10px;background:var(--surface);border-radius:8px;border:1px solid var(--border)">
+        <strong style="color:var(--seed)">日本文化の言語化ワーク</strong><br>
+        <span style="color:var(--text-secondary)">「日本演劇の面白さ」を英語で5分プレゼンする実践</span><br>
+        <span style="font-size:11px;color:var(--text-tertiary)">P:M-2/K-2 / D:M-4/K-4 / PW:M-2/K-4</span>
+      </div>
+      <div style="padding:8px 10px;background:var(--surface);border-radius:8px;border:1px solid var(--border)">
+        <strong style="color:var(--seed)">3職種横断グループワーク</strong><br>
+        <span style="color:var(--text-secondary)">仮想プロジェクトをシナリオA/Bで設計する混合WS</span><br>
+        <span style="font-size:11px;color:var(--text-tertiary)">P:S-1 / D:S-2 / PW:M-3（協働体験）</span>
+      </div>
+      <div style="padding:8px 10px;background:var(--surface);border-radius:8px;border:1px solid var(--border)">
+        <strong style="color:var(--seed)">転生事例ケーススタディ</strong><br>
+        <span style="color:var(--text-secondary)">トトロ・STOMP・Sixの転生ルートを3職種視点で解剖</span><br>
+        <span style="font-size:11px;color:var(--text-tertiary)">P:K-4/E-3 / D・PW：市場地図の理解</span>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 </div>
