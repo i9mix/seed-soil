@@ -616,8 +616,9 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
     <button class="tab-btn" data-tab="about">事業概要</button>
     <button class="tab-btn" data-tab="soil-map">① SOIL 戦略マップ</button>
     <button class="tab-btn" data-tab="hr">② 人材要件 v2</button>
-    <button class="tab-btn" data-tab="general-education">③ 一般教養プログラム</button>
-    <button class="tab-btn" data-tab="role-specific">④ 職能別個別要件</button>
+    <button class="tab-btn" data-tab="university-analysis">③ 大学教育に関する分析</button>
+    <button class="tab-btn" data-tab="general-education">④ 一般教養プログラム</button>
+    <button class="tab-btn" data-tab="role-specific">⑤ 職能別個別要件</button>
     <button class="tab-btn" data-tab="progress">プログラム進捗</button>
     <button class="tab-btn" data-tab="timeline">スケジュール</button>
     <button class="tab-btn" data-tab="meetings">会議資料</button>
@@ -1736,6 +1737,182 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 </div>
 </div><!-- /#tab-soil-map -->
 
+<!-- ════ University Analysis Tab ════ -->
+<div id="tab-university-analysis" class="tab-content">
+<div class="ge-container">
+
+<div class="soil-intro-card">
+  <strong>大学教育に関する分析：</strong>日本の演劇・舞台芸術教育（東演連加盟5校・昭和音楽大学・早稲田大学等）と海外主要機関（RADA・Guildhall・Rose Bruford・Yale・Juilliard・CMU・K-Arts）のカリキュラムをWebリサーチし、実際の科目名ベースで比較・分析した結果。これらの差分がSEEDの一般教養プログラム（タブ④）と各職能別プログラム（タブ⑤）の設計根拠になっている。
+</div>
+
+<!-- 国内大学分析 -->
+<div class="ge-section">
+  <div class="ge-section-title">国内大学の演劇教育 ── 何を教えていて、何が不足しているか</div>
+  <div style="overflow-x:auto">
+  <table class="ge-common-table">
+    <thead>
+      <tr><th>大学・機関</th><th>カバーしていること（確認済）</th><th>不足しているもの（SEEDが補う）</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>日本大学芸術学部 演劇学科</strong><br><span style="font-size:10px;color:var(--text-tertiary)">東演連加盟。劇作・演出・企画制作・演技・デザイン技術の3コース10専攻</span></td>
+        <td>演劇史（日本・西洋）、各専攻別技術実習（照明・音響・舞台美術）、学生主導の学内公演（年複数本）、戯曲輪読・集団創作</td>
+        <td>英語での表現・議論、国際市場の理解、商業演劇の財務・法務教育、業界人との体系的接続（単発外部講師が主流）</td>
+      </tr>
+      <tr>
+        <td><strong>玉川大学 演劇・舞踊学科</strong><br><span style="font-size:10px;color:var(--text-tertiary)">東演連加盟。身体表現・舞台創造・芸術応用の3コース</span></td>
+        <td>1年次横断必修（音楽表現・身体表現・舞台技術）、劇場接遇演習、オーディション演習、演劇史・理論、上演実習</td>
+        <td>英語・国際展開の具体的プログラムなし、商業演劇プロデュース、スクリーン演技・映像との接続</td>
+      </tr>
+      <tr>
+        <td><strong>多摩美術大学 演劇舞踊デザイン学科</strong><br><span style="font-size:10px;color:var(--text-tertiary)">東演連加盟。演劇舞踊コース＋劇場美術デザインコース</span></td>
+        <td>演技・振付・劇作・演出・コレオグラフィ演習、舞台美術・照明・衣裳・映像美術、社会的背景を踏まえた演劇史・理論</td>
+        <td>英語・国際展開教育、業界接続の仕組み、商業演劇プロデュース</td>
+      </tr>
+      <tr>
+        <td><strong>桐朋学園芸術短大 演劇専攻</strong><br><span style="font-size:10px;color:var(--text-tertiary)">東演連加盟。2年制。ストレートプレイ・ミュージカル・声優の3コース</span></td>
+        <td>「本を読む力・身体の鍛錬・アンサンブル」の3指針。ボイストレーニング・身体・演技発表会・卒業公演への集中特化</td>
+        <td>俳優育成特化のためプロデューサー・劇作家・演出家育成は対象外。英語・国際展開の記述なし</td>
+      </tr>
+      <tr>
+        <td><strong>桜美林大学 芸術文化学群</strong><br><span style="font-size:10px;color:var(--text-tertiary)">東演連加盟。演劇・ダンス専修 + 2025年度よりプロデュース＆マネジメント領域拡充</span></td>
+        <td>演劇・ダンス・ミュージカル・舞台技術スタッフワーク・アートプロデュース・2025年度より声優・映像演技・テーマパークダンス対応科目新設</td>
+        <td>「グローバルアウトリーチプログラム」が示唆されるが詳細不明。具体的な国際展開教育は未確認</td>
+      </tr>
+      <tr>
+        <td><strong>昭和音楽大学 アートマネジメントコース</strong><br><span style="font-size:10px;color:var(--text-tertiary)">1994年日本初のアートマネジメント教育。米国AAAE認定取得</span></td>
+        <td>アートマネジメント実務（企画・交渉・運営一貫）、<strong>アートマネジメント英語①②必修</strong>、50社超のインターンシップ、3年次：学生企画の公演を実費制作</td>
+        <td>演劇固有のドラマトゥルギー・劇作・演出の深度、自分の作品・ビジョンを継続して「語り続ける」表現訓練</td>
+      </tr>
+      <tr>
+        <td><strong>早稲田大学 文学部 演劇映像コース</strong><br><span style="font-size:10px;color:var(--text-tertiary)">研究・批評系。実技系ではない</span></td>
+        <td>日本古典演劇（能・浄瑠璃・歌舞伎）・民俗芸能・西洋演劇・現代舞台芸術・映画史理論・演劇批評</td>
+        <td>実技・実習なし。国際展開・英語プレゼン・プロデュース実践はカリキュラム外</td>
+      </tr>
+      <tr style="background:var(--seed-bg)">
+        <td colspan="3">
+          <strong>🔑 日本の演劇大学教育に共通して欠けているもの</strong><br>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:8px;font-size:11.5px">
+            <div><strong style="color:var(--seed-text)">英語・国際交渉</strong>：昭和音大のみ「アートマネジメント英語」を必修化。東演連5校は未整備。</div>
+            <div><strong style="color:var(--seed-text)">商業演劇プロデュース</strong>：Yale Theater Management MFAレベルの体系的教育が日本に存在しない。</div>
+            <div><strong style="color:var(--seed-text)">業界接続の制度化</strong>：RADAは業界人前プレゼンを必修化。Yaleは初日から実務従事。日本は単発外部講師が主流。</div>
+            <div><strong style="color:var(--seed-text)">ドラマトゥルギー実践化</strong>：RADAはBA必修。Yaleは独立専攻。日本は理論系にとどまる。</div>
+            <div><strong style="color:var(--seed-text)">3職能横断学習</strong>：Yale DRAM 50aは全職能が3週間協働必修。日本では専攻間の壁が高い。</div>
+            <div><strong style="color:var(--urgent-text)">最大のギャップ → SEEDが担う</strong>：「表現の力（sustained oral discourse）」——どの大学も圧倒的に不足。</div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- 海外詳細比較 -->
+<div class="ge-section">
+  <div class="ge-section-title">海外の演劇教育との詳細比較 ── 具体的科目名による分析</div>
+
+  <!-- 主要海外機関のサマリー -->
+  <div style="overflow-x:auto;margin-bottom:1.5rem">
+  <table class="ge-common-table">
+    <thead>
+      <tr><th>機関（国）</th><th>特徴的な科目・プログラム</th><th>日本との最大の差</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>RADA</strong><br><span style="font-size:10px;color:var(--text-tertiary)">英国・BA Acting 3年制</span></td>
+        <td><strong>Dramaturgy（Year 1 必修）</strong>・国際フェスティバル参加必須（Year 2：META / Gdansk Shakespeare Festival / Utah等）・Reflective Practice（継続）・Agents/CD/Producers による業界セミナー（必修）・RADA Buddy Mentoring</td>
+        <td>Year 2 に国際フェスティバル参加が<strong>カリキュラムとして制度化</strong>。ドラマトゥルギーが学部1年次から必修。業界人との接点を科目化。</td>
+      </tr>
+      <tr>
+        <td><strong>Guildhall School</strong><br><span style="font-size:10px;color:var(--text-tertiary)">英国・BA Acting 3年制</span></td>
+        <td><strong>Self-led Practice（劇作・ドラマトゥルギー・独立プロジェクト必修）</strong>・専任 Industry Consultant 配置・Making It Festival（学生創作発表）・3年次でAgents/CD/Directors向けショーケース・Alumni Gym（卒業後継続トレーニング）</td>
+        <td><strong>専任 Industry Consultant を学校に配置</strong>し、学生のキャリア構築を個別支援。日本では単発外部講師が主流。</td>
+      </tr>
+      <tr>
+        <td><strong>Rose Bruford</strong><br><span style="font-size:10px;color:var(--text-tertiary)">英国・学部+MA</span></td>
+        <td>European Theatre Arts（欧州6ヶ国セメスター留学、675名実績）・American Theatre Arts（米国主要都市留学）・<strong>MA Directing 正式科目：Budgeting / Fundraising / Pitching Ideas / Professional Networking</strong></td>
+        <td><strong>演出家の育成課程でピッチ・資金調達・ネットワーキングを正式科目として設置</strong>。欧米への演劇特化留学が制度化されている。</td>
+      </tr>
+      <tr>
+        <td><strong>Yale School of Drama</strong><br><span style="font-size:10px;color:var(--text-tertiary)">米国・MFA各専攻</span></td>
+        <td><strong>Theater Management MFA 16科目（Financial Accounting / Strategic Planning / Law and the Arts / Principles of Marketing / Advanced Topics in Branding / Labor and Employee Relations / Governance / Producing for the Commercial Theater 等）</strong>・Bridge to the Profession（年12回・6単位）・MFA/MBA Joint Degree・Yale Rep初日から実務参加</td>
+        <td>Theater Management が独立MFA専攻として確立。<strong>劇場経営に必要な全知識（財務・法務・労使・政策・ガバナンス）を体系化</strong>。日本に同等の専門大学院なし。</td>
+      </tr>
+      <tr>
+        <td><strong>Yale Playwriting/Directing/Dramaturgy</strong><br><span style="font-size:10px;color:var(--text-tertiary)">米国・MFA各専攻</span></td>
+        <td>Playwriting：<strong>Teach What You Write（自作を教えることで言語化）・Theater Now NYC（業界没入リサーチ）・Writing for Film and Television（必修）</strong>。Directing：Bridge to the Profession / Choreographic Imagination / Opera Practicum / World Performance / Director's Thesis Casebook。Dramaturgy：Criticism Workshop（3年間継続）・Literary Office Practicum・Translation（語学をドラマトゥルギーとして統合）</td>
+        <td>劇作家が映像脚本も学ぶ、演出家がOpera・振付・World Performanceを横断する、ドラマトゥルグが文学部の実務も担う——<strong>専攻間の横断学習が必修として制度化</strong>。</td>
+      </tr>
+      <tr>
+        <td><strong>Juilliard School</strong><br><span style="font-size:10px;color:var(--text-tertiary)">米国・BFA Drama 4年制</span></td>
+        <td>Year 1-2：<strong>Essentials of Entrepreneurship（起業家精神・必修）</strong>。Year 3：<strong>Elements of Producing（俳優も必修）・Acting on Camera。</strong>Year 4：Bridge to the Profession（6単位）・American Theater Landscape・<strong>Actor Presentations（NY&LA のエージェント/CDへのライブショーケース）</strong></td>
+        <td>俳優育成課程に起業家精神・プロデュース基礎を必修化。4年次に<strong>実際の業界人の前でのショーケースを制度化</strong>（＝「松田さんの前で話す」の海外版）。</td>
+      </tr>
+      <tr>
+        <td><strong>CMU School of Drama</strong><br><span style="font-size:10px;color:var(--text-tertiary)">米国・BFA Dramaturgy</span></td>
+        <td>Dramaturgy が独立学科として存在。<strong>Interactive Lobby Dramaturgy（観客エンゲージメントの専門訓練が科目課題）</strong>・Dramaturgy Forum（上級生主導の業界/思想討議）・必修インターンシップ（提携主要劇場）</td>
+        <td>ドラマトゥルジーが<strong>4年制の独立学科</strong>として存在。「劇場ロビーでの観客との対話」まで演劇教育に統合されている。</td>
+      </tr>
+      <tr>
+        <td><strong>K-Arts（韓国）</strong><br><span style="font-size:10px;color:var(--text-tertiary)">韓国・School of Drama 5学科</span></td>
+        <td>演出科を<strong>「劇作家（dramatist）として演出家を養成」</strong>・毎学期24本の大小公演・<strong>Arts Management 専攻が School of Drama 内に独立</strong>・Musical Theatre Writing Program（大学院3年：劇作・作詞・作曲を統合育成）・英米露欧のメソッドを統合した教員陣</td>
+        <td>Arts Managementが演劇学科の中に専攻として独立。ミュージカル創作を国策として大学院で体系育成。<strong>演出家を「書く人」として養成する発想</strong>が日本と全く異なる。</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!-- 海外にあって日本にない科目リスト -->
+  <div style="font-size:13px;font-weight:700;color:var(--text-primary);margin-bottom:10px">海外にあって日本にない ── 具体的科目名（SEEDのプログラムで補うべき視点）</div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1.5rem;font-size:11.5px">
+    <div style="padding:10px 12px;background:var(--seed-bg);border-radius:10px;border:1px solid #BDD3F8">
+      <div style="font-weight:700;color:var(--seed-text);margin-bottom:6px">業界接続の制度化</div>
+      <div style="color:var(--text-secondary);line-height:1.7">Bridge to the Profession（Yale/Juilliard・年12回・6単位）<br>Actor Presentations（NY&LA 業界人ショーケース）<br>Industry Practice I/II（Yale・業界に自作を持ち込む）<br>Industry Consultant 常駐（Guildhall）<br>Professional Colloquium（NYU・業界人との議論）</div>
+    </div>
+    <div style="padding:10px 12px;background:var(--soil-bg);border-radius:10px;border:1px solid #A8DEC8">
+      <div style="font-weight:700;color:var(--soil-text);margin-bottom:6px">表現・言語化の正式訓練</div>
+      <div style="color:var(--text-secondary);line-height:1.7">Teach What You Write（Yale・自作を教える）<br>Criticism Workshop（Yale・3年間継続執筆）<br>Pitching Ideas（Rose Bruford Directing MA）<br>Business Writing for Theater Managers（Yale）<br>Authentic Collaboration（Yale・協働の言語化）<br>Reflective Practice（RADA/Guildhall・省察の習慣化）</div>
+    </div>
+    <div style="padding:10px 12px;background:var(--director-bg);border-radius:10px;border:1px solid var(--director-border)">
+      <div style="font-weight:700;color:var(--director);margin-bottom:6px">起業・経営・政策</div>
+      <div style="color:var(--text-secondary);line-height:1.7">Essentials of Entrepreneurship（Juilliard・Year 1-2必修）<br>Elements of Producing（Juilliard・俳優も必修）<br>Producing for the Commercial Theater（Yale）<br>Governance / Labor and Employee Relations（Yale）<br>Cultural Policy（Yale）<br>Fundraising / Budgeting（Rose Bruford）</div>
+    </div>
+    <div style="padding:10px 12px;background:var(--playwright-bg);border-radius:10px;border:1px solid var(--playwright-border)">
+      <div style="font-weight:700;color:var(--playwright);margin-bottom:6px">国際フェスティバル参加</div>
+      <div style="color:var(--text-secondary);line-height:1.7">Year 2 必修参加（RADA：META/Gdansk等）<br>European Theatre Arts（Rose Bruford：6ヶ国留学・675名実績）<br>American Theatre Arts（Rose Bruford：米国主要都市）<br>Theater Now NYC（Yale：業界没入リサーチ）</div>
+    </div>
+    <div style="padding:10px 12px;background:var(--bg);border-radius:10px;border:1px solid var(--border)">
+      <div style="font-weight:700;color:var(--text-primary);margin-bottom:6px">3職能横断学習の必修化</div>
+      <div style="color:var(--text-secondary);line-height:1.7">DRAM 50a（Yale：劇作家×演出家×俳優×デザイナー×ドラマトゥルグが3週間協働）<br>New Play Lab（Yale/CMU：全職能でフィードバック）<br>Playwrights & Directors Practicum（Yale）<br>Cross-school "undisciplined"（Guildhall：音楽×演劇×デザイン）</div>
+    </div>
+    <div style="padding:10px 12px;background:var(--bg);border-radius:10px;border:1px solid var(--border)">
+      <div style="font-weight:700;color:var(--text-primary);margin-bottom:6px">映像・TV・多メディア統合</div>
+      <div style="color:var(--text-secondary);line-height:1.7">Episodic Writing I（NYU：TVスペック執筆・劇作家も必修）<br>Writing for Film and Television（Yale Playwriting・必修）<br>Screen Acting / Acting on Camera（RADA・Juilliard・Guildhall）<br>Directing for Camera（Rose Bruford）</div>
+    </div>
+  </div>
+
+  <!-- 表現の力の比較 -->
+  <div style="font-size:13px;font-weight:700;color:var(--text-primary);margin-bottom:10px">「表現の力（話し続ける力）」に対応する海外の具体的な訓練方法</div>
+  <div style="overflow-x:auto">
+  <table class="ge-common-table">
+    <thead>
+      <tr><th>訓練の種類</th><th>海外の具体的科目名</th><th>機関</th><th>SEEDでの対応（UNIT）</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>「なぜ表現するか」の言語化</strong></td><td>Teach What You Write（自作を教えることで言語化）<br>Authentic Collaboration（協働の意図を言語化）<br>Reflective Practice（省察を継続的に書く）</td><td>Yale / RADA / Guildhall</td><td>UNIT E1（自分の文化・作品を5分で語る）</td></tr>
+      <tr><td><strong>業界人の前での語り（live pitch）</strong></td><td>Actor Presentations（NY&LA業界人向けショーケース）<br>Bridge to the Profession（Artistic Leadersへのプロジェクトピッチ）<br>Industry Practice I/II（業界に自作を持ち込む）<br>Pitching Ideas（演出家課程の正式科目）</td><td>Juilliard / Yale / Rose Bruford</td><td>UNIT E2（10分プレゼン・業界のプロの前で=修了基準）</td></tr>
+      <tr><td><strong>批評的言語化の継続</strong></td><td>Criticism Workshop（3年間毎週継続）<br>Dramaturgy Forum（上級生が主導する週次討議）<br>Business Writing for Theater Managers</td><td>Yale / CMU</td><td>企画1（海外演劇誌×英語ディスカッション）での継続</td></tr>
+      <tr><td><strong>声の段階的訓練</strong></td><td>Voice I/II/III（Juilliard・4年間継続）<br>Voice & Speech（RADA・3年間継続）<br>Voice（方言・歌唱・音声メディア統合・Guildhall）</td><td>Juilliard / RADA / Guildhall</td><td>（演出家・劇作家の職能別プログラムで対応）</td></tr>
+      <tr><td><strong>起業家精神・自己設計力</strong></td><td>Essentials of Entrepreneurship（Year 1-2必修）<br>American Theater Landscape（年4の業界構造理解）<br>Founding Visions（創業者ビジョンの言語化）</td><td>Juilliard / Yale</td><td>UNIT K1（市場地図・3シナリオ・自分の立ち位置）→ E1/E2での言語化</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+</div>
+
+</div>
+</div><!-- /#tab-university-analysis -->
+
 <!-- ════ General Education Tab ════ -->
 <div id="tab-general-education" class="tab-content">
 <div class="ge-container">
@@ -1747,10 +1924,16 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
   3職能が「同じ地図を見て・同じ言語で話し続けられる」ようになる共通土台。選考①の範囲に連動し、JPASNの正会員（社会人）も参加可能な設計。
 </div>
 
-<!-- 棲み分け -->
+<!-- 大学分析 参照カード -->
+<div class="soil-intro-card" style="background:var(--seed-bg);border:1px solid #BDD3F8;margin-bottom:1.5rem">
+  <strong>📊 大学教育との差分・海外比較 → タブ③「大学教育に関する分析」で確認</strong><br>
+  国内7校（東演連5校・昭和音大・早稲田）と海外8機関（RADA・Guildhall・Rose Bruford・Yale・Juilliard・CMU・K-Arts）の具体的カリキュラムを科目名付きで比較分析しています。<br>
+  <span style="color:var(--seed-text);font-size:12.5px;font-weight:600">→ 共通のギャップ：「表現の力（sustained oral discourse）」が国内全大学で圧倒的に不足。それを補うのが以下のプログラムです。</span>
+</div>
+
 <div class="ge-section">
-  <div class="ge-section-title">大学教育との差分 ── SEEDの一般教養が補うもの</div>
-  <div style="overflow-x:auto">
+  <div class="ge-section-title">一般教養 vs 職能別プログラム ── 棲み分け原則</div>
+  <div style="display:none">
   <table class="ge-common-table">
     <thead>
       <tr><th>大学・機関</th><th>カバーしていること（確認済）</th><th>不足しているもの（SEEDが補う）</th></tr>
@@ -1818,7 +2001,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
       </div>
     </div>
     <div class="ge-split-card ge-split-right">
-      <div class="ge-split-title">職能別プログラムがカバーすること → タブ④へ</div>
+      <div class="ge-split-title">職能別プログラムがカバーすること → タブ⑤へ</div>
       <div class="ge-split-items">
         HOW（どうやって実現するか・どう売るか）<br>
         各職能固有の技術・スキル・戦略<br>
@@ -1851,9 +2034,10 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
   </div>
 </div>
 
-<!-- 海外詳細比較 -->
+<!-- 海外詳細比較はタブ③に移動済み（このブロックは非表示） -->
+<div style="display:none">
 <div class="ge-section">
-  <div class="ge-section-title">海外の演劇教育との詳細比較 ── 具体的科目名による分析</div>
+  <div class="ge-section-title">海外の演劇教育との詳細比較（タブ③に移動済み）</div>
 
   <!-- 主要海外機関のサマリー -->
   <div style="overflow-x:auto;margin-bottom:1.5rem">
@@ -1953,6 +2137,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
   </div>
 
 </div>
+</div><!-- /.hidden overseas section -->
 
 <!-- 6ユニット -->
 <div class="ge-section">
