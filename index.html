@@ -1604,46 +1604,63 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 <!-- Section 5: シナリオA/B/C' -->
 <div class="soil-section">
   <div class="soil-section-title">⑤ 3つの戦略シナリオ ── SEEDの主軸はA・B・C'</div>
-  <div class="scenario-2col">
+  <div style="display:flex;flex-direction:column;gap:12px">
+
+    <!-- Scenario A -->
     <div class="sc-card main-sc">
       <div class="sc-main-badge">⭐ SEED 主軸シナリオ</div>
       <div class="sc-letter a">A</div>
       <div class="sc-name">トトロパターン ── IP × 国際共同制作</div>
       <div class="sc-desc">既存の有名IPを利用したファミリー向けミュージカルを海外機関と共同開発し市場展開する。壁は日本単独では越えず、<strong>Transfer装置との国際共同制作で迂回・突破する</strong>のが核心。STEP1：IPを活用した北米・英国の文化施設との共同制作。STEP2：IPの集客力と資本力を使って商業市場に接続。</div>
-      <div class="sc-role-row"><span class="sc-role-chip chip-pr">P</span><span class="sc-role-text">海外文化機関ネットワーク・IPホルダー交渉力・国際共同制作マネジメント</span></div>
-      <div class="sc-role-row"><span class="sc-role-chip chip-dr">D</span><span class="sc-role-text">英国・北米の商業演劇文法・IP制約下の創造性・英語稽古場対応</span></div>
-      <div class="sc-role-row"><span class="sc-role-chip chip-pw">PW</span><span class="sc-role-text">IPの翻案力・英訳を前提とした戯曲構造設計</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:10px">
+        <div class="sc-role-row"><span class="sc-role-chip chip-pr">P</span><span class="sc-role-text">海外文化機関ネットワーク・IPホルダー交渉力・国際共同制作マネジメント</span></div>
+        <div class="sc-role-row"><span class="sc-role-chip chip-dr">D</span><span class="sc-role-text">英国・北米の商業演劇文法・IP制約下の創造性・英語稽古場対応</span></div>
+        <div class="sc-role-row"><span class="sc-role-chip chip-pw">PW</span><span class="sc-role-text">IPの翻案力・英訳を前提とした戯曲構造設計</span></div>
+      </div>
+      <div style="padding:8px 12px;background:var(--bg);border-radius:8px;border-left:3px solid var(--urgent-border);font-size:11.5px;color:var(--text-secondary);line-height:1.65">
+        <strong style="color:var(--urgent-text)">⚠ 構造的課題：</strong>「次のトトロができるか」——トトロはジブリ × National Theatreの特殊な信頼関係によって実現した。IPホルダー（アニメ会社・出版社）と海外Transfer装置を繋げるブリッジ人材が日本に存在しない。国際共同制作の資金スキームもなく（文化庁補助金は国内向け）、IPライセンスの国際交渉ができる演劇専門エージェントも存在しない。
+      </div>
     </div>
+
+    <!-- Scenario B -->
     <div class="sc-card main-sc">
       <div class="sc-main-badge">⭐ SEED 主軸シナリオ</div>
       <div class="sc-letter b">B</div>
       <div class="sc-name">ストンプパターン ── ノンバーバル × フリンジTransfer</div>
-      <div class="sc-desc">国内インバウンド観光をテストマーケットにし、海外の観光需要を狙う。STEP1：国内インバウンド向けにノンバーバル作品を開発。STEP2：フリンジフェスに出展。STEP3：世界IP展開。</div>
-      <div class="sc-role-row"><span class="sc-role-chip chip-pr">P</span><span class="sc-role-text">フリンジフェスネットワーク・インバウンド市場理解・ノンバーバル作品のフォーマット設計</span></div>
-      <div class="sc-role-row"><span class="sc-role-chip chip-dr">D</span><span class="sc-role-text">ノンバーバル・身体表現の専門性・観光客向け作品設計</span></div>
-      <div class="sc-role-row"><span class="sc-role-chip chip-pw">PW</span><span class="sc-role-text">ノンバーバル構造設計（devisor的役割）</span></div>
-      <div style="margin-top:10px;padding:8px 10px;background:var(--bg);border-radius:8px;border-left:3px solid var(--soil);font-size:11.5px;color:var(--text-secondary);line-height:1.6">
-        <strong>📌 補足：</strong>国内には既にインバウンド向けパフォーマンス（浅草・京都等の観光特化型）が存在するが、JPASNの直接的な文脈外にある。これらとの連携・接続がシナリオBの展開において重要な視点となる可能性がある。
+      <div class="sc-desc">国内インバウンド観光をテストマーケットにし、海外の観光需要を狙う。STEP1：国内インバウンド向けにノンバーバル作品を開発。STEP2：フリンジフェスに出展。STEP3：世界IP展開。<br>
+        <span style="font-size:11px;color:var(--text-tertiary)">📌 国内には既にインバウンド向けパフォーマンス（浅草・京都等の観光特化型）が存在するが、JPASNの直接的な文脈外にある。これらとの連携・接続がシナリオBの展開において重要な視点となる可能性がある。</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:10px">
+        <div class="sc-role-row"><span class="sc-role-chip chip-pr">P</span><span class="sc-role-text">フリンジフェスネットワーク・インバウンド市場理解・ノンバーバル作品のフォーマット設計</span></div>
+        <div class="sc-role-row"><span class="sc-role-chip chip-dr">D</span><span class="sc-role-text">ノンバーバル・身体表現の専門性・観光客向け作品設計</span></div>
+        <div class="sc-role-row"><span class="sc-role-chip chip-pw">PW</span><span class="sc-role-text">ノンバーバル構造設計（devisor的役割）</span></div>
+      </div>
+      <div style="padding:8px 12px;background:var(--bg);border-radius:8px;border-left:3px solid var(--urgent-border);font-size:11.5px;color:var(--text-secondary);line-height:1.65">
+        <strong style="color:var(--urgent-text)">⚠ 構造的課題：</strong>「国内インバウンドからフリンジTransferへの接続回路がない」——国内に観光向けパフォーマンスは存在するが、それをエジンバラ等のフリンジに持ち込みTransferを設計できる人材・ネットワークがない。STOMPやナンタのような「長期IP化」（30年超の継続展開）を設計・運営できるプロデューサーが育っていない。
       </div>
     </div>
-  </div>
-  <div style="margin-top:12px">
-    <div class="sc-card main-sc" style="border-color:var(--director);background:var(--director-bg)">
-      <div class="sc-main-badge" style="background:var(--director);color:#fff">⭐ SEED 主軸シナリオ（C+D統合）</div>
+
+    <!-- Scenario C' -->
+    <div class="sc-card main-sc">
+      <div class="sc-main-badge">⭐ SEED 主軸シナリオ</div>
       <div class="sc-letter" style="color:var(--director)">C'</div>
-      <div class="sc-name" style="color:var(--director)">国際文脈展開型 ── 固有文脈 × 国際フェスティバル発見</div>
-      <div class="sc-desc" style="color:var(--text-primary)">
-        古典の現代的再解釈（旧シナリオC）と社会的文脈・時代性を持つ現代演劇（旧シナリオD）を統合。両者に共通するのは<strong>「強い日本固有文脈を持つ作品が、国際フェスティバルを経由してTransferする」</strong>という構造。<br><br>
-        <strong>バリエーション例（産経新聞「目に映るのは氷山の一角」より）：</strong><br>
-        ・木ノ下歌舞伎パターン：古典を現代的に再解釈 → 国内評価 → 国際招聘<br>
-        ・チェルフィッチュパターン：社会的文脈の現代演劇 → Kunsten/Avignon等の国際フェス招聘 → 世界展開<br>
-        ・震災・社会テーマ型：日本固有の社会的文脈 → 国際的な文脈での評価 → フェスティバル招聘<br><br>
+      <div class="sc-name">国際文脈展開型 ── 固有文脈 × 国際フェスティバル発見</div>
+      <div class="sc-desc">古典の現代的再解釈と社会的文脈・時代性を持つ現代演劇を統合。両者に共通するのは<strong>「強い日本固有文脈を持つ作品が、国際フェスティバルを経由してTransferする」</strong>という構造。<br>
+        <span style="font-size:11.5px;color:var(--text-secondary)"><strong>バリエーション例（産経新聞「目に映るのは氷山の一角」より）：</strong><br>
+        ・木ノ下歌舞伎型：古典を現代的に再解釈 → 国内評価 → 国際招聘<br>
+        ・チェルフィッチュ型：社会的文脈の現代演劇 → Kunsten/Avignon招聘 → 世界展開<br>
+        ・社会テーマ型：震災等の日本固有の社会的文脈 → 国際的な文脈での評価 → フェスティバル招聘</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:10px">
+        <div class="sc-role-row"><span class="sc-role-chip chip-pr">P</span><span class="sc-role-text">国際フェスティバルキュレーターとのネットワーク・文化外交・公的支援の活用</span></div>
+        <div class="sc-role-row"><span class="sc-role-chip chip-dr">D</span><span class="sc-role-text">社会的文脈・時代性を持つ作品制作／古典文法を理解した現代的解釈</span></div>
+        <div class="sc-role-row"><span class="sc-role-chip chip-pw">PW</span><span class="sc-role-text">日本社会の今を普遍的言語で語る力／伝統様式の現代語翻訳</span></div>
+      </div>
+      <div style="padding:8px 12px;background:var(--bg);border-radius:8px;border-left:3px solid var(--urgent-border);font-size:11.5px;color:var(--text-secondary);line-height:1.65">
         <strong style="color:var(--urgent-text)">⚠ 構造的課題：</strong>「次のチェルフィッチュが作れていない」「プリコグでも作れていない」——属人性が高く、個人の才能と偶然の出会いに依存している。この課題をSEEDが構造化することがC'シナリオのミッション。
       </div>
-      <div class="sc-role-row"><span class="sc-role-chip chip-pr">P</span><span class="sc-role-text">国際フェスティバルキュレーターとのネットワーク・文化外交・公的支援の活用</span></div>
-      <div class="sc-role-row"><span class="sc-role-chip chip-dr">D</span><span class="sc-role-text">社会的文脈・時代性を持つ作品制作／古典文法を理解した現代的解釈</span></div>
-      <div class="sc-role-row"><span class="sc-role-chip chip-pw">PW</span><span class="sc-role-text">日本社会の今を普遍的言語で語る力／伝統様式の現代語翻訳</span></div>
     </div>
+
   </div>
 </div>
 
