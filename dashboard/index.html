@@ -2353,8 +2353,16 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 <div class="rs-container">
 
 <div class="soil-intro-card">
-  <strong>職能別個別要件：</strong>一般教養でカバーされる共通要件を除いた後の、各職能固有の能力・経験・機会の整理。
-  シナリオ <span style="color:var(--seed);font-weight:700">A（トトロ型）</span>・<span style="color:var(--soil);font-weight:700">B（ストンプ型）</span> どちらに対応するかで求められるものが大きく異なる。
+  <strong>⑤ 職能別個別要件：</strong>タブ①〜④の成果を統合した各職能固有の能力・経験・機会の整理。<br>
+  <span style="font-size:12px;color:var(--text-secondary);line-height:1.8">
+  ① SOIL戦略マップ（市場構造・Transfer装置・3シナリオ）→ ② 人材要件ToBeモデル（v5/v2/v3）→ ③ 大学教育との差分（何が不足しているか）→ ④ 一般教養プログラム（共通土台・表現の力）<br>
+  <strong>→ ⑤ここでは「一般教養を前提として、各職能固有で深める必要があるもの」を整理する</strong>
+  </span>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px;font-size:11.5px">
+    <div style="padding:6px 10px;background:var(--seed-bg);border-radius:8px;color:var(--seed-text)"><strong>シナリオA</strong>（トトロ型）：IP × 国際共同制作。壁は単独でなく転生装置との共同制作で越える</div>
+    <div style="padding:6px 10px;background:var(--soil-bg);border-radius:8px;color:var(--soil-text)"><strong>シナリオB</strong>（ストンプ型）：ノンバーバル × フリンジTransfer。インバウンドをテストマーケットに</div>
+    <div style="padding:6px 10px;background:var(--director-bg);border-radius:8px;color:var(--director)"><strong>シナリオC'</strong>（国際文脈展開型）：固有文脈 × 国際フェスティバル発見。次のチェルフィッチュを構造化する</div>
+  </div>
 </div>
 
 <div class="rs-tab-nav">
@@ -2365,130 +2373,187 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 
 <!-- ── プロデューサー ── -->
 <div id="rs-producer" class="rs-content active">
+
   <div class="rs-section">
-    <div class="rs-section-title">固有の能力（一般教養では扱わないもの）</div>
+    <div class="rs-section-title">固有の能力 ── シナリオ別</div>
     <table class="rs-table">
       <thead><tr><th>カテゴリ</th><th>要件</th><th>内容</th><th>シナリオ</th></tr></thead>
       <tbody>
-        <tr><td>スキル</td><td><strong>戦略的市場選択</strong></td><td>「どのシナリオで・どの壁を越えて・どの入口から」進むかを判断する。SOILの4列マトリックスを自プロジェクトに当てはめる力</td><td><span class="rs-sc rs-sc-ab">A・B</span></td></tr>
-        <tr><td>スキル</td><td><strong>転生装置へのアクセス戦略</strong></td><td>NT・Barbican・Public Theatreのキュレーターへのアプローチ実践。Edinburgh・Avignon出展戦略の設計</td><td><span class="rs-sc rs-sc-ab">A・B</span></td></tr>
-        <tr><td>スキル</td><td><strong>IPライセンス交渉の実践</strong></td><td>IPホルダー（出版社・アニメ会社）との権利交渉。ライセンス条件の読み方・交渉進め方・弁護士との連携</td><td><span class="rs-sc rs-sc-a">A</span></td></tr>
-        <tr><td>スキル</td><td><strong>国際共同制作のマネジメント</strong></td><td>文化機関との共同制作スケジュール管理・予算設計・スタッフィング。海外と日本の制作システムの違いをマネジメントに落とし込む</td><td><span class="rs-sc rs-sc-a">A</span></td></tr>
-        <tr><td>スキル</td><td><strong>ノンバーバル作品のフォーマット設計</strong></td><td>再演可能・言語不要・観光向けの作品フォーマット設計。STOMPやナンタが示す「コンテンツIP化」の設計思想</td><td><span class="rs-sc rs-sc-b">B</span></td></tr>
-        <tr><td>スキル</td><td><strong>英語ピッチの実践レベル</strong></td><td>一般教養は「30秒体験」。職能別では実際の交渉・プレゼン・デック作成・フォローアップまで</td><td><span class="rs-sc rs-sc-ab">A・B</span></td></tr>
+        <tr><td>スキル</td><td><strong>Transfer装置へのアクセス戦略</strong></td><td>NT・Barbican・Public Theatreのキュレーターへのアプローチ実践。Edinburgh・Avignon出展戦略の設計。「壁は日本だけで越えようとしない」を実践する</td><td><span class="rs-sc rs-sc-ab">A・B</span></td></tr>
+        <tr><td>スキル</td><td><strong>IPライセンス交渉の実践</strong></td><td>IPホルダー（出版社・アニメ会社）との権利交渉。ライセンス条件の読み方・交渉進め方・弁護士との連携（福井健策弁護士等）</td><td><span class="rs-sc rs-sc-a">A</span></td></tr>
+        <tr><td>スキル</td><td><strong>国際共同制作のマネジメント</strong></td><td>文化機関との共同制作スケジュール管理・予算設計・スタッフィング。日本のプロデューサーが「全部やる」体制から「GM・Company Managerとの分業」へ（海外標準への対応）</td><td><span class="rs-sc rs-sc-a">A</span></td></tr>
+        <tr><td>スキル</td><td><strong>ノンバーバル作品のフォーマット設計</strong></td><td>再演可能・言語不要・観光向けの作品フォーマット設計。STOMPやナンタが示す「コンテンツIP化」の設計思想。インバウンド→フリンジ→世界IPへのスケール戦略</td><td><span class="rs-sc rs-sc-b">B</span></td></tr>
+        <tr><td>スキル</td><td><strong>キュレーターとの長期信頼関係の構築</strong></td><td>「招聘は結果ではなく関係への投資」。国際フェスティバルのキュレーターとの継続的接触・情報共有・作品紹介の積み重ね</td><td><span class="rs-sc" style="background:var(--director-bg);color:var(--director)">C'</span></td></tr>
+        <tr><td>スキル</td><td><strong>文化外交・公的支援の活用</strong></td><td>国際交流基金・British Council・各国文化機関との連携。C'型作品の国際展開には資本だけでなく文化的文脈の担保が必要</td><td><span class="rs-sc" style="background:var(--director-bg);color:var(--director)">C'</span></td></tr>
+        <tr style="background:#FFF9E0"><td>スキル ★NY</td><td><strong>WOM（口コミ）設計力</strong></td><td>「観客が誰かへ話したくなる体験」を設計する力。Jeffrey Richards の4要因（IP・TR・SP・WOM）フレームを自プロジェクトに適用。WTSF（Want To See Factor）を生み出す作品・マーケティング設計</td><td><span class="rs-sc rs-sc-ab">A・B</span></td></tr>
+        <tr style="background:#FFF9E0"><td>スキル ★NY</td><td><strong>マーケティング・Audience Development</strong></td><td>SNS・インフルエンサー・Community Building・Brand Activationの実務。Patrick Catullo：「マーケティングは作品開発と同時に始める。開幕後に考えるものではない」</td><td><span class="rs-sc rs-sc-ab">A・B</span></td></tr>
+        <tr style="background:#FFF9E0"><td>スキル ★NY</td><td><strong>Taste（審美眼）の磨き方</strong></td><td>「どの作品を選び何を届けるか」のセンス。Patrick Catullo：「Tasteこそがプロデューサーに最終的に残る信用」。海外作品・フェスティバルへの継続的視察・観劇が基盤</td><td><span class="rs-sc rs-sc-ab">A・B</span></td></tr>
+        <tr style="background:#FFF9E0"><td>知識 ★NY</td><td><strong>段階的作品開発プロセスの実践</strong></td><td>Reading（5000円）→ 29-hour Workshop → Regional Tryout → Commercial という段階を設計・運営する能力。「完成作品ではなく開発中のIPとして投資を集める」発想への転換</td><td><span class="rs-sc rs-sc-ab">A・B</span></td></tr>
       </tbody>
     </table>
   </div>
+
   <div class="rs-section">
     <div class="rs-section-title">固有の経験・機会</div>
     <div class="rs-opp-grid">
-      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-ab">A・B</div><div class="rs-opp-title">転生装置への実際の訪問</div><div class="rs-opp-desc">NT・Barbican・Edinburgh等への視察。キュレーターとの実際の対話体験</div></div>
-      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-a">A</div><div class="rs-opp-title">IPホルダー交渉ロールプレイ</div><div class="rs-opp-desc">出版社・権利者役との模擬交渉体験。実際の条件・交渉ポイントを使用</div></div>
-      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-a">A</div><div class="rs-opp-title">国際共同制作への参加・見学</div><div class="rs-opp-desc">現在進行中の日英・日韓・日米共同制作プロジェクトへの同行・観察</div></div>
-      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-ab">A・B</div><div class="rs-opp-title">ビジネスプラン作成演習</div><div class="rs-opp-desc">シナリオA or Bを想定した実際のプロジェクトプランを作成し、先輩プロデューサー・アドバイザーにプレゼン</div></div>
-      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-b">B</div><div class="rs-opp-title">Edinburgh・Avignon参加ツアー</div><div class="rs-opp-desc">転生装置の人たちと出会う「場に出る」体験（将来的な設計として）</div></div>
-      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-ab">A・B</div><div class="rs-opp-title">メンターとの1on1</div><div class="rs-opp-desc">東宝・ホリプロ・ゴーチ（確定済み）のリサーチャーメンターとのセッション</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-ab">A・B</div><div class="rs-opp-title">Transfer装置への実際の訪問・対話</div><div class="rs-opp-desc">NT・Barbican・Edinburgh等への視察。キュレーターとの対話体験。「場に出ること」が最大の学び（単なる観劇ではなく関係構築の場）</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-a">A</div><div class="rs-opp-title">IPホルダー交渉ロールプレイ</div><div class="rs-opp-desc">出版社・権利者役との模擬交渉体験。実際のライセンス条件・交渉ポイントを使用。「次のトトロを作るための前提条件」を体感する</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-a">A</div><div class="rs-opp-title">国際共同制作への参加・見学</div><div class="rs-opp-desc">現在進行中の日英・日韓・日米共同制作プロジェクトへの同行・観察。GM・Company Managerとの分業の実態を現場で学ぶ</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-ab">A・B</div><div class="rs-opp-title">3シナリオ別プロジェクトプラン作成</div><div class="rs-opp-desc">A/B/C'から1つを選んで実際のプロジェクトプランを作成し、松田誠・渡辺ミキ等のアドバイザーにプレゼン。「10分でビジネスを語る」の実践版</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag" style="background:var(--director-bg);color:var(--director)">C'</div><div class="rs-opp-title">国際フェスティバルキュレーターとの接触</div><div class="rs-opp-desc">Kunsten・Theatertreffen・Avignonのキュレーターとの接点機会（招聘の仕組み・彼らが何を求めているかを直接聞く）</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-ab">A・B</div><div class="rs-opp-title">メンターとの継続1on1</div><div class="rs-opp-desc">東宝（小嶋麻倫子）・ホリプロ（井川荃芬）・ゴーチ（時田曜子）の確定済みメンターとのセッション。「自分のプロジェクトを育てる伴走者」として</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-ab">A・B</div><div class="rs-opp-title">Paid インターン（3〜5プロダクション）</div><div class="rs-opp-desc">毛色の違う3〜5プロダクションでのインターン。「GM分業がない日本の制作現場」と「海外水準の分業体制」の両方を体験・比較する</div></div>
     </div>
   </div>
+
+  <div class="rs-section">
+    <div class="rs-section-title">大学教育では得られない（タブ③からの示唆）</div>
+    <div class="rs-curriculum">
+      ✗ <strong>GM専門職との分業体験</strong>：日本の演劇大学にはGM専門教育がない。プロデューサーが「全部やる」体制を経験した後に、分業の何が違うかを学ぶ機会が必要<br>
+      ✗ <strong>Development Funding の設計</strong>：Reading → Workshop への民間投資をどう集めるか。Yaleのように「商業演劇プロデュース」を専門科目で学べる場が日本にない<br>
+      ✗ <strong>Bridge to the Profession 相当</strong>：Juilliard・Yaleでは「Artistic LeadersやAgentsへのピッチ」が年12回・6単位の正式科目。日本ではこの構造化がない<br>
+      ✗ <strong>Essentials of Entrepreneurship</strong>：Juilliardでは俳優も必修。「自分のキャリアを事業として設計する」視点が日本の演劇教育に欠けている
+    </div>
+  </div>
+
   <div class="rs-section">
     <div class="rs-section-title">カリキュラム設計のポイント</div>
     <div class="rs-curriculum">
-      <strong>座学フェーズ：</strong>IPライセンス実務（福井健策弁護士等）/ 国際共同制作の設計事例（トトロ・デスノート等の経緯）/ シナリオ別プロデュース戦略の立案<br>
-      <strong>実践フェーズ：</strong>IPホルダー交渉ロールプレイ / 転生装置へのピッチ練習 / プロジェクトプランのメンタリング（アドバイザーとの面談）<br>
-      <strong>機会設計：</strong>フェスティバル・文化機関への視察ツアー / インターン先3〜5プロダクション
+      <strong>座学フェーズ：</strong>IPライセンス実務（福井健策弁護士）/ GM・分業システムの実態講義 / 国際共同制作の設計事例（トトロ・デスノート等の経緯詳細） / シナリオA/B/C'別プロデュース戦略の立案<br>
+      <strong>実践フェーズ：</strong>IPホルダー交渉ロールプレイ / Transfer装置へのピッチ練習（英語・日本語） / プロジェクトプランのメンタリング（アドバイザーとの面談）/ WOM・マーケティングプラン作成<br>
+      <strong>機会設計：</strong>Edinburgh・Kunsten等への視察ツアー / Paid インターン3〜5プロダクション / 国際フェスティバルキュレーターとの接触機会（C'向け）
     </div>
   </div>
 </div>
 
 <!-- ── 演出家 ── -->
 <div id="rs-director" class="rs-content">
+
   <div class="rs-section">
-    <div class="rs-section-title">固有の能力（一般教養では扱わないもの）</div>
+    <div class="rs-section-title">固有の能力 ── シナリオ別</div>
     <table class="rs-table">
       <thead><tr><th>カテゴリ</th><th>要件</th><th>内容</th><th>シナリオ</th></tr></thead>
       <tbody>
-        <tr><td>知識</td><td><strong>英国・北米商業演劇のシステムと文法</strong></td><td>ウエストエンド・ブロードウェイの制作システム（リハーサル期間・スタッフ構成・Union・慣習等）。「商業演劇で演出家に何が求められるか」の理解</td><td><span class="rs-sc rs-sc-a">A</span></td></tr>
-        <tr><td>知識</td><td><strong>フィジカルシアター・ノンバーバルの理論と系譜</strong></td><td>Pina Bausch・DV8・Frantic Assembly・Akram Khan等の作品と思想の深掘り。「なぜ言語なしで感情が成立するか」の理論</td><td><span class="rs-sc rs-sc-b">B</span></td></tr>
-        <tr><td>スキル</td><td><strong>ノンバーバル演出技術の実践</strong></td><td>身体・空間・リズム・沈黙・繰り返しのみで意味と感情を作る演出技術。言語に依存しない稽古場コミュニケーション</td><td><span class="rs-sc rs-sc-b">B</span></td></tr>
-        <tr><td>スキル</td><td><strong>IP制約下での創造性の発揮</strong></td><td>IPの世界観・キャラクター・既存イメージを守りながら、現地観客が自分を投影できる作品に仕上げる演出力</td><td><span class="rs-sc rs-sc-a">A</span></td></tr>
-        <tr><td>スキル</td><td><strong>異言語環境での稽古場マネジメント</strong></td><td>英語・通訳を介した稽古場の進行管理。言葉に頼らない演出指示（感情・イメージ・身体で伝える）</td><td><span class="rs-sc rs-sc-ab">A・B</span></td></tr>
-        <tr><td>スキル</td><td><strong>フリンジ規模での演出設計</strong></td><td>低予算・短期公演・小空間での演出の最適化。「小さいからこそ光る作品」の設計</td><td><span class="rs-sc rs-sc-b">B</span></td></tr>
+        <tr><td>知識</td><td><strong>英国・北米商業演劇のシステムと文法</strong></td><td>ウエストエンド・ブロードウェイの制作システム（リハーサル期間・スタッフ構成・Union・慣習等）。「商業演劇で演出家に何が求められるか」。RADAのようにDramaturgyを実践として学ぶ</td><td><span class="rs-sc rs-sc-a">A</span></td></tr>
+        <tr><td>知識</td><td><strong>フィジカルシアター・ノンバーバルの理論と系譜</strong></td><td>Pina Bausch・DV8・Frantic Assembly・Akram Khan等の作品と思想の深掘り。「なぜ言語なしで感情が成立するか」の理論。Rose Bruford MA Directingのようにこれが専門科目</td><td><span class="rs-sc rs-sc-b">B</span></td></tr>
+        <tr><td>スキル</td><td><strong>ノンバーバル演出技術の実践</strong></td><td>身体・空間・リズム・沈黙・繰り返しのみで意味と感情を作る演出技術。言語に依存しない稽古場コミュニケーション。DV8・Frantic Assemblyのメソッドを体験的に学ぶ</td><td><span class="rs-sc rs-sc-b">B</span></td></tr>
+        <tr><td>スキル</td><td><strong>IP制約下での創造性の発揮</strong></td><td>IPの世界観・キャラクター・既存イメージを守りながら現地観客が自分を投影できる作品に仕上げる演出力。「制約の中でどう創造するか」がシナリオAの演出家の核心</td><td><span class="rs-sc rs-sc-a">A</span></td></tr>
+        <tr><td>スキル</td><td><strong>異言語環境での稽古場マネジメント</strong></td><td>英語・通訳を介した稽古場の進行管理。言葉に頼らない演出指示（感情・イメージ・身体で伝える）。John Landau：「他言語での演出が逆に演出感度を上げる」</td><td><span class="rs-sc rs-sc-ab">A・B</span></td></tr>
+        <tr><td>スキル</td><td><strong>社会的文脈・時代性を舞台上で体現する演出技術</strong></td><td>「強い日本固有文脈を持つ作品」を国際フェスティバルが評価する形で立体化する技術。「社会性と普遍性の両立」がC'演出家の核心スキル</td><td><span class="rs-sc" style="background:var(--director-bg);color:var(--director)">C'</span></td></tr>
+        <tr><td>スキル</td><td><strong>古典文法を理解した上での現代的再解釈</strong></td><td>能・歌舞伎・古典戯曲の構造を深く理解し、それを現代文脈に翻訳する演出術。木ノ下歌舞伎・宮城聰が体現するアプローチの習得</td><td><span class="rs-sc" style="background:var(--director-bg);color:var(--director)">C'</span></td></tr>
+        <tr><td>スキル</td><td><strong>フリンジ規模での演出設計</strong></td><td>低予算・短期公演・小空間での演出の最適化。「小さいからこそ光る作品」の設計。Edinburgh型フリンジで評価されるための規模感と密度の設計</td><td><span class="rs-sc rs-sc-b">B</span></td></tr>
       </tbody>
     </table>
   </div>
+
   <div class="rs-section">
     <div class="rs-section-title">固有の経験・機会</div>
     <div class="rs-opp-grid">
-      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-b">B</div><div class="rs-opp-title">フィジカルシアター集中WS</div><div class="rs-opp-desc">DV8・Frantic Assembly等のメソッドを体験できる国内外のWSへの参加</div></div>
-      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-ab">A・B</div><div class="rs-opp-title">実際に演出する場の確保</div><div class="rs-opp-desc">劇作家が書いた短編・devised作品を実際に演出する体験（サマースクール内2〜3日の集中演出実習）</div></div>
-      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-a">A</div><div class="rs-opp-title">異言語環境での演出体験</div><div class="rs-opp-desc">英語話者（留学生・在日外国人俳優等）との稽古場体験。通訳を介した演出の実践</div></div>
-      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-ab">A・B</div><div class="rs-opp-title">優秀な演出家のアシスタント機会</div><div class="rs-opp-desc">サマースクールゲスト演出家への質疑・観察。長期的なアシスタント制度への接続</div></div>
-      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-ab">A・B</div><div class="rs-opp-title">作品ビジョンプレゼン（英語）</div><div class="rs-opp-desc">自分が演出したい作品のビジョンを英語でキュレーター・プロデューサーに説明する体験</div></div>
-      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-ab">A・B</div><div class="rs-opp-title">Paidインターン</div><div class="rs-opp-desc">埼玉芸術劇場・世田谷PT等（交渉中）。毛色の違う3〜5プロダクションで1日からでも可</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-b">B</div><div class="rs-opp-title">フィジカルシアター集中WS</div><div class="rs-opp-desc">DV8・Frantic Assembly等のメソッドを体験できる国内外WSへの参加。「日本の身体感覚がシナリオBの武器になる」という視点で参加</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-ab">A・B</div><div class="rs-opp-title">実際に演出する場の確保（必須）</div><div class="rs-opp-desc">劇作家が書いた短編・devised作品を実際に演出する体験。Bartlett Sher：「空き倉庫でいい、まず作れ」。サマースクール内2〜3日の集中演出実習</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-a">A</div><div class="rs-opp-title">異言語環境での演出実習</div><div class="rs-opp-desc">英語話者（留学生・在日外国人俳優等）との稽古場体験。通訳を介した演出の実践。「言葉に頼れない環境が演出感度を上げる」を体験</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-ab">A・B</div><div class="rs-opp-title">優秀な演出家のアシスタント</div><div class="rs-opp-desc">John Landau：「24人の演出家のアシスタントを経験した」。国内主要演出家への観察・補佐機会。Paid インターン（埼玉芸術劇場・世田谷PT等・交渉中）</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag" style="background:var(--director-bg);color:var(--director)">C'</div><div class="rs-opp-title">国際フェスティバルへの出展・参加体験</div><div class="rs-opp-desc">Edinburgh Fringe等への出展、またはAPAF（東京）での国際キュレーターとの接触。「フリンジで発見されるための説明力」を実際の場で試す</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-ab">A・B</div><div class="rs-opp-title">作品ビジョンプレゼン（英語）</div><div class="rs-opp-desc">自分が演出したい作品のビジョンを英語でキュレーター・プロデューサーに説明する体験。UNIT E2の修了基準と連動する職能特化版</div></div>
     </div>
   </div>
+
+  <div class="rs-section">
+    <div class="rs-section-title">大学教育では得られない（タブ③からの示唆）</div>
+    <div class="rs-curriculum">
+      ✗ <strong>アシスタント・アソシエートディレクター制度</strong>：Yaleはアシスタント経験が正式カリキュラム（Bridge to the Profession）に組み込まれている。日本では師弟関係が非公式<br>
+      ✗ <strong>Out-of-town Tryout文化</strong>：Regional Theaterで本格的に演出をテストし修正する場が日本にない（東京一極集中）。失敗できる場の欠如<br>
+      ✗ <strong>フィジカルシアター専門WS・スクール</strong>：DV8・Frantic Assembly等が運営する専門教育機関が日本にない。シナリオBの核心スキルを学ぶ場の不足<br>
+      ✗ <strong>演出家専門MFA（Juilliard・Yale・CSSD相当）</strong>：実務家が教える演出家専門大学院が日本にない。「メンターとの出会いを制度化する」仕組みの欠如
+    </div>
+  </div>
+
   <div class="rs-section">
     <div class="rs-section-title">カリキュラム設計のポイント</div>
     <div class="rs-curriculum">
-      <strong>シナリオA向け：</strong>商業演劇文法の講義（英国・北米の制作システム解説）/ 戯曲精読・立体化ワーク / 異言語環境での演出実習<br>
-      <strong>シナリオB向け：</strong>フィジカルシアターのメソッド体験WS / ノンバーバル作品の短期演出実習（声なしの制約） / フリンジ向け規模感の演出設計演習<br>
-      <strong>共通：</strong>演出家同士のディスカッション（シナリオ選択の対話）/ メンター演出家との1on1（アドバイザリーボードを活用）
+      <strong>シナリオA向け：</strong>商業演劇文法の講義（英国・北米の制作システム・Union・Dramaturgy） / 戯曲精読・立体化ワーク（3職種視点で読む） / 異言語環境での演出実習（英語俳優との稽古場）<br>
+      <strong>シナリオB向け：</strong>フィジカルシアターのメソッド体験WS / ノンバーバル作品の短期演出実習（声なし・テキストなしの制約） / Edinburgh型フリンジ向け規模感の演出設計演習<br>
+      <strong>シナリオC'向け：</strong>日本の古典・伝統芸能の「演出家の目」での深読み / 社会的文脈作品の分析（チェルフィッチュ・宮城聰等） / 国際フェスティバルのキュレーター視点とは何か<br>
+      <strong>共通：</strong>演出家同士のシナリオ選択対話 / メンター演出家との1on1（アドバイザリーボード活用） / 実際に演出する場の確保（必須）
     </div>
   </div>
 </div>
 
 <!-- ── 劇作家 ── -->
 <div id="rs-playwright" class="rs-content">
+
   <div class="rs-section">
-    <div class="rs-section-title">固有の能力（一般教養では扱わないもの）</div>
+    <div class="rs-section-title">固有の能力 ── シナリオ別</div>
     <table class="rs-table">
       <thead><tr><th>カテゴリ</th><th>要件</th><th>内容</th><th>シナリオ</th></tr></thead>
       <tbody>
-        <tr><td>スキル</td><td><strong>翻案・アダプテーションの実践技術</strong></td><td>原作の「魂」を守りながら現地観客に届く形に変換する技術。原作分析→エッセンス抽出→現代・他文化文脈への移植のプロセス</td><td><span class="rs-sc rs-sc-a">A</span></td></tr>
-        <tr><td>スキル</td><td><strong>英訳を前提とした戯曲の書き方</strong></td><td>翻訳されることを意識した文体設計：センテンスの長さ・文化特有の慣用表現の最小化・感情の直接的表現。「翻訳可能な戯曲」を書く訓練</td><td><span class="rs-sc rs-sc-a">A</span></td></tr>
-        <tr><td>スキル</td><td><strong>自作をIPとして設計する視点</strong></td><td>「一回上演して終わり」でなく、英訳→国際リーディング→再演→海外上演のチェーンを見越した設計。続編可能性・キャラクターのIP強度も意識</td><td><span class="rs-sc rs-sc-a">A</span></td></tr>
-        <tr><td>スキル</td><td><strong>ノンバーバル作品の構造設計（devising）</strong></td><td>テキストなしに時間・空間・繰り返し・身体で物語を構造化する技術。演出家・俳優と共同でdeviseするプロセスへの参加</td><td><span class="rs-sc rs-sc-b">B</span></td></tr>
-        <tr><td>スキル</td><td><strong>集中的な反復執筆練習</strong></td><td>毎週1本のシーン作成（ソン・ギウン方式）。短い単位からの積み上げによる戯曲技術の習得。毎日書く習慣の体内化</td><td><span class="rs-sc rs-sc-ab">A・B</span></td></tr>
-        <tr><td>スキル</td><td><strong>国際リーディングへの対応</strong></td><td>英語話者の俳優に戯曲を読んでもらう体験の準備・対話・フィードバック受け取り</td><td><span class="rs-sc rs-sc-a">A</span></td></tr>
+        <tr><td>スキル</td><td><strong>翻案・アダプテーションの実践技術</strong></td><td>原作の「魂」を守りながら現地観客に届く形に変換する技術。原作分析→エッセンス抽出→現代・他文化文脈への移植のプロセス。フランシス・ターンリー（ロンドン）：「アダプテーションも劇作家の重要な仕事」</td><td><span class="rs-sc rs-sc-a">A</span></td></tr>
+        <tr><td>スキル</td><td><strong>英訳を前提とした戯曲の書き方</strong></td><td>翻訳されることを意識した文体設計：センテンスの長さ・文化特有の慣用表現の最小化・感情の直接的表現。阿部のぞみ：「翻訳があれば戯曲を読んでもらえる。上演したいという依頼が来る」</td><td><span class="rs-sc rs-sc-a">A</span></td></tr>
+        <tr><td>スキル</td><td><strong>自作をIPとして設計する視点</strong></td><td>「一回上演して終わり」でなく、英訳→国際リーディング→再演→海外上演のチェーンを見越した設計。IPの強度・続編可能性・キャラクターの普遍性まで意識して書く</td><td><span class="rs-sc rs-sc-a">A</span></td></tr>
+        <tr><td>スキル</td><td><strong>自社会を普遍的言語に昇華する技術</strong></td><td>「なぜ今・なぜここで」を世界に向けて語る力。日本の社会・歴史・文化的コンテクストを、国際観客が「自分の話」として受け取れる形に変換する劇作技術</td><td><span class="rs-sc" style="background:var(--director-bg);color:var(--director)">C'</span></td></tr>
+        <tr><td>スキル</td><td><strong>伝統様式・古典を現代語に翻訳する劇作技術</strong></td><td>能・歌舞伎・狂言等の伝統劇の構造を理解し、現代の観客・現代の文脈に「翻訳」する劇作の技。木ノ下歌舞伎が体現するアプローチ</td><td><span class="rs-sc" style="background:var(--director-bg);color:var(--director)">C'</span></td></tr>
+        <tr><td>スキル</td><td><strong>ノンバーバル作品の構造設計（devising）</strong></td><td>テキストなしに時間・空間・繰り返し・身体で物語を構造化する技術。演出家・俳優と共同でdeviseするプロセスへの参加。「書く」から「設計する」への発想転換</td><td><span class="rs-sc rs-sc-b">B</span></td></tr>
+        <tr><td>スキル</td><td><strong>集中的な反復執筆練習</strong></td><td>毎週1本のシーン作成（ソン・ギウン方式）。短い単位からの積み上げによる戯曲技術の習得。毎日書く習慣の体内化（ドン・マクキャンフィル：「毎日書くこと。つまらなくていい」）</td><td><span class="rs-sc rs-sc-ab">A・B</span></td></tr>
+        <tr style="background:#FFF9E0"><td>スキル ★NY</td><td><strong>ミュージカル楽曲の構造設計</strong></td><td>Introduction→Lift→Bridge（Shift）→Last Momentの4段階構造。David Hein：「歌い始めと歌い終えでキャラクターが変化していること」。「なぜここで歌うのか（stakes）」の設計が核心</td><td><span class="rs-sc rs-sc-a">A</span></td></tr>
+        <tr style="background:#FFF9E0"><td>スキル ★NY</td><td><strong>Thematic writing</strong></td><td>モチーフ・テーマが全体を通じて機能する設計。Crystal Monee Hall：「Nothing is random, nothing is wasted」。2時間15分の中で観客と記憶を共有するthematic undercurrentの設計</td><td><span class="rs-sc rs-sc-a">A</span></td></tr>
+        <tr style="background:#FFF9E0"><td>知識 ★NY</td><td><strong>Composer/Orchestrator/Vocal Arranger分業の理解</strong></td><td>Composerはメロディ・歌詞・キャラクター・感情に集中。Orchestratorはサウンド構築を担う。Crystal：「You can't write it like me, but I can't arrange it like you」。信頼して委ねることが創作の豊かさ</td><td><span class="rs-sc rs-sc-a">A</span></td></tr>
       </tbody>
     </table>
   </div>
+
   <div class="rs-section">
     <div class="rs-section-title">固有の経験・機会</div>
     <div class="rs-opp-grid">
-      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-a">A</div><div class="rs-opp-title">翻案ワーク（IPを戯曲化する実習）</div><div class="rs-opp-desc">日本の文学・アニメ・民話等を素材に短編翻案作品を実際に書く体験。演出家・俳優と上演まで進める</div></div>
-      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-a">A</div><div class="rs-opp-title">国際リーディング体験</div><div class="rs-opp-desc">書いた作品を英語話者の俳優に読んでもらい、反応・フィードバックを受け取る（プレ授業で実施）</div></div>
-      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-ab">A・B</div><div class="rs-opp-title">毎日書き続ける習慣定着</div><div class="rs-opp-desc">サマースクール期間中、毎日短いシーンを書く。「とにかく書く習慣」の体内化（ドン・マクキャンフィル方式）</div></div>
-      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-b">B</div><div class="rs-opp-title">devising（共同創作）体験</div><div class="rs-opp-desc">演出家・俳優と共にテキストなし or 最小限の短編作品を共同開発する体験</div></div>
-      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-a">A</div><div class="rs-opp-title">ドラマターグとの対話機会</div><div class="rs-opp-desc">書いた作品についてドラマターグ（ゲスト講師）からフィードバックを受ける1on1セッション</div></div>
-      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-ab">A・B</div><div class="rs-opp-title">劇作家コミュニティの形成</div><div class="rs-opp-desc">同期の劇作家との作品共有・ディスカッション習慣の形成（ARKOモデル：孤独に書かない）</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-a">A</div><div class="rs-opp-title">翻案ワーク集中実習</div><div class="rs-opp-desc">日本の文学・アニメ・民話・古典等を素材に短編翻案作品を実際に書く体験。演出家・俳優と上演まで進める。「IPを戯曲化する」プロセスを体内化</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-a">A</div><div class="rs-opp-title">国際リーディング体験（プレ授業で実施）</div><div class="rs-opp-desc">書いた作品を英語話者の俳優に読んでもらい反応・フィードバックを受け取る。阿部のぞみ：「外国語で自作が演じられる体験が海外進出のイメージを広げる」</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-ab">A・B</div><div class="rs-opp-title">毎日書き続ける習慣定着（全期間）</div><div class="rs-opp-desc">サマースクール期間中、毎日短いシーンを書く。「とにかく書く習慣」の体内化。Yale Playwriting のように「Writing Lab」として制度化する</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-b">B</div><div class="rs-opp-title">devising（共同創作）体験</div><div class="rs-opp-desc">演出家・俳優と共にテキストなし or 最小限の短編作品を共同開発する体験。「劇作家がdeviserになる」感覚を体験的に習得</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag" style="background:var(--director-bg);color:var(--director)">C'</div><div class="rs-opp-title">社会的文脈作品のリーディング・分析</div><div class="rs-opp-desc">チェルフィッチュ・宮城聰等のC'型作品の戯曲を読み、「何が国際評価を生んだか」を劇作家の視点で解析する。自分の「固有文脈」を発見するきっかけ</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-a">A</div><div class="rs-opp-title">ドラマターグとの対話機会</div><div class="rs-opp-desc">書いた作品についてドラマターグ（ゲスト講師）からフィードバックを受ける1on1セッション。「守られながら育つ」ARKOモデルの実践版</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-ab">A・B</div><div class="rs-opp-title">劇作家コミュニティの形成</div><div class="rs-opp-desc">同期の劇作家との作品共有・ディスカッション習慣の形成（ARKOモデル：孤独に書かない）。CMU Dramaturgy Forumのような横のつながりを作る</div></div>
     </div>
   </div>
+
+  <div class="rs-section">
+    <div class="rs-section-title">大学教育では得られない（タブ③からの示唆）</div>
+    <div class="rs-curriculum">
+      ✗ <strong>Dramaturg（ドラマターグ）専門職との継続的関係</strong>：RADAはBA Actingに必修。Yaleは独立MFA専攻。日本では劇作家の作品に伴走する専門職が制度的に存在しない<br>
+      ✗ <strong>Playwright Residency（劇場居住制度）</strong>：Royal Court・Bush Theatreが設ける「作家が劇場に住む」制度が日本にない。デビュー後のpathwayが整備されていない<br>
+      ✗ <strong>29-hour Reading / Workshop 文化</strong>：書き直しを前提とした段階的開発プロセスが日本に存在しない。「完成作品を上演する」から「育てながら上演する」文化への転換が必要<br>
+      ✗ <strong>戯曲の英訳・出版・アーカイブ支援</strong>：Out of the Wings（英）のような戯曲翻訳・普及機関が日本にない。英訳→国際リーディング→次の上演の連鎖が生まれない
+    </div>
+  </div>
+
   <div class="rs-section">
     <div class="rs-section-title">カリキュラム設計のポイント</div>
     <div class="rs-curriculum">
-      <strong>シナリオA向け：</strong>翻案ワーク集中実習（素材選定→分析→執筆→発表）/ 「英訳を前提とした書き方」ワーク / 国際リーディング体験（英語俳優との対話）<br>
-      <strong>シナリオB向け：</strong>devising参加体験（演出家・俳優との共同創作）/ ノンバーバル構造設計の入門ワーク<br>
-      <strong>共通：</strong>毎日書く習慣の集中実習（サマースクール全期間）/ 劇作家コミュニティの形成（同期との作品共有）/ メンター・ドラマターグとの1on1 / プレ授業（前川知大・鹿目由紀等）
+      <strong>シナリオA向け：</strong>翻案ワーク集中実習（素材選定→分析→執筆→発表） / 「英訳を前提とした書き方」ワーク / 国際リーディング体験（英語俳優との対話） / ミュージカル楽曲構造の入門（Bridge=Shiftの体験）<br>
+      <strong>シナリオB向け：</strong>devising参加体験（演出家・俳優との共同創作） / ノンバーバル構造設計の入門ワーク（テキストなしで物語を作る）<br>
+      <strong>シナリオC'向け：</strong>自分の「固有文脈」発見ワーク / 社会的テーマ・時代性を劇作に落とし込む訓練 / C'型作品（チェルフィッチュ等）の戯曲分析<br>
+      <strong>共通：</strong>毎日書く習慣の集中実習（サマースクール全期間） / 劇作家コミュニティの形成（同期との作品共有） / ドラマターグ・メンターとの1on1 / プレ授業（前川知大・鹿目由紀等）
     </div>
   </div>
 </div>
 
 <!-- 機会マトリックス -->
 <div class="rs-section" style="margin-top:2rem">
-  <div class="rs-section-title">3職種共通の「機会設計」サマリー</div>
+  <div class="rs-section-title">3職種共通の「機会設計」サマリー ── ①〜④と⑤の接続</div>
   <table class="rs-table">
-    <thead><tr><th>機会</th><th style="text-align:center">P</th><th style="text-align:center">D</th><th style="text-align:center">PW</th><th>どこで提供</th></tr></thead>
+    <thead><tr><th>機会・能力</th><th style="text-align:center">P</th><th style="text-align:center">D</th><th style="text-align:center">PW</th><th>どこで提供するか</th></tr></thead>
     <tbody>
-      <tr><td>転生装置の概念理解</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td>→ 一般教養 UNIT 1-B</td></tr>
-      <tr><td>転生装置への実際のアクセス</td><td style="text-align:center">◎</td><td style="text-align:center">○</td><td style="text-align:center">○</td><td>→ プロデューサー職能別</td></tr>
-      <tr><td>英語ピッチ基礎体験</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td>→ 一般教養 UNIT 3-A</td></tr>
-      <tr><td>英語ピッチの実践・深化</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td style="text-align:center">○</td><td>→ 各職能別</td></tr>
-      <tr><td>日本文化の言語化</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td>→ 一般教養 UNIT 2-C</td></tr>
-      <tr><td>3職種混合での協働体験</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td>→ 一般教養 UNIT 3-B</td></tr>
-      <tr><td>IP・翻案の実践</td><td style="text-align:center">◎</td><td style="text-align:center">○</td><td style="text-align:center">◎</td><td>→ 各職能別</td></tr>
-      <tr><td>ノンバーバル演出・devising</td><td style="text-align:center">○</td><td style="text-align:center">◎</td><td style="text-align:center">○</td><td>→ 演出家/劇作家職能別</td></tr>
-      <tr><td>メンターとの継続関係</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td>→ 各職能別（全期間）</td></tr>
+      <tr><td>市場地図・Transfer装置・3シナリオの理解</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td>→ ④一般教養 UNIT K1</td></tr>
+      <tr><td>Transfer装置への実際のアクセス</td><td style="text-align:center">◎</td><td style="text-align:center">○</td><td style="text-align:center">○</td><td>→ ⑤プロデューサー職能別</td></tr>
+      <tr><td>大学教育との差分の認識</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td>→ ③大学教育に関する分析</td></tr>
+      <tr><td>表現の力（5分ピッチ）</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td>→ ④一般教養 UNIT E1</td></tr>
+      <tr><td>表現の力（10分プレゼン＝修了基準）</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td>→ ④一般教養 UNIT E2</td></tr>
+      <tr><td>英語ピッチの実践・深化（職能特化）</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td style="text-align:center">○</td><td>→ ⑤各職能別（シナリオ対応）</td></tr>
+      <tr><td>日本文化の言語化</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td>→ ④一般教養 UNIT E1（基礎）＋⑤各職能別（深化）</td></tr>
+      <tr><td>3職種混合での協働体験</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td>→ ④一般教養 UNIT E2（グループワーク）</td></tr>
+      <tr><td>IP・翻案の実践</td><td style="text-align:center">◎</td><td style="text-align:center">○</td><td style="text-align:center">◎</td><td>→ ⑤プロデューサー・劇作家職能別（シナリオA）</td></tr>
+      <tr><td>ノンバーバル演出・devising</td><td style="text-align:center">○</td><td style="text-align:center">◎</td><td style="text-align:center">○</td><td>→ ⑤演出家・劇作家職能別（シナリオB）</td></tr>
+      <tr><td>C'型作品の理解・分析</td><td style="text-align:center">○</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td>→ ④一般教養 UNIT K2（事例解剖）＋⑤D/PW職能別（シナリオC'）</td></tr>
+      <tr><td>メンターとの継続関係</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td>→ ⑤各職能別（全期間を通じて）</td></tr>
+      <tr><td>インターン・業界接続</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td style="text-align:center">○</td><td>→ ⑤プロデューサー（Paid 3〜5P）・演出家（埼玉/世田谷PT等）</td></tr>
     </tbody>
   </table>
 </div>
