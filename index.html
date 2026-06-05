@@ -141,6 +141,28 @@ body {
 
 /* ── HR Requirements ── */
 .hr-container { max-width: 1100px; margin: 0 auto; }
+/* ── Scenario ToBe Cards ── */
+.sc-tobe-grid{display:flex;flex-direction:column;gap:14px;margin-bottom:1.5rem}
+.sc-tobe-card{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;padding:1.25rem}
+.sc-tobe-card.sc-tobe-a{border-left:5px solid var(--seed)}
+.sc-tobe-card.sc-tobe-b{border-left:5px solid var(--soil)}
+.sc-tobe-card.sc-tobe-c{border-left:5px solid var(--director)}
+.sc-tobe-sc-badge{font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;display:inline-block;margin-bottom:8px}
+.sc-tobe-sc-badge-a{background:var(--seed-bg);color:var(--seed-text)}
+.sc-tobe-sc-badge-b{background:var(--soil-bg);color:var(--soil-text)}
+.sc-tobe-sc-badge-c{background:var(--director-bg);color:var(--director)}
+.sc-tobe-statement{font-size:15px;font-weight:700;color:var(--text-primary);margin-bottom:12px;line-height:1.5;padding:10px;background:var(--bg);border-radius:8px}
+.sc-tobe-body{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.sc-tobe-reqs-title,.sc-tobe-rm-title{font-size:10px;font-weight:700;color:var(--text-tertiary);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px}
+.sc-tobe-req-item{font-size:12px;color:var(--text-secondary);padding:4px 0;border-bottom:1px solid var(--bg);line-height:1.5}
+.sc-tobe-req-item:last-child{border-bottom:none}
+.sc-tobe-req-item strong{color:var(--text-primary);font-size:12.5px}
+.sc-tobe-rm-item{padding:6px 10px;border-radius:8px;background:var(--bg);margin-bottom:4px}
+.sc-tobe-rm-name{font-size:12.5px;font-weight:700;color:var(--text-primary)}
+.sc-tobe-rm-desc{font-size:11px;color:var(--text-tertiary);line-height:1.5;margin-top:2px}
+.sc-tobe-env{margin-top:1rem;padding:10px 14px;background:var(--bg);border-radius:10px;border-left:3px solid var(--director);font-size:12px;color:var(--text-secondary);line-height:1.75}
+.sc-tobe-env-title{font-size:11px;font-weight:700;color:var(--director);letter-spacing:.05em;margin-bottom:6px;text-transform:uppercase}
+@media(max-width:700px){.sc-tobe-body{grid-template-columns:1fr}}
 
 .hr-intro { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; }
 .hr-intro p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
@@ -877,8 +899,91 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 
     <!-- ── 劇作家 ── -->
     <div id="role-playwright" class="role-content active">
-      <div class="role-header playwright">
-        <div class="role-title playwright">劇作家 ToBe モデル <span style="font-size:11px;font-weight:400;opacity:0.7">v3 SOIL＋NYリサーチ統合</span></div>
+      <div style="font-size:13px;color:var(--text-secondary);margin-bottom:1rem;padding:10px 14px;background:var(--bg);border-radius:10px">
+        シナリオによって「何を書くか」「どう届けるか」が根本的に異なる。目指すシナリオを選んでから、対応するToBeモデルを確認してください。
+      </div>
+      <!-- 劇作家 3シナリオToBe -->
+      <div class="role-title playwright" style="font-size:16px;font-weight:700;margin-bottom:1rem">劇作家 ToBeモデル <span style="font-size:11px;font-weight:400;opacity:0.7">v3 シナリオ別</span></div>
+      <div class="sc-tobe-grid">
+
+        <!-- Scenario A -->
+        <div class="sc-tobe-card sc-tobe-a">
+          <span class="sc-tobe-sc-badge sc-tobe-sc-badge-a">シナリオ A ── トトロ型 IP × 国際共同制作</span>
+          <div class="sc-tobe-statement">「IPの世界観を守りながら、英訳を前提に現地観客が自分を投影できる戯曲を書き、国際リーディングへ届けられる劇作家」</div>
+          <div class="sc-tobe-body">
+            <div>
+              <div class="sc-tobe-reqs-title">最重要要件</div>
+              <div class="sc-tobe-req-item"><strong>翻案・アダプテーションの実践技術</strong><br>原作の「魂」を守りながら現地観客に届く形に変換。原作分析→エッセンス抽出→文化的移植のプロセス</div>
+              <div class="sc-tobe-req-item"><strong>英訳を前提とした戯曲構造の設計</strong><br>文化特有の慣用表現を最小化し、感情を直接的に表現する「翻訳可能な戯曲」を書く訓練</div>
+              <div class="sc-tobe-req-item"><strong>自作をIPとして育てる長期視点</strong><br>英訳→国際リーディング→再演→海外上演のチェーンを見越した設計</div>
+              <div class="sc-tobe-req-item" style="background:#FFF9E0;border-radius:4px;padding-left:6px"><strong>★NY ミュージカル楽曲構造設計</strong><br>Introduction→Lift→Bridge(Shift)→Last Momentの4段階。「なぜここで歌うのか（stakes）」の設計が核心</div>
+              <div class="sc-tobe-req-item" style="background:#FFF9E0;border-radius:4px;padding-left:6px"><strong>★NY Thematic writing</strong><br>「Nothing is random, nothing is wasted」。モチーフが全体を通じて機能するsonic worldの設計</div>
+            </div>
+            <div>
+              <div class="sc-tobe-rm-title">目指すべきロールモデル</div>
+              <div class="sc-tobe-rm-item"><div class="sc-tobe-rm-name">前川知大（iaku）</div><div class="sc-tobe-rm-desc">日本社会の「今」を切り取り国際展開を模索するSEEDリサーチャー。</div></div>
+              <div class="sc-tobe-rm-item"><div class="sc-tobe-rm-name">David Hein（Come from Away）★NY</div><div class="sc-tobe-rm-desc">「人の声を聞くことから始める」ドキュメンタリー的アプローチ。ローカルな物語が普遍的感情を通じて世界へ届く原理を体現。</div></div>
+              <div class="sc-tobe-rm-item"><div class="sc-tobe-rm-name">Crystal Monee Hall（Lincoln）★NY</div><div class="sc-tobe-rm-desc">「The show is the star」「Nothing is random」。Thematic writingと分業信頼の哲学。</div></div>
+              <div class="sc-tobe-rm-item"><div class="sc-tobe-rm-name">Jez Butterworth（Jerusalem）</div><div class="sc-tobe-rm-desc">イギリス特有の風土に根ざした戯曲がウエストエンド→ブロードウェイへ。特定文化の深さが普遍に届く原理。</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scenario B -->
+        <div class="sc-tobe-card sc-tobe-b">
+          <span class="sc-tobe-sc-badge sc-tobe-sc-badge-b">シナリオ B ── ストンプ型 ノンバーバル × フリンジ</span>
+          <div class="sc-tobe-statement">「テキストに依存せず、身体・空間・リズムで物語の構造を設計できる劇作家（devisor）」</div>
+          <div class="sc-tobe-body">
+            <div>
+              <div class="sc-tobe-reqs-title">最重要要件</div>
+              <div class="sc-tobe-req-item"><strong>ノンバーバル作品の構造設計</strong><br>時間・空間・繰り返し・身体で物語を成立させる技術。「書く」から「設計する」への発想転換</div>
+              <div class="sc-tobe-req-item"><strong>演出家・俳優との共同devising</strong><br>テキストなし or 最小限で作品を共同開発するプロセスへの参加能力</div>
+              <div class="sc-tobe-req-item"><strong>視覚的物語設計力</strong><br>言語なしに「意味・感情・物語」を成立させるビジュアルストーリーテリング</div>
+            </div>
+            <div>
+              <div class="sc-tobe-rm-title">目指すべきロールモデル</div>
+              <div class="sc-tobe-rm-item"><div class="sc-tobe-rm-name">Pina Bausch（独）</div><div class="sc-tobe-rm-desc">テキストではなくイメージ・身体・繰り返しで「物語」を成立させるタンツテアターを確立。言語なしに語る構造設計の先駆者。</div></div>
+              <div class="sc-tobe-rm-item"><div class="sc-tobe-rm-name">devising company系（Forced Entertainment等）</div><div class="sc-tobe-rm-desc">集団devising（共同開発）で独自の作品を作り国際フェスに出続けるモデル。劇作家・演出家の境界を越えた創作の先例。</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scenario C' -->
+        <div class="sc-tobe-card sc-tobe-c">
+          <span class="sc-tobe-sc-badge sc-tobe-sc-badge-c">シナリオ C' ── 国際文脈展開型 固有文脈 × 国際フェスティバル</span>
+          <div class="sc-tobe-statement">「強い日本固有文脈（社会的テーマ・時代性・伝統）を普遍的言語で書き、国際フェスティバルに発見される劇作家」</div>
+          <div class="sc-tobe-body">
+            <div>
+              <div class="sc-tobe-reqs-title">最重要要件</div>
+              <div class="sc-tobe-req-item"><strong>自社会を普遍的言語に昇華する技術</strong><br>「なぜ今・なぜここで」を世界に向けて語る力。日本の社会・歴史的文脈を国際観客が「自分の話」として受け取れる形に変換</div>
+              <div class="sc-tobe-req-item"><strong>伝統様式・古典を現代語に翻訳する劇作技術</strong><br>能・歌舞伎・古典戯曲の構造を理解し現代の観客・文脈に「翻訳」する。木ノ下歌舞伎が体現するアプローチ</div>
+              <div class="sc-tobe-req-item"><strong>国際フェスティバルが評価する「文脈・固有性・時代性」の理解</strong><br>Kunsten・Avignon・Theatertreftenが何に反応するかを知り、自作を国際的な文脈に位置づける</div>
+              <div class="sc-tobe-req-item"><strong>自分の「固有文脈」の発見と言語化</strong><br>自分にしか書けないものは何か——社会的テーマ・地域性・家族・歴史——を掘り下げ、それを表現する力</div>
+            </div>
+            <div>
+              <div class="sc-tobe-rm-title">目指すべきロールモデル</div>
+              <div class="sc-tobe-rm-item"><div class="sc-tobe-rm-name">岡田利規（チェルフィッチュ）系作家</div><div class="sc-tobe-rm-desc">現代日本の話し言葉・身体感覚を武器に、Kunsten・Avignon等の国際フェスに招聘され世界展開。社会的文脈がC'の核心。</div></div>
+              <div class="sc-tobe-rm-item"><div class="sc-tobe-rm-name">Lucy Kirkwood（Chimerica）</div><div class="sc-tobe-rm-desc">社会的テーマを持つ戯曲が国際上演される現代劇作家。社会的文脈を普遍的な個人の物語に落とし込む劇作技術を体現。</div></div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /.sc-tobe-grid -->
+
+      <!-- 環境と文化・制度（共通） -->
+      <div class="sc-tobe-env">
+        <div class="sc-tobe-env-title">🌐 環境と文化・制度として必要なこと ── 海外にあって日本にない/整っていないもの</div>
+        <strong>Dramaturg（ドラマターグ）専門職制度：</strong>RADAはBA必修・Yaleは独立MFA専攻。日本には確立されていない。若手劇作家を守る専門職がない。<br>
+        <strong>Playwright Residency（劇場居住・作品開発制度）：</strong>Royal Court・Bush Theatre等の制度が日本にない。デビュー後のpathwayが整備されていない。<br>
+        <strong>29-hour Reading / Workshop 文化：</strong>書き直しを前提とした段階的作品開発が制度として存在しない。「育てながら上演する」文化が日本では薄い。<br>
+        <strong>戯曲の英訳・出版・アーカイブ支援：</strong>Out of the Wings（英）のような戯曲翻訳・普及機関が日本にない。英訳→国際リーディング→次の上演の連鎖が生まれない。
+      </div>
+
+      <div style="font-size:12px;color:var(--text-tertiary);margin-top:10px;text-align:right">
+        → 各シナリオの固有の能力・経験・機会の詳細は <strong>⑤ 職能別個別要件</strong> タブへ
+      </div>
+
+      <div style="display:none"><!-- 旧コンテンツ（非表示） -->
         <div class="role-tobe">「普遍的な人間の物語を、日本固有の感性で書き（または設計し）、世界に届けられる劇作家」</div>
         <div class="role-sub">
           シナリオA：IPの翻案担い手として現地観客に届く戯曲を書く。シナリオB：ノンバーバル構造の設計者（devisor）として機能する。<span style="color:var(--director);font-weight:700">シナリオC'：強い日本固有文脈（社会・伝統・時代性）を普遍的言語で書き、国際フェスティバルに発見される作品を生み出す。</span><br>
@@ -989,10 +1094,94 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
           <li><strong>Orchestrator等への委任と信頼を通じて、自分にしかできない創作に集中できる</strong> ★NY</li>
         </ol>
       </div>
+      </div><!-- /hidden old content -->
     </div><!-- /#role-playwright -->
 
     <!-- ── 演出家 ── -->
     <div id="role-director" class="role-content">
+      <div style="font-size:13px;color:var(--text-secondary);margin-bottom:1rem;padding:10px 14px;background:var(--bg);border-radius:10px">
+        シナリオによって「求められる演出の文法」が根本的に異なる。A=テキスト文法、B=身体文法、C'=社会文脈の文法。
+      </div>
+      <!-- 演出家 3シナリオToBe -->
+      <div class="role-title director" style="font-size:16px;font-weight:700;margin-bottom:1rem">演出家 ToBeモデル <span style="font-size:11px;font-weight:400;opacity:0.7">v2 シナリオ別</span></div>
+      <div class="sc-tobe-grid">
+
+        <!-- Scenario A -->
+        <div class="sc-tobe-card sc-tobe-a">
+          <span class="sc-tobe-sc-badge sc-tobe-sc-badge-a">シナリオ A ── トトロ型 IP × 国際共同制作</span>
+          <div class="sc-tobe-statement">「英国・北米の商業演劇文法を理解し、IPの世界観を守りながら現地観客が自分を投影できる作品を立体化する演出家」</div>
+          <div class="sc-tobe-body">
+            <div>
+              <div class="sc-tobe-reqs-title">最重要要件</div>
+              <div class="sc-tobe-req-item"><strong>英国・北米商業演劇のシステムと文法</strong><br>ウエストエンド・ブロードウェイの制作システム（リハーサル期間・Union・スタッフ構成）の理解</div>
+              <div class="sc-tobe-req-item"><strong>IP制約下での創造性の発揮</strong><br>IPの世界観・キャラクター・既存イメージを守りながら現地観客が自分を投影できる作品に仕上げる演出力</div>
+              <div class="sc-tobe-req-item"><strong>異言語環境での稽古場マネジメント</strong><br>英語・通訳を介した稽古場の進行管理。言葉に頼らない演出指示（感情・イメージ・身体で伝える）</div>
+              <div class="sc-tobe-req-item"><strong>文化的翻訳力</strong><br>日本の物語・文化的文脈を、海外の観客が「自分の話」として受け取れる普遍的ドラマに昇華する技術</div>
+            </div>
+            <div>
+              <div class="sc-tobe-rm-title">目指すべきロールモデル</div>
+              <div class="sc-tobe-rm-item"><div class="sc-tobe-rm-name">Bartlett Sher（米）</div><div class="sc-tobe-rm-desc">リンカーンセンターでRodgers & Hammerstein作品を現代的に再演出。「探求を導く」演出スタイルと商業の両立を体現。</div></div>
+              <div class="sc-tobe-rm-item"><div class="sc-tobe-rm-name">岡田利規（チェルフィッチュ）</div><div class="sc-tobe-rm-desc">日本語・日本の身体感覚を武器に国際フェスティバルに繋いだ演出家。日本性を普遍的文脈に着地させる技術の体現者。</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scenario B -->
+        <div class="sc-tobe-card sc-tobe-b">
+          <span class="sc-tobe-sc-badge sc-tobe-sc-badge-b">シナリオ B ── ストンプ型 ノンバーバル × フリンジ</span>
+          <div class="sc-tobe-statement">「言語を問わず誰もが楽しめる、身体・空間・リズムのみで感情と物語を成立させる演出家」</div>
+          <div class="sc-tobe-body">
+            <div>
+              <div class="sc-tobe-reqs-title">最重要要件</div>
+              <div class="sc-tobe-req-item"><strong>ムーブメント・身体表現の専門知識</strong><br>Pina Bausch・DV8・Frantic Assembly等の理論と系譜。「なぜ言語なしで感情が成立するか」の理論的理解</div>
+              <div class="sc-tobe-req-item"><strong>ノンバーバル演出技術の実践</strong><br>身体・空間・リズム・沈黙・繰り返しのみで意味と感情を作る演出技術。言語に依存しない稽古場コミュニケーション</div>
+              <div class="sc-tobe-req-item"><strong>フリンジ規模での演出設計</strong><br>低予算・短期公演・小空間での演出の最適化。「小さいからこそ光る作品」の設計</div>
+              <div class="sc-tobe-req-item"><strong>日本の身体感覚を武器にする自覚</strong><br>能・武道・所作に根ざした身体性がフィジカルシアターの世界では「希少性」として評価される可能性</div>
+            </div>
+            <div>
+              <div class="sc-tobe-rm-title">目指すべきロールモデル</div>
+              <div class="sc-tobe-rm-item"><div class="sc-tobe-rm-name">Lloyd Newson（DV8 Physical Theatre）</div><div class="sc-tobe-rm-desc">社会的テーマを身体のみで表現するフィジカルシアターを世界規模に展開。言語なしで意味・感情・物語を成立させる演出文法の第一人者。</div></div>
+              <div class="sc-tobe-rm-item"><div class="sc-tobe-rm-name">Akram Khan（英）</div><div class="sc-tobe-rm-desc">南アジアのカタックと現代ダンスを融合し国際共同制作で世界展開。自文化の身体技術を普遍的感情に変換する技術を確立。</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scenario C' -->
+        <div class="sc-tobe-card sc-tobe-c">
+          <span class="sc-tobe-sc-badge sc-tobe-sc-badge-c">シナリオ C' ── 国際文脈展開型 固有文脈 × 国際フェスティバル</span>
+          <div class="sc-tobe-statement">「社会的文脈・時代性を持つ作品や古典の現代的再解釈を通じて、国際フェスティバルのキュレーターに発見される演出家」</div>
+          <div class="sc-tobe-body">
+            <div>
+              <div class="sc-tobe-reqs-title">最重要要件</div>
+              <div class="sc-tobe-req-item"><strong>社会的文脈・時代性を舞台上で体現する演出技術</strong><br>「強い日本固有文脈を持つ作品」を国際フェスティバルが評価する形で立体化する技術</div>
+              <div class="sc-tobe-req-item"><strong>古典文法を理解した上での現代的再解釈</strong><br>能・歌舞伎・古典戯曲の構造を深く理解し、現代の観客・文脈に「翻訳」する演出術</div>
+              <div class="sc-tobe-req-item"><strong>国際フェスティバルのキュレーション思想の理解</strong><br>Kunsten・Theatertreffen・Festival d'Avignonが何を評価するかを知り、自分の作品を国際文脈に位置づける</div>
+              <div class="sc-tobe-req-item"><strong>フリンジで発見されるための「説明力」</strong><br>英語で作品を語れること。シナリオC'でも転生の条件は「語れること」</div>
+            </div>
+            <div>
+              <div class="sc-tobe-rm-title">目指すべきロールモデル</div>
+              <div class="sc-tobe-rm-item"><div class="sc-tobe-rm-name">岡田利規（チェルフィッチュ）</div><div class="sc-tobe-rm-desc">現代日本語・身体感覚を武器にKunsten・ウィーン・ベルリン等の国際フェスに招聘。社会的文脈がC'型の核心であることを体現。</div></div>
+              <div class="sc-tobe-rm-item"><div class="sc-tobe-rm-name">宮城聰（SPAC）</div><div class="sc-tobe-rm-desc">日本の伝統と現代を架橋した作品でFestival d'Avignon招聘を実現。転生装置（フェスティバル）に呼ばれるための「説明できる日本性」の体現者。</div></div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /.sc-tobe-grid -->
+
+      <!-- 環境と文化・制度（演出家） -->
+      <div class="sc-tobe-env">
+        <div class="sc-tobe-env-title">🌐 環境と文化・制度として必要なこと ── 海外にあって日本にない/整っていないもの</div>
+        <strong>アシスタント・アソシエートディレクター制度：</strong>Yaleは年12回・6単位「Bridge to the Profession」。日本では師弟関係が非公式で報酬も不明確。<br>
+        <strong>Out-of-town Tryout文化：</strong>Regional Theaterで演出を本格テストし修正する文化が日本にない。東京一極集中で失敗できる場がない。<br>
+        <strong>フィジカルシアター専門WS・スクール：</strong>DV8・Frantic Assemblyが運営する専門教育機関が日本にない。シナリオBの核心スキルを学ぶ場の不足。<br>
+        <strong>演出家専門MFAプログラム：</strong>Juilliard・Yale等の実務家が教える演出家専門大学院が日本にない。「メンターとの出会いを制度化する」仕組みの欠如。
+      </div>
+
+      <div style="font-size:12px;color:var(--text-tertiary);margin-top:10px;text-align:right">
+        → 各シナリオの固有の能力・経験・機会の詳細は <strong>⑤ 職能別個別要件</strong> タブへ
+      </div>
+
+      <div style="display:none"><!-- 旧コンテンツ（非表示） -->
       <div class="role-header director">
         <div class="role-title director">演出家 ToBe モデル <span style="font-size:11px;font-weight:400;opacity:0.7">v2 SOIL統合</span></div>
         <div class="role-tobe">「作品の探求を導き、多様なアーティストと協働しながら、日本の物語を世界の観客に届けられる演出家」</div>
@@ -1091,12 +1280,97 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
           <li><strong>シナリオA（商業演劇型）またはB（フィジカル型）の戦略を選択して実行できる</strong></li>
         </ol>
       </div>
+      </div><!-- /hidden old content -->
     </div><!-- /#role-director -->
 
     <!-- ── プロデューサー ── -->
     <div id="role-producer" class="role-content">
+      <div style="font-size:13px;color:var(--text-secondary);margin-bottom:1rem;padding:10px 14px;background:var(--bg);border-radius:10px">
+        シナリオによって「どこへ・何を使って・誰に届けるか」が全く異なる。プロデューサーはシナリオの「設計者」でもある。
+      </div>
+      <!-- プロデューサー 3シナリオToBe -->
+      <div class="role-title producer" style="font-size:16px;font-weight:700;margin-bottom:1rem">プロデューサー ToBeモデル <span style="font-size:11px;font-weight:400;opacity:0.7">v5 シナリオ別</span></div>
+      <div class="sc-tobe-grid">
+
+        <!-- Scenario A -->
+        <div class="sc-tobe-card sc-tobe-a">
+          <span class="sc-tobe-sc-badge sc-tobe-sc-badge-a">シナリオ A ── トトロ型 IP × 国際共同制作</span>
+          <div class="sc-tobe-statement">「日本にしかないIPを持ち込み、Transfer装置（NT・Barbican等）と国際共同制作を設計し、商業市場に接続するプロデューサー」</div>
+          <div class="sc-tobe-body">
+            <div>
+              <div class="sc-tobe-reqs-title">最重要要件</div>
+              <div class="sc-tobe-req-item"><strong>Transfer装置へのアクセス戦略</strong><br>NT・Barbican・Public Theatreのキュレーターとの関係構築。Edinburgh・Avignon出展戦略の設計。「壁は単独で越えようとしない」</div>
+              <div class="sc-tobe-req-item"><strong>IPライセンス交渉の実践</strong><br>IPホルダー（出版社・アニメ会社）との権利交渉。ライセンス条件の読み方・交渉進め方・弁護士との連携</div>
+              <div class="sc-tobe-req-item"><strong>国際共同制作のマネジメント</strong><br>GM・Company Managerとの分業を理解した運営。海外と日本の制作システムの違いを前提にした設計</div>
+              <div class="sc-tobe-req-item" style="background:#FFF9E0;border-radius:4px;padding-left:6px"><strong>★NY Taste（審美眼）</strong><br>「どの作品を選び何を届けるか」のセンス。Patrick Catullo：「Tasteこそがプロデューサーに最終的に残る信用」</div>
+              <div class="sc-tobe-req-item" style="background:#FFF9E0;border-radius:4px;padding-left:6px"><strong>★NY 段階的作品開発プロセス</strong><br>Reading→29-hour→Regional→商業の流れを設計・運営する能力。「完成作品ではなく開発中のIPとして投資を集める」発想</div>
+            </div>
+            <div>
+              <div class="sc-tobe-rm-title">目指すべきロールモデル</div>
+              <div class="sc-tobe-rm-item"><div class="sc-tobe-rm-name">Cameron Mackintosh（英）</div><div class="sc-tobe-rm-desc">Cats・Les Mis・Phantomをウエストエンド→ブロードウェイ→世界ツアーへ。長期投資と国際ライセンス展開の設計を体現。</div></div>
+              <div class="sc-tobe-rm-item"><div class="sc-tobe-rm-name">松田誠（東宝）</div><div class="sc-tobe-rm-desc">日本産ミュージカルの海外展開を担うSEEDアドバイザリーボードメンバー。国内大手とアーティストの間で海外に橋渡しする日本型プロデュース。</div></div>
+              <div class="sc-tobe-rm-item"><div class="sc-tobe-rm-name">Jeffrey Richards（NY）★NY</div><div class="sc-tobe-rm-desc">Maybe Happy Ending等。「4成功要因：IP・TR・SP・WOM→WTSF」のフレームで作品を選択。「作品を愛し続けること」が最重要。</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scenario B -->
+        <div class="sc-tobe-card sc-tobe-b">
+          <span class="sc-tobe-sc-badge sc-tobe-sc-badge-b">シナリオ B ── ストンプ型 ノンバーバル × フリンジ</span>
+          <div class="sc-tobe-statement">「ノンバーバル作品をインバウンドでテストし、フリンジ経由で世界展開するIPとして設計・育てるプロデューサー」</div>
+          <div class="sc-tobe-body">
+            <div>
+              <div class="sc-tobe-reqs-title">最重要要件</div>
+              <div class="sc-tobe-req-item"><strong>ノンバーバル作品のフォーマット設計</strong><br>再演可能・言語不要・観光向けの作品フォーマット設計。STOMPやナンタが示す「コンテンツIP化」の設計思想</div>
+              <div class="sc-tobe-req-item"><strong>フリンジフェスネットワーク</strong><br>Edinburgh等への出展戦略。「場に出ること」が最大の学び。フリンジで発見されるための設計と交渉力</div>
+              <div class="sc-tobe-req-item"><strong>インバウンド市場理解</strong><br>観光消費の構造。国内に既存するインバウンド向けパフォーマンスとの連携・接続の可能性</div>
+              <div class="sc-tobe-req-item" style="background:#FFF9E0;border-radius:4px;padding-left:6px"><strong>★NY WOM（口コミ）設計力</strong><br>「観光客が誰かへ話したくなる体験」を設計する。WTSF（Want To See Factor）を生み出す作品設計</div>
+            </div>
+            <div>
+              <div class="sc-tobe-rm-title">目指すべきロールモデル</div>
+              <div class="sc-tobe-rm-item"><div class="sc-tobe-rm-name">Luke Cresswell & Steve McNicholas（英）</div><div class="sc-tobe-rm-desc">STOMPをフリンジから始め30年超の長期公演・世界展開IPに育てた。ノンバーバル作品を「繰り返し上演できるフォーマット」として設計する思考。</div></div>
+              <div class="sc-tobe-rm-item"><div class="sc-tobe-rm-name">Shim Jae-Won（韓国）</div><div class="sc-tobe-rm-desc">言語不要のノンバーバル料理ショーNANTA（ナンタ）を観光特化から世界ツアーへ。インバウンドをテストマーケットにしてスケールする戦略。</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scenario C' -->
+        <div class="sc-tobe-card sc-tobe-c">
+          <span class="sc-tobe-sc-badge sc-tobe-sc-badge-c">シナリオ C' ── 国際文脈展開型 固有文脈 × 国際フェスティバル</span>
+          <div class="sc-tobe-statement">「国際フェスティバルのキュレーターと長期信頼関係を築き、強い日本固有文脈を持つ作品を国際舞台に送り出すプロデューサー」</div>
+          <div class="sc-tobe-body">
+            <div>
+              <div class="sc-tobe-reqs-title">最重要要件</div>
+              <div class="sc-tobe-req-item"><strong>キュレーターとの長期信頼関係の構築</strong><br>「招聘は結果ではなく関係への投資」。国際フェスティバルのキュレーターとの継続的接触・情報共有・作品紹介の積み重ね</div>
+              <div class="sc-tobe-req-item"><strong>国際フェスティバルの文脈・キュレーション思想の理解</strong><br>Kunsten・Theatertreffen・Festival d'Avignonが何を選ぶかを知る。文脈・固有性・時代性の評価基準</div>
+              <div class="sc-tobe-req-item"><strong>文化外交・公的支援の活用</strong><br>国際交流基金・British Council・各国文化機関との連携。資本だけでなく文化的文脈の担保が必要</div>
+              <div class="sc-tobe-req-item"><strong>C'型の属人性を構造化する使命感</strong><br>「次のチェルフィッチュを作れない」という構造的課題への問題意識。SEED自体がこの課題に取り組む</div>
+            </div>
+            <div>
+              <div class="sc-tobe-rm-title">目指すべきロールモデル</div>
+              <div class="sc-tobe-rm-item"><div class="sc-tobe-rm-name">Mara Isaacs（Hadestown）★NY</div><div class="sc-tobe-rm-desc">「プロデューサーは権力者ではなく助産師的存在」。ビジョン・美意識・価値観を持つことが最重要。Touch Pointを増やす戦略（Youth licensing→audience growth→ロングラン）を確立。</div></div>
+              <div class="sc-tobe-rm-item"><div class="sc-tobe-rm-name">Sue Frost（Come from Away）★NY</div><div class="sc-tobe-rm-desc">「WOM＝観客が誰かへ話したくなること」「もし自分がやらなかったら後悔する作品かどうか」が判断基準。Regional Theaterを活用した段階的作品育成。</div></div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /.sc-tobe-grid -->
+
+      <!-- 環境と文化・制度（プロデューサー） -->
+      <div class="sc-tobe-env">
+        <div class="sc-tobe-env-title">🌐 環境と文化・制度として必要なこと ── 海外にあって日本にない/整っていないもの</div>
+        <strong>GM（General Manager）専門職制度：</strong>Yaleは会計・財務・労働法・ガバナンス・資金調達まで含むTheater Management MFAが存在。日本ではプロデューサーが全てを一人で担い専門分業がない。<br>
+        <strong>Development Funding（開発段階への投資文化）：</strong>Reading・Workshopへの民間投資文化が日本にない。「完成作品」ではなく「開発中のIP」に投資する仕組みが存在しない。<br>
+        <strong>Producer MFAプログラム：</strong>Columbia・Yale等の実務家が教える商業演劇プロデュース専門大学院が日本にない。プロデューサーを体系的に育てる教育機関が存在しない。<br>
+        <strong>国際共同制作支援の資金スキーム：</strong>文化庁補助金は国内向けで国際展開に使える公的資金が極めて限られている。海外との共同制作に必要なツアー費・共同開発費を支援するスキームが未整備。
+      </div>
+
+      <div style="font-size:12px;color:var(--text-tertiary);margin-top:10px;text-align:right">
+        → 各シナリオの固有の能力・経験・機会の詳細は <strong>⑤ 職能別個別要件</strong> タブへ
+      </div>
+
+      <div style="display:none"><!-- 旧コンテンツ（非表示） -->
       <div class="role-header producer">
-        <div class="role-title producer">プロデューサー ToBe モデル <span style="font-size:11px;font-weight:400;opacity:0.7">v5 SOIL＋NYリサーチ統合</span></div>
         <div class="role-tobe">「日本にしかないコンテンツを見極め、転生装置と繋がり、世界市場に送り出せるプロデューサー」</div>
         <div class="role-sub">シナリオA：IPホルダーと文化機関を繋ぎ、NT・Barbican等との共同制作を設計する。シナリオB：ノンバーバル作品をインバウンドでテストし、フリンジから世界展開するIPとして育てる。<span style="color:var(--director);font-weight:700">シナリオC'：国際フェスティバルのキュレーターと長期信頼関係を築き、社会的文脈・固有文脈を持つ作品を国際舞台に送り出す。</span><br>
         <span style="color:var(--text-tertiary);font-size:11px">▶ NYリサーチ追加：WOM設計力・GM分業の理解・段階的開発文化・Taste（審美眼）・マーケティング能力</span></div>
@@ -1209,6 +1483,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
           <li><strong>シナリオA（IP共同制作型）またはB（フリンジ転生型）の戦略を選択して実行できる</strong></li>
         </ol>
       </div>
+      </div><!-- /hidden old content -->
     </div><!-- /#role-producer -->
 
   </div><!-- /.hr-container -->
