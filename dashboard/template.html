@@ -177,13 +177,38 @@ body {
 .ge-common-table.col-priority th:nth-child(2), .ge-common-table.col-priority td:nth-child(2) { width: 10%; }
 .ge-common-table.col-priority th:nth-child(3), .ge-common-table.col-priority td:nth-child(3) { width: 42%; }
 .ge-common-table.col-priority th:nth-child(4), .ge-common-table.col-priority td:nth-child(4) { width: 36%; }
-/* rs-table */
-.rs-table { table-layout: fixed; width: 100%; word-break: break-word; }
-.rs-table th, .rs-table td { word-break: break-word; overflow-wrap: break-word; }
-.rs-table th:nth-child(1), .rs-table td:nth-child(1) { width: 9%; }
-.rs-table th:nth-child(2), .rs-table td:nth-child(2) { width: 23%; }
-.rs-table th:nth-child(3), .rs-table td:nth-child(3) { width: 56%; }
-.rs-table th:nth-child(4), .rs-table td:nth-child(4) { width: 12%; }
+/* ── Role-Specific (⑤ tab) ── */
+.rs-tab-nav{display:flex;gap:8px;margin-bottom:1.25rem;flex-wrap:wrap}
+.rs-tab-btn{padding:6px 20px;border-radius:20px;border:1.5px solid var(--border);background:var(--surface);font-size:13px;font-weight:700;cursor:pointer;color:var(--text-secondary);transition:all .15s;font-family:'Noto Sans JP',sans-serif}
+.rs-tab-btn[data-rs-role="producer"].active{background:var(--producer-bg);color:var(--producer);border-color:var(--producer)}
+.rs-tab-btn[data-rs-role="director"].active{background:var(--director-bg);color:var(--director);border-color:var(--director)}
+.rs-tab-btn[data-rs-role="playwright"].active{background:var(--playwright-bg);color:var(--playwright);border-color:var(--playwright)}
+.rs-content{display:none}
+.rs-content.active{display:block}
+.rs-section{margin-bottom:2rem}
+.rs-section-title{font-size:12px;font-weight:700;color:var(--text-secondary);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border);letter-spacing:.05em;text-transform:uppercase}
+.rs-table{width:100%;border-collapse:collapse;font-size:12.5px;table-layout:fixed;word-break:break-word}
+.rs-table th{background:var(--bg);padding:8px 10px;text-align:left;font-size:11px;font-weight:700;color:var(--text-secondary);border-bottom:2px solid var(--border);word-break:break-word}
+.rs-table td{padding:10px;border-bottom:1px solid var(--bg);vertical-align:top;line-height:1.5;word-break:break-word;overflow-wrap:break-word}
+.rs-table tr:hover td{background:var(--bg)}
+.rs-table th:nth-child(1),.rs-table td:nth-child(1){width:9%}
+.rs-table th:nth-child(2),.rs-table td:nth-child(2){width:23%}
+.rs-table th:nth-child(3),.rs-table td:nth-child(3){width:56%}
+.rs-table th:nth-child(4),.rs-table td:nth-child(4){width:12%}
+#tab-research-agenda .rs-table th:nth-child(1){width:20%}
+#tab-research-agenda .rs-table th:nth-child(2){width:20%}
+#tab-research-agenda .rs-table th:nth-child(3){width:60%}
+.rs-sc{font-size:10px;font-weight:700;padding:1px 5px;border-radius:5px;display:inline-block;margin-left:4px}
+.rs-sc-a{background:var(--seed-bg);color:var(--seed-text)}
+.rs-sc-b{background:var(--soil-bg);color:var(--soil-text)}
+.rs-sc-ab{background:#F0F0F0;color:#555}
+.rs-opp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.rs-opp-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1rem}
+.rs-opp-title{font-size:13px;font-weight:700;color:var(--text-primary);margin-bottom:4px}
+.rs-opp-desc{font-size:12px;color:var(--text-secondary);line-height:1.5}
+.rs-opp-tag{font-size:10px;font-weight:700;padding:2px 6px;border-radius:5px;display:inline-block;margin-bottom:6px}
+.rs-curriculum{background:var(--bg);border-radius:12px;padding:1rem;font-size:12.5px;line-height:1.9;color:var(--text-secondary)}
+.rs-curriculum strong{color:var(--text-primary)}
 /* ── HR Requirements ── */
 .hr-container { max-width: 1100px; margin: 0 auto; }
 
