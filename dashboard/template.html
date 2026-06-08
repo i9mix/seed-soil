@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
@@ -471,7 +471,12 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
   <div class="tab-nav">
     <button class="tab-btn active" data-tab="dashboard">ダッシュボード</button>
     <button class="tab-btn" data-tab="about">事業概要</button>
-    <button class="tab-btn" data-tab="hr">人材要件仮説（仮）</button>
+    <button class="tab-btn" data-tab="soil-map">① SEED 戦略マップ</button>
+    <button class="tab-btn" data-tab="hr">② 人材要件 v2</button>
+    <button class="tab-btn" data-tab="university-analysis">③ 大学教育に関する分析</button>
+    <button class="tab-btn" data-tab="general-education">④ 一般教養プログラム</button>
+    <button class="tab-btn" data-tab="role-specific">⑤ 職能別個別要件</button>
+    <button class="tab-btn" data-tab="research-agenda">⑥ 追加リサーチ検討</button>
     <button class="tab-btn" data-tab="progress">プログラム進捗</button>
     <button class="tab-btn" data-tab="timeline">スケジュール</button>
     <button class="tab-btn" data-tab="meetings">会議資料</button>
@@ -492,7 +497,9 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
     <div class="leg"><div class="leg-dot" style="background:var(--seed)"></div>SEED</div>
     <div class="leg"><div class="leg-dot" style="background:var(--border)"></div>共通</div>
   </div>
-  <div class="grid">%%CARDS%%</div>
+  <div class="grid">
+%%CARDS%%
+  </div>
 </div><!-- /#tab-dashboard -->
 
 <!-- ════ About Tab ════ -->
@@ -1119,6 +1126,1442 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
     </div>
   </div>
 </div><!-- /#tab-people -->
+
+<!-- ════ SOIL Map Tab ════ -->
+<div id="tab-soil-map" class="tab-content">
+<div class="soil-container">
+
+<div style="margin-bottom:2rem">
+  <div style="font-size:14px;font-weight:700;color:var(--text-primary);margin-bottom:.75rem;display:flex;align-items:center;gap:8px">
+    <span>日本の舞台芸術国際展開戦略</span>
+    <span style="font-size:11px;font-weight:400;color:var(--text-tertiary);font-family:'DM Mono',monospace">p.11 — 市場構造マップ</span>
+  </div>
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.07)">
+    <img
+      src="strategy-p11.png"
+      alt="日本の舞台芸術国際展開戦略 p.11 — 市場構造マップ"
+      style="width:100%;display:block;border-radius:14px"
+    />
+  </div>
+</div>
+
+<div class="soil-intro-card">
+  <strong>SEED・SOIL 両事業の根幹となる市場認識フレームワーク。</strong>「どの市場を狙うか」「どのルートでTransfer（転生）するか」「誰に届けるか」を整理した戦略地図。<br>
+  SEEDが主軸とする3つのシナリオ：<span style="color:var(--seed);font-weight:700">A（トトロ型：IP × 文化機関共同制作）</span>・<span style="color:var(--soil);font-weight:700">B（ストンプ型：ノンバーバル × フリンジ）</span>・<span style="color:var(--director);font-weight:700">C'（国際文脈展開型：古典・社会的文脈 × 国際フェスティバル）</span>
+</div>
+
+<!-- Section 1: 4列の市場構造 -->
+<div class="soil-section">
+  <div class="soil-section-title">① 4列の市場構造マップ</div>
+  <div class="axis-note-h">
+    <span>← 複製芸術（ライセンス・フランチャイズ・IP展開が可能）</span>
+    <span>希少芸術（特定のアーティスト・身体・文脈に価値が宿る）→</span>
+  </div>
+  <div class="market-4col">
+    <div class="market-col ip-col">
+      <div class="mc-col-title">国際IP</div>
+      <div class="mc-world-ex">ライオンキング<br>シルク・ド・ソレイユ<br>トトロ（転生中→）</div>
+      <div class="mc-jp-block">
+        <div class="mc-jp-tag jp-none">🇯🇵 現在ここに日本なし</div>
+        <div class="mc-jp-tag jp-target">🎯 シナリオA 最終目標</div>
+      </div>
+      <div class="mc-zone-tag zone-void">← 最大の戦略的空白地帯</div>
+    </div>
+    <div class="market-col commercial-col">
+      <div class="mc-col-title">商業招聘</div>
+      <div class="mc-world-ex">STOMP・ナンタ<br>オペラ座の怪人<br>Come from Away</div>
+      <div class="mc-jp-block">
+        <div class="mc-jp-tag jp-present">🇯🇵 トトロ（転生途上）</div>
+      </div>
+      <div class="mc-jp-tag jp-target" style="margin-top:6px">🎯 シナリオA/B 経由地点</div>
+      <div class="mc-zone-tag zone-void">左下VOID：演劇人のみの商業</div>
+    </div>
+    <div class="market-col contemporary-col">
+      <div class="mc-stage-badge">⭐ 勝負のステージング領域</div>
+      <div class="mc-col-title">現代演劇</div>
+      <div style="font-size:11px;color:var(--text-secondary);margin-bottom:8px;line-height:1.5">最もボリュームが大きい。世界中のプロデューサー・キュレーターが同時に見ている場所。</div>
+      <div class="mc-jp-block">
+        <div class="mc-jp-tag jp-present">🇯🇵 チェルフィッチュ・野田地図</div>
+        <div class="mc-jp-list">SPAC・木ノ下歌舞伎<br>千と千尋・セーラームーン</div>
+      </div>
+      <div class="mc-zone-tag zone-dead">⚠ DEAD ZONE：誰に届けたいか曖昧な自主開催フリンジ</div>
+    </div>
+    <div class="market-col heritage-col">
+      <div class="mc-col-title">文化資産</div>
+      <div class="mc-world-ex">ピナ・バウシュ<br>カニングハム・ダンス<br>Robert Wilson</div>
+      <div class="mc-jp-block">
+        <div class="mc-jp-tag jp-present">🇯🇵 能・歌舞伎・舞踏</div>
+        <div class="mc-jp-list">鈴木メソッド<br>宮城聰（SPAC）</div>
+      </div>
+      <div class="mc-zone-tag zone-void">右上VOID：海外招聘不要な領域</div>
+    </div>
+  </div>
+
+  <div class="v-axis-heading">縦軸：訴求幅（上が広い → 下が狭い）</div>
+  <div class="v-axis-rows">
+    <div class="v-axis-row"><span class="v-axis-num">①</span><span>ファミリー含む全年齢（子供〜大人・世界中どこでも）</span></div>
+    <div class="v-axis-row"><span class="v-axis-num">②</span><span>観光客含む幅広い対象（旅行者・都市エンタメ層）</span></div>
+    <div class="v-axis-row"><span class="v-axis-num">③</span><span>特定の国・文化に帰属する人たち（文化的文脈を共有するコミュニティ）</span></div>
+    <div class="v-axis-row"><span class="v-axis-num">④</span><span>演劇人（演劇界・批評家・フェスティバル層）</span></div>
+  </div>
+  <div class="vzd-grid">
+    <div class="vzd-card vzd-void"><div class="vzd-tag">VOID（右上）</div><div class="vzd-desc">文化資産×ファミリー全年齢 ── わざわざ海外から招聘する理由がない構造的空白</div></div>
+    <div class="vzd-card vzd-void"><div class="vzd-tag">VOID（左下）</div><div class="vzd-desc">商業招聘×演劇人 ── 商業展開しているのに演劇人にしか届かない。構造的失敗</div></div>
+    <div class="vzd-card vzd-dead"><div class="vzd-tag">DEAD ZONE</div><div class="vzd-desc">現代演劇内の中途半端な領域 ── 誰に届けたいかが曖昧な自主開催フリンジ枠。左右両側に存在</div></div>
+  </div>
+</div>
+
+<!-- Section 2: 転生装置 -->
+<div class="soil-section">
+  <div class="soil-section-title">② Transfer（転生）装置 ── 最も越えにくい壁の核心</div>
+  <div class="transfer-intro-card">
+    <strong>Transfer（トランスファー）とは：</strong>国際演劇業界で「転生」に相当する現象を指す業界標準用語。開発段階・小規模会場で上演された作品が、より大きな商業劇場・権威ある会場へ「移行」すること。ツアーとは異なり、作品が「格上の場所に定着する」ニュアンスを持つ。<br>
+    例：Six → Edinburgh Arts Centre → Arts Theatre (West End) → Broadway ／ Hamilton → Public Theater → Richard Rodgers Theatre<br><br>
+    <strong>Transfer装置とは：</strong>文化機関と商業劇場の中間に位置する劇場・機関。広い顧客基盤を持つ文化機関が商業Transferの入口になる。<br>
+    「エディンバラ・アビニョンに出る理由はそこにいるTransfer装置の人たちに会うため」 ── SOIL戦略の核心。<strong>資本でも言語でも代替できない壁。</strong>
+  </div>
+  <div style="background:var(--seed-bg);border:1px solid #BDD3F8;border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:12.5px;color:var(--seed-text);line-height:1.7">
+    <strong>💡 壁の越え方の原則：「日本だけで越えようとしない」</strong><br>
+    言語の壁・資本の壁・歴史観の壁——これらをJapan単独で突破しようとするのではなく、<strong>国際共同制作を通じて乗り越えることが戦略の核心。</strong>Transfer装置（NT・Barbican等）との共同制作によって、その機関の信頼性・観客基盤・ブランドが壁を代わりに突破してくれる。壁は「越えるもの」ではなく「共同制作で迂回するもの」。
+  </div>
+  <div class="transfer-city-grid">
+    <div>
+      <div class="transfer-city-title">🇬🇧 ロンドン</div>
+      <div class="transfer-insts">
+        <div class="transfer-inst">National Theatre</div>
+        <div class="transfer-inst">Barbican</div>
+        <div class="transfer-inst">Arts Theatre</div>
+        <div class="transfer-inst">Donmar Warehouse</div>
+        <div class="transfer-inst">Young Vic</div>
+      </div>
+    </div>
+    <div>
+      <div class="transfer-city-title">🇺🇸 ニューヨーク</div>
+      <div class="transfer-insts">
+        <div class="transfer-inst">Public Theater</div>
+        <div class="transfer-inst">Second Stage</div>
+        <div class="transfer-inst">Ford's Theatre</div>
+      </div>
+      <div style="margin-top:10px">
+        <div class="transfer-city-title">🎭 フェスティバル（Transfer発見の場）</div>
+        <div class="transfer-insts">
+          <div class="transfer-inst">Edinburgh Fringe</div>
+          <div class="transfer-inst">Festival d'Avignon</div>
+          <div class="transfer-inst">Kunsten Festival (Brussels)</div>
+          <div class="transfer-inst">Theatertreffen (Berlin)</div>
+          <div class="transfer-inst">APAF（東京）</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Section 3: Transferルート -->
+<div class="soil-section">
+  <div class="soil-section-title">③ Transferルートの事例</div>
+  <table class="route-table">
+    <thead>
+      <tr><th>パターン</th><th>ルート</th><th>特徴</th><th>シナリオ</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>トトロパターン</strong></td><td>NT × スタジオジブリ共同制作 → バービカン → ウエストエンド商業</td><td>既存IPで文化機関と<strong>国際共同制作</strong>。壁を単独で越えず、NT共同制作で突破。2〜3年でTransfer達成</td><td><span class="route-lbl route-lbl-a route-lbl-main">A 主軸</span></td></tr>
+      <tr><td><strong>Sixパターン</strong></td><td>Edinburgh Fringe → Arts Theatre → ウエストエンド → ブロードウェイ</td><td>予算ほぼゼロからスタート。土着性×ポップスで壁を越えた</td><td><span class="route-lbl route-lbl-b route-lbl-main">B 主軸</span></td></tr>
+      <tr><td><strong>STOMPパターン</strong></td><td>フリンジ発 → 長期公演 → 世界ツアー</td><td>ノンバーバル作品をIPとして設計。30年超の長期展開</td><td><span class="route-lbl route-lbl-b route-lbl-main">B 主軸</span></td></tr>
+      <tr><td><strong>チェルフィッチュパターン</strong></td><td>国内評価 → Kunsten/Avignon招聘 → 欧州フェスティバル巡回 → 世界展開</td><td>社会的文脈・時代性のある作品が国際キュレーターに発見される。属人性が高く構造化が課題</td><td><span class="route-lbl" style="background:var(--director-bg);color:var(--director)">C' 主軸</span></td></tr>
+      <tr><td><strong>木ノ下歌舞伎パターン</strong></td><td>古典の現代的再解釈 → 国内評価 → 国際フェスティバル招聘</td><td>他国が複製できない伝統芸能の現代化。10〜20年単位の長期投資</td><td><span class="route-lbl" style="background:var(--director-bg);color:var(--director)">C' 主軸</span></td></tr>
+      <tr><td><strong>社会的文脈型</strong></td><td>震災・社会テーマ → 国際的文脈での評価 → フェスティバル招聘</td><td>産経記事「目に映るのは氷山の一角」が示す多様なバリエーション。日本固有の社会的文脈が国際評価に繋がる</td><td><span class="route-lbl" style="background:var(--director-bg);color:var(--director)">C' 主軸</span></td></tr>
+      <tr><td><strong>War Horseパターン</strong></td><td>NT制作 → ブロードウェイ商業成功 → ライセンス展開</td><td>文化機関が制作したものが商業Transferした典型例</td><td><span class="route-lbl route-lbl-a">A 参照</span></td></tr>
+      <tr><td><strong>場所貸し型</strong></td><td>文化機関に場所代を払って自主公演</td><td>千と千尋・野田地図・セーラームーン。お金で解決できる唯一の入口</td><td><span class="route-lbl" style="background:#F0F0F0;color:#666">現状</span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Section 4: 3つの入り口 -->
+<div class="soil-section">
+  <div class="soil-section-title">④ 3つの入り口（Entrance）</div>
+  <div class="entrance-3col">
+    <div class="entrance-card" style="border-color:var(--seed)">
+      <div class="entrance-letter">A</div>
+      <div class="entrance-title">資本で場所を買う</div>
+      <div class="entrance-desc">文化機関（NT・Barbican等）に場所代を払って自主公演する。お金で解決できる唯一の入口。</div>
+      <div class="entrance-example">事例：千と千尋・野田地図・セーラームーン</div>
+    </div>
+    <div class="entrance-card" style="border-color:var(--seed)">
+      <div class="entrance-letter">B</div>
+      <div class="entrance-title">転生装置と共同制作する</div>
+      <div class="entrance-desc">文化機関と最初から共同で作品を開発する。最も強力な転生方法だが、関係構築が前提。</div>
+      <div class="entrance-example">事例：トトロ（NT × スタジオジブリ）</div>
+    </div>
+    <div class="entrance-card">
+      <div class="entrance-letter">C</div>
+      <div class="entrance-title">フェスティバルから這い上がる</div>
+      <div class="entrance-desc">Edinburgh・Avignon等のフリンジで発見され、転生装置に拾われる。予算ゼロから可能。</div>
+      <div class="entrance-example">事例：Six・チェルフィッチュ</div>
+    </div>
+  </div>
+</div>
+
+<!-- Section 5: シナリオA/B/C' -->
+<div class="soil-section">
+  <div class="soil-section-title">⑤ 3つの戦略シナリオ ── SEEDの主軸はA・B・C'</div>
+  <div style="display:flex;flex-direction:column;gap:12px">
+
+    <!-- Scenario A -->
+    <div class="sc-card main-sc">
+      <div class="sc-main-badge">⭐ SEED 主軸シナリオ</div>
+      <div class="sc-letter a">A</div>
+      <div class="sc-name">トトロパターン ── IP × 国際共同制作</div>
+      <div class="sc-desc">既存の有名IPを利用したファミリー向けミュージカルを海外機関と共同開発し市場展開する。壁は日本単独では越えず、<strong>Transfer装置との国際共同制作で迂回・突破する</strong>のが核心。STEP1：IPを活用した北米・英国の文化施設との共同制作。STEP2：IPの集客力と資本力を使って商業市場に接続。</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:10px">
+        <div class="sc-role-row"><span class="sc-role-chip chip-pr">P</span><span class="sc-role-text">海外文化機関ネットワーク・IPホルダー交渉力・国際共同制作マネジメント</span></div>
+        <div class="sc-role-row"><span class="sc-role-chip chip-dr">D</span><span class="sc-role-text">英国・北米の商業演劇文法・IP制約下の創造性・英語稽古場対応</span></div>
+        <div class="sc-role-row"><span class="sc-role-chip chip-pw">PW</span><span class="sc-role-text">IPの翻案力・英訳を前提とした戯曲構造設計</span></div>
+      </div>
+      <div style="padding:8px 12px;background:var(--bg);border-radius:8px;border-left:3px solid var(--urgent-border);font-size:11.5px;color:var(--text-secondary);line-height:1.65">
+        <strong style="color:var(--urgent-text)">⚠ 構造的課題：</strong>「次のトトロができるか」——トトロはジブリ × National Theatreの特殊な信頼関係によって実現した。IPホルダー（アニメ会社・出版社）と海外Transfer装置を繋げるブリッジ人材が日本に存在しない。国際共同制作の資金スキームもなく（文化庁補助金は国内向け）、IPライセンスの国際交渉ができる演劇専門エージェントも存在しない。
+      </div>
+    </div>
+
+    <!-- Scenario B -->
+    <div class="sc-card main-sc">
+      <div class="sc-main-badge">⭐ SEED 主軸シナリオ</div>
+      <div class="sc-letter b">B</div>
+      <div class="sc-name">ストンプパターン ── ノンバーバル × フリンジTransfer</div>
+      <div class="sc-desc">国内インバウンド観光をテストマーケットにし、海外の観光需要を狙う。STEP1：国内インバウンド向けにノンバーバル作品を開発。STEP2：フリンジフェスに出展。STEP3：世界IP展開。<br>
+        <span style="font-size:11px;color:var(--text-tertiary)">📌 国内には既にインバウンド向けパフォーマンス（浅草・京都等の観光特化型）が存在するが、JPASNの直接的な文脈外にある。これらとの連携・接続がシナリオBの展開において重要な視点となる可能性がある。</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:10px">
+        <div class="sc-role-row"><span class="sc-role-chip chip-pr">P</span><span class="sc-role-text">フリンジフェスネットワーク・インバウンド市場理解・ノンバーバル作品のフォーマット設計</span></div>
+        <div class="sc-role-row"><span class="sc-role-chip chip-dr">D</span><span class="sc-role-text">ノンバーバル・身体表現の専門性・観光客向け作品設計</span></div>
+        <div class="sc-role-row"><span class="sc-role-chip chip-pw">PW</span><span class="sc-role-text">ノンバーバル構造設計（devisor的役割）</span></div>
+      </div>
+      <div style="padding:8px 12px;background:var(--bg);border-radius:8px;border-left:3px solid var(--urgent-border);font-size:11.5px;color:var(--text-secondary);line-height:1.65">
+        <strong style="color:var(--urgent-text)">⚠ 構造的課題：</strong>「国内インバウンドからフリンジTransferへの接続回路がない」——国内に観光向けパフォーマンスは存在するが、それをエジンバラ等のフリンジに持ち込みTransferを設計できる人材・ネットワークがない。STOMPやナンタのような「長期IP化」（30年超の継続展開）を設計・運営できるプロデューサーが育っていない。
+      </div>
+    </div>
+
+    <!-- Scenario C' -->
+    <div class="sc-card main-sc">
+      <div class="sc-main-badge">⭐ SEED 主軸シナリオ</div>
+      <div class="sc-letter" style="color:var(--director)">C'</div>
+      <div class="sc-name">国際文脈展開型 ── 固有文脈 × 国際フェスティバル発見</div>
+      <div class="sc-desc">古典の現代的再解釈と社会的文脈・時代性を持つ現代演劇を統合。両者に共通するのは<strong>「強い日本固有文脈を持つ作品が、国際フェスティバルを経由してTransferする」</strong>という構造。<br>
+        <span style="font-size:11.5px;color:var(--text-secondary)"><strong>バリエーション例（産経新聞「目に映るのは氷山の一角」より）：</strong><br>
+        ・木ノ下歌舞伎型：古典を現代的に再解釈 → 国内評価 → 国際招聘<br>
+        ・チェルフィッチュ型：社会的文脈の現代演劇 → Kunsten/Avignon招聘 → 世界展開<br>
+        ・社会テーマ型：震災等の日本固有の社会的文脈 → 国際的な文脈での評価 → フェスティバル招聘</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:10px">
+        <div class="sc-role-row"><span class="sc-role-chip chip-pr">P</span><span class="sc-role-text">国際フェスティバルキュレーターとのネットワーク・文化外交・公的支援の活用</span></div>
+        <div class="sc-role-row"><span class="sc-role-chip chip-dr">D</span><span class="sc-role-text">社会的文脈・時代性を持つ作品制作／古典文法を理解した現代的解釈</span></div>
+        <div class="sc-role-row"><span class="sc-role-chip chip-pw">PW</span><span class="sc-role-text">日本社会の今を普遍的言語で語る力／伝統様式の現代語翻訳</span></div>
+      </div>
+      <div style="padding:8px 12px;background:var(--bg);border-radius:8px;border-left:3px solid var(--urgent-border);font-size:11.5px;color:var(--text-secondary);line-height:1.65">
+        <strong style="color:var(--urgent-text)">⚠ 構造的課題：</strong>「次のチェルフィッチュが作れていない」「プリコグでも作れていない」——属人性が高く、個人の才能と偶然の出会いに依存している。この課題をSEEDが構造化することがC'シナリオのミッション。
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Section 6: Japan / 足りない構造 -->
+<div class="soil-section">
+  <div class="soil-section-title">⑥ 足りない人・構造 ── SEEDが埋める空白</div>
+  <div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:12.5px;color:var(--text-secondary);line-height:1.7;border-left:3px solid var(--seed)">
+    <strong style="color:var(--text-primary)">原則：壁は「日本だけで越えようとしない」</strong><br>
+    言語の壁・資本の壁・歴史観の壁——日本単独で突破しようとすることが最大の失敗パターン。<strong>国際共同制作（Co-production）を通じて乗り越えることが戦略の核心。</strong>Transfer装置（NT・Barbican等）との共同制作によって、その機関の信頼性・観客基盤・ブランドが壁を共に突破してくれる。
+  </div>
+  <div class="special-grid" style="grid-template-columns:repeat(2,1fr);display:grid;gap:10px">
+    <div class="special-item"><div class="special-id" style="background:#FEF0EE;color:var(--urgent-text)">人材</div><div class="special-name">国際共同制作の経験があるプロデューサーがほぼいない</div></div>
+    <div class="special-item"><div class="special-id" style="background:#FEF0EE;color:var(--urgent-text)">人材</div><div class="special-name">海外文化機関のキュレーターと個人的信頼関係を持つ人がいない</div></div>
+    <div class="special-item"><div class="special-id" style="background:#FEF0EE;color:var(--urgent-text)">人材</div><div class="special-name">英語で交渉・契約できる演劇専門の弁護士・エージェントがいない</div></div>
+    <div class="special-item"><div class="special-id" style="background:#FEF0EE;color:var(--urgent-text)">人材</div><div class="special-name">IPホルダーと演劇界を繋ぐブリッジ人材がいない</div></div>
+    <div class="special-item"><div class="special-id" style="background:#FEF0EE;color:var(--urgent-text)">人材 C'</div><div class="special-name">チェルフィッチュ以降のC'型を担える次世代がいない ── 属人性の構造化が急務</div></div>
+    <div class="special-item"><div class="special-id" style="background:var(--wip-bg);color:var(--wip-text)">構造</div><div class="special-name">Transfer装置との継続的関係構築の仕組みがない</div></div>
+    <div class="special-item"><div class="special-id" style="background:var(--wip-bg);color:var(--wip-text)">構造</div><div class="special-name">国際共同制作のための資金スキームがない（文化庁補助金は国内向け）</div></div>
+    <div class="special-item"><div class="special-id" style="background:var(--wip-bg);color:var(--wip-text)">構造 C'</div><div class="special-name">C'型の属人性を構造化・再現可能にする育成の仕組みがない ← SEEDの主要ミッション</div></div>
+  </div>
+</div>
+
+</div>
+</div><!-- /#tab-soil-map -->
+
+<!-- ════ University Analysis Tab ════ -->
+<div id="tab-university-analysis" class="tab-content">
+<div class="ge-container">
+
+<div class="soil-intro-card">
+  <strong>大学教育に関する分析：</strong>日本の演劇・舞台芸術教育（東演連加盟5校・昭和音楽大学・早稲田大学等）と海外主要機関（RADA・Guildhall・Rose Bruford・Yale・Juilliard・CMU・K-Arts）のカリキュラムをWebリサーチし、実際の科目名ベースで比較・分析した結果。これらの差分がSEEDの一般教養プログラム（タブ④）と各職能別プログラム（タブ⑤）の設計根拠になっている。
+</div>
+
+<!-- 国内大学分析 -->
+<div class="ge-section">
+  <div class="ge-section-title">国内大学の演劇教育 ── 何を教えていて、何が不足しているか</div>
+  <div style="overflow-x:auto">
+  <table class="ge-common-table">
+    <thead>
+      <tr><th>大学・機関</th><th>カバーしていること（確認済）</th><th>不足しているもの（SEEDが補う）</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>日本大学芸術学部 演劇学科</strong><br><span style="font-size:10px;color:var(--text-tertiary)">東演連加盟。劇作・演出・企画制作・演技・デザイン技術の3コース10専攻</span></td>
+        <td>演劇史（日本・西洋）、各専攻別技術実習（照明・音響・舞台美術）、学生主導の学内公演（年複数本）、戯曲輪読・集団創作</td>
+        <td>英語での表現・議論、国際市場の理解、商業演劇の財務・法務教育、業界人との体系的接続（単発外部講師が主流）</td>
+      </tr>
+      <tr>
+        <td><strong>玉川大学 演劇・舞踊学科</strong><br><span style="font-size:10px;color:var(--text-tertiary)">東演連加盟。身体表現・舞台創造・芸術応用の3コース</span></td>
+        <td>1年次横断必修（音楽表現・身体表現・舞台技術）、劇場接遇演習、オーディション演習、演劇史・理論、上演実習</td>
+        <td>英語・国際展開の具体的プログラムなし、商業演劇プロデュース、スクリーン演技・映像との接続</td>
+      </tr>
+      <tr>
+        <td><strong>多摩美術大学 演劇舞踊デザイン学科</strong><br><span style="font-size:10px;color:var(--text-tertiary)">東演連加盟。演劇舞踊コース＋劇場美術デザインコース</span></td>
+        <td>演技・振付・劇作・演出・コレオグラフィ演習、舞台美術・照明・衣裳・映像美術、社会的背景を踏まえた演劇史・理論</td>
+        <td>英語・国際展開教育、業界接続の仕組み、商業演劇プロデュース</td>
+      </tr>
+      <tr>
+        <td><strong>桐朋学園芸術短大 演劇専攻</strong><br><span style="font-size:10px;color:var(--text-tertiary)">東演連加盟。2年制。ストレートプレイ・ミュージカル・声優の3コース</span></td>
+        <td>「本を読む力・身体の鍛錬・アンサンブル」の3指針。ボイストレーニング・身体・演技発表会・卒業公演への集中特化</td>
+        <td>俳優育成特化のためプロデューサー・劇作家・演出家育成は対象外。英語・国際展開の記述なし</td>
+      </tr>
+      <tr>
+        <td><strong>桜美林大学 芸術文化学群</strong><br><span style="font-size:10px;color:var(--text-tertiary)">東演連加盟。演劇・ダンス専修 + 2025年度よりプロデュース＆マネジメント領域拡充</span></td>
+        <td>演劇・ダンス・ミュージカル・舞台技術スタッフワーク・アートプロデュース・2025年度より声優・映像演技・テーマパークダンス対応科目新設</td>
+        <td>「グローバルアウトリーチプログラム」が示唆されるが詳細不明。具体的な国際展開教育は未確認</td>
+      </tr>
+      <tr>
+        <td><strong>昭和音楽大学 アートマネジメントコース</strong><br><span style="font-size:10px;color:var(--text-tertiary)">1994年日本初のアートマネジメント教育。米国AAAE認定取得</span></td>
+        <td>アートマネジメント実務（企画・交渉・運営一貫）、<strong>アートマネジメント英語①②必修</strong>、50社超のインターンシップ、3年次：学生企画の公演を実費制作</td>
+        <td>演劇固有のドラマトゥルギー・劇作・演出の深度、自分の作品・ビジョンを継続して「語り続ける」表現訓練</td>
+      </tr>
+      <tr>
+        <td><strong>早稲田大学 文学部 演劇映像コース</strong><br><span style="font-size:10px;color:var(--text-tertiary)">研究・批評系。実技系ではない</span></td>
+        <td>日本古典演劇（能・浄瑠璃・歌舞伎）・民俗芸能・西洋演劇・現代舞台芸術・映画史理論・演劇批評</td>
+        <td>実技・実習なし。国際展開・英語プレゼン・プロデュース実践はカリキュラム外</td>
+      </tr>
+      <tr style="background:var(--seed-bg)">
+        <td colspan="3">
+          <strong>🔑 日本の演劇大学教育に共通して欠けているもの</strong><br>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:8px;font-size:11.5px">
+            <div><strong style="color:var(--seed-text)">英語・国際交渉</strong>：昭和音大のみ「アートマネジメント英語」を必修化。東演連5校は未整備。</div>
+            <div><strong style="color:var(--seed-text)">商業演劇プロデュース</strong>：Yale Theater Management MFAレベルの体系的教育が日本に存在しない。</div>
+            <div><strong style="color:var(--seed-text)">業界接続の制度化</strong>：RADAは業界人前プレゼンを必修化。Yaleは初日から実務従事。日本は単発外部講師が主流。</div>
+            <div><strong style="color:var(--seed-text)">ドラマトゥルギー実践化</strong>：RADAはBA必修。Yaleは独立専攻。日本は理論系にとどまる。</div>
+            <div><strong style="color:var(--seed-text)">3職能横断学習</strong>：Yale DRAM 50aは全職能が3週間協働必修。日本では専攻間の壁が高い。</div>
+            <div><strong style="color:var(--urgent-text)">最大のギャップ → SEEDが担う</strong>：「表現の力（sustained oral discourse）」——どの大学も圧倒的に不足。</div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- 海外詳細比較 -->
+<div class="ge-section">
+  <div class="ge-section-title">海外の演劇教育との詳細比較 ── 具体的科目名による分析</div>
+
+  <!-- 主要海外機関のサマリー -->
+  <div style="overflow-x:auto;margin-bottom:1.5rem">
+  <table class="ge-common-table">
+    <thead>
+      <tr><th>機関（国）</th><th>特徴的な科目・プログラム</th><th>日本との最大の差</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>RADA</strong><br><span style="font-size:10px;color:var(--text-tertiary)">英国・BA Acting 3年制</span></td>
+        <td><strong>Dramaturgy（Year 1 必修）</strong>・国際フェスティバル参加必須（Year 2：META / Gdansk Shakespeare Festival / Utah等）・Reflective Practice（継続）・Agents/CD/Producers による業界セミナー（必修）・RADA Buddy Mentoring</td>
+        <td>Year 2 に国際フェスティバル参加が<strong>カリキュラムとして制度化</strong>。ドラマトゥルギーが学部1年次から必修。業界人との接点を科目化。</td>
+      </tr>
+      <tr>
+        <td><strong>Guildhall School</strong><br><span style="font-size:10px;color:var(--text-tertiary)">英国・BA Acting 3年制</span></td>
+        <td><strong>Self-led Practice（劇作・ドラマトゥルギー・独立プロジェクト必修）</strong>・専任 Industry Consultant 配置・Making It Festival（学生創作発表）・3年次でAgents/CD/Directors向けショーケース・Alumni Gym（卒業後継続トレーニング）</td>
+        <td><strong>専任 Industry Consultant を学校に配置</strong>し、学生のキャリア構築を個別支援。日本では単発外部講師が主流。</td>
+      </tr>
+      <tr>
+        <td><strong>Rose Bruford</strong><br><span style="font-size:10px;color:var(--text-tertiary)">英国・学部+MA</span></td>
+        <td>European Theatre Arts（欧州6ヶ国セメスター留学、675名実績）・American Theatre Arts（米国主要都市留学）・<strong>MA Directing 正式科目：Budgeting / Fundraising / Pitching Ideas / Professional Networking</strong></td>
+        <td><strong>演出家の育成課程でピッチ・資金調達・ネットワーキングを正式科目として設置</strong>。欧米への演劇特化留学が制度化されている。</td>
+      </tr>
+      <tr>
+        <td><strong>Yale School of Drama</strong><br><span style="font-size:10px;color:var(--text-tertiary)">米国・MFA各専攻</span></td>
+        <td><strong>Theater Management MFA 16科目（Financial Accounting / Strategic Planning / Law and the Arts / Principles of Marketing / Advanced Topics in Branding / Labor and Employee Relations / Governance / Producing for the Commercial Theater 等）</strong>・Bridge to the Profession（年12回・6単位）・MFA/MBA Joint Degree・Yale Rep初日から実務参加</td>
+        <td>Theater Management が独立MFA専攻として確立。<strong>劇場経営に必要な全知識（財務・法務・労使・政策・ガバナンス）を体系化</strong>。日本に同等の専門大学院なし。</td>
+      </tr>
+      <tr>
+        <td><strong>Yale Playwriting/Directing/Dramaturgy</strong><br><span style="font-size:10px;color:var(--text-tertiary)">米国・MFA各専攻</span></td>
+        <td>Playwriting：<strong>Teach What You Write（自作を教えることで言語化）・Theater Now NYC（業界没入リサーチ）・Writing for Film and Television（必修）</strong>。Directing：Bridge to the Profession / Choreographic Imagination / Opera Practicum / World Performance / Director's Thesis Casebook。Dramaturgy：Criticism Workshop（3年間継続）・Literary Office Practicum・Translation（語学をドラマトゥルギーとして統合）</td>
+        <td>劇作家が映像脚本も学ぶ、演出家がOpera・振付・World Performanceを横断する、ドラマトゥルグが文学部の実務も担う——<strong>専攻間の横断学習が必修として制度化</strong>。</td>
+      </tr>
+      <tr>
+        <td><strong>Juilliard School</strong><br><span style="font-size:10px;color:var(--text-tertiary)">米国・BFA Drama 4年制</span></td>
+        <td>Year 1-2：<strong>Essentials of Entrepreneurship（起業家精神・必修）</strong>。Year 3：<strong>Elements of Producing（俳優も必修）・Acting on Camera。</strong>Year 4：Bridge to the Profession（6単位）・American Theater Landscape・<strong>Actor Presentations（NY&LA のエージェント/CDへのライブショーケース）</strong></td>
+        <td>俳優育成課程に起業家精神・プロデュース基礎を必修化。4年次に<strong>実際の業界人の前でのショーケースを制度化</strong>（＝「松田さんの前で話す」の海外版）。</td>
+      </tr>
+      <tr>
+        <td><strong>CMU School of Drama</strong><br><span style="font-size:10px;color:var(--text-tertiary)">米国・BFA Dramaturgy</span></td>
+        <td>Dramaturgy が独立学科として存在。<strong>Interactive Lobby Dramaturgy（観客エンゲージメントの専門訓練が科目課題）</strong>・Dramaturgy Forum（上級生主導の業界/思想討議）・必修インターンシップ（提携主要劇場）</td>
+        <td>ドラマトゥルジーが<strong>4年制の独立学科</strong>として存在。「劇場ロビーでの観客との対話」まで演劇教育に統合されている。</td>
+      </tr>
+      <tr>
+        <td><strong>K-Arts（韓国）</strong><br><span style="font-size:10px;color:var(--text-tertiary)">韓国・School of Drama 5学科</span></td>
+        <td>演出科を<strong>「劇作家（dramatist）として演出家を養成」</strong>・毎学期24本の大小公演・<strong>Arts Management 専攻が School of Drama 内に独立</strong>・Musical Theatre Writing Program（大学院3年：劇作・作詞・作曲を統合育成）・英米露欧のメソッドを統合した教員陣</td>
+        <td>Arts Managementが演劇学科の中に専攻として独立。ミュージカル創作を国策として大学院で体系育成。<strong>演出家を「書く人」として養成する発想</strong>が日本と全く異なる。</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!-- 海外にあって日本にない科目リスト -->
+  <div style="font-size:13px;font-weight:700;color:var(--text-primary);margin-bottom:10px">海外にあって日本にない ── 具体的科目名（SEEDのプログラムで補うべき視点）</div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1.5rem;font-size:11.5px">
+    <div style="padding:10px 12px;background:var(--seed-bg);border-radius:10px;border:1px solid #BDD3F8">
+      <div style="font-weight:700;color:var(--seed-text);margin-bottom:6px">業界接続の制度化</div>
+      <div style="color:var(--text-secondary);line-height:1.7">Bridge to the Profession（Yale/Juilliard・年12回・6単位）<br>Actor Presentations（NY&LA 業界人ショーケース）<br>Industry Practice I/II（Yale・業界に自作を持ち込む）<br>Industry Consultant 常駐（Guildhall）<br>Professional Colloquium（NYU・業界人との議論）</div>
+    </div>
+    <div style="padding:10px 12px;background:var(--soil-bg);border-radius:10px;border:1px solid #A8DEC8">
+      <div style="font-weight:700;color:var(--soil-text);margin-bottom:6px">表現・言語化の正式訓練</div>
+      <div style="color:var(--text-secondary);line-height:1.7">Teach What You Write（Yale・自作を教える）<br>Criticism Workshop（Yale・3年間継続執筆）<br>Pitching Ideas（Rose Bruford Directing MA）<br>Business Writing for Theater Managers（Yale）<br>Authentic Collaboration（Yale・協働の言語化）<br>Reflective Practice（RADA/Guildhall・省察の習慣化）</div>
+    </div>
+    <div style="padding:10px 12px;background:var(--director-bg);border-radius:10px;border:1px solid var(--director-border)">
+      <div style="font-weight:700;color:var(--director);margin-bottom:6px">起業・経営・政策</div>
+      <div style="color:var(--text-secondary);line-height:1.7">Essentials of Entrepreneurship（Juilliard・Year 1-2必修）<br>Elements of Producing（Juilliard・俳優も必修）<br>Producing for the Commercial Theater（Yale）<br>Governance / Labor and Employee Relations（Yale）<br>Cultural Policy（Yale）<br>Fundraising / Budgeting（Rose Bruford）</div>
+    </div>
+    <div style="padding:10px 12px;background:var(--playwright-bg);border-radius:10px;border:1px solid var(--playwright-border)">
+      <div style="font-weight:700;color:var(--playwright);margin-bottom:6px">国際フェスティバル参加</div>
+      <div style="color:var(--text-secondary);line-height:1.7">Year 2 必修参加（RADA：META/Gdansk等）<br>European Theatre Arts（Rose Bruford：6ヶ国留学・675名実績）<br>American Theatre Arts（Rose Bruford：米国主要都市）<br>Theater Now NYC（Yale：業界没入リサーチ）</div>
+    </div>
+    <div style="padding:10px 12px;background:var(--bg);border-radius:10px;border:1px solid var(--border)">
+      <div style="font-weight:700;color:var(--text-primary);margin-bottom:6px">3職能横断学習の必修化</div>
+      <div style="color:var(--text-secondary);line-height:1.7">DRAM 50a（Yale：劇作家×演出家×俳優×デザイナー×ドラマトゥルグが3週間協働）<br>New Play Lab（Yale/CMU：全職能でフィードバック）<br>Playwrights & Directors Practicum（Yale）<br>Cross-school "undisciplined"（Guildhall：音楽×演劇×デザイン）</div>
+    </div>
+    <div style="padding:10px 12px;background:var(--bg);border-radius:10px;border:1px solid var(--border)">
+      <div style="font-weight:700;color:var(--text-primary);margin-bottom:6px">映像・TV・多メディア統合</div>
+      <div style="color:var(--text-secondary);line-height:1.7">Episodic Writing I（NYU：TVスペック執筆・劇作家も必修）<br>Writing for Film and Television（Yale Playwriting・必修）<br>Screen Acting / Acting on Camera（RADA・Juilliard・Guildhall）<br>Directing for Camera（Rose Bruford）</div>
+    </div>
+  </div>
+
+  <!-- 表現の力の比較 -->
+  <div style="font-size:13px;font-weight:700;color:var(--text-primary);margin-bottom:10px">「表現の力（話し続ける力）」に対応する海外の具体的な訓練方法</div>
+  <div style="overflow-x:auto">
+  <table class="ge-common-table">
+    <thead>
+      <tr><th>訓練の種類</th><th>海外の具体的科目名</th><th>機関</th><th>SEEDでの対応（UNIT）</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>「なぜ表現するか」の言語化</strong></td><td>Teach What You Write（自作を教えることで言語化）<br>Authentic Collaboration（協働の意図を言語化）<br>Reflective Practice（省察を継続的に書く）</td><td>Yale / RADA / Guildhall</td><td>UNIT E1（自分の文化・作品を5分で語る）</td></tr>
+      <tr><td><strong>業界人の前での語り（live pitch）</strong></td><td>Actor Presentations（NY&LA業界人向けショーケース）<br>Bridge to the Profession（Artistic Leadersへのプロジェクトピッチ）<br>Industry Practice I/II（業界に自作を持ち込む）<br>Pitching Ideas（演出家課程の正式科目）</td><td>Juilliard / Yale / Rose Bruford</td><td>UNIT E2（10分プレゼン・業界のプロの前で=修了基準）</td></tr>
+      <tr><td><strong>批評的言語化の継続</strong></td><td>Criticism Workshop（3年間毎週継続）<br>Dramaturgy Forum（上級生が主導する週次討議）<br>Business Writing for Theater Managers</td><td>Yale / CMU</td><td>企画1（海外演劇誌×英語ディスカッション）での継続</td></tr>
+      <tr><td><strong>声の段階的訓練</strong></td><td>Voice I/II/III（Juilliard・4年間継続）<br>Voice & Speech（RADA・3年間継続）<br>Voice（方言・歌唱・音声メディア統合・Guildhall）</td><td>Juilliard / RADA / Guildhall</td><td>（演出家・劇作家の職能別プログラムで対応）</td></tr>
+      <tr><td><strong>起業家精神・自己設計力</strong></td><td>Essentials of Entrepreneurship（Year 1-2必修）<br>American Theater Landscape（年4の業界構造理解）<br>Founding Visions（創業者ビジョンの言語化）</td><td>Juilliard / Yale</td><td>UNIT K1（市場地図・3シナリオ・自分の立ち位置）→ E1/E2での言語化</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+</div>
+
+</div>
+</div><!-- /#tab-university-analysis -->
+
+<!-- ════ General Education Tab ════ -->
+<div id="tab-general-education" class="tab-content">
+<div class="ge-container">
+
+<div class="soil-intro-card">
+  <strong>一般教養プログラムの核心：「氷山の一角」モデル</strong><br>
+  産経新聞「目に映るのは氷山の一角」が示す通り、国際舞台で評価される日本の演劇は「見えている部分（作品・表現）」だけが評価されているが、その下には文化的文脈・歴史・社会認識・才能という「見えない基盤」がある。<br>
+  <strong>大学は主に「水面下（知識・技術・歴史）」を育てている。SEEDの一般教養は「その知識を水面に引き上げる力＝表現の力」を育てる。</strong><br>
+  3職能が「同じ地図を見て・同じ言語で話し続けられる」ようになる共通土台。選考①の範囲に連動し、JPASNの正会員（社会人）も参加可能な設計。
+</div>
+
+<!-- 大学分析 参照カード -->
+<div class="soil-intro-card" style="background:var(--seed-bg);border:1px solid #BDD3F8;margin-bottom:1.5rem">
+  <strong>📊 大学教育との差分・海外比較 → タブ③「大学教育に関する分析」で確認</strong><br>
+  国内7校（東演連5校・昭和音大・早稲田）と海外8機関（RADA・Guildhall・Rose Bruford・Yale・Juilliard・CMU・K-Arts）の具体的カリキュラムを科目名付きで比較分析しています。<br>
+  <span style="color:var(--seed-text);font-size:12.5px;font-weight:600">→ 共通のギャップ：「表現の力（sustained oral discourse）」が国内全大学で圧倒的に不足。それを補うのが以下のプログラムです。</span>
+</div>
+
+<div class="ge-section">
+  <div class="ge-section-title">一般教養 vs 職能別プログラム ── 棲み分け原則</div>
+  <div style="display:none">
+  <table class="ge-common-table">
+    <thead>
+      <tr><th>大学・機関</th><th>カバーしていること（確認済）</th><th>不足しているもの（SEEDが補う）</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>日本大学芸術学部 演劇学科</strong><br><span style="font-size:10px;color:var(--text-tertiary)">東演連加盟。劇作・演出・企画制作・演技・デザイン技術の3コース10専攻</span></td>
+        <td>演劇史（日本・西洋）、各専攻別技術実習（照明・音響・舞台美術）、学生主導の学内公演（年複数本）、戯曲輪読・集団創作</td>
+        <td>英語での表現・議論、国際市場の理解、商業演劇の財務・法務教育、業界人との体系的接続（単発外部講師が主流）</td>
+      </tr>
+      <tr>
+        <td><strong>玉川大学 演劇・舞踊学科</strong><br><span style="font-size:10px;color:var(--text-tertiary)">東演連加盟。身体表現・舞台創造・芸術応用の3コース</span></td>
+        <td>1年次横断必修（音楽表現・身体表現・舞台技術）、劇場接遇演習、オーディション演習、演劇史・理論、上演実習</td>
+        <td>英語・国際展開の具体的プログラムなし、商業演劇プロデュース、スクリーン演技・映像との接続</td>
+      </tr>
+      <tr>
+        <td><strong>多摩美術大学 演劇舞踊デザイン学科</strong><br><span style="font-size:10px;color:var(--text-tertiary)">東演連加盟。演劇舞踊コース＋劇場美術デザインコース</span></td>
+        <td>演技・振付・劇作・演出・コレオグラフィ演習、舞台美術・照明・衣裳・映像美術、社会的背景を踏まえた演劇史・理論</td>
+        <td>英語・国際展開教育、業界接続の仕組み、商業演劇プロデュース</td>
+      </tr>
+      <tr>
+        <td><strong>桐朋学園芸術短大 演劇専攻</strong><br><span style="font-size:10px;color:var(--text-tertiary)">東演連加盟。2年制。ストレートプレイ・ミュージカル・声優の3コース</span></td>
+        <td>「本を読む力・身体の鍛錬・アンサンブル」の3指針。ボイストレーニング・身体・演技発表会・卒業公演への集中特化</td>
+        <td>俳優育成特化のためプロデューサー・劇作家・演出家育成は対象外。英語・国際展開の記述なし</td>
+      </tr>
+      <tr>
+        <td><strong>桜美林大学 芸術文化学群</strong><br><span style="font-size:10px;color:var(--text-tertiary)">東演連加盟。演劇・ダンス専修 + 2025年度よりプロデュース＆マネジメント領域拡充</span></td>
+        <td>演劇・ダンス・ミュージカル・舞台技術スタッフワーク・アートプロデュース・2025年度より声優・映像演技・テーマパークダンス対応科目新設</td>
+        <td>「グローバルアウトリーチプログラム」が示唆されるが詳細不明。具体的な国際展開教育は未確認</td>
+      </tr>
+      <tr>
+        <td><strong>昭和音楽大学 アートマネジメントコース</strong><br><span style="font-size:10px;color:var(--text-tertiary)">1994年日本初のアートマネジメント教育。米国AAAE認定取得</span></td>
+        <td>アートマネジメント実務（企画・交渉・運営一貫）、<strong>アートマネジメント英語①②必修</strong>、50社超のインターンシップ、3年次：学生企画の公演を実費制作</td>
+        <td>演劇固有のドラマトゥルギー・劇作・演出の深度、自分の作品・ビジョンを継続して「語り続ける」表現訓練</td>
+      </tr>
+      <tr>
+        <td><strong>早稲田大学 文学部 演劇映像コース</strong><br><span style="font-size:10px;color:var(--text-tertiary)">研究・批評系。実技系ではない</span></td>
+        <td>日本古典演劇（能・浄瑠璃・歌舞伎）・民俗芸能・西洋演劇・現代舞台芸術・映画史理論・演劇批評</td>
+        <td>実技・実習なし。国際展開・英語プレゼン・プロデュース実践はカリキュラム外</td>
+      </tr>
+      <tr style="background:var(--seed-bg)">
+        <td colspan="3">
+          <strong>🔬 海外比較で見えてくる構造的ギャップ（RADA・Yale・K-Arts）</strong><br>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:8px;font-size:11.5px">
+            <div><strong style="color:var(--seed-text)">英語・国際交渉</strong>：RADAは国際演劇祭参加が正規プログラム。日本は昭和音大のみ「アートマネジメント英語」を必修化。東演連5校は未整備。</div>
+            <div><strong style="color:var(--seed-text)">商業演劇プロデュース</strong>：Yale Theater Management MFAでは会計・財務・労働法・ガバナンス・資金調達・観客開発を専門課程として設置。日本にはない。</div>
+            <div><strong style="color:var(--seed-text)">ドラマトゥルギーの実践的科目化</strong>：RADAはBA ActingにDramaturgy必修。YaleはMFA独立専攻。日本は理論系にとどまる。</div>
+            <div><strong style="color:var(--seed-text)">業界構造・キャリア設計</strong>：RADAはエージェント・キャスティング・プロデューサーによるセミナーを必修化。Yaleは初日から実務従事。日本は単発外部講師が主流。</div>
+            <div><strong style="color:var(--seed-text)">ミュージカル創作</strong>：K-Artsは Musical Theatre Writing Program（大学院）として国策育成。日本に独立プログラムなし。</div>
+            <div><strong style="color:var(--urgent-text)">共通の最大ギャップ → SEEDが担う</strong>：「表現の力（sustained oral discourse）」——知識を持ちながら、英語で・継続的に・論理的に「話し続ける」訓練が、どの大学でも圧倒的に不足。</div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="ge-split-grid" style="margin-top:12px">
+    <div class="ge-split-card ge-split-left">
+      <div class="ge-split-title">一般教養がカバーすること</div>
+      <div class="ge-split-items">
+        <strong>地図（WHY/WHERE）</strong>：市場構造・3シナリオ・Transfer装置<br>
+        <strong>表現の力（HOW TO SURFACE）</strong>：知識を言語化・プレゼン・話し続ける訓練<br>
+        <strong>共通言語</strong>：ドラマトゥルギー・制作実務・日本文化の言語化<br>
+        → 3職種が「語り合える状態」にする
+      </div>
+    </div>
+    <div class="ge-split-card ge-split-right">
+      <div class="ge-split-title">職能別プログラムがカバーすること → タブ⑤へ</div>
+      <div class="ge-split-items">
+        HOW（どうやって実現するか・どう売るか）<br>
+        各職能固有の技術・スキル・戦略<br>
+        シナリオA/B/C'別の具体的アプローチ<br>
+        実践スキルレベルの専門知識
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 共通要件の抽出 -->
+<div class="ge-section">
+  <div class="ge-section-title">3職能横断の共通要件 ── 一般教養で扱う根拠</div>
+  <div style="overflow-x:auto">
+  <table class="ge-common-table">
+    <thead>
+      <tr><th>共通要件</th><th>P（プロデューサー）</th><th>D（演出家）</th><th>PW（劇作家）</th><th>大学カバー度</th><th>一般教養での扱い方</th></tr>
+    </thead>
+    <tbody>
+      <tr style="background:#FFF9E0"><td><strong>🆕 表現の力（話し続ける・語る・プレゼン）</strong></td><td>S-3/S-7 ◎</td><td>S-3/S-6 ◎</td><td>S-2/S-6 ◎</td><td style="color:var(--urgent-text);font-weight:700">✗ 全大学で欠如<br><span style="font-size:10px;font-weight:400">RADAは業界人前プレゼン必修。日本は記載なし</span></td><td>10分プレゼン（業界プロの前で）・話の展開力・sustained discourse（UNIT E1/E2）</td></tr>
+      <tr><td><strong>市場構造リテラシー（SOIL・3シナリオ）</strong></td><td>K-4/7/8 ◎</td><td>K-7 ○</td><td>K-8 ○</td><td style="color:var(--urgent-text)">✗ 全大学で欠如<br><span style="font-size:10px">国際市場・Transferの概念なし</span></td><td>4列マトリックス・Transfer装置・A/B/C'シナリオ → タブ①（UNIT K1）</td></tr>
+      <tr><td><strong>コラボレーション・協働姿勢</strong></td><td>M-1・S-1 ◎</td><td>M-1/2・S-2 ◎</td><td>M-3 ◎</td><td style="color:var(--soil)">△ 学内実習で部分的<br><span style="font-size:10px">職種横断の設計は少ない（玉川は1年次横断あり）</span></td><td>3職種混合グループワーク・職種横断対話（UNIT E2）</td></tr>
+      <tr><td><strong>日本文化への誇りと相対化</strong></td><td>M-2・K-2 ◎</td><td>M-4・K-4 ◎</td><td>M-2・K-4 ◎</td><td style="color:var(--soil)">△ 演劇史で基礎あり<br><span style="font-size:10px">早稲田・多摩美は日本伝統芸能も</span></td><td>日本文化の言語化＋英語表現まで（UNIT E1）</td></tr>
+      <tr><td><strong>演劇の構造・ドラマトゥルギー</strong></td><td>K-1 ◎</td><td>K-1 ◎</td><td>K-1 ◎</td><td style="color:var(--soil)">△ 理論系のみ<br><span style="font-size:10px">RADAはBA必修。日本は実践的科目化が弱い</span></td><td>戯曲を「国際的に届くか」の視点で議論（UNIT K2）</td></tr>
+      <tr><td><strong>制作実務基礎（知財・助成金・GM分業）</strong></td><td>K-3/9 ◎</td><td>K-8 ○</td><td>K-5 ◎</td><td style="color:var(--soil)">○ 昭和音大・桜美林で基礎<br><span style="font-size:10px">海外展開・GM分業は日本全大学で未整備</span></td><td>知財・海外契約・GM分業の概論（UNIT K3）</td></tr>
+      <tr><td><strong>英語コミュニケーション</strong></td><td>S-2 ◎</td><td>S-5 ◎</td><td>S-7 ○</td><td style="color:var(--urgent-text)">△ 昭和音大のみ英語必修<br><span style="font-size:10px">東演連5校は「話す英語」ほぼなし</span></td><td>英語ピッチ→10分sustained discourse（UNIT E1/E2）</td></tr>
+      <tr><td><strong>Transfer事例・業界構造・ロールモデル理解</strong></td><td>K-4 ◎</td><td>K-7 ○</td><td>K-8 ○</td><td style="color:var(--urgent-text)">✗ 全大学で欠如<br><span style="font-size:10px">Yaleは初日から劇場実務従事。日本は単発外部講師</span></td><td>Transfer事例解剖（Six/Come from Away/チェルフィッチュ等）（UNIT K2）</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- 海外詳細比較はタブ③に移動済み（このブロックは非表示） -->
+<div style="display:none">
+<div class="ge-section">
+  <div class="ge-section-title">海外の演劇教育との詳細比較（タブ③に移動済み）</div>
+
+  <!-- 主要海外機関のサマリー -->
+  <div style="overflow-x:auto;margin-bottom:1.5rem">
+  <table class="ge-common-table">
+    <thead>
+      <tr><th>機関（国）</th><th>特徴的な科目・プログラム</th><th>日本との最大の差</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>RADA</strong><br><span style="font-size:10px;color:var(--text-tertiary)">英国・BA Acting 3年制</span></td>
+        <td><strong>Dramaturgy（Year 1 必修）</strong>・国際フェスティバル参加必須（Year 2：META / Gdansk Shakespeare Festival / Utah等）・Reflective Practice（継続）・Agents/CD/Producers による業界セミナー（必修）・RADA Buddy Mentoring</td>
+        <td>Year 2 に国際フェスティバル参加が<strong>カリキュラムとして制度化</strong>。ドラマトゥルギーが学部1年次から必修。業界人との接点を科目化。</td>
+      </tr>
+      <tr>
+        <td><strong>Guildhall School</strong><br><span style="font-size:10px;color:var(--text-tertiary)">英国・BA Acting 3年制</span></td>
+        <td><strong>Self-led Practice（劇作・ドラマトゥルギー・独立プロジェクト必修）</strong>・専任 Industry Consultant 配置・Making It Festival（学生創作発表）・3年次でAgents/CD/Directors向けショーケース・Alumni Gym（卒業後継続トレーニング）</td>
+        <td><strong>専任 Industry Consultant を学校に配置</strong>し、学生のキャリア構築を個別支援。日本では単発外部講師が主流。</td>
+      </tr>
+      <tr>
+        <td><strong>Rose Bruford</strong><br><span style="font-size:10px;color:var(--text-tertiary)">英国・学部+MA</span></td>
+        <td>European Theatre Arts（欧州6ヶ国セメスター留学、675名実績）・American Theatre Arts（米国主要都市留学）・<strong>MA Directing 正式科目：Budgeting / Fundraising / Pitching Ideas / Professional Networking</strong></td>
+        <td><strong>演出家の育成課程でピッチ・資金調達・ネットワーキングを正式科目として設置</strong>。欧米への演劇特化留学が制度化されている。</td>
+      </tr>
+      <tr>
+        <td><strong>Yale School of Drama</strong><br><span style="font-size:10px;color:var(--text-tertiary)">米国・MFA各専攻</span></td>
+        <td><strong>Theater Management MFA 16科目（Financial Accounting / Strategic Planning / Law and the Arts / Principles of Marketing / Advanced Topics in Branding / Labor and Employee Relations / Governance / Producing for the Commercial Theater 等）</strong>・Bridge to the Profession（年12回・6単位）・MFA/MBA Joint Degree・Yale Rep初日から実務参加</td>
+        <td>Theater Management が独立MFA専攻として確立。<strong>劇場経営に必要な全知識（財務・法務・労使・政策・ガバナンス）を体系化</strong>。日本に同等の専門大学院なし。</td>
+      </tr>
+      <tr>
+        <td><strong>Yale Playwriting/Directing/Dramaturgy</strong><br><span style="font-size:10px;color:var(--text-tertiary)">米国・MFA各専攻</span></td>
+        <td>Playwriting：<strong>Teach What You Write（自分の作品を教える=言語化の最高到達点）・Theater Now NYC（業界没入リサーチ）・Writing for Film and Television（必修）</strong>。Directing：Bridge to the Profession / Choreographic Imagination / Opera Practicum / World Performance / Director's Thesis Casebook。Dramaturgy：Criticism Workshop（3年間継続）・Literary Office Practicum・Translation（語学をドラマトゥルギーとして統合）</td>
+        <td>劇作家が映像脚本も学ぶ、演出家がOpera・振付・World Performanceを横断する、ドラマトゥルグが文学部の実務も担う——<strong>専攻間の横断学習が必修として制度化</strong>。</td>
+      </tr>
+      <tr>
+        <td><strong>Juilliard School</strong><br><span style="font-size:10px;color:var(--text-tertiary)">米国・BFA Drama 4年制</span></td>
+        <td>Year 1-2：<strong>Essentials of Entrepreneurship（起業家精神・必修）</strong>。Year 3：<strong>Elements of Producing（俳優も必修）・Acting on Camera。</strong>Year 4：Bridge to the Profession（6単位）・American Theater Landscape・<strong>Actor Presentations（NY&LA のエージェント/CDへのライブショーケース）</strong></td>
+        <td>俳優育成課程に起業家精神・プロデュース基礎を必修化。4年次に<strong>実際の業界人の前でのショーケースを制度化</strong>（＝「松田さんの前で話す」の海外版）。</td>
+      </tr>
+      <tr>
+        <td><strong>CMU School of Drama</strong><br><span style="font-size:10px;color:var(--text-tertiary)">米国・BFA Dramaturgy</span></td>
+        <td>Dramaturgy が独立学科として存在。<strong>Interactive Lobby Dramaturgy（観客エンゲージメントの専門訓練が科目課題）</strong>・Dramaturgy Forum（上級生主導の業界/思想討議）・必修インターンシップ（提携主要劇場）</td>
+        <td>ドラマトゥルジーが<strong>4年制の独立学科</strong>として存在。「劇場ロビーでの観客との対話」まで演劇教育に統合されている。</td>
+      </tr>
+      <tr>
+        <td><strong>K-Arts（韓国）</strong><br><span style="font-size:10px;color:var(--text-tertiary)">韓国・School of Drama 5学科</span></td>
+        <td>演出科を<strong>「劇作家（dramatist）として演出家を養成」</strong>・毎学期24本の大小公演・<strong>Arts Management 専攻が School of Drama 内に独立</strong>・Musical Theatre Writing Program（大学院3年：劇作・作詞・作曲を統合育成）・英米露欧のメソッドを統合した教員陣</td>
+        <td>Arts Managementが演劇学科の中に専攻として独立。ミュージカル創作を国策として大学院で体系育成。<strong>演出家を「書く人」として養成する発想</strong>が日本と全く異なる。</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!-- 海外にあって日本にない科目リスト -->
+  <div style="font-size:13px;font-weight:700;color:var(--text-primary);margin-bottom:10px">海外にあって日本にない ── 具体的科目名（SEEDの一般教養で補うべき視点）</div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1.5rem;font-size:11.5px">
+    <div style="padding:10px 12px;background:var(--seed-bg);border-radius:10px;border:1px solid #BDD3F8">
+      <div style="font-weight:700;color:var(--seed-text);margin-bottom:6px">業界接続の制度化</div>
+      <div style="color:var(--text-secondary);line-height:1.7">Bridge to the Profession（Yale/Juilliard・年12回・6単位）<br>Actor Presentations（NY&LA 業界人ショーケース）<br>Industry Practice I/II（Yale・業界に自作を持ち込む）<br>Industry Consultant 常駐（Guildhall）<br>Professional Colloquium（NYU・業界人との議論）</div>
+    </div>
+    <div style="padding:10px 12px;background:var(--soil-bg);border-radius:10px;border:1px solid #A8DEC8">
+      <div style="font-weight:700;color:var(--soil-text);margin-bottom:6px">表現・言語化の正式訓練</div>
+      <div style="color:var(--text-secondary);line-height:1.7">Teach What You Write（Yale・自作を教える）<br>Criticism Workshop（Yale・3年間継続執筆）<br>Pitching Ideas（Rose Bruford Directing MA）<br>Business Writing for Theater Managers（Yale）<br>Authentic Collaboration（Yale・協働の言語化）<br>Reflective Practice（RADA/Guildhall・省察の習慣化）</div>
+    </div>
+    <div style="padding:10px 12px;background:var(--director-bg);border-radius:10px;border:1px solid var(--director-border)">
+      <div style="font-weight:700;color:var(--director);margin-bottom:6px">起業・経営・政策</div>
+      <div style="color:var(--text-secondary);line-height:1.7">Essentials of Entrepreneurship（Juilliard・Year 1-2必修）<br>Elements of Producing（Juilliard・俳優も必修）<br>Producing for the Commercial Theater（Yale）<br>Governance / Labor and Employee Relations（Yale）<br>Cultural Policy（Yale）<br>Fundraising / Budgeting（Rose Bruford）</div>
+    </div>
+    <div style="padding:10px 12px;background:var(--playwright-bg);border-radius:10px;border:1px solid var(--playwright-border)">
+      <div style="font-weight:700;color:var(--playwright);margin-bottom:6px">国際フェスティバル参加</div>
+      <div style="color:var(--text-secondary);line-height:1.7">Year 2 必修参加（RADA：META/Gdansk等）<br>European Theatre Arts（Rose Bruford：6ヶ国留学・675名実績）<br>American Theatre Arts（Rose Bruford：米国主要都市）<br>Theater Now NYC（Yale：業界没入リサーチ）</div>
+    </div>
+    <div style="padding:10px 12px;background:var(--bg);border-radius:10px;border:1px solid var(--border)">
+      <div style="font-weight:700;color:var(--text-primary);margin-bottom:6px">3職能横断学習の必修化</div>
+      <div style="color:var(--text-secondary);line-height:1.7">DRAM 50a（Yale：劇作家×演出家×俳優×デザイナー×ドラマトゥルグが3週間協働）<br>New Play Lab（Yale/CMU：全職能でフィードバック）<br>Playwrights & Directors Practicum（Yale）<br>Cross-school "undisciplined"（Guildhall：音楽×演劇×デザイン）</div>
+    </div>
+    <div style="padding:10px 12px;background:var(--bg);border-radius:10px;border:1px solid var(--border)">
+      <div style="font-weight:700;color:var(--text-primary);margin-bottom:6px">映像・TV・多メディア統合</div>
+      <div style="color:var(--text-secondary);line-height:1.7">Episodic Writing I（NYU：TVスペック執筆・劇作家も必修）<br>Writing for Film and Television（Yale Playwriting・必修）<br>Screen Acting / Acting on Camera（RADA・Juilliard・Guildhall）<br>Directing for Camera（Rose Bruford）</div>
+    </div>
+  </div>
+
+  <!-- 表現の力の比較 -->
+  <div style="font-size:13px;font-weight:700;color:var(--text-primary);margin-bottom:10px">「表現の力（話し続ける力）」に対応する海外の具体的な訓練方法</div>
+  <div style="overflow-x:auto">
+  <table class="ge-common-table">
+    <thead>
+      <tr><th>訓練の種類</th><th>海外の具体的科目名</th><th>機関</th><th>SEEDでの対応（UNIT）</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>「なぜ表現するか」の言語化</strong></td><td>Teach What You Write（自作を教えることで言語化）<br>Authentic Collaboration（協働の意図を言語化）<br>Reflective Practice（省察を継続的に書く）</td><td>Yale / RADA / Guildhall</td><td>UNIT E1（自分の文化・作品を5分で語る）</td></tr>
+      <tr><td><strong>業界人の前での語り（live pitch）</strong></td><td>Actor Presentations（NY&LA業界人向けショーケース）<br>Bridge to the Profession（Artistic Leadersへのプロジェクトピッチ）<br>Industry Practice I/II（業界に自作を持ち込む）<br>Pitching Ideas（演出家課程の正式科目）</td><td>Juilliard / Yale / Rose Bruford</td><td>UNIT E2（10分プレゼン・業界のプロの前で=修了基準）</td></tr>
+      <tr><td><strong>批評的言語化の継続</strong></td><td>Criticism Workshop（3年間毎週継続）<br>Dramaturgy Forum（上級生が主導する週次討議）<br>Business Writing for Theater Managers</td><td>Yale / CMU</td><td>企画1（海外演劇誌×英語ディスカッション）での継続</td></tr>
+      <tr><td><strong>声の段階的訓練</strong></td><td>Voice I/II/III（Juilliard・4年間継続）<br>Voice & Speech（RADA・3年間継続）<br>Voice（方言・歌唱・音声メディア統合・Guildhall）</td><td>Juilliard / RADA / Guildhall</td><td>（演出家・劇作家の職能別プログラムで対応）</td></tr>
+      <tr><td><strong>起業家精神・自己設計力</strong></td><td>Essentials of Entrepreneurship（Year 1-2必修）<br>American Theater Landscape（年4の業界構造理解）<br>Founding Visions（創業者ビジョンの言語化）</td><td>Juilliard / Yale</td><td>UNIT K1（市場地図・3シナリオ・自分の立ち位置）→ E1/E2での言語化</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+</div>
+</div><!-- /.hidden overseas section -->
+
+<!-- 6ユニット -->
+<div class="ge-section">
+  <div class="ge-section-title">6つのプログラムユニット ── 知識系（K）×表現系（E）の二軸設計</div>
+  <div style="font-size:12px;color:var(--text-tertiary);margin-bottom:12px;padding:8px 12px;background:var(--bg);border-radius:8px">
+    📌 大学でカバー済みの「知識（水面下）」を土台に、SEEDの一般教養が「表現（水面）」を積み上げる設計。<br>
+    知識系UNITは事前・Day1中心。表現系UNITはDay2以降の実践中心。講座外の継続プログラム（企画1〜3）でさらに定着させる。
+  </div>
+  <div class="ge-unit-grid">
+    <div class="ge-unit-card" style="border-top:3px solid var(--seed)">
+      <div class="ge-unit-id">UNIT K0 ── 事前（オンライン）　<span style="background:#E8F5E9;color:#2E7D32;font-size:9px;padding:2px 6px;border-radius:4px">知識系</span></div>
+      <div class="ge-unit-theme">氷山を知る ── 日本の演劇が「見える/見えない」理由</div>
+      <div class="ge-unit-subtitle">「なぜ今・なぜここから・なぜ自分が」</div>
+      <div class="ge-unit-items">①「氷山の一角」モデル：水面下の文化基盤と水面の表現<br>②大学で学んでいること vs SEEDで育てること（差分の認識）<br>③SEEDが生まれた背景・SOILとの連携・3シナリオ概要</div>
+      <div class="ge-unit-goal">→ 「自分がなぜここにいるか」を言葉にできる。学習の動機付けが完成する</div>
+      <div class="ge-unit-owner">担当：野村善文・横堀応彦</div>
+    </div>
+    <div class="ge-unit-card" style="border-top:3px solid var(--seed)">
+      <div class="ge-unit-id">UNIT K1 ── Day 1 午前　<span style="background:#E8F5E9;color:#2E7D32;font-size:9px;padding:2px 6px;border-radius:4px">知識系</span></div>
+      <div class="ge-unit-theme">世界市場の地図 ── Transfer装置と3シナリオ</div>
+      <div class="ge-unit-subtitle">「世界の舞台芸術市場はどう動いているか」</div>
+      <div class="ge-unit-items">①4列マトリックス（SOIL戦略マップ：国際IP/商業招聘/現代演劇/文化資産）<br>②Transfer装置の概念・主要機関（NT/Barbican/Kunsten等）と「壁の越え方」<br>③3シナリオ（A/B/C'）の概要と職能ごとの役割</div>
+      <div class="ge-unit-goal">→ 「自分がどのシナリオで・どの壁を越えて働きたいか」を選択・説明できる</div>
+      <div class="ge-unit-owner">担当：横堀応彦 + SOILリサーチャー（時田/小川等）</div>
+    </div>
+    <div class="ge-unit-card" style="border-top:3px solid var(--soil)">
+      <div class="ge-unit-id">UNIT K2 ── Day 1 午後　<span style="background:#E8F5E9;color:#2E7D32;font-size:9px;padding:2px 6px;border-radius:4px">知識系</span></div>
+      <div class="ge-unit-theme">演劇の共通言語 ── 戯曲を読む・語る・批評する</div>
+      <div class="ge-unit-subtitle">「なぜこの作品が世界に届くのか/届かないのか」</div>
+      <div class="ge-unit-items">①ドラマトゥルギー基礎概念（コンフリクト・アーク・サブテキスト）<br>②Transfer事例解剖：Six/Come from Away/チェルフィッチュを3職種視点で読む<br>③批評リテラシー入門：海外誌（The Stage等）の記事を読んで議論する</div>
+      <div class="ge-unit-goal">→ 3職種が共通言語で「世界に届くか」を議論できる。批評的思考の基礎が完成</div>
+      <div class="ge-unit-owner">担当：倉沢（劇作家）・川名（演出家）</div>
+    </div>
+    <div class="ge-unit-card" style="border-top:3px solid var(--soil)">
+      <div class="ge-unit-id">UNIT K3 ── 事前（オンライン）　<span style="background:#E8F5E9;color:#2E7D32;font-size:9px;padding:2px 6px;border-radius:4px">知識系</span></div>
+      <div class="ge-unit-theme">制作の共通言語 ── 知財・GM分業・海外実務</div>
+      <div class="ge-unit-subtitle">「演劇の仕事に必要な社会人的知識」</div>
+      <div class="ge-unit-items">①著作権・知的財産の基礎（戯曲・楽曲・振付の権利）<br>②海外展開の契約・ライセンス・GM専門職分業の実態（日本との違い）<br>③助成金・資金調達の概要 ／ ハラスメント対策・労働倫理</div>
+      <div class="ge-unit-goal">→ プロデューサーに「全部任せる」から「自分も最低限判断できる」へ</div>
+      <div class="ge-unit-owner">担当：福井健策弁護士・遠藤真有美</div>
+    </div>
+    <div class="ge-unit-card" style="border-top:3px solid var(--playwright)">
+      <div class="ge-unit-id">UNIT E1 ── Day 2 午前　<span style="background:#F3E5F5;color:#6A1B9A;font-size:9px;padding:2px 6px;border-radius:4px">表現系</span></div>
+      <div class="ge-unit-theme">表現の力① ── 自分の文化・作品を5分で語る</div>
+      <div class="ge-unit-subtitle">「日本演劇の何が面白いか」を英語で・説得力を持って語る</div>
+      <div class="ge-unit-items">①「氷山を水面に引き上げる」練習：日本の文化的文脈を外国人に説明<br>②30秒→2分→5分の段階的ピッチ訓練（自分の職能・作品・ビジョンを語る）<br>③英語 + 日本語の両方での表現：言語は問わず「届ける意志」を鍛える</div>
+      <div class="ge-unit-goal">→ 海外のキュレーターに「日本演劇の何が面白いか」を5分で説明できる</div>
+      <div class="ge-unit-owner">担当：横堀応彦・SEEDリサーチャーOB・英語ファシリテーター</div>
+    </div>
+    <div class="ge-unit-card" style="border-top:3px solid var(--director)">
+      <div class="ge-unit-id">UNIT E2 ── Day 2 午後・最終Day　<span style="background:#F3E5F5;color:#6A1B9A;font-size:9px;padding:2px 6px;border-radius:4px">表現系 ★修了基準</span></div>
+      <div class="ge-unit-theme">表現の力② ── 話し続ける・展開する・動かす</div>
+      <div class="ge-unit-subtitle">「10分間、業界のプロの前で話し続ける」= 修了基準</div>
+      <div class="ge-unit-items">3職種混合グループワーク（仮想プロジェクト設計：どのシナリオで・何を・どう届けるか）<br>Transfer事例ケーススタディ：自分が関わったとしたら何をするか（3職種視点）<br><strong>最終発表：「松田誠（または業界のプロ）の前で10分話す」修了基準パフォーマンス</strong></div>
+      <div class="ge-unit-goal">→ ペーパーテストではなくパフォーマンスで定着度を測る。「話し続ける力・話の展開力」が身についているかを確認</div>
+      <div class="ge-unit-owner">担当：赤羽・野村（全体統合）＋ 業界プロ（松田誠等アドバイザリーボードメンバー）</div>
+    </div>
+  </div>
+
+  <div style="margin-top:1rem;padding:10px 14px;background:var(--bg);border-radius:10px;border-left:3px solid var(--playwright);font-size:12px;color:var(--text-secondary);line-height:1.8">
+    <strong style="color:var(--text-primary)">②「講座外の時間」の設計：</strong>「講座を受けている実際の時間だけで身に付くものではない」（事務局長レビュー）。各UNITの学びを定着させるために、<strong>講座の間に何をするかが重要</strong>。
+    <br>・K0〜K3の理解をK3終了後に短い文章で言語化（自習課題）
+    ・継続的な英語実践→企画1（海外演劇誌のディスカッション）への接続
+    ・戯曲を「自分の職能で読む」→企画2（戯曲Reading Group）への接続
+    ・ロールモデルの声を聴く→企画3（ポッドキャスト）への接続
+  </div>
+</div>
+
+<!-- 企画概要 -->
+<div class="ge-section">
+  <div class="ge-section-title">企画概要 ── 各プログラムと育成する人材要件</div>
+
+  <div style="font-size:12px;color:var(--text-secondary);margin-bottom:1.25rem;line-height:1.7;padding:10px 14px;background:var(--bg);border-radius:8px;border-left:3px solid var(--soil)">
+    事務局長・野村善文が構想する3本の企画を軸に設計。<strong>これらはUNITで得た地図と表現の力を「継続的に練習する場」</strong>として機能する。<br>
+    いずれも「定期的・継続的に参加できる」形式が特徴。対象は基本的に大学生。有料で社会人（JPASN会員）の受け入れも検討。<br>
+    <span style="color:var(--urgent-text)">💡「講座を受けている実際の時間だけで身に付くものではない」——3本の継続プログラムが講座外の定着を支える構造。</span>
+  </div>
+
+  <!-- Program 1 -->
+  <div class="ge-program-card" style="border-left:4px solid var(--seed)">
+    <div class="ge-prog-header">
+      <div class="ge-prog-num" style="background:var(--seed-bg);color:var(--seed-text)">企画 1</div>
+      <div class="ge-prog-title">海外トレンド理解 × 英語</div>
+      <div class="ge-prog-badge">The Stage × British Council Japan × JPASN 連携</div>
+    </div>
+    <div class="ge-prog-body">
+      <div class="ge-prog-desc">
+        海外演劇誌（<em>The Stage</em> 等）を毎回の教材として英語で読み、ディスカッションを行う定期開催の勉強会。
+        海外で今何が起きているかをリアルタイムで追いながら、英語で「演劇について話す」実践力を同時に鍛える。
+        British Council Japan・JPASNとの共同連携により、業界ネットワークへの接点も提供。
+      </div>
+      <div class="ge-prog-meta-grid">
+        <div class="ge-prog-meta-item">
+          <div class="ge-prog-meta-label">形式</div>
+          <div class="ge-prog-meta-val">定期勉強会（購読記事のリーディング＋英語ディスカッション）</div>
+        </div>
+        <div class="ge-prog-meta-item">
+          <div class="ge-prog-meta-label">対象</div>
+          <div class="ge-prog-meta-val">大学生（3職種共通）、社会人受け入れ検討中</div>
+        </div>
+      </div>
+      <div class="ge-prog-req-title">育成する人材要件</div>
+      <div class="ge-prog-reqs">
+        <span class="ge-req-chip ge-req-common">英語コミュニケーション基礎<span class="ge-req-ids">P:S-2 / D:S-5 / PW:S-7</span></span>
+        <span class="ge-req-chip ge-req-common">国際演劇トレンドの理解<span class="ge-req-ids">P:K-4/6 / D:K-3 / PW:K-9</span></span>
+        <span class="ge-req-chip ge-req-common">批評リテラシー<span class="ge-req-ids">P:K-1 / D:K-1 / PW:K-1</span></span>
+        <span class="ge-req-chip ge-req-common">自文化への誇りと相対化<span class="ge-req-ids">P:M-2 / D:M-4 / PW:M-2</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Program 2 -->
+  <div class="ge-program-card" style="border-left:4px solid var(--playwright)">
+    <div class="ge-prog-header">
+      <div class="ge-prog-num" style="background:var(--playwright-bg);color:var(--playwright)">企画 2</div>
+      <div class="ge-prog-title">戯曲 Reading Group</div>
+      <div class="ge-prog-badge">海外演劇教育で扱われる戯曲を読む会</div>
+    </div>
+    <div class="ge-prog-body">
+      <div class="ge-prog-desc">
+        英国・韓国・米国の演劇教育プログラムで実際に使われている戯曲を毎回1本選定して読み、ディスカッションを行う。
+        単に読むだけでなく、「なぜこの戯曲が世界で教材として使われているのか」「どこが普遍的か」を3職種の視点で解剖する。
+        劇作家にとっては戯曲技術の吸収、演出家には読み込み力の訓練、プロデューサーには作品価値の言語化の場になる。
+      </div>
+      <div class="ge-prog-meta-grid">
+        <div class="ge-prog-meta-item">
+          <div class="ge-prog-meta-label">形式</div>
+          <div class="ge-prog-meta-val">定期開催のリーディング会（音読 or 黙読 + 全体ディスカッション）</div>
+        </div>
+        <div class="ge-prog-meta-item">
+          <div class="ge-prog-meta-label">対象</div>
+          <div class="ge-prog-meta-val">大学生（3職種共通）、社会人受け入れ検討中</div>
+        </div>
+      </div>
+      <div class="ge-prog-req-title">育成する人材要件</div>
+      <div class="ge-prog-reqs">
+        <span class="ge-req-chip ge-req-common">演劇の構造・ドラマトゥルギー<span class="ge-req-ids">P:K-1 / D:K-1 / PW:K-1</span></span>
+        <span class="ge-req-chip ge-req-pw">戯曲を読む習慣<span class="ge-req-ids">PW:K-2 ◎</span></span>
+        <span class="ge-req-chip ge-req-dir">テキストを読み込む力<span class="ge-req-ids">D:K-1 ◎</span></span>
+        <span class="ge-req-chip ge-req-common">作品・価値を言語化する力<span class="ge-req-ids">P:S-3 / D:S-3 / PW:S-2</span></span>
+        <span class="ge-req-chip ge-req-common">他者と協働する開放性<span class="ge-req-ids">P:M-1 / D:M-1 / PW:M-3</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Program 3 -->
+  <div class="ge-program-card" style="border-left:4px solid var(--soil)">
+    <div class="ge-prog-header">
+      <div class="ge-prog-num" style="background:var(--soil-bg);color:var(--soil-text)">企画 3</div>
+      <div class="ge-prog-title">ポッドキャストシリーズ</div>
+      <div class="ge-prog-badge">海外で活躍する人材からノウハウを獲得</div>
+    </div>
+    <div class="ge-prog-body">
+      <div class="ge-prog-desc">
+        海外の劇場・フェスティバル・制作会社で活躍する日本人や、日本の演劇に関わる海外のキュレーター・プロデューサーにインタビューし、
+        音声コンテンツとして配信するシリーズ。「転生装置の中の人」の生の声を届けることで、
+        学生がリアルなキャリアイメージを持てるようにする。テキスト要約・ディスカッション素材としても活用可能。
+      </div>
+      <div class="ge-prog-meta-grid">
+        <div class="ge-prog-meta-item">
+          <div class="ge-prog-meta-label">形式</div>
+          <div class="ge-prog-meta-val">収録・配信型（随時更新）＋ 視聴後ディスカッション回を適宜設定</div>
+        </div>
+        <div class="ge-prog-meta-item">
+          <div class="ge-prog-meta-label">対象</div>
+          <div class="ge-prog-meta-val">大学生・社会人（非同期で視聴可能、広くリーチできる）</div>
+        </div>
+      </div>
+      <div class="ge-prog-req-title">育成する人材要件</div>
+      <div class="ge-prog-reqs">
+        <span class="ge-req-chip ge-req-common">転生装置・ロールモデルの理解<span class="ge-req-ids">P:K-4 / E-3</span></span>
+        <span class="ge-req-chip ge-req-common">国際演劇トレンドの理解<span class="ge-req-ids">P:K-6 / D:K-3 / PW:K-9</span></span>
+        <span class="ge-req-chip ge-req-common">自文化への誇りと相対化<span class="ge-req-ids">P:M-2 / D:M-4 / PW:M-2</span></span>
+        <span class="ge-req-chip ge-req-prod">英語コミュニケーション（リスニング）<span class="ge-req-ids">P:S-2 / D:S-5</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 補完プログラム（既存ユニットの接続） -->
+  <div style="margin-top:1.5rem;padding:1rem 1.25rem;background:var(--bg);border-radius:12px;border:1px dashed var(--border)">
+    <div style="font-size:12px;font-weight:700;color:var(--text-secondary);margin-bottom:10px;letter-spacing:.05em">上記3企画を補完するその他のプログラム要素</div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;font-size:12px">
+      <div style="padding:8px 10px;background:var(--surface);border-radius:8px;border:1px solid var(--border)">
+        <strong style="color:var(--seed)">知財・制作実務 講義</strong><br>
+        <span style="color:var(--text-secondary)">著作権・契約・助成金の基礎概論（福井健策弁護士等）</span><br>
+        <span style="font-size:11px;color:var(--text-tertiary)">P:K-3/K-5 / D:K-8 / PW:K-5</span>
+      </div>
+      <div style="padding:8px 10px;background:var(--surface);border-radius:8px;border:1px solid var(--border)">
+        <strong style="color:var(--seed)">日本文化の言語化ワーク</strong><br>
+        <span style="color:var(--text-secondary)">「日本演劇の面白さ」を英語で5分プレゼンする実践</span><br>
+        <span style="font-size:11px;color:var(--text-tertiary)">P:M-2/K-2 / D:M-4/K-4 / PW:M-2/K-4</span>
+      </div>
+      <div style="padding:8px 10px;background:var(--surface);border-radius:8px;border:1px solid var(--border)">
+        <strong style="color:var(--seed)">3職種横断グループワーク</strong><br>
+        <span style="color:var(--text-secondary)">仮想プロジェクトをシナリオA/Bで設計する混合WS</span><br>
+        <span style="font-size:11px;color:var(--text-tertiary)">P:S-1 / D:S-2 / PW:M-3（協働体験）</span>
+      </div>
+      <div style="padding:8px 10px;background:var(--surface);border-radius:8px;border:1px solid var(--border)">
+        <strong style="color:var(--seed)">転生事例ケーススタディ</strong><br>
+        <span style="color:var(--text-secondary)">トトロ・STOMP・Sixの転生ルートを3職種視点で解剖</span><br>
+        <span style="font-size:11px;color:var(--text-tertiary)">P:K-4/E-3 / D・PW：市場地図の理解</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</div>
+</div><!-- /#tab-general-education -->
+
+<!-- ════ Role-Specific Tab ════ -->
+<div id="tab-role-specific" class="tab-content">
+<div class="rs-container">
+
+<div class="soil-intro-card">
+  <strong>⑤ 職能別個別要件：</strong>タブ①〜④の成果を統合した各職能固有の能力・経験・機会の整理。<br>
+  <span style="font-size:12px;color:var(--text-secondary);line-height:1.8">
+  ① SOIL戦略マップ（市場構造・Transfer装置・3シナリオ）→ ② 人材要件ToBeモデル（v5/v2/v3）→ ③ 大学教育との差分（何が不足しているか）→ ④ 一般教養プログラム（共通土台・表現の力）<br>
+  <strong>→ ⑤ここでは「一般教養を前提として、各職能固有で深める必要があるもの」を整理する</strong>
+  </span>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px;font-size:11.5px">
+    <div style="padding:6px 10px;background:var(--seed-bg);border-radius:8px;color:var(--seed-text)"><strong>シナリオA</strong>（トトロ型）：IP × 国際共同制作。壁は単独でなく転生装置との共同制作で越える</div>
+    <div style="padding:6px 10px;background:var(--soil-bg);border-radius:8px;color:var(--soil-text)"><strong>シナリオB</strong>（ストンプ型）：ノンバーバル × フリンジTransfer。インバウンドをテストマーケットに</div>
+    <div style="padding:6px 10px;background:var(--director-bg);border-radius:8px;color:var(--director)"><strong>シナリオC'</strong>（国際文脈展開型）：固有文脈 × 国際フェスティバル発見。次のチェルフィッチュを構造化する</div>
+  </div>
+</div>
+
+<div class="rs-tab-nav">
+  <button class="rs-tab-btn active" data-rs-role="producer">プロデューサー</button>
+  <button class="rs-tab-btn" data-rs-role="director">演出家</button>
+  <button class="rs-tab-btn" data-rs-role="playwright">劇作家</button>
+</div>
+
+<!-- ── プロデューサー ── -->
+<div id="rs-producer" class="rs-content active">
+
+  <div class="rs-section">
+    <div class="rs-section-title">固有の能力 ── シナリオ別</div>
+    <table class="rs-table">
+      <thead><tr><th>カテゴリ</th><th>要件</th><th>内容</th><th>シナリオ</th></tr></thead>
+      <tbody>
+        <tr><td>スキル</td><td><strong>Transfer装置へのアクセス戦略</strong></td><td>NT・Barbican・Public Theatreのキュレーターへのアプローチ実践。Edinburgh・Avignon出展戦略の設計。「壁は日本だけで越えようとしない」を実践する</td><td><span class="rs-sc rs-sc-ab">A・B</span></td></tr>
+        <tr><td>スキル</td><td><strong>IPライセンス交渉の実践</strong></td><td>IPホルダー（出版社・アニメ会社）との権利交渉。ライセンス条件の読み方・交渉進め方・弁護士との連携（福井健策弁護士等）</td><td><span class="rs-sc rs-sc-a">A</span></td></tr>
+        <tr><td>スキル</td><td><strong>国際共同制作のマネジメント</strong></td><td>文化機関との共同制作スケジュール管理・予算設計・スタッフィング。日本のプロデューサーが「全部やる」体制から「GM・Company Managerとの分業」へ（海外標準への対応）</td><td><span class="rs-sc rs-sc-a">A</span></td></tr>
+        <tr><td>スキル</td><td><strong>ノンバーバル作品のフォーマット設計</strong></td><td>再演可能・言語不要・観光向けの作品フォーマット設計。STOMPやナンタが示す「コンテンツIP化」の設計思想。インバウンド→フリンジ→世界IPへのスケール戦略</td><td><span class="rs-sc rs-sc-b">B</span></td></tr>
+        <tr><td>スキル</td><td><strong>キュレーターとの長期信頼関係の構築</strong></td><td>「招聘は結果ではなく関係への投資」。国際フェスティバルのキュレーターとの継続的接触・情報共有・作品紹介の積み重ね</td><td><span class="rs-sc" style="background:var(--director-bg);color:var(--director)">C'</span></td></tr>
+        <tr><td>スキル</td><td><strong>文化外交・公的支援の活用</strong></td><td>国際交流基金・British Council・各国文化機関との連携。C'型作品の国際展開には資本だけでなく文化的文脈の担保が必要</td><td><span class="rs-sc" style="background:var(--director-bg);color:var(--director)">C'</span></td></tr>
+        <tr style="background:#FFF9E0"><td>スキル ★NY</td><td><strong>WOM（口コミ）設計力</strong></td><td>「観客が誰かへ話したくなる体験」を設計する力。Jeffrey Richards の4要因（IP・TR・SP・WOM）フレームを自プロジェクトに適用。WTSF（Want To See Factor）を生み出す作品・マーケティング設計</td><td><span class="rs-sc rs-sc-ab">A・B</span></td></tr>
+        <tr style="background:#FFF9E0"><td>スキル ★NY</td><td><strong>マーケティング・Audience Development</strong></td><td>SNS・インフルエンサー・Community Building・Brand Activationの実務。Patrick Catullo：「マーケティングは作品開発と同時に始める。開幕後に考えるものではない」</td><td><span class="rs-sc rs-sc-ab">A・B</span></td></tr>
+        <tr style="background:#FFF9E0"><td>スキル ★NY</td><td><strong>Taste（審美眼）の磨き方</strong></td><td>「どの作品を選び何を届けるか」のセンス。Patrick Catullo：「Tasteこそがプロデューサーに最終的に残る信用」。海外作品・フェスティバルへの継続的視察・観劇が基盤</td><td><span class="rs-sc rs-sc-ab">A・B</span></td></tr>
+        <tr style="background:#FFF9E0"><td>知識 ★NY</td><td><strong>段階的作品開発プロセスの実践</strong></td><td>Reading（5000円）→ 29-hour Workshop → Regional Tryout → Commercial という段階を設計・運営する能力。「完成作品ではなく開発中のIPとして投資を集める」発想への転換</td><td><span class="rs-sc rs-sc-ab">A・B</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="rs-section">
+    <div class="rs-section-title">固有の経験・機会</div>
+    <div class="rs-opp-grid">
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-ab">A・B</div><div class="rs-opp-title">Transfer装置への実際の訪問・対話</div><div class="rs-opp-desc">NT・Barbican・Edinburgh等への視察。キュレーターとの対話体験。「場に出ること」が最大の学び（単なる観劇ではなく関係構築の場）</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-a">A</div><div class="rs-opp-title">IPホルダー交渉ロールプレイ</div><div class="rs-opp-desc">出版社・権利者役との模擬交渉体験。実際のライセンス条件・交渉ポイントを使用。「次のトトロを作るための前提条件」を体感する</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-a">A</div><div class="rs-opp-title">国際共同制作への参加・見学</div><div class="rs-opp-desc">現在進行中の日英・日韓・日米共同制作プロジェクトへの同行・観察。GM・Company Managerとの分業の実態を現場で学ぶ</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-ab">A・B</div><div class="rs-opp-title">3シナリオ別プロジェクトプラン作成</div><div class="rs-opp-desc">A/B/C'から1つを選んで実際のプロジェクトプランを作成し、松田誠・渡辺ミキ等のアドバイザーにプレゼン。「10分でビジネスを語る」の実践版</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag" style="background:var(--director-bg);color:var(--director)">C'</div><div class="rs-opp-title">国際フェスティバルキュレーターとの接触</div><div class="rs-opp-desc">Kunsten・Theatertreffen・Avignonのキュレーターとの接点機会（招聘の仕組み・彼らが何を求めているかを直接聞く）</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-ab">A・B</div><div class="rs-opp-title">メンターとの継続1on1</div><div class="rs-opp-desc">東宝（小嶋麻倫子）・ホリプロ（井川荃芬）・ゴーチ（時田曜子）の確定済みメンターとのセッション。「自分のプロジェクトを育てる伴走者」として</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-ab">A・B</div><div class="rs-opp-title">Paid インターン（3〜5プロダクション）</div><div class="rs-opp-desc">毛色の違う3〜5プロダクションでのインターン。「GM分業がない日本の制作現場」と「海外水準の分業体制」の両方を体験・比較する</div></div>
+    </div>
+  </div>
+
+  <div class="rs-section">
+    <div class="rs-section-title">大学教育では得られない（タブ③からの示唆）</div>
+    <div class="rs-curriculum">
+      ✗ <strong>GM専門職との分業体験</strong>：日本の演劇大学にはGM専門教育がない。プロデューサーが「全部やる」体制を経験した後に、分業の何が違うかを学ぶ機会が必要<br>
+      ✗ <strong>Development Funding の設計</strong>：Reading → Workshop への民間投資をどう集めるか。Yaleのように「商業演劇プロデュース」を専門科目で学べる場が日本にない<br>
+      ✗ <strong>Bridge to the Profession 相当</strong>：Juilliard・Yaleでは「Artistic LeadersやAgentsへのピッチ」が年12回・6単位の正式科目。日本ではこの構造化がない<br>
+      ✗ <strong>Essentials of Entrepreneurship</strong>：Juilliardでは俳優も必修。「自分のキャリアを事業として設計する」視点が日本の演劇教育に欠けている
+    </div>
+  </div>
+
+  <div class="rs-section">
+    <div class="rs-section-title">カリキュラム設計のポイント</div>
+    <div class="rs-curriculum">
+      <strong>座学フェーズ：</strong>IPライセンス実務（福井健策弁護士）/ GM・分業システムの実態講義 / 国際共同制作の設計事例（トトロ・デスノート等の経緯詳細） / シナリオA/B/C'別プロデュース戦略の立案<br>
+      <strong>実践フェーズ：</strong>IPホルダー交渉ロールプレイ / Transfer装置へのピッチ練習（英語・日本語） / プロジェクトプランのメンタリング（アドバイザーとの面談）/ WOM・マーケティングプラン作成<br>
+      <strong>機会設計：</strong>Edinburgh・Kunsten等への視察ツアー / Paid インターン3〜5プロダクション / 国際フェスティバルキュレーターとの接触機会（C'向け）
+    </div>
+  </div>
+</div>
+
+<!-- ── 演出家 ── -->
+<div id="rs-director" class="rs-content">
+
+  <div class="rs-section">
+    <div class="rs-section-title">固有の能力 ── シナリオ別</div>
+    <table class="rs-table">
+      <thead><tr><th>カテゴリ</th><th>要件</th><th>内容</th><th>シナリオ</th></tr></thead>
+      <tbody>
+        <tr><td>知識</td><td><strong>英国・北米商業演劇のシステムと文法</strong></td><td>ウエストエンド・ブロードウェイの制作システム（リハーサル期間・スタッフ構成・Union・慣習等）。「商業演劇で演出家に何が求められるか」。RADAのようにDramaturgyを実践として学ぶ</td><td><span class="rs-sc rs-sc-a">A</span></td></tr>
+        <tr><td>知識</td><td><strong>フィジカルシアター・ノンバーバルの理論と系譜</strong></td><td>Pina Bausch・DV8・Frantic Assembly・Akram Khan等の作品と思想の深掘り。「なぜ言語なしで感情が成立するか」の理論。Rose Bruford MA Directingのようにこれが専門科目</td><td><span class="rs-sc rs-sc-b">B</span></td></tr>
+        <tr><td>スキル</td><td><strong>ノンバーバル演出技術の実践</strong></td><td>身体・空間・リズム・沈黙・繰り返しのみで意味と感情を作る演出技術。言語に依存しない稽古場コミュニケーション。DV8・Frantic Assemblyのメソッドを体験的に学ぶ</td><td><span class="rs-sc rs-sc-b">B</span></td></tr>
+        <tr><td>スキル</td><td><strong>IP制約下での創造性の発揮</strong></td><td>IPの世界観・キャラクター・既存イメージを守りながら現地観客が自分を投影できる作品に仕上げる演出力。「制約の中でどう創造するか」がシナリオAの演出家の核心</td><td><span class="rs-sc rs-sc-a">A</span></td></tr>
+        <tr><td>スキル</td><td><strong>異言語環境での稽古場マネジメント</strong></td><td>英語・通訳を介した稽古場の進行管理。言葉に頼らない演出指示（感情・イメージ・身体で伝える）。John Landau：「他言語での演出が逆に演出感度を上げる」</td><td><span class="rs-sc rs-sc-ab">A・B</span></td></tr>
+        <tr><td>スキル</td><td><strong>社会的文脈・時代性を舞台上で体現する演出技術</strong></td><td>「強い日本固有文脈を持つ作品」を国際フェスティバルが評価する形で立体化する技術。「社会性と普遍性の両立」がC'演出家の核心スキル</td><td><span class="rs-sc" style="background:var(--director-bg);color:var(--director)">C'</span></td></tr>
+        <tr><td>スキル</td><td><strong>古典文法を理解した上での現代的再解釈</strong></td><td>能・歌舞伎・古典戯曲の構造を深く理解し、それを現代文脈に翻訳する演出術。木ノ下歌舞伎・宮城聰が体現するアプローチの習得</td><td><span class="rs-sc" style="background:var(--director-bg);color:var(--director)">C'</span></td></tr>
+        <tr><td>スキル</td><td><strong>フリンジ規模での演出設計</strong></td><td>低予算・短期公演・小空間での演出の最適化。「小さいからこそ光る作品」の設計。Edinburgh型フリンジで評価されるための規模感と密度の設計</td><td><span class="rs-sc rs-sc-b">B</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="rs-section">
+    <div class="rs-section-title">固有の経験・機会</div>
+    <div class="rs-opp-grid">
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-b">B</div><div class="rs-opp-title">フィジカルシアター集中WS</div><div class="rs-opp-desc">DV8・Frantic Assembly等のメソッドを体験できる国内外WSへの参加。「日本の身体感覚がシナリオBの武器になる」という視点で参加</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-ab">A・B</div><div class="rs-opp-title">実際に演出する場の確保（必須）</div><div class="rs-opp-desc">劇作家が書いた短編・devised作品を実際に演出する体験。Bartlett Sher：「空き倉庫でいい、まず作れ」。サマースクール内2〜3日の集中演出実習</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-a">A</div><div class="rs-opp-title">異言語環境での演出実習</div><div class="rs-opp-desc">英語話者（留学生・在日外国人俳優等）との稽古場体験。通訳を介した演出の実践。「言葉に頼れない環境が演出感度を上げる」を体験</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-ab">A・B</div><div class="rs-opp-title">優秀な演出家のアシスタント</div><div class="rs-opp-desc">John Landau：「24人の演出家のアシスタントを経験した」。国内主要演出家への観察・補佐機会。Paid インターン（埼玉芸術劇場・世田谷PT等・交渉中）</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag" style="background:var(--director-bg);color:var(--director)">C'</div><div class="rs-opp-title">国際フェスティバルへの出展・参加体験</div><div class="rs-opp-desc">Edinburgh Fringe等への出展、またはAPAF（東京）での国際キュレーターとの接触。「フリンジで発見されるための説明力」を実際の場で試す</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-ab">A・B</div><div class="rs-opp-title">作品ビジョンプレゼン（英語）</div><div class="rs-opp-desc">自分が演出したい作品のビジョンを英語でキュレーター・プロデューサーに説明する体験。UNIT E2の修了基準と連動する職能特化版</div></div>
+    </div>
+  </div>
+
+  <div class="rs-section">
+    <div class="rs-section-title">大学教育では得られない（タブ③からの示唆）</div>
+    <div class="rs-curriculum">
+      ✗ <strong>アシスタント・アソシエートディレクター制度</strong>：Yaleはアシスタント経験が正式カリキュラム（Bridge to the Profession）に組み込まれている。日本では師弟関係が非公式<br>
+      ✗ <strong>Out-of-town Tryout文化</strong>：Regional Theaterで本格的に演出をテストし修正する場が日本にない（東京一極集中）。失敗できる場の欠如<br>
+      ✗ <strong>フィジカルシアター専門WS・スクール</strong>：DV8・Frantic Assembly等が運営する専門教育機関が日本にない。シナリオBの核心スキルを学ぶ場の不足<br>
+      ✗ <strong>演出家専門MFA（Juilliard・Yale・CSSD相当）</strong>：実務家が教える演出家専門大学院が日本にない。「メンターとの出会いを制度化する」仕組みの欠如
+    </div>
+  </div>
+
+  <div class="rs-section">
+    <div class="rs-section-title">カリキュラム設計のポイント</div>
+    <div class="rs-curriculum">
+      <strong>シナリオA向け：</strong>商業演劇文法の講義（英国・北米の制作システム・Union・Dramaturgy） / 戯曲精読・立体化ワーク（3職種視点で読む） / 異言語環境での演出実習（英語俳優との稽古場）<br>
+      <strong>シナリオB向け：</strong>フィジカルシアターのメソッド体験WS / ノンバーバル作品の短期演出実習（声なし・テキストなしの制約） / Edinburgh型フリンジ向け規模感の演出設計演習<br>
+      <strong>シナリオC'向け：</strong>日本の古典・伝統芸能の「演出家の目」での深読み / 社会的文脈作品の分析（チェルフィッチュ・宮城聰等） / 国際フェスティバルのキュレーター視点とは何か<br>
+      <strong>共通：</strong>演出家同士のシナリオ選択対話 / メンター演出家との1on1（アドバイザリーボード活用） / 実際に演出する場の確保（必須）
+    </div>
+  </div>
+</div>
+
+<!-- ── 劇作家 ── -->
+<div id="rs-playwright" class="rs-content">
+
+  <div class="rs-section">
+    <div class="rs-section-title">固有の能力 ── シナリオ別</div>
+    <table class="rs-table">
+      <thead><tr><th>カテゴリ</th><th>要件</th><th>内容</th><th>シナリオ</th></tr></thead>
+      <tbody>
+        <tr><td>スキル</td><td><strong>翻案・アダプテーションの実践技術</strong></td><td>原作の「魂」を守りながら現地観客に届く形に変換する技術。原作分析→エッセンス抽出→現代・他文化文脈への移植のプロセス。フランシス・ターンリー（ロンドン）：「アダプテーションも劇作家の重要な仕事」</td><td><span class="rs-sc rs-sc-a">A</span></td></tr>
+        <tr><td>スキル</td><td><strong>英訳を前提とした戯曲の書き方</strong></td><td>翻訳されることを意識した文体設計：センテンスの長さ・文化特有の慣用表現の最小化・感情の直接的表現。阿部のぞみ：「翻訳があれば戯曲を読んでもらえる。上演したいという依頼が来る」</td><td><span class="rs-sc rs-sc-a">A</span></td></tr>
+        <tr><td>スキル</td><td><strong>自作をIPとして設計する視点</strong></td><td>「一回上演して終わり」でなく、英訳→国際リーディング→再演→海外上演のチェーンを見越した設計。IPの強度・続編可能性・キャラクターの普遍性まで意識して書く</td><td><span class="rs-sc rs-sc-a">A</span></td></tr>
+        <tr><td>スキル</td><td><strong>自社会を普遍的言語に昇華する技術</strong></td><td>「なぜ今・なぜここで」を世界に向けて語る力。日本の社会・歴史・文化的コンテクストを、国際観客が「自分の話」として受け取れる形に変換する劇作技術</td><td><span class="rs-sc" style="background:var(--director-bg);color:var(--director)">C'</span></td></tr>
+        <tr><td>スキル</td><td><strong>伝統様式・古典を現代語に翻訳する劇作技術</strong></td><td>能・歌舞伎・狂言等の伝統劇の構造を理解し、現代の観客・現代の文脈に「翻訳」する劇作の技。木ノ下歌舞伎が体現するアプローチ</td><td><span class="rs-sc" style="background:var(--director-bg);color:var(--director)">C'</span></td></tr>
+        <tr><td>スキル</td><td><strong>ノンバーバル作品の構造設計（devising）</strong></td><td>テキストなしに時間・空間・繰り返し・身体で物語を構造化する技術。演出家・俳優と共同でdeviseするプロセスへの参加。「書く」から「設計する」への発想転換</td><td><span class="rs-sc rs-sc-b">B</span></td></tr>
+        <tr><td>スキル</td><td><strong>集中的な反復執筆練習</strong></td><td>毎週1本のシーン作成（ソン・ギウン方式）。短い単位からの積み上げによる戯曲技術の習得。毎日書く習慣の体内化（ドン・マクキャンフィル：「毎日書くこと。つまらなくていい」）</td><td><span class="rs-sc rs-sc-ab">A・B</span></td></tr>
+        <tr style="background:#FFF9E0"><td>スキル ★NY</td><td><strong>ミュージカル楽曲の構造設計</strong></td><td>Introduction→Lift→Bridge（Shift）→Last Momentの4段階構造。David Hein：「歌い始めと歌い終えでキャラクターが変化していること」。「なぜここで歌うのか（stakes）」の設計が核心</td><td><span class="rs-sc rs-sc-a">A</span></td></tr>
+        <tr style="background:#FFF9E0"><td>スキル ★NY</td><td><strong>Thematic writing</strong></td><td>モチーフ・テーマが全体を通じて機能する設計。Crystal Monee Hall：「Nothing is random, nothing is wasted」。2時間15分の中で観客と記憶を共有するthematic undercurrentの設計</td><td><span class="rs-sc rs-sc-a">A</span></td></tr>
+        <tr style="background:#FFF9E0"><td>知識 ★NY</td><td><strong>Composer/Orchestrator/Vocal Arranger分業の理解</strong></td><td>Composerはメロディ・歌詞・キャラクター・感情に集中。Orchestratorはサウンド構築を担う。Crystal：「You can't write it like me, but I can't arrange it like you」。信頼して委ねることが創作の豊かさ</td><td><span class="rs-sc rs-sc-a">A</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="rs-section">
+    <div class="rs-section-title">固有の経験・機会</div>
+    <div class="rs-opp-grid">
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-a">A</div><div class="rs-opp-title">翻案ワーク集中実習</div><div class="rs-opp-desc">日本の文学・アニメ・民話・古典等を素材に短編翻案作品を実際に書く体験。演出家・俳優と上演まで進める。「IPを戯曲化する」プロセスを体内化</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-a">A</div><div class="rs-opp-title">国際リーディング体験（プレ授業で実施）</div><div class="rs-opp-desc">書いた作品を英語話者の俳優に読んでもらい反応・フィードバックを受け取る。阿部のぞみ：「外国語で自作が演じられる体験が海外進出のイメージを広げる」</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-ab">A・B</div><div class="rs-opp-title">毎日書き続ける習慣定着（全期間）</div><div class="rs-opp-desc">サマースクール期間中、毎日短いシーンを書く。「とにかく書く習慣」の体内化。Yale Playwriting のように「Writing Lab」として制度化する</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-b">B</div><div class="rs-opp-title">devising（共同創作）体験</div><div class="rs-opp-desc">演出家・俳優と共にテキストなし or 最小限の短編作品を共同開発する体験。「劇作家がdeviserになる」感覚を体験的に習得</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag" style="background:var(--director-bg);color:var(--director)">C'</div><div class="rs-opp-title">社会的文脈作品のリーディング・分析</div><div class="rs-opp-desc">チェルフィッチュ・宮城聰等のC'型作品の戯曲を読み、「何が国際評価を生んだか」を劇作家の視点で解析する。自分の「固有文脈」を発見するきっかけ</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-a">A</div><div class="rs-opp-title">ドラマターグとの対話機会</div><div class="rs-opp-desc">書いた作品についてドラマターグ（ゲスト講師）からフィードバックを受ける1on1セッション。「守られながら育つ」ARKOモデルの実践版</div></div>
+      <div class="rs-opp-card"><div class="rs-opp-tag rs-sc-ab">A・B</div><div class="rs-opp-title">劇作家コミュニティの形成</div><div class="rs-opp-desc">同期の劇作家との作品共有・ディスカッション習慣の形成（ARKOモデル：孤独に書かない）。CMU Dramaturgy Forumのような横のつながりを作る</div></div>
+    </div>
+  </div>
+
+  <div class="rs-section">
+    <div class="rs-section-title">大学教育では得られない（タブ③からの示唆）</div>
+    <div class="rs-curriculum">
+      ✗ <strong>Dramaturg（ドラマターグ）専門職との継続的関係</strong>：RADAはBA Actingに必修。Yaleは独立MFA専攻。日本では劇作家の作品に伴走する専門職が制度的に存在しない<br>
+      ✗ <strong>Playwright Residency（劇場居住制度）</strong>：Royal Court・Bush Theatreが設ける「作家が劇場に住む」制度が日本にない。デビュー後のpathwayが整備されていない<br>
+      ✗ <strong>29-hour Reading / Workshop 文化</strong>：書き直しを前提とした段階的開発プロセスが日本に存在しない。「完成作品を上演する」から「育てながら上演する」文化への転換が必要<br>
+      ✗ <strong>戯曲の英訳・出版・アーカイブ支援</strong>：Out of the Wings（英）のような戯曲翻訳・普及機関が日本にない。英訳→国際リーディング→次の上演の連鎖が生まれない
+    </div>
+  </div>
+
+  <div class="rs-section">
+    <div class="rs-section-title">カリキュラム設計のポイント</div>
+    <div class="rs-curriculum">
+      <strong>シナリオA向け：</strong>翻案ワーク集中実習（素材選定→分析→執筆→発表） / 「英訳を前提とした書き方」ワーク / 国際リーディング体験（英語俳優との対話） / ミュージカル楽曲構造の入門（Bridge=Shiftの体験）<br>
+      <strong>シナリオB向け：</strong>devising参加体験（演出家・俳優との共同創作） / ノンバーバル構造設計の入門ワーク（テキストなしで物語を作る）<br>
+      <strong>シナリオC'向け：</strong>自分の「固有文脈」発見ワーク / 社会的テーマ・時代性を劇作に落とし込む訓練 / C'型作品（チェルフィッチュ等）の戯曲分析<br>
+      <strong>共通：</strong>毎日書く習慣の集中実習（サマースクール全期間） / 劇作家コミュニティの形成（同期との作品共有） / ドラマターグ・メンターとの1on1 / プレ授業（前川知大・鹿目由紀等）
+    </div>
+  </div>
+</div>
+
+<!-- 機会マトリックス -->
+<div class="rs-section" style="margin-top:2rem">
+  <div class="rs-section-title">3職種共通の「機会設計」サマリー ── ①〜④と⑤の接続</div>
+  <table class="rs-table">
+    <thead><tr><th>機会・能力</th><th style="text-align:center">P</th><th style="text-align:center">D</th><th style="text-align:center">PW</th><th>どこで提供するか</th></tr></thead>
+    <tbody>
+      <tr><td>市場地図・Transfer装置・3シナリオの理解</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td>→ ④一般教養 UNIT K1</td></tr>
+      <tr><td>Transfer装置への実際のアクセス</td><td style="text-align:center">◎</td><td style="text-align:center">○</td><td style="text-align:center">○</td><td>→ ⑤プロデューサー職能別</td></tr>
+      <tr><td>大学教育との差分の認識</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td>→ ③大学教育に関する分析</td></tr>
+      <tr><td>表現の力（5分ピッチ）</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td>→ ④一般教養 UNIT E1</td></tr>
+      <tr><td>表現の力（10分プレゼン＝修了基準）</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td>→ ④一般教養 UNIT E2</td></tr>
+      <tr><td>英語ピッチの実践・深化（職能特化）</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td style="text-align:center">○</td><td>→ ⑤各職能別（シナリオ対応）</td></tr>
+      <tr><td>日本文化の言語化</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td>→ ④一般教養 UNIT E1（基礎）＋⑤各職能別（深化）</td></tr>
+      <tr><td>3職種混合での協働体験</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td>→ ④一般教養 UNIT E2（グループワーク）</td></tr>
+      <tr><td>IP・翻案の実践</td><td style="text-align:center">◎</td><td style="text-align:center">○</td><td style="text-align:center">◎</td><td>→ ⑤プロデューサー・劇作家職能別（シナリオA）</td></tr>
+      <tr><td>ノンバーバル演出・devising</td><td style="text-align:center">○</td><td style="text-align:center">◎</td><td style="text-align:center">○</td><td>→ ⑤演出家・劇作家職能別（シナリオB）</td></tr>
+      <tr><td>C'型作品の理解・分析</td><td style="text-align:center">○</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td>→ ④一般教養 UNIT K2（事例解剖）＋⑤D/PW職能別（シナリオC'）</td></tr>
+      <tr><td>メンターとの継続関係</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td>→ ⑤各職能別（全期間を通じて）</td></tr>
+      <tr><td>インターン・業界接続</td><td style="text-align:center">◎</td><td style="text-align:center">◎</td><td style="text-align:center">○</td><td>→ ⑤プロデューサー（Paid 3〜5P）・演出家（埼玉/世田谷PT等）</td></tr>
+    </tbody>
+  </table>
+</div>
+
+</div>
+</div><!-- /#tab-role-specific -->
+
+<!-- ════ Research Agenda Tab ════ -->
+<div id="tab-research-agenda" class="tab-content">
+<div class="ge-container">
+
+<div class="soil-intro-card">
+  <strong>⑥ 追加リサーチ検討：</strong>①〜⑤のタブで構築したToBeモデル・人材要件・プログラム内容の「仮説・インプット不足」を補うためのリサーチアジェンダ。<br>
+  <span style="font-size:12.5px;color:var(--text-secondary)">各項目に「現状の課題」「誰に・どこで」「期待できる示唆」を整理。リサーチャー派遣・個別インタビューの設計に活用してください。</span>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px;font-size:11.5px">
+    <div style="padding:6px 10px;background:var(--seed-bg);border-radius:8px;color:var(--seed-text);text-align:center"><strong>A</strong><br>ToBeモデルの精緻化</div>
+    <div style="padding:6px 10px;background:var(--soil-bg);border-radius:8px;color:var(--soil-text);text-align:center"><strong>B</strong><br>As-Isモデルの構築</div>
+    <div style="padding:6px 10px;background:var(--director-bg);border-radius:8px;color:var(--director);text-align:center"><strong>C</strong><br>プログラム内容の具体化</div>
+    <div style="padding:6px 10px;background:var(--playwright-bg);border-radius:8px;color:var(--playwright);text-align:center"><strong>D</strong><br>市場・エコシステム理解</div>
+  </div>
+</div>
+
+<!-- 優先度マトリックス -->
+<div class="ge-section">
+  <div class="ge-section-title">優先度マトリックス ── 直近で動くべきリサーチ</div>
+  <div style="overflow-x:auto">
+  <table class="ge-common-table">
+    <thead><tr><th>優先度</th><th>カテゴリ</th><th>リサーチ内容</th><th>理由・連動するタブ</th></tr></thead>
+    <tbody>
+      <tr style="background:#FEF0EE">
+        <td><strong style="color:var(--urgent-text)">★★★ 最優先</strong></td>
+        <td><span style="background:var(--soil-bg);color:var(--soil-text);padding:2px 6px;border-radius:4px;font-size:11px">B-1</span></td>
+        <td><strong>日本の若手（卒業2〜5年目）のAs-Is実態調査</strong><br><span style="font-size:11px;color:var(--text-secondary)">対象：日芸・桐朋・玉川卒業生 + JPASN若手会員</span></td>
+        <td>ToBeとAs-Isのギャップを測定するための最重要リサーチ。差分なしに育成設計できない → ② ⑤</td>
+      </tr>
+      <tr style="background:#FEF0EE">
+        <td><strong style="color:var(--urgent-text)">★★★ 最優先</strong></td>
+        <td><span style="background:var(--director-bg);color:var(--director);padding:2px 6px;border-radius:4px;font-size:11px">C-1</span></td>
+        <td><strong>Traverse Theatre との事前ヒアリング</strong><br><span style="font-size:11px;color:var(--text-secondary)">Gareth Nicholls（Artistic Director）</span></td>
+        <td>2027年9月のリーディング実施まで時間がなく、プログラム設計に直結 → ⑤劇作家</td>
+      </tr>
+      <tr style="background:#FEF3E2">
+        <td><strong style="color:#9A6500">★★ 優先</strong></td>
+        <td><span style="background:var(--seed-bg);color:var(--seed-text);padding:2px 6px;border-radius:4px;font-size:11px">A-1</span></td>
+        <td><strong>C'型アーティスト本人へのインタビュー</strong><br><span style="font-size:11px;color:var(--text-secondary)">岡田利規・宮城聰・木ノ下裕一</span></td>
+        <td>C'ToBeモデルの確度を上げ、属人的成功を構造化 → ① ② ⑤</td>
+      </tr>
+      <tr style="background:#FEF3E2">
+        <td><strong style="color:#9A6500">★★ 優先</strong></td>
+        <td><span style="background:var(--soil-bg);color:var(--soil-text);padding:2px 6px;border-radius:4px;font-size:11px">B-2</span></td>
+        <td><strong>非営利×営利の分断問題の実態（英国・NY）</strong><br><span style="font-size:11px;color:var(--text-secondary)">NT Literary Manager、日本の商業プロデューサー、世田谷PT等</span></td>
+        <td>「なぜ日本にTransfer装置がないか」の深掘り → ① ②P</td>
+      </tr>
+      <tr style="background:#FEF3E2">
+        <td><strong style="color:#9A6500">★★ 優先</strong></td>
+        <td><span style="background:var(--playwright-bg);color:var(--playwright);padding:2px 6px;border-radius:4px;font-size:11px">D-1</span></td>
+        <td><strong>韓国の成功モデル詳細（ARKO・NANTA・K-Arts）</strong><br><span style="font-size:11px;color:var(--text-secondary)">田窪桜子さんのソウル派遣と連動</span></td>
+        <td>ARKO型劇作家保護・シナリオBのNANTA実態・ミュージカル創作教育 → ② ④ ⑤</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- カテゴリA -->
+<div class="ge-section">
+  <div class="ge-section-title" style="color:var(--seed-text)">A. ToBeモデルの精緻化に必要なリサーチ</div>
+
+  <div style="display:flex;flex-direction:column;gap:12px">
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--seed);border-radius:12px;padding:1rem">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <span style="background:var(--seed-bg);color:var(--seed-text);font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px">A-1</span>
+        <strong>C'型ToBeモデルが「属人的な成功話」で終わっている</strong>
+      </div>
+      <div style="font-size:12.5px;color:var(--text-secondary);margin-bottom:10px">現状の課題：「次のチェルフィッチュが作れない」と認識しているが、チェルフィッチュ・SPAC・木ノ下歌舞伎が国際展開したプロセスは推測ベース。「何がトリガーになったか」が構造化されていない。</div>
+      <div style="overflow-x:auto">
+      <table class="rs-table">
+        <thead><tr><th>誰に</th><th>どこで</th><th>期待できる示唆</th></tr></thead>
+        <tbody>
+          <tr><td><strong>岡田利規</strong>（チェルフィッチュ主宰）</td><td>Tokyo / 国際フェス会場</td><td>「最初にKunstenに発見されたきっかけ」「プロデューサーとの関係のはじまり方」</td></tr>
+          <tr><td><strong>宮城聰</strong>（SPAC 芸術総監督）</td><td>静岡</td><td>Avignon招聘に至った経緯・公的支援と独立性のバランス</td></tr>
+          <tr><td><strong>木ノ下裕一</strong>（木ノ下歌舞伎）</td><td>Tokyo</td><td>古典再解釈型C'の育ち方・何がきっかけで国際展開の回路が開いたか</td></tr>
+          <tr><td><strong>Kunsten Festival des Arts プログラマー</strong></td><td>Brussels</td><td>「日本の作品を招聘するとき何を見るか」「最初にどこで出会うか」</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--seed);border-radius:12px;padding:1rem">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <span style="background:var(--seed-bg);color:var(--seed-text);font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px">A-2</span>
+        <strong>演出家ToBeモデルへの海外現地インプットが薄い</strong>
+      </div>
+      <div style="font-size:12.5px;color:var(--text-secondary);margin-bottom:10px">現状の課題：NYリサーチ（井川さん）はプロデューサー・作曲家中心。「演出家として国際展開した人」からの直接ヒアリングがほぼない。演出家ToBeモデルは推論ベース。</div>
+      <div style="overflow-x:auto">
+      <table class="rs-table">
+        <thead><tr><th>誰に</th><th>どこで</th><th>期待できる示唆</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Bartlett Sher</strong>（リンカーンセンター）</td><td>NY</td><td>「若い演出家に最初に身につけてほしいこと」「日本の演劇人に対するコメント」</td></tr>
+          <tr><td><strong>Michael Arden</strong>（Maybe Happy Ending演出）</td><td>NY</td><td>「演出家とプロデューサーの関係構築」「アジア文化とブロードウェイの接続」</td></tr>
+          <tr><td><strong>時田曜子さんのロンドン派遣</strong></td><td>London</td><td>演出家特化インタビューの設計が必要：誰と会うかの事前検討が重要</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--seed);border-radius:12px;padding:1rem">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <span style="background:var(--seed-bg);color:var(--seed-text);font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px">A-3</span>
+        <strong>劇作家ToBeモデルがミュージカル寄りになっている</strong>
+      </div>
+      <div style="font-size:12.5px;color:var(--text-secondary);margin-bottom:10px">現状の課題：NYリサーチでミュージカル劇作家の知見は充実したが、ストレートプレイの国際展開要件・C'型劇作家のToBeモデルが特に薄い。</div>
+      <div style="overflow-x:auto">
+      <table class="rs-table">
+        <thead><tr><th>誰に</th><th>どこで</th><th>期待できる示唆</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Lucy Kirkwood</strong>（Chimerica等）</td><td>London</td><td>ストレートプレイで国際上演を実現した劇作家の核心スキル</td></tr>
+          <tr><td><strong>Traverse Theatre Literary Manager</strong></td><td>Edinburgh</td><td>「どんな戯曲を探しているか」「日本人劇作家に期待すること」</td></tr>
+          <tr><td><strong>前川知大</strong>（SEEDリサーチャー）</td><td>Tokyo</td><td>派遣後アップデート：自身の国際展開の試みから何がわかったか</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- カテゴリB -->
+<div class="ge-section">
+  <div class="ge-section-title" style="color:var(--soil-text)">B. As-Isモデルの構築（現状把握）── 最大の盲点</div>
+  <div style="background:var(--soil-bg);border:1px solid #A8DEC8;border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:12.5px;color:var(--soil-text)">
+    ToBeモデルは詳細に定義されているが、<strong>現在の日本の若手演劇人がどのレベルにいるか（As-Is）がほぼ未調査</strong>。差分が測定できない状態ではSEEDが「何を補うか」の根拠が弱い。
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:12px">
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--soil);border-radius:12px;padding:1rem">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <span style="background:var(--soil-bg);color:var(--soil-text);font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px">B-1</span>
+        <strong>日本の若手プロデューサー・劇作家・演出家の現状把握</strong>
+      </div>
+      <div style="overflow-x:auto">
+      <table class="rs-table">
+        <thead><tr><th>誰に</th><th>どこで</th><th>期待できる示唆</th></tr></thead>
+        <tbody>
+          <tr><td><strong>日芸・桐朋・玉川 卒業2〜5年目の若手</strong>（各職能）</td><td>Tokyo・座談会形式</td><td>「何を学んで何が足りないか」「英語力・国際感覚の実態」「転職・離職の理由」</td></tr>
+          <tr><td><strong>JPASN会員（若手〜中堅）</strong></td><td>座談会・アンケート</td><td>As-Isの業界水準・一般教養プログラムへの期待値・現状で何が不足しているか</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--soil);border-radius:12px;padding:1rem">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <span style="background:var(--soil-bg);color:var(--soil-text);font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px">B-2</span>
+        <strong>非営利×営利の分断問題の実態（英国・NYのTransfer装置が機能する理由）</strong>
+      </div>
+      <div style="font-size:12.5px;color:var(--text-secondary);margin-bottom:10px">現状の課題：英国・NYでは非営利劇場と商業劇場の人材・作品流通が自然に起きているが、日本では分断が強い。「なぜ分断しているか」「誰がボトルネックか」の調査がない。</div>
+      <div style="overflow-x:auto">
+      <table class="rs-table">
+        <thead><tr><th>誰に</th><th>どこで</th><th>期待できる示唆</th></tr></thead>
+        <tbody>
+          <tr><td><strong>National Theatre Literary Manager</strong></td><td>London（時田さん経由推奨）</td><td>「非営利→商業のTransferを判断する基準」「日本の作品をどう評価するか」</td></tr>
+          <tr><td><strong>Young Vic Associate Artist / Literary Associate</strong></td><td>London</td><td>「文化機関から商業へ作品を推薦するプロセスの実態」</td></tr>
+          <tr><td><strong>日本の商業プロデューサー（東宝・ホリプロ以外）</strong></td><td>Tokyo</td><td>「なぜ日本では非営利の作品が商業転移しにくいか」「障壁はどこか」</td></tr>
+          <tr><td><strong>世田谷PT・KAAT等のプログラマー</strong></td><td>Tokyo</td><td>「日本版Transfer装置として機能できるか」 → タブ①の構造的課題に直結</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--soil);border-radius:12px;padding:1rem">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <span style="background:var(--soil-bg);color:var(--soil-text);font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px">B-3</span>
+        <strong>IPホルダー（出版社・アニメ会社）から見た演劇界</strong>
+      </div>
+      <div style="font-size:12.5px;color:var(--text-secondary);margin-bottom:10px">現状の課題：シナリオAの核心は「IPホルダー×Transfer装置×国際共同制作」だが、IPホルダー側が演劇界をどう見ているかが未調査。「次のトトロ」を作るための条件を、IPホルダー視点から取れていない。</div>
+      <div style="overflow-x:auto">
+      <table class="rs-table">
+        <thead><tr><th>誰に</th><th>どこで</th><th>期待できる示唆</th></tr></thead>
+        <tbody>
+          <tr><td><strong>集英社・小学館・角川等の版権部門担当者</strong></td><td>Tokyo</td><td>「演劇界へのIP提供に何を懸念しているか」「どんなプロデューサーなら話せるか」</td></tr>
+          <tr><td><strong>スタジオジブリ等のプロデューサー</strong></td><td>Tokyo</td><td>トトロ×NT共同制作の経緯の詳細（どの段階で誰が動いたか）</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- カテゴリC -->
+<div class="ge-section">
+  <div class="ge-section-title" style="color:var(--director)">C. プログラム内容の具体化に必要なリサーチ</div>
+  <div style="display:flex;flex-direction:column;gap:12px">
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--director);border-radius:12px;padding:1rem">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <span style="background:var(--director-bg);color:var(--director);font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px">C-1</span>
+        <strong>Traverse Theatre との事前ヒアリング ── 期待値の確認</strong>
+      </div>
+      <div style="font-size:12.5px;color:var(--text-secondary);margin-bottom:10px">現状の課題：2027年9月のリーディング実施が確定しているが、「Traverseが実際にどんな日本の戯曲を求めているか」が不明。プログラム設計（劇作家カリキュラム）に直結。</div>
+      <div style="overflow-x:auto">
+      <table class="rs-table">
+        <thead><tr><th>誰に</th><th>どこで</th><th>期待できる示唆</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Gareth Nicholls</strong>（Traverse Artistic Director）</td><td>Edinburgh / オンライン</td><td>「どんな日本人劇作家と仕事したいか」「リーディング後の理想的な展開は何か」</td></tr>
+          <tr><td><strong>Traverse Literary Manager</strong></td><td>Edinburgh</td><td>「戯曲のセレクション基準」「C'型 vs A型、どちらの作品に関心があるか」</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--director);border-radius:12px;padding:1rem">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <span style="background:var(--director-bg);color:var(--director);font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px">C-2</span>
+        <strong>Edinburgh Fringe のTransferメカニズムの詳細（シナリオB）</strong>
+      </div>
+      <div style="font-size:12.5px;color:var(--text-secondary);margin-bottom:10px">現状の課題：「SixがフリンジからWest Endへ転生した」ことは知っているが、具体的なプロセス（誰が最初に見た・どのようにArts Theatreとの関係が始まったか）の詳細がない。</div>
+      <div style="overflow-x:auto">
+      <table class="rs-table">
+        <thead><tr><th>誰に</th><th>どこで</th><th>期待できる示唆</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Edinburgh Fringe Society プログラム担当</strong></td><td>Edinburgh / オンライン</td><td>「フリンジからのTransfer事例の共通点」「どのフリンジ出展者がTransfer装置と出会えるか」</td></tr>
+          <tr><td><strong>Arts Theatre London のプロデューサー</strong></td><td>London</td><td>「Sixを拾った判断基準」「フリンジ作品を商業につなぐ際に何を見るか」</td></tr>
+          <tr><td><strong>STOMP の制作サイド</strong></td><td>London</td><td>「30年続いたノンバーバルIPの維持管理」→ シナリオBロールモデルの実態把握</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--director);border-radius:12px;padding:1rem">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <span style="background:var(--director-bg);color:var(--director);font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px">C-3</span>
+        <strong>「表現の力」育成プログラムの設計詳細</strong>
+      </div>
+      <div style="font-size:12.5px;color:var(--text-secondary);margin-bottom:10px">現状の課題：一般教養に「10分プレゼン（修了基準）」を設定したが、RADAのReflective Practice・JuilliardのBridge to the Professionがどう機能しているかの設計詳細が薄い。</div>
+      <div style="overflow-x:auto">
+      <table class="rs-table">
+        <thead><tr><th>誰に</th><th>どこで</th><th>期待できる示唆</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Juilliard Bridge to the Profession 担当教員</strong></td><td>オンライン</td><td>「10分プレゼンの内容・評価基準」「業界プロが学生に何を期待するか」</td></tr>
+          <tr><td><strong>RADA Reflective Practice 担当</strong></td><td>オンライン</td><td>「省察を習慣化する訓練の具体的方法」「どう評価しているか」</td></tr>
+          <tr><td><strong>British Council Japan 担当者</strong></td><td>Tokyo</td><td>「企画1（海外演劇誌×英語）の共同運営の可能性」「The Stage等教材使用の許可プロセス」</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--director);border-radius:12px;padding:1rem">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <span style="background:var(--director-bg);color:var(--director);font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px">C-4</span>
+        <strong>フィジカルシアターWSの設計（シナリオB・演出家プログラム）</strong>
+      </div>
+      <div style="font-size:12.5px;color:var(--text-secondary);margin-bottom:10px">現状の課題：シナリオBの演出家育成にフィジカルシアター専門WSが必要と定義しているが「誰が・何を教えるか」が未確定。国内代替できるか、海外から呼ぶかの判断材料がない。</div>
+      <div style="overflow-x:auto">
+      <table class="rs-table">
+        <thead><tr><th>誰に</th><th>どこで</th><th>期待できる示唆</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Frantic Assembly Education coordinator</strong></td><td>London / オンライン</td><td>WSの具体的内容・費用・日本での実施可能性</td></tr>
+          <tr><td><strong>国内のフィジカルシアター実践者</strong>（山田うん、白井晃等）</td><td>Tokyo</td><td>日本版フィジカルシアター教育の可能性と限界</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- カテゴリD -->
+<div class="ge-section">
+  <div class="ge-section-title" style="color:var(--playwright)">D. 市場・エコシステムの理解深化</div>
+  <div style="display:flex;flex-direction:column;gap:12px">
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--playwright);border-radius:12px;padding:1rem">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <span style="background:var(--playwright-bg);color:var(--playwright);font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px">D-1</span>
+        <strong>韓国の成功モデルの詳細（C'型 + シナリオA/B型）── ソウル派遣と連動</strong>
+      </div>
+      <div style="font-size:12.5px;color:var(--text-secondary);margin-bottom:10px">現状の課題：ARKOモデル・NANTA・K-Artsの概要はあるが「実際にどう機能しているか」の詳細が薄い。田窪桜子さんのソウル派遣（6月目標）に組み込むべき優先テーマ。</div>
+      <div style="overflow-x:auto">
+      <table class="rs-table">
+        <thead><tr><th>誰に</th><th>どこで</th><th>期待できる示唆</th></tr></thead>
+        <tbody>
+          <tr><td><strong>ARKO 担当者</strong></td><td>Seoul</td><td>劇作家保護プログラムの具体的設計・予算・効果測定方法</td></tr>
+          <tr><td><strong>NANTA プロデューサー周辺</strong></td><td>Seoul</td><td>インバウンド→世界展開の具体的ステップ・失敗談</td></tr>
+          <tr><td><strong>K-Arts Musical Theatre Writing Program 教員</strong></td><td>Seoul</td><td>ミュージカル創作教育の具体的カリキュラム・日本との比較</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--playwright);border-radius:12px;padding:1rem">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <span style="background:var(--playwright-bg);color:var(--playwright);font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px">D-2</span>
+        <strong>インバウンド向けパフォーマンスとJPASNの連携可能性（シナリオB）</strong>
+      </div>
+      <div style="font-size:12.5px;color:var(--text-secondary);margin-bottom:10px">現状の課題：「国内にインバウンド向けパフォーマンスが存在するがJPASNの文脈外」と整理しているが、実際にどういう主体が運営していてJPASNとどう連携できるかが不明。</div>
+      <div style="overflow-x:auto">
+      <table class="rs-table">
+        <thead><tr><th>誰に</th><th>どこで</th><th>期待できる示唆</th></tr></thead>
+        <tbody>
+          <tr><td><strong>観光庁・JNTO エンターテインメント担当</strong></td><td>Tokyo</td><td>訪日外国人向けコンテンツ支援の仕組みとSEED/SOILとの接点</td></tr>
+          <tr><td><strong>浅草・京都で観光向けパフォーマンスを運営している主体</strong></td><td>Tokyo/Kyoto</td><td>シナリオBのテストマーケットとして接続できるか・実態把握</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 派遣設計への接続 -->
+<div class="ge-section">
+  <div class="ge-section-title">派遣リサーチャーへの接続アクションプラン</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+    <div style="padding:12px 14px;background:var(--seed-bg);border-radius:12px;border:1px solid #BDD3F8">
+      <div style="font-size:12px;font-weight:700;color:var(--seed-text);margin-bottom:8px">🇰🇷 田窪桜子さん（ソウル派遣）に組み込むべき</div>
+      <div style="font-size:12px;color:var(--text-secondary);line-height:1.8">
+        ・D-1：ARKO（劇作家保護プログラムの設計詳細）<br>
+        ・D-1：NANTA（インバウンド→世界展開の実態）<br>
+        ・D-1：K-Arts Musical Theatre Writing Program<br>
+        ・A-3補完：K-Artsの劇作・演出科のOB学生
+      </div>
+    </div>
+    <div style="padding:12px 14px;background:var(--seed-bg);border-radius:12px;border:1px solid #BDD3F8">
+      <div style="font-size:12px;font-weight:700;color:var(--seed-text);margin-bottom:8px">🇬🇧 時田曜子さん（ロンドン派遣）に組み込むべき</div>
+      <div style="font-size:12px;color:var(--text-secondary);line-height:1.8">
+        ・A-2：Bartlett Sher等の演出家インタビュー設計<br>
+        ・B-2：NT/Young Vic Literary Manager（非営利×営利分断）<br>
+        ・C-2：Edinburgh Fringe Society / Arts Theatre London<br>
+        ・C-2：STOMP制作サイド（ノンバーバルIP）<br>
+        ・C-4：Frantic Assembly Education coordinator
+      </div>
+    </div>
+    <div style="padding:12px 14px;background:var(--soil-bg);border-radius:12px;border:1px solid #A8DEC8">
+      <div style="font-size:12px;font-weight:700;color:var(--soil-text);margin-bottom:8px">🇯🇵 国内で直近に実施すべき</div>
+      <div style="font-size:12px;color:var(--text-secondary);line-height:1.8">
+        ・B-1：若手卒業生への座談会（As-Is把握）<br>
+        ・A-1：岡田利規・宮城聰・木ノ下裕一インタビュー<br>
+        ・C-1：Traverse Theatre との事前ヒアリング（最優先）<br>
+        ・B-3：IPホルダー版権部門へのアプローチ
+      </div>
+    </div>
+    <div style="padding:12px 14px;background:var(--soil-bg);border-radius:12px;border:1px solid #A8DEC8">
+      <div style="font-size:12px;font-weight:700;color:var(--soil-text);margin-bottom:8px">💻 オンラインで実施可能</div>
+      <div style="font-size:12px;color:var(--text-secondary);line-height:1.8">
+        ・C-3：Juilliard Bridge to the Profession 担当教員<br>
+        ・C-3：RADA Reflective Practice 担当<br>
+        ・C-3：British Council Japan担当者（企画1の連携）<br>
+        ・D-2：観光庁・JNTO エンターテインメント担当
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+</div><!-- /#tab-research-agenda -->
 
 <div class="footer">
   <span>Slackデイリーレポートより自動生成（毎朝9:00更新）</span>
