@@ -141,6 +141,49 @@ body {
 
 /* ── All Tab Containers ── */
 .ge-container, .rs-container, .soil-container { max-width: 1100px; margin: 0 auto; }
+
+/* ── ① SOIL/SEED Map: horizontal scroll for wide content ── */
+.soil-container { overflow-x: hidden; }
+.soil-section-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; }
+.market-4col { min-width: 700px; }
+.entrance-3col { min-width: 600px; }
+.scenario-2col { min-width: 600px; }
+.transfer-city-grid { min-width: 500px; }
+.vzd-grid { min-width: 500px; }
+.route-table { min-width: 700px; }
+
+/* ── Table layout fixes for ③-⑥ ── */
+.ge-common-table { table-layout: fixed; width: 100%; word-break: break-word; }
+.ge-common-table th, .ge-common-table td { word-break: break-word; overflow-wrap: break-word; }
+/* 3-column tables (university comparison) */
+.ge-common-table.col3 th:nth-child(1), .ge-common-table.col3 td:nth-child(1) { width: 22%; }
+.ge-common-table.col3 th:nth-child(2), .ge-common-table.col3 td:nth-child(2) { width: 40%; }
+.ge-common-table.col3 th:nth-child(3), .ge-common-table.col3 td:nth-child(3) { width: 38%; }
+/* 4-column tables */
+.ge-common-table.col4 th:nth-child(1), .ge-common-table.col4 td:nth-child(1) { width: 20%; }
+.ge-common-table.col4 th:nth-child(2), .ge-common-table.col4 td:nth-child(2) { width: 30%; }
+.ge-common-table.col4 th:nth-child(3), .ge-common-table.col4 td:nth-child(3) { width: 30%; }
+.ge-common-table.col4 th:nth-child(4), .ge-common-table.col4 td:nth-child(4) { width: 20%; }
+/* 6-column requirement tables */
+.ge-common-table.col6 { min-width: 860px; }
+.ge-common-table.col6 th:nth-child(1), .ge-common-table.col6 td:nth-child(1) { width: 22%; }
+.ge-common-table.col6 th:nth-child(2), .ge-common-table.col6 td:nth-child(2) { width: 10%; }
+.ge-common-table.col6 th:nth-child(3), .ge-common-table.col6 td:nth-child(3) { width: 10%; }
+.ge-common-table.col6 th:nth-child(4), .ge-common-table.col6 td:nth-child(4) { width: 10%; }
+.ge-common-table.col6 th:nth-child(5), .ge-common-table.col6 td:nth-child(5) { width: 18%; }
+.ge-common-table.col6 th:nth-child(6), .ge-common-table.col6 td:nth-child(6) { width: 30%; }
+/* Priority matrix table (4 cols) */
+.ge-common-table.col-priority th:nth-child(1), .ge-common-table.col-priority td:nth-child(1) { width: 12%; }
+.ge-common-table.col-priority th:nth-child(2), .ge-common-table.col-priority td:nth-child(2) { width: 10%; }
+.ge-common-table.col-priority th:nth-child(3), .ge-common-table.col-priority td:nth-child(3) { width: 42%; }
+.ge-common-table.col-priority th:nth-child(4), .ge-common-table.col-priority td:nth-child(4) { width: 36%; }
+/* rs-table */
+.rs-table { table-layout: fixed; width: 100%; word-break: break-word; }
+.rs-table th, .rs-table td { word-break: break-word; overflow-wrap: break-word; }
+/* research agenda tables */
+#tab-research-agenda .rs-table th:nth-child(1) { width: 20%; }
+#tab-research-agenda .rs-table th:nth-child(2) { width: 20%; }
+#tab-research-agenda .rs-table th:nth-child(3) { width: 60%; }
 /* ── HR Requirements ── */
 .hr-container { max-width: 1100px; margin: 0 auto; }
 
@@ -1213,6 +1256,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 <!-- Section 1: 4列の市場構造 -->
 <div class="soil-section">
   <div class="soil-section-title">① 4列の市場構造マップ</div>
+  <div class="soil-section-scroll">
   <div class="axis-note-h">
     <span>← 複製芸術（ライセンス・フランチャイズ・IP展開が可能）</span>
     <span>希少芸術（特定のアーティスト・身体・文脈に価値が宿る）→</span>
@@ -1269,6 +1313,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
     <div class="vzd-card vzd-void"><div class="vzd-tag">VOID（左下）</div><div class="vzd-desc">商業招聘×演劇人 ── 商業展開しているのに演劇人にしか届かない。構造的失敗</div></div>
     <div class="vzd-card vzd-dead"><div class="vzd-tag">DEAD ZONE</div><div class="vzd-desc">現代演劇内の中途半端な領域 ── 誰に届けたいかが曖昧な自主開催フリンジ枠。左右両側に存在</div></div>
   </div>
+  </div><!-- /.soil-section-scroll -->
 </div>
 
 <!-- Section 2: 転生装置 -->
@@ -1458,7 +1503,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 <div class="ge-section">
   <div class="ge-section-title">国内大学の演劇教育 ── 何を教えていて、何が不足しているか</div>
   <div style="overflow-x:auto">
-  <table class="ge-common-table">
+  <table class="ge-common-table col3">
     <thead>
       <tr><th>大学・機関</th><th>カバーしていること（確認済）</th><th>不足しているもの（SEEDが補う）</th></tr>
     </thead>
@@ -1522,7 +1567,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 
   <!-- 主要海外機関のサマリー -->
   <div style="overflow-x:auto;margin-bottom:1.5rem">
-  <table class="ge-common-table">
+  <table class="ge-common-table col3">
     <thead>
       <tr><th>機関（国）</th><th>特徴的な科目・プログラム</th><th>日本との最大の差</th></tr>
     </thead>
@@ -1603,7 +1648,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
   <!-- 表現の力の比較 -->
   <div style="font-size:13px;font-weight:700;color:var(--text-primary);margin-bottom:10px">「表現の力（話し続ける力）」に対応する海外の具体的な訓練方法</div>
   <div style="overflow-x:auto">
-  <table class="ge-common-table">
+  <table class="ge-common-table col4">
     <thead>
       <tr><th>訓練の種類</th><th>海外の具体的科目名</th><th>機関</th><th>SEEDでの対応（UNIT）</th></tr>
     </thead>
@@ -1725,7 +1770,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 <div class="ge-section">
   <div class="ge-section-title">3職能横断の共通要件 ── 一般教養で扱う根拠</div>
   <div style="overflow-x:auto">
-  <table class="ge-common-table">
+  <table class="ge-common-table col6">
     <thead>
       <tr><th>共通要件</th><th>P（プロデューサー）</th><th>D（演出家）</th><th>PW（劇作家）</th><th>大学カバー度</th><th>一般教養での扱い方</th></tr>
     </thead>
@@ -1750,7 +1795,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 
   <!-- 主要海外機関のサマリー -->
   <div style="overflow-x:auto;margin-bottom:1.5rem">
-  <table class="ge-common-table">
+  <table class="ge-common-table col3">
     <thead>
       <tr><th>機関（国）</th><th>特徴的な科目・プログラム</th><th>日本との最大の差</th></tr>
     </thead>
@@ -1831,7 +1876,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
   <!-- 表現の力の比較 -->
   <div style="font-size:13px;font-weight:700;color:var(--text-primary);margin-bottom:10px">「表現の力（話し続ける力）」に対応する海外の具体的な訓練方法</div>
   <div style="overflow-x:auto">
-  <table class="ge-common-table">
+  <table class="ge-common-table col4">
     <thead>
       <tr><th>訓練の種類</th><th>海外の具体的科目名</th><th>機関</th><th>SEEDでの対応（UNIT）</th></tr>
     </thead>
@@ -2289,7 +2334,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 <div class="ge-section">
   <div class="ge-section-title">優先度マトリックス ── 直近で動くべきリサーチ</div>
   <div style="overflow-x:auto">
-  <table class="ge-common-table">
+  <table class="ge-common-table col-priority">
     <thead><tr><th>優先度</th><th>カテゴリ</th><th>リサーチ内容</th><th>理由・連動するタブ</th></tr></thead>
     <tbody>
       <tr style="background:#FEF0EE">
