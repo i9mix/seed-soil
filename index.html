@@ -641,6 +641,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
     <button class="tab-btn" data-tab="university-analysis">③ 大学教育に関する分析</button>
     <button class="tab-btn" data-tab="general-education">④ 一般教養プログラム</button>
     <button class="tab-btn" data-tab="role-specific">⑤ 職能別個別要件</button>
+    <button class="tab-btn" data-tab="research-agenda">⑥ 追加リサーチ検討</button>
     <button class="tab-btn" data-tab="progress">プログラム進捗</button>
     <button class="tab-btn" data-tab="timeline">スケジュール</button>
     <button class="tab-btn" data-tab="meetings">会議資料</button>
@@ -2835,6 +2836,359 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 
 </div>
 </div><!-- /#tab-role-specific -->
+
+<!-- ════ Research Agenda Tab ════ -->
+<div id="tab-research-agenda" class="tab-content">
+<div class="ge-container">
+
+<div class="soil-intro-card">
+  <strong>⑥ 追加リサーチ検討：</strong>①〜⑤のタブで構築したToBeモデル・人材要件・プログラム内容の「仮説・インプット不足」を補うためのリサーチアジェンダ。<br>
+  <span style="font-size:12.5px;color:var(--text-secondary)">各項目に「現状の課題」「誰に・どこで」「期待できる示唆」を整理。リサーチャー派遣・個別インタビューの設計に活用してください。</span>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px;font-size:11.5px">
+    <div style="padding:6px 10px;background:var(--seed-bg);border-radius:8px;color:var(--seed-text);text-align:center"><strong>A</strong><br>ToBeモデルの精緻化</div>
+    <div style="padding:6px 10px;background:var(--soil-bg);border-radius:8px;color:var(--soil-text);text-align:center"><strong>B</strong><br>As-Isモデルの構築</div>
+    <div style="padding:6px 10px;background:var(--director-bg);border-radius:8px;color:var(--director);text-align:center"><strong>C</strong><br>プログラム内容の具体化</div>
+    <div style="padding:6px 10px;background:var(--playwright-bg);border-radius:8px;color:var(--playwright);text-align:center"><strong>D</strong><br>市場・エコシステム理解</div>
+  </div>
+</div>
+
+<!-- 優先度マトリックス -->
+<div class="ge-section">
+  <div class="ge-section-title">優先度マトリックス ── 直近で動くべきリサーチ</div>
+  <div style="overflow-x:auto">
+  <table class="ge-common-table">
+    <thead><tr><th>優先度</th><th>カテゴリ</th><th>リサーチ内容</th><th>理由・連動するタブ</th></tr></thead>
+    <tbody>
+      <tr style="background:#FEF0EE">
+        <td><strong style="color:var(--urgent-text)">★★★ 最優先</strong></td>
+        <td><span style="background:var(--soil-bg);color:var(--soil-text);padding:2px 6px;border-radius:4px;font-size:11px">B-1</span></td>
+        <td><strong>日本の若手（卒業2〜5年目）のAs-Is実態調査</strong><br><span style="font-size:11px;color:var(--text-secondary)">対象：日芸・桐朋・玉川卒業生 + JPASN若手会員</span></td>
+        <td>ToBeとAs-Isのギャップを測定するための最重要リサーチ。差分なしに育成設計できない → ② ⑤</td>
+      </tr>
+      <tr style="background:#FEF0EE">
+        <td><strong style="color:var(--urgent-text)">★★★ 最優先</strong></td>
+        <td><span style="background:var(--director-bg);color:var(--director);padding:2px 6px;border-radius:4px;font-size:11px">C-1</span></td>
+        <td><strong>Traverse Theatre との事前ヒアリング</strong><br><span style="font-size:11px;color:var(--text-secondary)">Gareth Nicholls（Artistic Director）</span></td>
+        <td>2027年9月のリーディング実施まで時間がなく、プログラム設計に直結 → ⑤劇作家</td>
+      </tr>
+      <tr style="background:#FEF3E2">
+        <td><strong style="color:#9A6500">★★ 優先</strong></td>
+        <td><span style="background:var(--seed-bg);color:var(--seed-text);padding:2px 6px;border-radius:4px;font-size:11px">A-1</span></td>
+        <td><strong>C'型アーティスト本人へのインタビュー</strong><br><span style="font-size:11px;color:var(--text-secondary)">岡田利規・宮城聰・木ノ下裕一</span></td>
+        <td>C'ToBeモデルの確度を上げ、属人的成功を構造化 → ① ② ⑤</td>
+      </tr>
+      <tr style="background:#FEF3E2">
+        <td><strong style="color:#9A6500">★★ 優先</strong></td>
+        <td><span style="background:var(--soil-bg);color:var(--soil-text);padding:2px 6px;border-radius:4px;font-size:11px">B-2</span></td>
+        <td><strong>非営利×営利の分断問題の実態（英国・NY）</strong><br><span style="font-size:11px;color:var(--text-secondary)">NT Literary Manager、日本の商業プロデューサー、世田谷PT等</span></td>
+        <td>「なぜ日本にTransfer装置がないか」の深掘り → ① ②P</td>
+      </tr>
+      <tr style="background:#FEF3E2">
+        <td><strong style="color:#9A6500">★★ 優先</strong></td>
+        <td><span style="background:var(--playwright-bg);color:var(--playwright);padding:2px 6px;border-radius:4px;font-size:11px">D-1</span></td>
+        <td><strong>韓国の成功モデル詳細（ARKO・NANTA・K-Arts）</strong><br><span style="font-size:11px;color:var(--text-secondary)">田窪桜子さんのソウル派遣と連動</span></td>
+        <td>ARKO型劇作家保護・シナリオBのNANTA実態・ミュージカル創作教育 → ② ④ ⑤</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<!-- カテゴリA -->
+<div class="ge-section">
+  <div class="ge-section-title" style="color:var(--seed-text)">A. ToBeモデルの精緻化に必要なリサーチ</div>
+
+  <div style="display:flex;flex-direction:column;gap:12px">
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--seed);border-radius:12px;padding:1rem">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <span style="background:var(--seed-bg);color:var(--seed-text);font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px">A-1</span>
+        <strong>C'型ToBeモデルが「属人的な成功話」で終わっている</strong>
+      </div>
+      <div style="font-size:12.5px;color:var(--text-secondary);margin-bottom:10px">現状の課題：「次のチェルフィッチュが作れない」と認識しているが、チェルフィッチュ・SPAC・木ノ下歌舞伎が国際展開したプロセスは推測ベース。「何がトリガーになったか」が構造化されていない。</div>
+      <div style="overflow-x:auto">
+      <table class="rs-table">
+        <thead><tr><th>誰に</th><th>どこで</th><th>期待できる示唆</th></tr></thead>
+        <tbody>
+          <tr><td><strong>岡田利規</strong>（チェルフィッチュ主宰）</td><td>Tokyo / 国際フェス会場</td><td>「最初にKunstenに発見されたきっかけ」「プロデューサーとの関係のはじまり方」</td></tr>
+          <tr><td><strong>宮城聰</strong>（SPAC 芸術総監督）</td><td>静岡</td><td>Avignon招聘に至った経緯・公的支援と独立性のバランス</td></tr>
+          <tr><td><strong>木ノ下裕一</strong>（木ノ下歌舞伎）</td><td>Tokyo</td><td>古典再解釈型C'の育ち方・何がきっかけで国際展開の回路が開いたか</td></tr>
+          <tr><td><strong>Kunsten Festival des Arts プログラマー</strong></td><td>Brussels</td><td>「日本の作品を招聘するとき何を見るか」「最初にどこで出会うか」</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--seed);border-radius:12px;padding:1rem">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <span style="background:var(--seed-bg);color:var(--seed-text);font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px">A-2</span>
+        <strong>演出家ToBeモデルへの海外現地インプットが薄い</strong>
+      </div>
+      <div style="font-size:12.5px;color:var(--text-secondary);margin-bottom:10px">現状の課題：NYリサーチ（井川さん）はプロデューサー・作曲家中心。「演出家として国際展開した人」からの直接ヒアリングがほぼない。演出家ToBeモデルは推論ベース。</div>
+      <div style="overflow-x:auto">
+      <table class="rs-table">
+        <thead><tr><th>誰に</th><th>どこで</th><th>期待できる示唆</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Bartlett Sher</strong>（リンカーンセンター）</td><td>NY</td><td>「若い演出家に最初に身につけてほしいこと」「日本の演劇人に対するコメント」</td></tr>
+          <tr><td><strong>Michael Arden</strong>（Maybe Happy Ending演出）</td><td>NY</td><td>「演出家とプロデューサーの関係構築」「アジア文化とブロードウェイの接続」</td></tr>
+          <tr><td><strong>時田曜子さんのロンドン派遣</strong></td><td>London</td><td>演出家特化インタビューの設計が必要：誰と会うかの事前検討が重要</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--seed);border-radius:12px;padding:1rem">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <span style="background:var(--seed-bg);color:var(--seed-text);font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px">A-3</span>
+        <strong>劇作家ToBeモデルがミュージカル寄りになっている</strong>
+      </div>
+      <div style="font-size:12.5px;color:var(--text-secondary);margin-bottom:10px">現状の課題：NYリサーチでミュージカル劇作家の知見は充実したが、ストレートプレイの国際展開要件・C'型劇作家のToBeモデルが特に薄い。</div>
+      <div style="overflow-x:auto">
+      <table class="rs-table">
+        <thead><tr><th>誰に</th><th>どこで</th><th>期待できる示唆</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Lucy Kirkwood</strong>（Chimerica等）</td><td>London</td><td>ストレートプレイで国際上演を実現した劇作家の核心スキル</td></tr>
+          <tr><td><strong>Traverse Theatre Literary Manager</strong></td><td>Edinburgh</td><td>「どんな戯曲を探しているか」「日本人劇作家に期待すること」</td></tr>
+          <tr><td><strong>前川知大</strong>（SEEDリサーチャー）</td><td>Tokyo</td><td>派遣後アップデート：自身の国際展開の試みから何がわかったか</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- カテゴリB -->
+<div class="ge-section">
+  <div class="ge-section-title" style="color:var(--soil-text)">B. As-Isモデルの構築（現状把握）── 最大の盲点</div>
+  <div style="background:var(--soil-bg);border:1px solid #A8DEC8;border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:12.5px;color:var(--soil-text)">
+    ToBeモデルは詳細に定義されているが、<strong>現在の日本の若手演劇人がどのレベルにいるか（As-Is）がほぼ未調査</strong>。差分が測定できない状態ではSEEDが「何を補うか」の根拠が弱い。
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:12px">
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--soil);border-radius:12px;padding:1rem">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <span style="background:var(--soil-bg);color:var(--soil-text);font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px">B-1</span>
+        <strong>日本の若手プロデューサー・劇作家・演出家の現状把握</strong>
+      </div>
+      <div style="overflow-x:auto">
+      <table class="rs-table">
+        <thead><tr><th>誰に</th><th>どこで</th><th>期待できる示唆</th></tr></thead>
+        <tbody>
+          <tr><td><strong>日芸・桐朋・玉川 卒業2〜5年目の若手</strong>（各職能）</td><td>Tokyo・座談会形式</td><td>「何を学んで何が足りないか」「英語力・国際感覚の実態」「転職・離職の理由」</td></tr>
+          <tr><td><strong>JPASN会員（若手〜中堅）</strong></td><td>座談会・アンケート</td><td>As-Isの業界水準・一般教養プログラムへの期待値・現状で何が不足しているか</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--soil);border-radius:12px;padding:1rem">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <span style="background:var(--soil-bg);color:var(--soil-text);font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px">B-2</span>
+        <strong>非営利×営利の分断問題の実態（英国・NYのTransfer装置が機能する理由）</strong>
+      </div>
+      <div style="font-size:12.5px;color:var(--text-secondary);margin-bottom:10px">現状の課題：英国・NYでは非営利劇場と商業劇場の人材・作品流通が自然に起きているが、日本では分断が強い。「なぜ分断しているか」「誰がボトルネックか」の調査がない。</div>
+      <div style="overflow-x:auto">
+      <table class="rs-table">
+        <thead><tr><th>誰に</th><th>どこで</th><th>期待できる示唆</th></tr></thead>
+        <tbody>
+          <tr><td><strong>National Theatre Literary Manager</strong></td><td>London（時田さん経由推奨）</td><td>「非営利→商業のTransferを判断する基準」「日本の作品をどう評価するか」</td></tr>
+          <tr><td><strong>Young Vic Associate Artist / Literary Associate</strong></td><td>London</td><td>「文化機関から商業へ作品を推薦するプロセスの実態」</td></tr>
+          <tr><td><strong>日本の商業プロデューサー（東宝・ホリプロ以外）</strong></td><td>Tokyo</td><td>「なぜ日本では非営利の作品が商業転移しにくいか」「障壁はどこか」</td></tr>
+          <tr><td><strong>世田谷PT・KAAT等のプログラマー</strong></td><td>Tokyo</td><td>「日本版Transfer装置として機能できるか」 → タブ①の構造的課題に直結</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--soil);border-radius:12px;padding:1rem">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <span style="background:var(--soil-bg);color:var(--soil-text);font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px">B-3</span>
+        <strong>IPホルダー（出版社・アニメ会社）から見た演劇界</strong>
+      </div>
+      <div style="font-size:12.5px;color:var(--text-secondary);margin-bottom:10px">現状の課題：シナリオAの核心は「IPホルダー×Transfer装置×国際共同制作」だが、IPホルダー側が演劇界をどう見ているかが未調査。「次のトトロ」を作るための条件を、IPホルダー視点から取れていない。</div>
+      <div style="overflow-x:auto">
+      <table class="rs-table">
+        <thead><tr><th>誰に</th><th>どこで</th><th>期待できる示唆</th></tr></thead>
+        <tbody>
+          <tr><td><strong>集英社・小学館・角川等の版権部門担当者</strong></td><td>Tokyo</td><td>「演劇界へのIP提供に何を懸念しているか」「どんなプロデューサーなら話せるか」</td></tr>
+          <tr><td><strong>スタジオジブリ等のプロデューサー</strong></td><td>Tokyo</td><td>トトロ×NT共同制作の経緯の詳細（どの段階で誰が動いたか）</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- カテゴリC -->
+<div class="ge-section">
+  <div class="ge-section-title" style="color:var(--director)">C. プログラム内容の具体化に必要なリサーチ</div>
+  <div style="display:flex;flex-direction:column;gap:12px">
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--director);border-radius:12px;padding:1rem">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <span style="background:var(--director-bg);color:var(--director);font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px">C-1</span>
+        <strong>Traverse Theatre との事前ヒアリング ── 期待値の確認</strong>
+      </div>
+      <div style="font-size:12.5px;color:var(--text-secondary);margin-bottom:10px">現状の課題：2027年9月のリーディング実施が確定しているが、「Traverseが実際にどんな日本の戯曲を求めているか」が不明。プログラム設計（劇作家カリキュラム）に直結。</div>
+      <div style="overflow-x:auto">
+      <table class="rs-table">
+        <thead><tr><th>誰に</th><th>どこで</th><th>期待できる示唆</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Gareth Nicholls</strong>（Traverse Artistic Director）</td><td>Edinburgh / オンライン</td><td>「どんな日本人劇作家と仕事したいか」「リーディング後の理想的な展開は何か」</td></tr>
+          <tr><td><strong>Traverse Literary Manager</strong></td><td>Edinburgh</td><td>「戯曲のセレクション基準」「C'型 vs A型、どちらの作品に関心があるか」</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--director);border-radius:12px;padding:1rem">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <span style="background:var(--director-bg);color:var(--director);font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px">C-2</span>
+        <strong>Edinburgh Fringe のTransferメカニズムの詳細（シナリオB）</strong>
+      </div>
+      <div style="font-size:12.5px;color:var(--text-secondary);margin-bottom:10px">現状の課題：「SixがフリンジからWest Endへ転生した」ことは知っているが、具体的なプロセス（誰が最初に見た・どのようにArts Theatreとの関係が始まったか）の詳細がない。</div>
+      <div style="overflow-x:auto">
+      <table class="rs-table">
+        <thead><tr><th>誰に</th><th>どこで</th><th>期待できる示唆</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Edinburgh Fringe Society プログラム担当</strong></td><td>Edinburgh / オンライン</td><td>「フリンジからのTransfer事例の共通点」「どのフリンジ出展者がTransfer装置と出会えるか」</td></tr>
+          <tr><td><strong>Arts Theatre London のプロデューサー</strong></td><td>London</td><td>「Sixを拾った判断基準」「フリンジ作品を商業につなぐ際に何を見るか」</td></tr>
+          <tr><td><strong>STOMP の制作サイド</strong></td><td>London</td><td>「30年続いたノンバーバルIPの維持管理」→ シナリオBロールモデルの実態把握</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--director);border-radius:12px;padding:1rem">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <span style="background:var(--director-bg);color:var(--director);font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px">C-3</span>
+        <strong>「表現の力」育成プログラムの設計詳細</strong>
+      </div>
+      <div style="font-size:12.5px;color:var(--text-secondary);margin-bottom:10px">現状の課題：一般教養に「10分プレゼン（修了基準）」を設定したが、RADAのReflective Practice・JuilliardのBridge to the Professionがどう機能しているかの設計詳細が薄い。</div>
+      <div style="overflow-x:auto">
+      <table class="rs-table">
+        <thead><tr><th>誰に</th><th>どこで</th><th>期待できる示唆</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Juilliard Bridge to the Profession 担当教員</strong></td><td>オンライン</td><td>「10分プレゼンの内容・評価基準」「業界プロが学生に何を期待するか」</td></tr>
+          <tr><td><strong>RADA Reflective Practice 担当</strong></td><td>オンライン</td><td>「省察を習慣化する訓練の具体的方法」「どう評価しているか」</td></tr>
+          <tr><td><strong>British Council Japan 担当者</strong></td><td>Tokyo</td><td>「企画1（海外演劇誌×英語）の共同運営の可能性」「The Stage等教材使用の許可プロセス」</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--director);border-radius:12px;padding:1rem">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <span style="background:var(--director-bg);color:var(--director);font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px">C-4</span>
+        <strong>フィジカルシアターWSの設計（シナリオB・演出家プログラム）</strong>
+      </div>
+      <div style="font-size:12.5px;color:var(--text-secondary);margin-bottom:10px">現状の課題：シナリオBの演出家育成にフィジカルシアター専門WSが必要と定義しているが「誰が・何を教えるか」が未確定。国内代替できるか、海外から呼ぶかの判断材料がない。</div>
+      <div style="overflow-x:auto">
+      <table class="rs-table">
+        <thead><tr><th>誰に</th><th>どこで</th><th>期待できる示唆</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Frantic Assembly Education coordinator</strong></td><td>London / オンライン</td><td>WSの具体的内容・費用・日本での実施可能性</td></tr>
+          <tr><td><strong>国内のフィジカルシアター実践者</strong>（山田うん、白井晃等）</td><td>Tokyo</td><td>日本版フィジカルシアター教育の可能性と限界</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- カテゴリD -->
+<div class="ge-section">
+  <div class="ge-section-title" style="color:var(--playwright)">D. 市場・エコシステムの理解深化</div>
+  <div style="display:flex;flex-direction:column;gap:12px">
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--playwright);border-radius:12px;padding:1rem">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <span style="background:var(--playwright-bg);color:var(--playwright);font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px">D-1</span>
+        <strong>韓国の成功モデルの詳細（C'型 + シナリオA/B型）── ソウル派遣と連動</strong>
+      </div>
+      <div style="font-size:12.5px;color:var(--text-secondary);margin-bottom:10px">現状の課題：ARKOモデル・NANTA・K-Artsの概要はあるが「実際にどう機能しているか」の詳細が薄い。田窪桜子さんのソウル派遣（6月目標）に組み込むべき優先テーマ。</div>
+      <div style="overflow-x:auto">
+      <table class="rs-table">
+        <thead><tr><th>誰に</th><th>どこで</th><th>期待できる示唆</th></tr></thead>
+        <tbody>
+          <tr><td><strong>ARKO 担当者</strong></td><td>Seoul</td><td>劇作家保護プログラムの具体的設計・予算・効果測定方法</td></tr>
+          <tr><td><strong>NANTA プロデューサー周辺</strong></td><td>Seoul</td><td>インバウンド→世界展開の具体的ステップ・失敗談</td></tr>
+          <tr><td><strong>K-Arts Musical Theatre Writing Program 教員</strong></td><td>Seoul</td><td>ミュージカル創作教育の具体的カリキュラム・日本との比較</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--playwright);border-radius:12px;padding:1rem">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <span style="background:var(--playwright-bg);color:var(--playwright);font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px">D-2</span>
+        <strong>インバウンド向けパフォーマンスとJPASNの連携可能性（シナリオB）</strong>
+      </div>
+      <div style="font-size:12.5px;color:var(--text-secondary);margin-bottom:10px">現状の課題：「国内にインバウンド向けパフォーマンスが存在するがJPASNの文脈外」と整理しているが、実際にどういう主体が運営していてJPASNとどう連携できるかが不明。</div>
+      <div style="overflow-x:auto">
+      <table class="rs-table">
+        <thead><tr><th>誰に</th><th>どこで</th><th>期待できる示唆</th></tr></thead>
+        <tbody>
+          <tr><td><strong>観光庁・JNTO エンターテインメント担当</strong></td><td>Tokyo</td><td>訪日外国人向けコンテンツ支援の仕組みとSEED/SOILとの接点</td></tr>
+          <tr><td><strong>浅草・京都で観光向けパフォーマンスを運営している主体</strong></td><td>Tokyo/Kyoto</td><td>シナリオBのテストマーケットとして接続できるか・実態把握</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 派遣設計への接続 -->
+<div class="ge-section">
+  <div class="ge-section-title">派遣リサーチャーへの接続アクションプラン</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+    <div style="padding:12px 14px;background:var(--seed-bg);border-radius:12px;border:1px solid #BDD3F8">
+      <div style="font-size:12px;font-weight:700;color:var(--seed-text);margin-bottom:8px">🇰🇷 田窪桜子さん（ソウル派遣）に組み込むべき</div>
+      <div style="font-size:12px;color:var(--text-secondary);line-height:1.8">
+        ・D-1：ARKO（劇作家保護プログラムの設計詳細）<br>
+        ・D-1：NANTA（インバウンド→世界展開の実態）<br>
+        ・D-1：K-Arts Musical Theatre Writing Program<br>
+        ・A-3補完：K-Artsの劇作・演出科のOB学生
+      </div>
+    </div>
+    <div style="padding:12px 14px;background:var(--seed-bg);border-radius:12px;border:1px solid #BDD3F8">
+      <div style="font-size:12px;font-weight:700;color:var(--seed-text);margin-bottom:8px">🇬🇧 時田曜子さん（ロンドン派遣）に組み込むべき</div>
+      <div style="font-size:12px;color:var(--text-secondary);line-height:1.8">
+        ・A-2：Bartlett Sher等の演出家インタビュー設計<br>
+        ・B-2：NT/Young Vic Literary Manager（非営利×営利分断）<br>
+        ・C-2：Edinburgh Fringe Society / Arts Theatre London<br>
+        ・C-2：STOMP制作サイド（ノンバーバルIP）<br>
+        ・C-4：Frantic Assembly Education coordinator
+      </div>
+    </div>
+    <div style="padding:12px 14px;background:var(--soil-bg);border-radius:12px;border:1px solid #A8DEC8">
+      <div style="font-size:12px;font-weight:700;color:var(--soil-text);margin-bottom:8px">🇯🇵 国内で直近に実施すべき</div>
+      <div style="font-size:12px;color:var(--text-secondary);line-height:1.8">
+        ・B-1：若手卒業生への座談会（As-Is把握）<br>
+        ・A-1：岡田利規・宮城聰・木ノ下裕一インタビュー<br>
+        ・C-1：Traverse Theatre との事前ヒアリング（最優先）<br>
+        ・B-3：IPホルダー版権部門へのアプローチ
+      </div>
+    </div>
+    <div style="padding:12px 14px;background:var(--soil-bg);border-radius:12px;border:1px solid #A8DEC8">
+      <div style="font-size:12px;font-weight:700;color:var(--soil-text);margin-bottom:8px">💻 オンラインで実施可能</div>
+      <div style="font-size:12px;color:var(--text-secondary);line-height:1.8">
+        ・C-3：Juilliard Bridge to the Profession 担当教員<br>
+        ・C-3：RADA Reflective Practice 担当<br>
+        ・C-3：British Council Japan担当者（企画1の連携）<br>
+        ・D-2：観光庁・JNTO エンターテインメント担当
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+</div><!-- /#tab-research-agenda -->
 
 <div class="footer">
   <span>Slackデイリーレポートより自動生成（毎朝9:00更新）</span>
