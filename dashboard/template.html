@@ -178,6 +178,12 @@ body {
 .ge-common-table.col-priority th:nth-child(3), .ge-common-table.col-priority td:nth-child(3) { width: 42%; }
 .ge-common-table.col-priority th:nth-child(4), .ge-common-table.col-priority td:nth-child(4) { width: 36%; }
 /* rs-table */
+.rs-table { table-layout: fixed; width: 100%; word-break: break-word; }
+.rs-table th, .rs-table td { word-break: break-word; overflow-wrap: break-word; }
+.rs-table th:nth-child(1), .rs-table td:nth-child(1) { width: 9%; }
+.rs-table th:nth-child(2), .rs-table td:nth-child(2) { width: 23%; }
+.rs-table th:nth-child(3), .rs-table td:nth-child(3) { width: 56%; }
+.rs-table th:nth-child(4), .rs-table td:nth-child(4) { width: 12%; }
 /* ── HR Requirements ── */
 .hr-container { max-width: 1100px; margin: 0 auto; }
 
@@ -2625,6 +2631,15 @@ document.querySelectorAll('.role-tab-btn').forEach(btn => {
     document.querySelectorAll('.role-content').forEach(c => c.classList.remove('active'));
     btn.classList.add('active');
     document.getElementById('role-' + btn.dataset.role).classList.add('active');
+  });
+});
+
+document.querySelectorAll('.rs-tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.rs-tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.rs-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('rs-' + btn.dataset.rsRole).classList.add('active');
   });
 });
 </script>
