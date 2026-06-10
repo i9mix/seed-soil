@@ -23,3 +23,6 @@ dashboard/package-lock.json
 dashboard/render-page.mjs
 dashboard/render-page2.mjs
 dashboard/extract-page.mjs
+dashboard/fix-roles.mjs
+dashboard/render-news.mjs
+dashboard/template_new.html

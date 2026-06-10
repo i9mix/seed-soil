@@ -5,47 +5,2425 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SEEDダッシュボード</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style> :root {   --bg: #F7F6F2;   --surface: #FFFFFF;   --border: #E5E3DC;   --text-primary: #1A1916;   --text-secondary: #6B6860;   --text-tertiary: #A8A69F;   --soil: #1D9E75;   --soil-bg: #E1F5EE;   --soil-text: #085041;   --seed: #378ADD;   --seed-bg: #E6F1FB;   --seed-text: #0C447C;   --urgent-bg: #FEF0EE;   --urgent-text: #C0392B;   --urgent-border: #F5C4B3;   --wip-bg: #FEF9EE;   --wip-text: #9A6500;   --wip-border: #FAD894;   --plan-bg: #EEF4FE;   --plan-text: #1A4FA0;   --plan-border: #BDD3F8;   --slack: #4A154B;   --playwright: #C25219;   --playwright-bg: #FEF3E2;   --playwright-border: #F5D0A9;   --director: #5C3D9E;   --director-bg: #F0EDFD;   --director-border: #CBBFF8;   --producer: #1D9E75;   --producer-bg: #E1F5EE;   --producer-border: #A8DEC8; }  * { box-sizing: border-box; margin: 0; padding: 0; }  body {   font-family: 'Noto Sans JP', sans-serif;   background: var(--bg);   color: var(--text-primary);   min-height: 100vh;   padding: 2rem; }  .page-header {   max-width: 960px; margin: 0 auto 1.25rem;   display: flex;   align-items: flex-start;   justify-content: space-between;   gap: 1rem;   flex-wrap: wrap; }  .page-header h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 6px; } .meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; } .badge { font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; display: inline-block; } .badge-slack { background: var(--slack); color: #fff; } .badge-date { background: var(--border); color: var(--text-secondary); } .updated { font-size: 12px; color: var(--text-tertiary); text-align: right; }  /* ── Tab Navigation ── */ .tab-nav-wrapper { max-width: 960px; margin: 0 auto 1.5rem; border-bottom: 2px solid var(--border); }  .tab-nav { display: flex; flex-wrap: wrap; gap: 2px; }  .tab-btn {   background: none;   border: none;   border-bottom: 3px solid transparent;   margin-bottom: -2px;   padding: 10px 22px;   font-family: 'Noto Sans JP', sans-serif;   font-size: 14px;   font-weight: 500;   color: var(--text-secondary);   cursor: pointer;   transition: color 0.15s, border-color 0.15s;   white-space: nowrap; }  .tab-btn:hover { color: var(--text-primary); } .tab-btn.active { color: var(--seed); border-bottom-color: var(--seed); font-weight: 700; }  .tab-content { display: none; } .tab-content.active { display: block; }  /* ── Dashboard ── */ .metrics {   max-width: 960px; margin: 0 auto 1.25rem;   display: grid;   grid-template-columns: repeat(4, 1fr);   gap: 10px; }  .metric { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.25rem; } .metric-label { font-size: 11px; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; } .metric-value { font-size: 28px; font-weight: 700; font-family: 'DM Mono', monospace; letter-spacing: -0.03em; } .metric-value.red { color: #C0392B; } .metric-value.amber { color: #9A6500; } .metric-value.blue { color: #1A4FA0; }  .legend { max-width: 960px; margin: 0 auto 1rem; display: flex; gap: 14px; flex-wrap: wrap; } .leg { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--text-secondary); } .leg-dot { width: 9px; height: 9px; border-radius: 50%; }  .grid { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem; } .card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--border); } .avatar { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; } .member-name { font-size: 14px; font-weight: 700; } .member-date { font-size: 11px; color: var(--text-tertiary); font-family: 'DM Mono', monospace; } .group { margin-bottom: 9px; } .group:last-child { margin-bottom: 0; } .group-label { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 20px; margin-bottom: 6px; } .gl-urgent { background: var(--urgent-bg); color: var(--urgent-text); border: 1px solid var(--urgent-border); } .gl-wip    { background: var(--wip-bg);    color: var(--wip-text);    border: 1px solid var(--wip-border); } .gl-plan   { background: var(--plan-bg);   color: var(--plan-text);   border: 1px solid var(--plan-border); } .task { font-size: 12.5px; padding: 4px 0 4px 11px; border-left: 2.5px solid var(--border); margin-left: 4px; margin-bottom: 3px; line-height: 1.5; display: flex; align-items: baseline; gap: 5px; flex-wrap: wrap; } .task.soil { border-left-color: var(--soil); } .task.seed { border-left-color: var(--seed); } .tag { font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 8px; flex-shrink: 0; } .tag-soil { background: var(--soil-bg); color: var(--soil-text); } .tag-seed { background: var(--seed-bg); color: var(--seed-text); } .card-past { border-color: #FAD894; opacity: 0.85; } .badge-past { font-size: 10px; font-weight: 700; padding: 1px 7px; border-radius: 8px; background: var(--wip-bg); color: var(--wip-text); border: 1px solid var(--wip-border); margin-left: 5px; vertical-align: middle; }  /* ── HR Requirements ── */ .hr-container { max-width: 960px; margin: 0 auto; }  .hr-intro { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; } .hr-intro p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; } .hr-intro strong { color: var(--text-primary); }  .role-tab-nav { display: flex; gap: 8px; margin-bottom: 1.25rem; flex-wrap: wrap; }  .role-tab-btn {   background: var(--surface);   border: 1.5px solid var(--border);   border-radius: 24px;   padding: 8px 22px;   font-family: 'Noto Sans JP', sans-serif;   font-size: 14px;   font-weight: 500;   color: var(--text-secondary);   cursor: pointer;   transition: all 0.15s; }  .role-tab-btn:hover { border-color: var(--text-secondary); color: var(--text-primary); } .role-tab-btn.active[data-role="playwright"] { background: var(--playwright-bg); border-color: var(--playwright); color: var(--playwright); font-weight: 700; } .role-tab-btn.active[data-role="director"]   { background: var(--director-bg);   border-color: var(--director);   color: var(--director);   font-weight: 700; } .role-tab-btn.active[data-role="producer"]   { background: var(--producer-bg);   border-color: var(--producer);   color: var(--producer);   font-weight: 700; }  .role-content { display: none; } .role-content.active { display: block; }  .role-header { border-radius: 14px; padding: 1.5rem; margin-bottom: 1.25rem; } .role-header.playwright { background: var(--playwright-bg); border: 1px solid var(--playwright-border); } .role-header.director   { background: var(--director-bg);   border: 1px solid var(--director-border); } .role-header.producer   { background: var(--producer-bg);   border: 1px solid var(--producer-border); }  .role-title { font-size: 20px; font-weight: 700; margin-bottom: 10px; } .role-title.playwright { color: var(--playwright); } .role-title.director   { color: var(--director); } .role-title.producer   { color: var(--producer); }  .role-tobe { font-size: 15px; font-weight: 700; color: var(--text-primary); line-height: 1.6; padding: 10px 14px; background: rgba(255,255,255,0.7); border-radius: 8px; margin-bottom: 10px; } .role-sub { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }  .req-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; margin-bottom: 1.25rem; }  .req-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.25rem; } .req-card-title { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }  .req-item { display: flex; gap: 8px; padding: 5px 0; border-bottom: 1px solid var(--bg); align-items: flex-start; } .req-item:last-child { border-bottom: none; } .req-id { font-size: 10px; font-weight: 700; font-family: 'DM Mono', monospace; color: var(--text-tertiary); flex-shrink: 0; padding-top: 2px; min-width: 28px; } .req-name { font-size: 13px; color: var(--text-primary); line-height: 1.5; }  .special-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.25rem; } .special-card-title { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); } .special-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; } .special-item { background: var(--bg); border-radius: 8px; padding: 10px 12px; } .special-id { font-size: 10px; font-weight: 700; font-family: 'DM Mono', monospace; color: var(--text-tertiary); margin-bottom: 4px; } .special-name { font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; } .special-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }  .insights-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.25rem; } .insights-card-title { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); } .insight-item { display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--bg); align-items: flex-start; } .insight-item:last-child { border-bottom: none; } .insight-num { font-size: 11px; font-weight: 700; font-family: 'DM Mono', monospace; background: var(--bg); color: var(--text-secondary); border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; } .insight-text { font-size: 13px; color: var(--text-primary); line-height: 1.5; } .insight-text strong { color: var(--text-primary); } .insight-basis { font-size: 11.5px; color: var(--text-secondary); margin-top: 2px; line-height: 1.5; }  .summary-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.25rem; } .summary-card-title { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); } .summary-list { list-style: none; counter-reset: list-counter; } .summary-list li { font-size: 13px; color: var(--text-primary); padding: 6px 0 6px 26px; border-bottom: 1px solid var(--bg); position: relative; line-height: 1.5; counter-increment: list-counter; } .summary-list li:last-child { border-bottom: none; } .summary-list li::before { content: counter(list-counter); position: absolute; left: 0; font-size: 11px; font-weight: 700; font-family: 'DM Mono', monospace; color: var(--text-tertiary); top: 8px; }  /* ── About ── */ .about-container { max-width: 960px; margin: 0 auto; display: flex; flex-direction: column; gap: 2rem; } .about-hero { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 2.5rem 2rem; text-align: center; } .about-hero-label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--seed); font-family: 'DM Mono', monospace; margin-bottom: 0.75rem; } .about-hero-copy { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; color: var(--text-primary); line-height: 1.4; margin-bottom: 1rem; } .about-hero-sub { font-size: 14px; color: var(--text-secondary); line-height: 1.8; max-width: 640px; margin: 0 auto; } .about-section-title { font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); } .about-role-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; } @media (max-width: 700px) { .about-role-grid { grid-template-columns: 1fr; } } .about-role-card { background: var(--surface); border: 1.5px solid var(--border); border-radius: 14px; padding: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; } .about-role-card.playwright { border-top: 4px solid var(--playwright); } .about-role-card.director   { border-top: 4px solid var(--director); } .about-role-card.producer   { border-top: 4px solid var(--producer); } .about-role-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; } .about-role-badge.playwright { background: var(--playwright-bg); color: var(--playwright); } .about-role-badge.director   { background: var(--director-bg);   color: var(--director); } .about-role-badge.producer   { background: var(--producer-bg);   color: var(--producer); } .about-role-name { font-size: 17px; font-weight: 700; color: var(--text-primary); } .about-role-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.7; } .about-bg-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.5rem 1.75rem; } .about-bg-body { font-size: 14px; color: var(--text-secondary); line-height: 1.85; } .about-bg-body + .about-bg-body { margin-top: 0.75rem; } .about-milestone-list { display: flex; flex-direction: column; gap: 0; } .about-ms-row { display: flex; align-items: flex-start; gap: 1rem; padding: 0.85rem 0; border-bottom: 1px solid var(--border); } .about-ms-row:last-child { border-bottom: none; } .about-ms-date { font-size: 12px; font-family: 'DM Mono', monospace; color: var(--text-tertiary); min-width: 80px; padding-top: 2px; } .about-ms-dot { width: 10px; height: 10px; border-radius: 50%; margin-top: 4px; flex-shrink: 0; } .about-ms-dot.done { background: var(--soil); } .about-ms-dot.wip  { background: var(--wip-text); } .about-ms-dot.plan { background: var(--seed); } .about-ms-text { font-size: 14px; color: var(--text-primary); line-height: 1.5; } .about-ms-text span { font-size: 12px; color: var(--text-tertiary); margin-left: 8px; } .about-ms-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem 1.75rem; } .about-org-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; } @media (max-width: 600px) { .about-org-grid { grid-template-columns: 1fr; } } .about-org-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.1rem 1.25rem; } .about-org-role { font-size: 11px; font-weight: 700; letter-spacing: 0.05em; color: var(--text-tertiary); margin-bottom: 4px; } .about-org-name { font-size: 15px; font-weight: 700; color: var(--text-primary); } .about-advisor-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; } .about-advisor-chip { font-size: 12px; padding: 5px 14px; border-radius: 20px; background: var(--seed-bg); color: var(--seed-text); border: 1px solid #BDD3F8; font-weight: 500; } .about-link-row { display: flex; flex-wrap: wrap; gap: 10px; } .about-link-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; padding: 8px 18px; border-radius: 10px; border: 1.5px solid var(--border); background: var(--surface); color: var(--text-secondary); text-decoration: none; transition: border-color 0.15s, color 0.15s, background 0.15s; } .about-link-btn:hover { border-color: var(--seed); color: var(--seed); background: var(--seed-bg); }  /* ── Meetings ── */ .meetings-container { max-width: 960px; margin: 0 auto; } .meeting-group { margin-bottom: 2rem; } .meeting-group-title {   font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;   color: var(--text-tertiary); margin-bottom: 10px; padding-bottom: 8px;   border-bottom: 1px solid var(--border); } .meeting-row {   background: var(--surface); border: 1px solid var(--border); border-radius: 12px;   padding: 1rem 1.25rem; margin-bottom: 8px;   display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; } .meeting-round {   font-size: 11px; font-weight: 700; font-family: 'DM Mono', monospace;   background: var(--seed-bg); color: var(--seed-text);   border: 1px solid var(--border); border-radius: 20px;   padding: 4px 12px; flex-shrink: 0; white-space: nowrap; } .meeting-info { flex: 1; min-width: 140px; } .meeting-name { font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 2px; } .meeting-date { font-size: 11px; color: var(--text-tertiary); font-family: 'DM Mono', monospace; } .meeting-docs { display: flex; gap: 8px; flex-wrap: wrap; } .doc-btn {   display: inline-flex; align-items: center; gap: 5px;   font-size: 12px; font-weight: 500; padding: 6px 14px;   border-radius: 8px; border: 1.5px solid var(--border);   background: var(--surface); color: var(--text-secondary);   cursor: pointer; text-decoration: none;   transition: border-color 0.15s, color 0.15s, background 0.15s;   white-space: nowrap; } .doc-btn:hover { border-color: var(--seed); color: var(--seed); background: var(--seed-bg); } .doc-btn-icon { font-size: 13px; } .meeting-add-hint {   font-size: 12px; color: var(--text-tertiary); padding: 10px 4px;   border: 1.5px dashed var(--border); border-radius: 10px;   text-align: center; margin-top: 4px; }  /* ── Program Progress ── */ .prog-container { max-width: 960px; margin: 0 auto; } .prog-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 1.25rem; } .prog-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem; } .prog-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--border); } .prog-card-title { font-size: 15px; font-weight: 700; } .prog-card-title.playwright { color: var(--playwright); } .prog-card-title.director   { color: var(--director); } .prog-card-title.producer   { color: var(--producer); } .prog-card-title.general    { color: var(--seed); } .prog-owner { font-size: 11px; color: var(--text-tertiary); } .prog-phase { margin-bottom: 10px; } .prog-phase:last-child { margin-bottom: 0; } .prog-phase-name { font-size: 11px; font-weight: 700; color: var(--text-secondary); margin-bottom: 6px; letter-spacing: 0.04em; } .prog-item { display: flex; align-items: flex-start; gap: 8px; padding: 5px 0; border-bottom: 1px solid var(--bg); font-size: 12.5px; line-height: 1.5; } .prog-item:last-child { border-bottom: none; } .status-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; } .dot-done   { background: var(--soil); } .dot-wip    { background: #F0A500; } .dot-open   { background: #C0392B; } .dot-plan   { background: #BDD3F8; } .prog-legend { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 1rem; } .prog-leg { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--text-secondary); }  /* ── Timeline ── */ .tl-container { max-width: 960px; margin: 0 auto; } .tl-section { margin-bottom: 1.5rem; } .tl-section-title { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border); } .tl-row { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--bg); align-items: flex-start; } .tl-row:last-child { border-bottom: none; } .tl-date { font-size: 11.5px; font-family: 'DM Mono', monospace; color: var(--text-secondary); flex-shrink: 0; width: 90px; margin-top: 2px; } .tl-label { font-size: 13px; color: var(--text-primary); line-height: 1.5; flex: 1; } .tl-label .tl-note { font-size: 11px; color: var(--text-tertiary); display: block; } .tl-chips { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 3px; } .tl-chip { font-size: 10px; font-weight: 700; padding: 1px 7px; border-radius: 8px; } .chip-pw { background: var(--playwright-bg); color: var(--playwright); } .chip-dr { background: var(--director-bg); color: var(--director); } .chip-pr { background: var(--producer-bg); color: var(--producer); } .chip-ge { background: var(--seed-bg); color: var(--seed-text); } .chip-all { background: var(--bg); color: var(--text-secondary); border: 1px solid var(--border); } .chip-key { background: #FEF0EE; color: var(--urgent-text); border: 1px solid var(--urgent-border); }  /* ── People Map ── */ .people-container { max-width: 960px; margin: 0 auto; } .people-section { margin-bottom: 1.5rem; } .people-section-title { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border); } .people-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; } .person-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1rem; } .person-name { font-size: 14px; font-weight: 700; margin-bottom: 3px; } .person-org  { font-size: 11px; color: var(--text-tertiary); margin-bottom: 8px; } .person-role { font-size: 12px; color: var(--text-secondary); line-height: 1.5; } .person-chips { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 6px; } .status-tbd { border: 1px dashed var(--border); } .status-tbd .person-name { color: var(--text-secondary); }  /* ── Footer ── */ .footer { max-width: 960px; margin: 2rem auto 0; padding-top: 1rem; border-top: 1px solid var(--border); font-size: 11px; color: var(--text-tertiary); display: flex; justify-content: space-between; }  @media (max-width: 700px) {   body { padding: 1rem; }   .grid { grid-template-columns: 1fr; }   .metrics { grid-template-columns: repeat(2, 1fr); }   .page-header { flex-direction: column; }   .req-grid { grid-template-columns: 1fr; }   .special-grid { grid-template-columns: 1fr; }   .prog-grid { grid-template-columns: 1fr; }   .people-grid { grid-template-columns: 1fr; } } /* ══════ SOIL Map ══════ */ .soil-container,.ge-container,.rs-container{max-width:1100px;margin:0 auto} .soil-section{margin-bottom:2.5rem} .soil-section-title{font-size:14px;font-weight:700;color:var(--text-primary);margin-bottom:1rem;padding-bottom:8px;border-bottom:2px solid var(--border);display:flex;align-items:center;gap:8px} .soil-intro-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.25rem;margin-bottom:1.5rem;font-size:13.5px;line-height:1.8;color:var(--text-secondary)} .axis-note-h{display:flex;justify-content:space-between;font-size:11px;color:var(--text-tertiary);margin-bottom:8px;font-family:'DM Mono',monospace} .market-4col{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px} .market-col{border-radius:12px;padding:1rem;border:1.5px solid var(--border);background:var(--surface);position:relative} .market-col.ip-col{background:#EEF4FE;border-color:#BDD3F8} .market-col.commercial-col{background:#FEF3E2;border-color:#F5D0A9} .market-col.contemporary-col{background:#E1F5EE;border-color:#A8DEC8} .market-col.heritage-col{background:#F0EDFD;border-color:#CBBFF8} .mc-col-title{font-size:13px;font-weight:700;color:var(--text-primary);margin-bottom:6px} .mc-stage-badge{font-size:10px;font-weight:700;color:var(--soil);background:var(--soil-bg);border:1px solid #A8DEC8;padding:2px 7px;border-radius:5px;display:inline-block;margin-bottom:6px} .mc-world-ex{font-size:11.5px;color:var(--text-secondary);line-height:1.7;margin-bottom:8px} .mc-jp-block{margin-bottom:6px} .mc-jp-tag{font-size:10px;font-weight:700;padding:2px 6px;border-radius:5px;display:inline-block;margin-bottom:4px} .jp-present{background:#FEF0EE;color:var(--urgent-text)} .jp-none{background:#E8E8E8;color:#555;font-style:italic} .jp-target{background:var(--seed-bg);color:var(--seed-text)} .mc-jp-list{font-size:11px;color:var(--text-secondary);line-height:1.6} .mc-zone-tag{font-size:10px;font-weight:700;padding:3px 7px;border-radius:6px;display:inline-block;margin-top:8px} .zone-void{background:#E8E8E8;color:#555} .zone-dead{background:#FFF3CD;color:#856404} .v-axis-heading{font-size:11px;font-weight:700;color:var(--text-tertiary);margin-bottom:6px;letter-spacing:.04em} .v-axis-rows{display:flex;flex-direction:column;gap:3px;margin-bottom:10px} .v-axis-row{display:flex;align-items:center;gap:8px;padding:4px 10px;border-radius:6px;background:var(--bg);font-size:12px} .v-axis-num{font-size:10px;font-weight:700;font-family:'DM Mono';color:var(--text-tertiary);width:18px;flex-shrink:0} .vzd-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px} .vzd-card{border-radius:10px;padding:10px 12px} .vzd-void{background:#F0F0F0;border:1px solid #DDD} .vzd-dead{background:#FFF9E0;border:1px solid #F5D0A9} .vzd-tag{font-size:10px;font-weight:700;color:#555;margin-bottom:4px} .vzd-desc{font-size:12px;color:var(--text-secondary);line-height:1.5} /* ── Transfer Machine ── */ .transfer-intro-card{background:var(--seed-bg);border:1px solid #BDD3F8;border-radius:12px;padding:1rem;margin-bottom:12px;font-size:13px;color:var(--seed-text);line-height:1.6} .transfer-city-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px} .transfer-city-title{font-size:12px;font-weight:700;color:var(--text-secondary);margin-bottom:8px;letter-spacing:.06em;text-transform:uppercase} .transfer-insts{display:flex;flex-wrap:wrap;gap:6px} .transfer-inst{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:5px 10px;font-size:12px;color:var(--text-primary);font-weight:600} /* ── Route Table ── */ .route-table{width:100%;border-collapse:collapse;font-size:12.5px} .route-table th{background:var(--bg);padding:8px 10px;text-align:left;font-size:11px;font-weight:700;color:var(--text-secondary);border-bottom:2px solid var(--border)} .route-table td{padding:10px;border-bottom:1px solid var(--bg);vertical-align:top;line-height:1.5} .route-table tr:hover td{background:var(--bg)} .route-lbl{font-size:10px;font-weight:700;padding:2px 6px;border-radius:5px;display:inline-block} .route-lbl-a{background:var(--seed-bg);color:var(--seed-text)} .route-lbl-b{background:var(--soil-bg);color:var(--soil-text)} .route-lbl-main{background:#FFF3CD;color:#856404} /* ── Entrance ── */ .entrance-3col{display:grid;grid-template-columns:repeat(3,1fr);gap:12px} .entrance-card{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;padding:1.25rem} .entrance-letter{font-size:26px;font-weight:700;font-family:'DM Mono';color:var(--seed);margin-bottom:6px} .entrance-title{font-size:13px;font-weight:700;color:var(--text-primary);margin-bottom:6px} .entrance-desc{font-size:12px;color:var(--text-secondary);line-height:1.6} .entrance-example{font-size:11px;color:var(--text-tertiary);margin-top:8px;padding-top:6px;border-top:1px solid var(--bg)} /* ── Scenario ── */ .scenario-2col{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px} .scenario-2col-sub{display:grid;grid-template-columns:1fr 1fr;gap:10px;opacity:.65} .sc-card{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;padding:1.25rem} .sc-card.main-sc{border-color:var(--seed);box-shadow:0 0 0 3px rgba(55,138,221,.10)} .sc-main-badge{font-size:11px;font-weight:700;background:var(--seed-bg);color:var(--seed-text);padding:2px 8px;border-radius:8px;display:inline-block;margin-bottom:8px} .sc-letter{font-size:22px;font-weight:700;font-family:'DM Mono';margin-bottom:2px} .sc-letter.a{color:var(--seed)}.sc-letter.b{color:var(--soil)} .sc-name{font-size:13.5px;font-weight:700;color:var(--text-primary);margin-bottom:8px} .sc-desc{font-size:12.5px;color:var(--text-secondary);line-height:1.6;margin-bottom:10px} .sc-role-row{font-size:12px;display:flex;gap:6px;align-items:flex-start;margin-bottom:5px} .sc-role-chip{font-size:10px;font-weight:700;padding:1px 6px;border-radius:5px;flex-shrink:0;margin-top:2px} .sc-role-text{color:var(--text-secondary);line-height:1.4} /* ══════ General Education ══════ */ .ge-section{margin-bottom:2.5rem} .ge-section-title{font-size:14px;font-weight:700;color:var(--text-primary);margin-bottom:1rem;padding-bottom:8px;border-bottom:2px solid var(--border)} .ge-unit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px} .ge-unit-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.25rem} .ge-unit-id{font-size:10px;font-weight:700;font-family:'DM Mono';color:var(--text-tertiary);letter-spacing:.08em;margin-bottom:6px} .ge-unit-theme{font-size:14px;font-weight:700;color:var(--text-primary);margin-bottom:4px} .ge-unit-subtitle{font-size:12px;font-weight:600;color:var(--seed);margin-bottom:8px} .ge-unit-items{font-size:11.5px;color:var(--text-secondary);line-height:1.8;margin-bottom:8px} .ge-unit-goal{font-size:12px;font-weight:600;color:var(--soil-text);background:var(--soil-bg);border-radius:6px;padding:5px 8px;margin-bottom:8px} .ge-unit-owner{font-size:11px;color:var(--text-tertiary);padding-top:6px;border-top:1px solid var(--bg)} .ge-common-table{width:100%;border-collapse:collapse;font-size:12.5px} .ge-common-table th{background:var(--bg);padding:8px 10px;text-align:left;font-size:11px;font-weight:700;color:var(--text-secondary);border-bottom:2px solid var(--border)} .ge-common-table td{padding:10px;border-bottom:1px solid var(--bg);vertical-align:top;line-height:1.5} .ge-common-table tr:hover td{background:var(--bg)} .ge-split-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px} .ge-split-card{border-radius:12px;padding:1rem} .ge-split-left{background:var(--seed-bg);border:1px solid #BDD3F8} .ge-split-right{background:var(--surface);border:1px solid var(--border)} .ge-split-title{font-size:12px;font-weight:700;margin-bottom:8px;color:var(--text-primary)} .ge-split-items{font-size:12px;color:var(--text-secondary);line-height:1.8} .ge-flow-badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:8px;margin-bottom:8px} .ge-schedule{background:var(--bg);border-radius:12px;padding:1rem} .ge-sched-row{display:flex;gap:12px;padding:8px 0;border-bottom:1px solid var(--border)} .ge-sched-row:last-child{border-bottom:none} .ge-sched-timing{font-size:11px;font-family:'DM Mono';color:var(--text-tertiary);width:110px;flex-shrink:0;padding-top:2px} .ge-sched-content{flex:1;font-size:12.5px;color:var(--text-primary);line-height:1.5} .ge-sched-units{font-size:11px;color:var(--text-secondary);margin-top:2px} /* ── Program Cards ── */ .ge-program-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.25rem;margin-bottom:1rem;overflow:hidden} .ge-prog-header{display:flex;align-items:center;gap:10px;margin-bottom:1rem;flex-wrap:wrap} .ge-prog-num{font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;flex-shrink:0;font-family:'DM Mono',monospace} .ge-prog-title{font-size:16px;font-weight:700;color:var(--text-primary);flex:1} .ge-prog-badge{font-size:11px;color:var(--text-secondary);background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:2px 10px;white-space:nowrap} .ge-prog-body{} .ge-prog-desc{font-size:13px;color:var(--text-secondary);line-height:1.8;margin-bottom:1rem} .ge-prog-meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:1rem} .ge-prog-meta-item{background:var(--bg);border-radius:8px;padding:8px 12px} .ge-prog-meta-label{font-size:10px;font-weight:700;color:var(--text-tertiary);letter-spacing:.06em;margin-bottom:3px;text-transform:uppercase} .ge-prog-meta-val{font-size:12px;color:var(--text-primary);line-height:1.5} .ge-prog-req-title{font-size:11px;font-weight:700;color:var(--text-secondary);letter-spacing:.05em;margin-bottom:8px;text-transform:uppercase} .ge-prog-reqs{display:flex;flex-wrap:wrap;gap:6px} .ge-req-chip{font-size:11.5px;font-weight:600;padding:4px 10px;border-radius:20px;display:flex;align-items:center;gap:6px} .ge-req-common{background:var(--bg);color:var(--text-primary);border:1px solid var(--border)} .ge-req-prod{background:var(--producer-bg);color:var(--producer);border:1px solid var(--producer-border)} .ge-req-dir{background:var(--director-bg);color:var(--director);border:1px solid var(--director-border)} .ge-req-pw{background:var(--playwright-bg);color:var(--playwright);border:1px solid var(--playwright-border)} .ge-req-ids{font-size:10px;font-weight:400;font-family:'DM Mono',monospace;opacity:.7} /* ══════ Role-Specific ══════ */ .rs-tab-nav{display:flex;gap:8px;margin-bottom:1.25rem;flex-wrap:wrap} .rs-tab-btn{padding:6px 20px;border-radius:20px;border:1.5px solid var(--border);background:var(--surface);font-size:13px;font-weight:700;cursor:pointer;color:var(--text-secondary);transition:all .15s;font-family:'Noto Sans JP',sans-serif} .rs-tab-btn[data-rs-role="producer"].active{background:var(--producer-bg);color:var(--producer);border-color:var(--producer)} .rs-tab-btn[data-rs-role="director"].active{background:var(--director-bg);color:var(--director);border-color:var(--director)} .rs-tab-btn[data-rs-role="playwright"].active{background:var(--playwright-bg);color:var(--playwright);border-color:var(--playwright)} .rs-content{display:none} .rs-content.active{display:block} .rs-section{margin-bottom:2rem} .rs-section-title{font-size:12px;font-weight:700;color:var(--text-secondary);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border);letter-spacing:.05em;text-transform:uppercase} .rs-table{width:100%;border-collapse:collapse;font-size:12.5px} .rs-table th{background:var(--bg);padding:8px 10px;text-align:left;font-size:11px;font-weight:700;color:var(--text-secondary);border-bottom:2px solid var(--border)} .rs-table td{padding:10px;border-bottom:1px solid var(--bg);vertical-align:top;line-height:1.5} .rs-table tr:hover td{background:var(--bg)} .rs-sc{font-size:10px;font-weight:700;padding:1px 5px;border-radius:5px;display:inline-block;margin-left:4px} .rs-sc-a{background:var(--seed-bg);color:var(--seed-text)} .rs-sc-b{background:var(--soil-bg);color:var(--soil-text)} .rs-sc-ab{background:#F0F0F0;color:#555} .rs-opp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px} .rs-opp-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1rem} .rs-opp-title{font-size:13px;font-weight:700;color:var(--text-primary);margin-bottom:4px} .rs-opp-desc{font-size:12px;color:var(--text-secondary);line-height:1.5} .rs-opp-tag{font-size:10px;font-weight:700;padding:2px 6px;border-radius:5px;display:inline-block;margin-bottom:6px} .rs-curriculum{background:var(--bg);border-radius:12px;padding:1rem;font-size:12.5px;line-height:1.9;color:var(--text-secondary)} .rs-curriculum strong{color:var(--text-primary)} @media(max-width:700px){.market-4col{grid-template-columns:repeat(2,1fr)}.entrance-3col,.ge-unit-grid,.transfer-city-grid,.rs-opp-grid{grid-template-columns:1fr}.scenario-2col,.scenario-2col-sub,.ge-split-grid{grid-template-columns:1fr}} /* ── Password Gate ── */ #pw-gate {   position: fixed; inset: 0; z-index: 9999;   background: var(--bg);   display: flex; align-items: center; justify-content: center; } #pw-gate.hidden { display: none; } .pw-box {   background: var(--surface); border: 1px solid var(--border);   border-radius: 20px; padding: 2.5rem 2rem; width: 360px;   text-align: center; box-shadow: 0 8px 32px rgba(0,0,0,0.08); } .pw-logo {   font-size: 13px; font-weight: 700; letter-spacing: 0.12em;   text-transform: uppercase; color: var(--seed);   font-family: 'DM Mono', monospace; margin-bottom: 1.25rem; } .pw-title {   font-size: 18px; font-weight: 700; color: var(--text-primary);   margin-bottom: 0.4rem; } .pw-sub {   font-size: 13px; color: var(--text-tertiary); margin-bottom: 1.75rem; } .pw-input {   width: 100%; padding: 10px 14px; border-radius: 10px;   border: 1.5px solid var(--border); background: var(--bg);   font-family: 'DM Mono', monospace; font-size: 14px;   color: var(--text-primary); outline: none;   transition: border-color 0.15s; margin-bottom: 0.75rem;   text-align: center; letter-spacing: 0.05em; } .pw-input:focus { border-color: var(--seed); } .pw-input.error { border-color: #C0392B; animation: shake 0.3s; } @keyframes shake {   0%,100% { transform: translateX(0); }   25% { transform: translateX(-6px); }   75% { transform: translateX(6px); } } .pw-btn {   width: 100%; padding: 10px; border-radius: 10px;   border: none; background: var(--seed); color: #fff;   font-family: 'Noto Sans JP', sans-serif; font-size: 14px;   font-weight: 700; cursor: pointer; transition: opacity 0.15s; } .pw-btn:hover { opacity: 0.85; } .pw-error {   font-size: 12px; color: #C0392B; margin-top: 0.6rem;   min-height: 18px; } 
+<style>
+:root {
+  --bg: #F7F6F2;
+  --surface: #FFFFFF;
+  --border: #E5E3DC;
+  --text-primary: #1A1916;
+  --text-secondary: #6B6860;
+  --text-tertiary: #A8A69F;
+  --soil: #1D9E75;
+  --soil-bg: #E1F5EE;
+  --soil-text: #085041;
+  --seed: #378ADD;
+  --seed-bg: #E6F1FB;
+  --seed-text: #0C447C;
+  --urgent-bg: #FEF0EE;
+  --urgent-text: #C0392B;
+  --urgent-border: #F5C4B3;
+  --wip-bg: #FEF9EE;
+  --wip-text: #9A6500;
+  --wip-border: #FAD894;
+  --plan-bg: #EEF4FE;
+  --plan-text: #1A4FA0;
+  --plan-border: #BDD3F8;
+  --slack: #4A154B;
+  --playwright: #C25219;
+  --playwright-bg: #FEF3E2;
+  --playwright-border: #F5D0A9;
+  --director: #5C3D9E;
+  --director-bg: #F0EDFD;
+  --director-border: #CBBFF8;
+  --producer: #1D9E75;
+  --producer-bg: #E1F5EE;
+  --producer-border: #A8DEC8;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  min-height: 100vh;
+  padding: 2rem;
+}
+.page-header {
+  max-width: 960px;
+  margin: 0 auto 1.25rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.page-header h1 {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.badge {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 20px;
+  display: inline-block;
+}
+.badge-slack {
+  background: var(--slack);
+  color: #fff;
+}
+.badge-date {
+  background: var(--border);
+  color: var(--text-secondary);
+}
+.updated {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  text-align: right;
+}
+/* ── Tab Navigation ── */
+.tab-nav-wrapper {
+  max-width: 960px;
+  margin: 0 auto 1.5rem;
+  border-bottom: 2px solid var(--border);
+}
+.tab-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+.tab-btn {
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  padding: 10px 22px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+.tab-btn:hover {
+  color: var(--text-primary);
+}
+.tab-btn.active {
+  color: var(--seed);
+  border-bottom-color: var(--seed);
+  font-weight: 700;
+}
+.tab-content {
+  display: none;
+}
+.tab-content.active {
+  display: block;
+}
+/* ── Dashboard ── */
+.metrics {
+  max-width: 960px;
+  margin: 0 auto 1.25rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.metric {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+}
+.metric-label {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 4px;
+}
+.metric-value {
+  font-size: 28px;
+  font-weight: 700;
+  font-family: 'DM Mono', monospace;
+  letter-spacing: -0.03em;
+}
+.metric-value.red {
+  color: #C0392B;
+}
+.metric-value.amber {
+  color: #9A6500;
+}
+.metric-value.blue {
+  color: #1A4FA0;
+}
+.legend {
+  max-width: 960px;
+  margin: 0 auto 1rem;
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.leg {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+.leg-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+.grid {
+  max-width: 960px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.25rem;
+}
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.member-name {
+  font-size: 14px;
+  font-weight: 700;
+}
+.member-date {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  font-family: 'DM Mono', monospace;
+}
+.group {
+  margin-bottom: 9px;
+}
+.group:last-child {
+  margin-bottom: 0;
+}
+.group-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 20px;
+  margin-bottom: 6px;
+}
+.gl-urgent {
+  background: var(--urgent-bg);
+  color: var(--urgent-text);
+  border: 1px solid var(--urgent-border);
+}
+.gl-wip {
+  background: var(--wip-bg);
+  color: var(--wip-text);
+  border: 1px solid var(--wip-border);
+}
+.gl-plan {
+  background: var(--plan-bg);
+  color: var(--plan-text);
+  border: 1px solid var(--plan-border);
+}
+.task {
+  font-size: 12.5px;
+  padding: 4px 0 4px 11px;
+  border-left: 2.5px solid var(--border);
+  margin-left: 4px;
+  margin-bottom: 3px;
+  line-height: 1.5;
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+.task.soil {
+  border-left-color: var(--soil);
+}
+.task.seed {
+  border-left-color: var(--seed);
+}
+.tag {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+.tag-soil {
+  background: var(--soil-bg);
+  color: var(--soil-text);
+}
+.tag-seed {
+  background: var(--seed-bg);
+  color: var(--seed-text);
+}
+.card-past {
+  border-color: #FAD894;
+  opacity: 0.85;
+}
+.badge-past {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 8px;
+  background: var(--wip-bg);
+  color: var(--wip-text);
+  border: 1px solid var(--wip-border);
+  margin-left: 5px;
+  vertical-align: middle;
+}
+/* ── HR Requirements ── */
+.hr-container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+.hr-intro {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.hr-intro p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+.hr-intro strong {
+  color: var(--text-primary);
+}
+.role-tab-nav {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+.role-tab-btn {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 24px;
+  padding: 8px 22px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.role-tab-btn:hover {
+  border-color: var(--text-secondary);
+  color: var(--text-primary);
+}
+.role-tab-btn.active[data-role="playwright"] {
+  background: var(--playwright-bg);
+  border-color: var(--playwright);
+  color: var(--playwright);
+  font-weight: 700;
+}
+.role-tab-btn.active[data-role="director"] {
+  background: var(--director-bg);
+  border-color: var(--director);
+  color: var(--director);
+  font-weight: 700;
+}
+.role-tab-btn.active[data-role="producer"] {
+  background: var(--producer-bg);
+  border-color: var(--producer);
+  color: var(--producer);
+  font-weight: 700;
+}
+.role-content {
+  display: none;
+}
+.role-content.active {
+  display: block;
+}
+.role-header {
+  border-radius: 14px;
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+.role-header.playwright {
+  background: var(--playwright-bg);
+  border: 1px solid var(--playwright-border);
+}
+.role-header.director {
+  background: var(--director-bg);
+  border: 1px solid var(--director-border);
+}
+.role-header.producer {
+  background: var(--producer-bg);
+  border: 1px solid var(--producer-border);
+}
+.role-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.role-title.playwright {
+  color: var(--playwright);
+}
+.role-title.director {
+  color: var(--director);
+}
+.role-title.producer {
+  color: var(--producer);
+}
+.role-tobe {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.6;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+.role-sub {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.req-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 12px;
+  margin-bottom: 1.25rem;
+}
+.req-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+}
+.req-card-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.req-item {
+  display: flex;
+  gap: 8px;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--bg);
+  align-items: flex-start;
+}
+.req-item:last-child {
+  border-bottom: none;
+}
+.req-id {
+  font-size: 10px;
+  font-weight: 700;
+  font-family: 'DM Mono', monospace;
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+  padding-top: 2px;
+  min-width: 28px;
+}
+.req-name {
+  font-size: 13px;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+.special-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
+}
+.special-card-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.special-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.special-item {
+  background: var(--bg);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+.special-id {
+  font-size: 10px;
+  font-weight: 700;
+  font-family: 'DM Mono', monospace;
+  color: var(--text-tertiary);
+  margin-bottom: 4px;
+}
+.special-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+.special-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.insights-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
+}
+.insights-card-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.insight-item {
+  display: flex;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--bg);
+  align-items: flex-start;
+}
+.insight-item:last-child {
+  border-bottom: none;
+}
+.insight-num {
+  font-size: 11px;
+  font-weight: 700;
+  font-family: 'DM Mono', monospace;
+  background: var(--bg);
+  color: var(--text-secondary);
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.insight-text {
+  font-size: 13px;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+.insight-text strong {
+  color: var(--text-primary);
+}
+.insight-basis {
+  font-size: 11.5px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+  line-height: 1.5;
+}
+.summary-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
+}
+.summary-card-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.summary-list {
+  list-style: none;
+  counter-reset: list-counter;
+}
+.summary-list li {
+  font-size: 13px;
+  color: var(--text-primary);
+  padding: 6px 0 6px 26px;
+  border-bottom: 1px solid var(--bg);
+  position: relative;
+  line-height: 1.5;
+  counter-increment: list-counter;
+}
+.summary-list li:last-child {
+  border-bottom: none;
+}
+.summary-list li::before {
+  content: counter(list-counter);
+  position: absolute;
+  left: 0;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: 'DM Mono', monospace;
+  color: var(--text-tertiary);
+  top: 8px;
+}
+/* ── About ── */
+.about-container {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.about-hero {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+}
+.about-hero-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--seed);
+  font-family: 'DM Mono', monospace;
+  margin-bottom: 0.75rem;
+}
+.about-hero-copy {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  line-height: 1.4;
+  margin-bottom: 1rem;
+}
+.about-hero-sub {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.about-section-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.about-role-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+@media (max-width: 700px) {
+  .about-role-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.about-role-card {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.about-role-card.playwright {
+  border-top: 4px solid var(--playwright);
+}
+.about-role-card.director {
+  border-top: 4px solid var(--director);
+}
+.about-role-card.producer {
+  border-top: 4px solid var(--producer);
+}
+.about-role-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+.about-role-badge.playwright {
+  background: var(--playwright-bg);
+  color: var(--playwright);
+}
+.about-role-badge.director {
+  background: var(--director-bg);
+  color: var(--director);
+}
+.about-role-badge.producer {
+  background: var(--producer-bg);
+  color: var(--producer);
+}
+.about-role-name {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.about-role-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+.about-bg-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.5rem 1.75rem;
+}
+.about-bg-body {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.85;
+}
+.about-bg-body + .about-bg-body {
+  margin-top: 0.75rem;
+}
+.about-milestone-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.about-ms-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.about-ms-row:last-child {
+  border-bottom: none;
+}
+.about-ms-date {
+  font-size: 12px;
+  font-family: 'DM Mono', monospace;
+  color: var(--text-tertiary);
+  min-width: 80px;
+  padding-top: 2px;
+}
+.about-ms-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+.about-ms-dot.done {
+  background: var(--soil);
+}
+.about-ms-dot.wip {
+  background: var(--wip-text);
+}
+.about-ms-dot.plan {
+  background: var(--seed);
+}
+.about-ms-text {
+  font-size: 14px;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+.about-ms-text span {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-left: 8px;
+}
+.about-ms-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.25rem 1.75rem;
+}
+.about-org-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+@media (max-width: 600px) {
+  .about-org-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.about-org-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.1rem 1.25rem;
+}
+.about-org-role {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--text-tertiary);
+  margin-bottom: 4px;
+}
+.about-org-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.about-advisor-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+.about-advisor-chip {
+  font-size: 12px;
+  padding: 5px 14px;
+  border-radius: 20px;
+  background: var(--seed-bg);
+  color: var(--seed-text);
+  border: 1px solid #BDD3F8;
+  font-weight: 500;
+}
+.about-link-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.about-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 18px;
+  border-radius: 10px;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+.about-link-btn:hover {
+  border-color: var(--seed);
+  color: var(--seed);
+  background: var(--seed-bg);
+}
+/* ── Meetings ── */
+.meetings-container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+.meeting-group {
+  margin-bottom: 2rem;
+}
+.meeting-group-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.meeting-row {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.meeting-round {
+  font-size: 11px;
+  font-weight: 700;
+  font-family: 'DM Mono', monospace;
+  background: var(--seed-bg);
+  color: var(--seed-text);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 4px 12px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.meeting-info {
+  flex: 1;
+  min-width: 140px;
+}
+.meeting-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+.meeting-date {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  font-family: 'DM Mono', monospace;
+}
+.meeting-docs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.doc-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  color: var(--text-secondary);
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  white-space: nowrap;
+}
+.doc-btn:hover {
+  border-color: var(--seed);
+  color: var(--seed);
+  background: var(--seed-bg);
+}
+.doc-btn-icon {
+  font-size: 13px;
+}
+.meeting-add-hint {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  padding: 10px 4px;
+  border: 1.5px dashed var(--border);
+  border-radius: 10px;
+  text-align: center;
+  margin-top: 4px;
+}
+/* ── Program Progress ── */
+.prog-container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+.prog-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 1.25rem;
+}
+.prog-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.25rem;
+}
+.prog-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+.prog-card-title {
+  font-size: 15px;
+  font-weight: 700;
+}
+.prog-card-title.playwright {
+  color: var(--playwright);
+}
+.prog-card-title.director {
+  color: var(--director);
+}
+.prog-card-title.producer {
+  color: var(--producer);
+}
+.prog-card-title.general {
+  color: var(--seed);
+}
+.prog-owner {
+  font-size: 11px;
+  color: var(--text-tertiary);
+}
+.prog-phase {
+  margin-bottom: 10px;
+}
+.prog-phase:last-child {
+  margin-bottom: 0;
+}
+.prog-phase-name {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  letter-spacing: 0.04em;
+}
+.prog-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--bg);
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+.prog-item:last-child {
+  border-bottom: none;
+}
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+.dot-done {
+  background: var(--soil);
+}
+.dot-wip {
+  background: #F0A500;
+}
+.dot-open {
+  background: #C0392B;
+}
+.dot-plan {
+  background: #BDD3F8;
+}
+.prog-legend {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+.prog-leg {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+/* ── Timeline ── */
+.tl-container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+.tl-section {
+  margin-bottom: 1.5rem;
+}
+.tl-section-title {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+.tl-row {
+  display: flex;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--bg);
+  align-items: flex-start;
+}
+.tl-row:last-child {
+  border-bottom: none;
+}
+.tl-date {
+  font-size: 11.5px;
+  font-family: 'DM Mono', monospace;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+  width: 90px;
+  margin-top: 2px;
+}
+.tl-label {
+  font-size: 13px;
+  color: var(--text-primary);
+  line-height: 1.5;
+  flex: 1;
+}
+.tl-label .tl-note {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  display: block;
+}
+.tl-chips {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin-top: 3px;
+}
+.tl-chip {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 8px;
+}
+.chip-pw {
+  background: var(--playwright-bg);
+  color: var(--playwright);
+}
+.chip-dr {
+  background: var(--director-bg);
+  color: var(--director);
+}
+.chip-pr {
+  background: var(--producer-bg);
+  color: var(--producer);
+}
+.chip-ge {
+  background: var(--seed-bg);
+  color: var(--seed-text);
+}
+.chip-all {
+  background: var(--bg);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+.chip-key {
+  background: #FEF0EE;
+  color: var(--urgent-text);
+  border: 1px solid var(--urgent-border);
+}
+/* ── People Map ── */
+.people-container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+.people-section {
+  margin-bottom: 1.5rem;
+}
+.people-section-title {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+.people-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.person-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+}
+.person-name {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+.person-org {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  margin-bottom: 8px;
+}
+.person-role {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.person-chips {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+.status-tbd {
+  border: 1px dashed var(--border);
+}
+.status-tbd .person-name {
+  color: var(--text-secondary);
+}
+/* ── Footer ── */
+.footer {
+  max-width: 960px;
+  margin: 2rem auto 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  color: var(--text-tertiary);
+  display: flex;
+  justify-content: space-between;
+}
+@media (max-width: 700px) {
+  body {
+    padding: 1rem;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .page-header {
+    flex-direction: column;
+  }
+  .req-grid {
+    grid-template-columns: 1fr;
+  }
+  .special-grid {
+    grid-template-columns: 1fr;
+  }
+  .prog-grid {
+    grid-template-columns: 1fr;
+  }
+  .people-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* ══════ SOIL Map ══════ */
+.soil-container,.ge-container,.rs-container {
+  max-width:1100px;
+  margin:0 auto
+}
+.soil-section {
+  margin-bottom:2.5rem
+}
+.soil-section-title {
+  font-size:14px;
+  font-weight:700;
+  color:var(--text-primary);
+  margin-bottom:1rem;
+  padding-bottom:8px;
+  border-bottom:2px solid var(--border);
+  display:flex;
+  align-items:center;
+  gap:8px
+}
+.soil-intro-card {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:1.25rem;
+  margin-bottom:1.5rem;
+  font-size:13.5px;
+  line-height:1.8;
+  color:var(--text-secondary)
+}
+.axis-note-h {
+  display:flex;
+  justify-content:space-between;
+  font-size:11px;
+  color:var(--text-tertiary);
+  margin-bottom:8px;
+  font-family:'DM Mono',monospace
+}
+.market-4col {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin-bottom:12px
+}
+.market-col {
+  border-radius:12px;
+  padding:1rem;
+  border:1.5px solid var(--border);
+  background:var(--surface);
+  position:relative
+}
+.market-col.ip-col {
+  background:#EEF4FE;
+  border-color:#BDD3F8
+}
+.market-col.commercial-col {
+  background:#FEF3E2;
+  border-color:#F5D0A9
+}
+.market-col.contemporary-col {
+  background:#E1F5EE;
+  border-color:#A8DEC8
+}
+.market-col.heritage-col {
+  background:#F0EDFD;
+  border-color:#CBBFF8
+}
+.mc-col-title {
+  font-size:13px;
+  font-weight:700;
+  color:var(--text-primary);
+  margin-bottom:6px
+}
+.mc-stage-badge {
+  font-size:10px;
+  font-weight:700;
+  color:var(--soil);
+  background:var(--soil-bg);
+  border:1px solid #A8DEC8;
+  padding:2px 7px;
+  border-radius:5px;
+  display:inline-block;
+  margin-bottom:6px
+}
+.mc-world-ex {
+  font-size:11.5px;
+  color:var(--text-secondary);
+  line-height:1.7;
+  margin-bottom:8px
+}
+.mc-jp-block {
+  margin-bottom:6px
+}
+.mc-jp-tag {
+  font-size:10px;
+  font-weight:700;
+  padding:2px 6px;
+  border-radius:5px;
+  display:inline-block;
+  margin-bottom:4px
+}
+.jp-present {
+  background:#FEF0EE;
+  color:var(--urgent-text)
+}
+.jp-none {
+  background:#E8E8E8;
+  color:#555;
+  font-style:italic
+}
+.jp-target {
+  background:var(--seed-bg);
+  color:var(--seed-text)
+}
+.mc-jp-list {
+  font-size:11px;
+  color:var(--text-secondary);
+  line-height:1.6
+}
+.mc-zone-tag {
+  font-size:10px;
+  font-weight:700;
+  padding:3px 7px;
+  border-radius:6px;
+  display:inline-block;
+  margin-top:8px
+}
+.zone-void {
+  background:#E8E8E8;
+  color:#555
+}
+.zone-dead {
+  background:#FFF3CD;
+  color:#856404
+}
+.v-axis-heading {
+  font-size:11px;
+  font-weight:700;
+  color:var(--text-tertiary);
+  margin-bottom:6px;
+  letter-spacing:.04em
+}
+.v-axis-rows {
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+  margin-bottom:10px
+}
+.v-axis-row {
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:4px 10px;
+  border-radius:6px;
+  background:var(--bg);
+  font-size:12px
+}
+.v-axis-num {
+  font-size:10px;
+  font-weight:700;
+  font-family:'DM Mono';
+  color:var(--text-tertiary);
+  width:18px;
+  flex-shrink:0
+}
+.vzd-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-top:10px
+}
+.vzd-card {
+  border-radius:10px;
+  padding:10px 12px
+}
+.vzd-void {
+  background:#F0F0F0;
+  border:1px solid #DDD
+}
+.vzd-dead {
+  background:#FFF9E0;
+  border:1px solid #F5D0A9
+}
+.vzd-tag {
+  font-size:10px;
+  font-weight:700;
+  color:#555;
+  margin-bottom:4px
+}
+.vzd-desc {
+  font-size:12px;
+  color:var(--text-secondary);
+  line-height:1.5
+}
+/* ── Transfer Machine ── */
+.transfer-intro-card {
+  background:var(--seed-bg);
+  border:1px solid #BDD3F8;
+  border-radius:12px;
+  padding:1rem;
+  margin-bottom:12px;
+  font-size:13px;
+  color:var(--seed-text);
+  line-height:1.6
+}
+.transfer-city-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px
+}
+.transfer-city-title {
+  font-size:12px;
+  font-weight:700;
+  color:var(--text-secondary);
+  margin-bottom:8px;
+  letter-spacing:.06em;
+  text-transform:uppercase
+}
+.transfer-insts {
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px
+}
+.transfer-inst {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:5px 10px;
+  font-size:12px;
+  color:var(--text-primary);
+  font-weight:600
+}
+/* ── Route Table ── */
+.route-table {
+  width:100%;
+  border-collapse:collapse;
+  font-size:12.5px
+}
+.route-table th {
+  background:var(--bg);
+  padding:8px 10px;
+  text-align:left;
+  font-size:11px;
+  font-weight:700;
+  color:var(--text-secondary);
+  border-bottom:2px solid var(--border)
+}
+.route-table td {
+  padding:10px;
+  border-bottom:1px solid var(--bg);
+  vertical-align:top;
+  line-height:1.5
+}
+.route-table tr:hover td {
+  background:var(--bg)
+}
+.route-lbl {
+  font-size:10px;
+  font-weight:700;
+  padding:2px 6px;
+  border-radius:5px;
+  display:inline-block
+}
+.route-lbl-a {
+  background:var(--seed-bg);
+  color:var(--seed-text)
+}
+.route-lbl-b {
+  background:var(--soil-bg);
+  color:var(--soil-text)
+}
+.route-lbl-main {
+  background:#FFF3CD;
+  color:#856404
+}
+/* ── Entrance ── */
+.entrance-3col {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px
+}
+.entrance-card {
+  background:var(--surface);
+  border:1.5px solid var(--border);
+  border-radius:14px;
+  padding:1.25rem
+}
+.entrance-letter {
+  font-size:26px;
+  font-weight:700;
+  font-family:'DM Mono';
+  color:var(--seed);
+  margin-bottom:6px
+}
+.entrance-title {
+  font-size:13px;
+  font-weight:700;
+  color:var(--text-primary);
+  margin-bottom:6px
+}
+.entrance-desc {
+  font-size:12px;
+  color:var(--text-secondary);
+  line-height:1.6
+}
+.entrance-example {
+  font-size:11px;
+  color:var(--text-tertiary);
+  margin-top:8px;
+  padding-top:6px;
+  border-top:1px solid var(--bg)
+}
+/* ── Scenario ── */
+.scenario-2col {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-bottom:10px
+}
+.scenario-2col-sub {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  opacity:.65
+}
+.sc-card {
+  background:var(--surface);
+  border:1.5px solid var(--border);
+  border-radius:14px;
+  padding:1.25rem
+}
+.sc-card.main-sc {
+  border-color:var(--seed);
+  box-shadow:0 0 0 3px rgba(55,138,221,.10)
+}
+.sc-main-badge {
+  font-size:11px;
+  font-weight:700;
+  background:var(--seed-bg);
+  color:var(--seed-text);
+  padding:2px 8px;
+  border-radius:8px;
+  display:inline-block;
+  margin-bottom:8px
+}
+.sc-letter {
+  font-size:22px;
+  font-weight:700;
+  font-family:'DM Mono';
+  margin-bottom:2px
+}
+.sc-letter.a {
+  color:var(--seed)
+}
+.sc-letter.b {
+  color:var(--soil)
+}
+.sc-name {
+  font-size:13.5px;
+  font-weight:700;
+  color:var(--text-primary);
+  margin-bottom:8px
+}
+.sc-desc {
+  font-size:12.5px;
+  color:var(--text-secondary);
+  line-height:1.6;
+  margin-bottom:10px
+}
+.sc-role-row {
+  font-size:12px;
+  display:flex;
+  gap:6px;
+  align-items:flex-start;
+  margin-bottom:5px
+}
+.sc-role-chip {
+  font-size:10px;
+  font-weight:700;
+  padding:1px 6px;
+  border-radius:5px;
+  flex-shrink:0;
+  margin-top:2px
+}
+.sc-role-text {
+  color:var(--text-secondary);
+  line-height:1.4
+}
+/* ══════ General Education ══════ */
+.ge-section {
+  margin-bottom:2.5rem
+}
+.ge-section-title {
+  font-size:14px;
+  font-weight:700;
+  color:var(--text-primary);
+  margin-bottom:1rem;
+  padding-bottom:8px;
+  border-bottom:2px solid var(--border)
+}
+.ge-unit-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px
+}
+.ge-unit-card {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:1.25rem
+}
+.ge-unit-id {
+  font-size:10px;
+  font-weight:700;
+  font-family:'DM Mono';
+  color:var(--text-tertiary);
+  letter-spacing:.08em;
+  margin-bottom:6px
+}
+.ge-unit-theme {
+  font-size:14px;
+  font-weight:700;
+  color:var(--text-primary);
+  margin-bottom:4px
+}
+.ge-unit-subtitle {
+  font-size:12px;
+  font-weight:600;
+  color:var(--seed);
+  margin-bottom:8px
+}
+.ge-unit-items {
+  font-size:11.5px;
+  color:var(--text-secondary);
+  line-height:1.8;
+  margin-bottom:8px
+}
+.ge-unit-goal {
+  font-size:12px;
+  font-weight:600;
+  color:var(--soil-text);
+  background:var(--soil-bg);
+  border-radius:6px;
+  padding:5px 8px;
+  margin-bottom:8px
+}
+.ge-unit-owner {
+  font-size:11px;
+  color:var(--text-tertiary);
+  padding-top:6px;
+  border-top:1px solid var(--bg)
+}
+.ge-common-table {
+  width:100%;
+  border-collapse:collapse;
+  font-size:12.5px
+}
+.ge-common-table th {
+  background:var(--bg);
+  padding:8px 10px;
+  text-align:left;
+  font-size:11px;
+  font-weight:700;
+  color:var(--text-secondary);
+  border-bottom:2px solid var(--border)
+}
+.ge-common-table td {
+  padding:10px;
+  border-bottom:1px solid var(--bg);
+  vertical-align:top;
+  line-height:1.5
+}
+.ge-common-table tr:hover td {
+  background:var(--bg)
+}
+.ge-split-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-bottom:12px
+}
+.ge-split-card {
+  border-radius:12px;
+  padding:1rem
+}
+.ge-split-left {
+  background:var(--seed-bg);
+  border:1px solid #BDD3F8
+}
+.ge-split-right {
+  background:var(--surface);
+  border:1px solid var(--border)
+}
+.ge-split-title {
+  font-size:12px;
+  font-weight:700;
+  margin-bottom:8px;
+  color:var(--text-primary)
+}
+.ge-split-items {
+  font-size:12px;
+  color:var(--text-secondary);
+  line-height:1.8
+}
+.ge-flow-badge {
+  display:inline-block;
+  font-size:10px;
+  font-weight:700;
+  padding:2px 8px;
+  border-radius:8px;
+  margin-bottom:8px
+}
+.ge-schedule {
+  background:var(--bg);
+  border-radius:12px;
+  padding:1rem
+}
+.ge-sched-row {
+  display:flex;
+  gap:12px;
+  padding:8px 0;
+  border-bottom:1px solid var(--border)
+}
+.ge-sched-row:last-child {
+  border-bottom:none
+}
+.ge-sched-timing {
+  font-size:11px;
+  font-family:'DM Mono';
+  color:var(--text-tertiary);
+  width:110px;
+  flex-shrink:0;
+  padding-top:2px
+}
+.ge-sched-content {
+  flex:1;
+  font-size:12.5px;
+  color:var(--text-primary);
+  line-height:1.5
+}
+.ge-sched-units {
+  font-size:11px;
+  color:var(--text-secondary);
+  margin-top:2px
+}
+/* ── Program Cards ── */
+.ge-program-card {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:1.25rem;
+  margin-bottom:1rem;
+  overflow:hidden
+}
+.ge-prog-header {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:1rem;
+  flex-wrap:wrap
+}
+.ge-prog-num {
+  font-size:11px;
+  font-weight:700;
+  padding:3px 10px;
+  border-radius:20px;
+  flex-shrink:0;
+  font-family:'DM Mono',monospace
+}
+.ge-prog-title {
+  font-size:16px;
+  font-weight:700;
+  color:var(--text-primary);
+  flex:1
+}
+.ge-prog-badge {
+  font-size:11px;
+  color:var(--text-secondary);
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:2px 10px;
+  white-space:nowrap
+}
+.ge-prog-body {
+}
+.ge-prog-desc {
+  font-size:13px;
+  color:var(--text-secondary);
+  line-height:1.8;
+  margin-bottom:1rem
+}
+.ge-prog-meta-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-bottom:1rem
+}
+.ge-prog-meta-item {
+  background:var(--bg);
+  border-radius:8px;
+  padding:8px 12px
+}
+.ge-prog-meta-label {
+  font-size:10px;
+  font-weight:700;
+  color:var(--text-tertiary);
+  letter-spacing:.06em;
+  margin-bottom:3px;
+  text-transform:uppercase
+}
+.ge-prog-meta-val {
+  font-size:12px;
+  color:var(--text-primary);
+  line-height:1.5
+}
+.ge-prog-req-title {
+  font-size:11px;
+  font-weight:700;
+  color:var(--text-secondary);
+  letter-spacing:.05em;
+  margin-bottom:8px;
+  text-transform:uppercase
+}
+.ge-prog-reqs {
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px
+}
+.ge-req-chip {
+  font-size:11.5px;
+  font-weight:600;
+  padding:4px 10px;
+  border-radius:20px;
+  display:flex;
+  align-items:center;
+  gap:6px
+}
+.ge-req-common {
+  background:var(--bg);
+  color:var(--text-primary);
+  border:1px solid var(--border)
+}
+.ge-req-prod {
+  background:var(--producer-bg);
+  color:var(--producer);
+  border:1px solid var(--producer-border)
+}
+.ge-req-dir {
+  background:var(--director-bg);
+  color:var(--director);
+  border:1px solid var(--director-border)
+}
+.ge-req-pw {
+  background:var(--playwright-bg);
+  color:var(--playwright);
+  border:1px solid var(--playwright-border)
+}
+.ge-req-ids {
+  font-size:10px;
+  font-weight:400;
+  font-family:'DM Mono',monospace;
+  opacity:.7
+}
+/* ══════ Role-Specific ══════ */
+.rs-tab-nav {
+  display:flex;
+  gap:8px;
+  margin-bottom:1.25rem;
+  flex-wrap:wrap
+}
+.rs-tab-btn {
+  padding:6px 20px;
+  border-radius:20px;
+  border:1.5px solid var(--border);
+  background:var(--surface);
+  font-size:13px;
+  font-weight:700;
+  cursor:pointer;
+  color:var(--text-secondary);
+  transition:all .15s;
+  font-family:'Noto Sans JP',sans-serif
+}
+.rs-tab-btn[data-rs-role="producer"].active {
+  background:var(--producer-bg);
+  color:var(--producer);
+  border-color:var(--producer)
+}
+.rs-tab-btn[data-rs-role="director"].active {
+  background:var(--director-bg);
+  color:var(--director);
+  border-color:var(--director)
+}
+.rs-tab-btn[data-rs-role="playwright"].active {
+  background:var(--playwright-bg);
+  color:var(--playwright);
+  border-color:var(--playwright)
+}
+.rs-content {
+  display:none
+}
+.rs-content.active {
+  display:block
+}
+.rs-section {
+  margin-bottom:2rem
+}
+.rs-section-title {
+  font-size:12px;
+  font-weight:700;
+  color:var(--text-secondary);
+  margin-bottom:10px;
+  padding-bottom:6px;
+  border-bottom:1px solid var(--border);
+  letter-spacing:.05em;
+  text-transform:uppercase
+}
+.rs-table {
+  width:100%;
+  border-collapse:collapse;
+  font-size:12.5px
+}
+.rs-table th {
+  background:var(--bg);
+  padding:8px 10px;
+  text-align:left;
+  font-size:11px;
+  font-weight:700;
+  color:var(--text-secondary);
+  border-bottom:2px solid var(--border)
+}
+.rs-table td {
+  padding:10px;
+  border-bottom:1px solid var(--bg);
+  vertical-align:top;
+  line-height:1.5
+}
+.rs-table tr:hover td {
+  background:var(--bg)
+}
+.rs-sc {
+  font-size:10px;
+  font-weight:700;
+  padding:1px 5px;
+  border-radius:5px;
+  display:inline-block;
+  margin-left:4px
+}
+.rs-sc-a {
+  background:var(--seed-bg);
+  color:var(--seed-text)
+}
+.rs-sc-b {
+  background:var(--soil-bg);
+  color:var(--soil-text)
+}
+.rs-sc-ab {
+  background:#F0F0F0;
+  color:#555
+}
+.rs-opp-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px
+}
+.rs-opp-card {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:1rem
+}
+.rs-opp-title {
+  font-size:13px;
+  font-weight:700;
+  color:var(--text-primary);
+  margin-bottom:4px
+}
+.rs-opp-desc {
+  font-size:12px;
+  color:var(--text-secondary);
+  line-height:1.5
+}
+.rs-opp-tag {
+  font-size:10px;
+  font-weight:700;
+  padding:2px 6px;
+  border-radius:5px;
+  display:inline-block;
+  margin-bottom:6px
+}
+.rs-curriculum {
+  background:var(--bg);
+  border-radius:12px;
+  padding:1rem;
+  font-size:12.5px;
+  line-height:1.9;
+  color:var(--text-secondary)
+}
+.rs-curriculum strong {
+  color:var(--text-primary)
+}
+@media(max-width:700px) {
+  .market-4col {
+    grid-template-columns:repeat(2,1fr)
+  }
+  .entrance-3col,.ge-unit-grid,.transfer-city-grid,.rs-opp-grid {
+    grid-template-columns:1fr
+  }
+  .scenario-2col,.scenario-2col-sub,.ge-split-grid {
+    grid-template-columns:1fr
+  }
+}
+/* ── Password Gate ── */
+#pw-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#pw-gate.hidden {
+  display: none;
+}
+.pw-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  width: 360px;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+}
+.pw-logo {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--seed);
+  font-family: 'DM Mono', monospace;
+  margin-bottom: 1.25rem;
+}
+.pw-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.4rem;
+}
+.pw-sub {
+  font-size: 13px;
+  color: var(--text-tertiary);
+  margin-bottom: 1.75rem;
+}
+.pw-input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1.5px solid var(--border);
+  background: var(--bg);
+  font-family: 'DM Mono', monospace;
+  font-size: 14px;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.15s;
+  margin-bottom: 0.75rem;
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+.pw-input:focus {
+  border-color: var(--seed);
+}
+.pw-input.error {
+  border-color: #C0392B;
+  animation: shake 0.3s;
+}
+@keyframes shake {
+  0%,100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-6px);
+  }
+  75% {
+    transform: translateX(6px);
+  }
+}
+.pw-btn {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background: var(--seed);
+  color: #fff;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.pw-btn:hover {
+  opacity: 0.85;
+}
+.pw-error {
+  font-size: 12px;
+  color: #C0392B;
+  margin-top: 0.6rem;
+  min-height: 18px;
+}
 /* ── All Tab Containers ── */
-.ge-container, .rs-container, .soil-container { max-width: 1100px; margin: 0 auto; }
+.ge-container, .rs-container, .soil-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
 /* ── SEED Map: horizontal scroll ── */
-.soil-container { overflow-x: hidden; }
-.soil-section-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; }
-.market-4col { min-width: 700px; } .entrance-3col { min-width: 600px; } .scenario-2col { min-width: 600px; }
-.transfer-city-grid { min-width: 500px; } .vzd-grid { min-width: 500px; }
+.soil-container {
+  overflow-x: hidden;
+}
+.soil-section-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 4px;
+}
+.market-4col {
+  min-width: 700px;
+}
+.entrance-3col {
+  min-width: 600px;
+}
+.scenario-2col {
+  min-width: 600px;
+}
+.transfer-city-grid {
+  min-width: 500px;
+}
+.vzd-grid {
+  min-width: 500px;
+}
 /* ── Table column width fixes ── */
-.ge-common-table { table-layout: fixed; width: 100%; word-break: break-word; }
-.ge-common-table th, .ge-common-table td { word-break: break-word; overflow-wrap: break-word; }
-.ge-common-table.col3 th:nth-child(1),.ge-common-table.col3 td:nth-child(1){width:22%}
-.ge-common-table.col3 th:nth-child(2),.ge-common-table.col3 td:nth-child(2){width:40%}
-.ge-common-table.col3 th:nth-child(3),.ge-common-table.col3 td:nth-child(3){width:38%}
-.ge-common-table.col4 th:nth-child(1),.ge-common-table.col4 td:nth-child(1){width:20%}
-.ge-common-table.col4 th:nth-child(2),.ge-common-table.col4 td:nth-child(2){width:30%}
-.ge-common-table.col4 th:nth-child(3),.ge-common-table.col4 td:nth-child(3){width:30%}
-.ge-common-table.col4 th:nth-child(4),.ge-common-table.col4 td:nth-child(4){width:20%}
-.ge-common-table.col6{min-width:860px}
-.ge-common-table.col6 th:nth-child(1),.ge-common-table.col6 td:nth-child(1){width:22%}
-.ge-common-table.col6 th:nth-child(2),.ge-common-table.col6 td:nth-child(2){width:10%}
-.ge-common-table.col6 th:nth-child(3),.ge-common-table.col6 td:nth-child(3){width:10%}
-.ge-common-table.col6 th:nth-child(4),.ge-common-table.col6 td:nth-child(4){width:10%}
-.ge-common-table.col6 th:nth-child(5),.ge-common-table.col6 td:nth-child(5){width:18%}
-.ge-common-table.col6 th:nth-child(6),.ge-common-table.col6 td:nth-child(6){width:30%}
-.ge-common-table.col-priority th:nth-child(1),.ge-common-table.col-priority td:nth-child(1){width:12%}
-.ge-common-table.col-priority th:nth-child(2),.ge-common-table.col-priority td:nth-child(2){width:10%}
-.ge-common-table.col-priority th:nth-child(3),.ge-common-table.col-priority td:nth-child(3){width:42%}
-.ge-common-table.col-priority th:nth-child(4),.ge-common-table.col-priority td:nth-child(4){width:36%}
-.rs-table{width:100%;border-collapse:collapse;font-size:12.5px;table-layout:fixed;word-break:break-word}
-.rs-table th{background:var(--bg);padding:8px 10px;text-align:left;font-size:11px;font-weight:700;color:var(--text-secondary);border-bottom:2px solid var(--border);word-break:break-word}
-.rs-table td{padding:10px;border-bottom:1px solid var(--bg);vertical-align:top;line-height:1.5;word-break:break-word;overflow-wrap:break-word}
-.rs-table tr:hover td{background:var(--bg)}
-.rs-table th:nth-child(1),.rs-table td:nth-child(1){width:9%}
-.rs-table th:nth-child(2),.rs-table td:nth-child(2){width:23%}
-.rs-table th:nth-child(3),.rs-table td:nth-child(3){width:56%}
-.rs-table th:nth-child(4),.rs-table td:nth-child(4){width:12%}
-#tab-research-agenda .rs-table th:nth-child(1){width:20%}
-#tab-research-agenda .rs-table th:nth-child(2){width:20%}
-#tab-research-agenda .rs-table th:nth-child(3){width:60%}
-/* ── Scenario ToBe Cards ── */ .sc-tobe-grid{display:flex;flex-direction:column;gap:14px;margin-bottom:1.5rem;min-width:0;overflow:hidden} .sc-tobe-card{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;padding:1.25rem;min-width:0;overflow:hidden} .sc-tobe-card.sc-tobe-a{border-left:5px solid var(--seed)} .sc-tobe-card.sc-tobe-b{border-left:5px solid var(--soil)} .sc-tobe-card.sc-tobe-c{border-left:5px solid var(--director)} .sc-tobe-sc-badge{font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;display:inline-block;margin-bottom:8px} .sc-tobe-sc-badge-a{background:var(--seed-bg);color:var(--seed-text)} .sc-tobe-sc-badge-b{background:var(--soil-bg);color:var(--soil-text)} .sc-tobe-sc-badge-c{background:var(--director-bg);color:var(--director)} .sc-tobe-statement{font-size:15px;font-weight:700;color:var(--text-primary);margin-bottom:12px;line-height:1.5;padding:10px;background:var(--bg);border-radius:8px} .sc-tobe-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px} .sc-tobe-reqs-title,.sc-tobe-rm-title{font-size:10px;font-weight:700;color:var(--text-tertiary);letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px} .sc-tobe-req-item{font-size:12px;color:var(--text-secondary);padding:4px 0;border-bottom:1px solid var(--bg);line-height:1.5} .sc-tobe-req-item:last-child{border-bottom:none} .sc-tobe-req-item strong{color:var(--text-primary);font-size:12.5px} .sc-tobe-rm-item{padding:6px 10px;border-radius:8px;background:var(--bg);margin-bottom:4px} .sc-tobe-rm-name{font-size:12.5px;font-weight:700;color:var(--text-primary)} .sc-tobe-rm-desc{font-size:11px;color:var(--text-tertiary);line-height:1.5;margin-top:2px} .sc-tobe-env{margin-top:1rem;padding:10px 14px;background:var(--bg);border-radius:10px;border-left:3px solid var(--director);font-size:12px;color:var(--text-secondary);line-height:1.75} .sc-tobe-env-title{font-size:11px;font-weight:700;color:var(--director);letter-spacing:.05em;margin-bottom:6px;text-transform:uppercase}</style>
+.ge-common-table {
+  table-layout: fixed;
+  width: 100%;
+  word-break: break-word;
+}
+.ge-common-table th, .ge-common-table td {
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+.ge-common-table.col3 th:nth-child(1),.ge-common-table.col3 td:nth-child(1) {
+  width:22%
+}
+.ge-common-table.col3 th:nth-child(2),.ge-common-table.col3 td:nth-child(2) {
+  width:40%
+}
+.ge-common-table.col3 th:nth-child(3),.ge-common-table.col3 td:nth-child(3) {
+  width:38%
+}
+.ge-common-table.col4 th:nth-child(1),.ge-common-table.col4 td:nth-child(1) {
+  width:20%
+}
+.ge-common-table.col4 th:nth-child(2),.ge-common-table.col4 td:nth-child(2) {
+  width:30%
+}
+.ge-common-table.col4 th:nth-child(3),.ge-common-table.col4 td:nth-child(3) {
+  width:30%
+}
+.ge-common-table.col4 th:nth-child(4),.ge-common-table.col4 td:nth-child(4) {
+  width:20%
+}
+.ge-common-table.col6 {
+  min-width:860px
+}
+.ge-common-table.col6 th:nth-child(1),.ge-common-table.col6 td:nth-child(1) {
+  width:22%
+}
+.ge-common-table.col6 th:nth-child(2),.ge-common-table.col6 td:nth-child(2) {
+  width:10%
+}
+.ge-common-table.col6 th:nth-child(3),.ge-common-table.col6 td:nth-child(3) {
+  width:10%
+}
+.ge-common-table.col6 th:nth-child(4),.ge-common-table.col6 td:nth-child(4) {
+  width:10%
+}
+.ge-common-table.col6 th:nth-child(5),.ge-common-table.col6 td:nth-child(5) {
+  width:18%
+}
+.ge-common-table.col6 th:nth-child(6),.ge-common-table.col6 td:nth-child(6) {
+  width:30%
+}
+.ge-common-table.col-priority th:nth-child(1),.ge-common-table.col-priority td:nth-child(1) {
+  width:12%
+}
+.ge-common-table.col-priority th:nth-child(2),.ge-common-table.col-priority td:nth-child(2) {
+  width:10%
+}
+.ge-common-table.col-priority th:nth-child(3),.ge-common-table.col-priority td:nth-child(3) {
+  width:42%
+}
+.ge-common-table.col-priority th:nth-child(4),.ge-common-table.col-priority td:nth-child(4) {
+  width:36%
+}
+.rs-table {
+  width:100%;
+  border-collapse:collapse;
+  font-size:12.5px;
+  table-layout:fixed;
+  word-break:break-word
+}
+.rs-table th {
+  background:var(--bg);
+  padding:8px 10px;
+  text-align:left;
+  font-size:11px;
+  font-weight:700;
+  color:var(--text-secondary);
+  border-bottom:2px solid var(--border);
+  word-break:break-word
+}
+.rs-table td {
+  padding:10px;
+  border-bottom:1px solid var(--bg);
+  vertical-align:top;
+  line-height:1.5;
+  word-break:break-word;
+  overflow-wrap:break-word
+}
+.rs-table tr:hover td {
+  background:var(--bg)
+}
+.rs-table th:nth-child(1),.rs-table td:nth-child(1) {
+  width:9%
+}
+.rs-table th:nth-child(2),.rs-table td:nth-child(2) {
+  width:23%
+}
+.rs-table th:nth-child(3),.rs-table td:nth-child(3) {
+  width:56%
+}
+.rs-table th:nth-child(4),.rs-table td:nth-child(4) {
+  width:12%
+}
+#tab-research-agenda .rs-table th:nth-child(1) {
+  width:20%
+}
+#tab-research-agenda .rs-table th:nth-child(2) {
+  width:20%
+}
+#tab-research-agenda .rs-table th:nth-child(3) {
+  width:60%
+}
+/* ── Scenario ToBe Cards ── */
+.sc-tobe-grid {
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  margin-bottom:1.5rem;
+  min-width:0;
+  overflow:hidden
+}
+.sc-tobe-card {
+  background:var(--surface);
+  border:1.5px solid var(--border);
+  border-radius:16px;
+  padding:1.25rem;
+  min-width:0;
+  overflow:hidden
+}
+.sc-tobe-card.sc-tobe-a {
+  border-left:5px solid var(--seed)
+}
+.sc-tobe-card.sc-tobe-b {
+  border-left:5px solid var(--soil)
+}
+.sc-tobe-card.sc-tobe-c {
+  border-left:5px solid var(--director)
+}
+.sc-tobe-sc-badge {
+  font-size:11px;
+  font-weight:700;
+  padding:3px 10px;
+  border-radius:20px;
+  display:inline-block;
+  margin-bottom:8px
+}
+.sc-tobe-sc-badge-a {
+  background:var(--seed-bg);
+  color:var(--seed-text)
+}
+.sc-tobe-sc-badge-b {
+  background:var(--soil-bg);
+  color:var(--soil-text)
+}
+.sc-tobe-sc-badge-c {
+  background:var(--director-bg);
+  color:var(--director)
+}
+.sc-tobe-statement {
+  font-size:15px;
+  font-weight:700;
+  color:var(--text-primary);
+  margin-bottom:12px;
+  line-height:1.5;
+  padding:10px;
+  background:var(--bg);
+  border-radius:8px
+}
+.sc-tobe-body {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:14px
+}
+.sc-tobe-reqs-title,.sc-tobe-rm-title {
+  font-size:10px;
+  font-weight:700;
+  color:var(--text-tertiary);
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  margin-bottom:6px
+}
+.sc-tobe-req-item {
+  font-size:12px;
+  color:var(--text-secondary);
+  padding:4px 0;
+  border-bottom:1px solid var(--bg);
+  line-height:1.5
+}
+.sc-tobe-req-item:last-child {
+  border-bottom:none
+}
+.sc-tobe-req-item strong {
+  color:var(--text-primary);
+  font-size:12.5px
+}
+.sc-tobe-rm-item {
+  padding:6px 10px;
+  border-radius:8px;
+  background:var(--bg);
+  margin-bottom:4px
+}
+.sc-tobe-rm-name {
+  font-size:12.5px;
+  font-weight:700;
+  color:var(--text-primary)
+}
+.sc-tobe-rm-desc {
+  font-size:11px;
+  color:var(--text-tertiary);
+  line-height:1.5;
+  margin-top:2px
+}
+.sc-tobe-env {
+  margin-top:1rem;
+  padding:10px 14px;
+  background:var(--bg);
+  border-radius:10px;
+  border-left:3px solid var(--director);
+  font-size:12px;
+  color:var(--text-secondary);
+  line-height:1.75
+}
+.sc-tobe-env-title {
+  font-size:11px;
+  font-weight:700;
+  color:var(--director);
+  letter-spacing:.05em;
+  margin-bottom:6px;
+  text-transform:uppercase
+}
+/* ── Tab Nav Groups ── */
+.tab-nav-wrapper {
+  border-bottom: none;
+}
+.tab-group {
+  display: flex;
+  align-items: stretch;
+  gap: 4px;
+  border-bottom: 2px solid var(--border);
+}
+.tab-group-label {
+  flex-shrink: 0;
+  width: 70px;
+  display: flex;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--text-tertiary);
+}
+.tab-btn {
+  padding: 9px 16px;
+  font-size: 13px;
+}
+@media (max-width: 700px) {
+  .tab-group {
+    flex-direction: column;
+    gap: 0;
+  }
+  .tab-group-label {
+    width: auto;
+    padding: 8px 0 2px;
+  }
+}
+</style>
 </head>
 <body>
 
@@ -87,37 +2465,45 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
     <h1>SEEDダッシュボード</h1>
     <div class="meta">
       <span class="badge badge-slack">#101-会議関連</span>
-      <span class="badge badge-date">2026/06/03</span>
-      <span class="badge badge-date">7名</span>
+      <span class="badge badge-date">%%DATE%%</span>
+      <span class="badge badge-date">%%MEMBER_COUNT%%名</span>
     </div>
   </div>
-  <div class="updated">最終更新<br>2026/06/03 JST</div>
+  <div class="updated">最終更新<br>%%NOW%%</div>
 </div>
 
 <div class="tab-nav-wrapper">
-  <div class="tab-nav">
-    <button class="tab-btn active" data-tab="dashboard">ダッシュボード</button>
-    <button class="tab-btn" data-tab="about">事業概要</button>
-    <button class="tab-btn" data-tab="soil-map">① SEED 戦略マップ</button>
-    <button class="tab-btn" data-tab="hr">② 人材要件 v2</button>
-    <button class="tab-btn" data-tab="university-analysis">③ 大学教育に関する分析</button>
-    <button class="tab-btn" data-tab="general-education">④ 一般教養プログラム</button>
-    <button class="tab-btn" data-tab="role-specific">⑤ 職能別個別要件</button>
-    <button class="tab-btn" data-tab="research-agenda">⑥ 追加リサーチ検討</button>
-    <button class="tab-btn" data-tab="progress">プログラム進捗</button>
-    <button class="tab-btn" data-tab="timeline">スケジュール</button>
-    <button class="tab-btn" data-tab="meetings">会議資料</button>
-    <button class="tab-btn" data-tab="people">関係者マップ</button>
+  <div class="tab-group">
+    <span class="tab-group-label">日次運営</span>
+    <div class="tab-nav">
+      <button class="tab-btn active" data-tab="dashboard">ダッシュボード</button>
+      <button class="tab-btn" data-tab="progress">プログラム進捗</button>
+      <button class="tab-btn" data-tab="timeline">スケジュール</button>
+      <button class="tab-btn" data-tab="meetings">会議資料</button>
+      <button class="tab-btn" data-tab="people">関係者マップ</button>
+    </div>
+  </div>
+  <div class="tab-group">
+    <span class="tab-group-label">戦略・設計</span>
+    <div class="tab-nav">
+      <button class="tab-btn" data-tab="about">事業概要</button>
+      <button class="tab-btn" data-tab="soil-map">① SEED 戦略マップ</button>
+      <button class="tab-btn" data-tab="hr">② 人材要件 v2</button>
+      <button class="tab-btn" data-tab="university-analysis">③ 大学教育に関する分析</button>
+      <button class="tab-btn" data-tab="general-education">④ 一般教養プログラム</button>
+      <button class="tab-btn" data-tab="role-specific">⑤ 職能別個別要件</button>
+      <button class="tab-btn" data-tab="research-agenda">⑥ 追加リサーチ検討</button>
+    </div>
   </div>
 </div>
 
 <!-- ════ Dashboard Tab ════ -->
 <div id="tab-dashboard" class="tab-content active">
   <div class="metrics">
-    <div class="metric"><div class="metric-label">投稿メンバー</div><div class="metric-value">7</div></div>
-    <div class="metric"><div class="metric-label">緊急タスク</div><div class="metric-value red">7</div></div>
-    <div class="metric"><div class="metric-label">進行中タスク</div><div class="metric-value amber">11</div></div>
-    <div class="metric"><div class="metric-label">今後予定</div><div class="metric-value blue">14</div></div>
+    <div class="metric"><div class="metric-label">投稿メンバー</div><div class="metric-value">%%MEMBER_COUNT%%</div></div>
+    <div class="metric"><div class="metric-label">緊急タスク</div><div class="metric-value red">%%TOTAL_URGENT%%</div></div>
+    <div class="metric"><div class="metric-label">進行中タスク</div><div class="metric-value amber">%%TOTAL_WIP%%</div></div>
+    <div class="metric"><div class="metric-label">今後予定</div><div class="metric-value blue">%%TOTAL_PLAN%%</div></div>
   </div>
   <div class="legend">
     <div class="leg"><div class="leg-dot" style="background:var(--soil)"></div>SOIL</div>
@@ -378,13 +2764,6 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
         → 各シナリオの固有の能力・経験・機会の詳細は <strong>⑤ 職能別個別要件</strong> タブへ
       </div>
 
-      <div style="display:none"><!-- 旧コンテンツ（非表示） -->
-        <div class="role-tobe">「普遍的な人間の物語を、日本固有の感性で書き（または設計し）、世界に届けられる劇作家」</div>
-        <div class="role-sub">
-          シナリオA：IPの翻案担い手として現地観客に届く戯曲を書く。シナリオB：ノンバーバル構造の設計者（devisor）として機能する。<span style="color:var(--director);font-weight:700">シナリオC'：強い日本固有文脈（社会・伝統・時代性）を普遍的言語で書き、国際フェスティバルに発見される作品を生み出す。</span><br>
-          <span style="color:var(--text-tertiary);font-size:11px">▶ NYリサーチ追加：楽曲構造設計・「なぜここで歌うのか」設計・Thematic writing・Composer/Orchestrator分業</span>
-        </div>
-      </div>
       <div class="req-grid">
         <div class="req-card">
           <div class="req-card-title">◎ マインドセット（最優先）</div>
@@ -428,17 +2807,6 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
           <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">E-4</span><span class="req-name">翻案作品の実際の制作・上演体験 <span class="chip-pr" style="font-size:10px;padding:1px 5px;border-radius:6px">A</span></span></div>
           <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">E-5</span><span class="req-name">自作の国際リーディング・英語上演体験 <span class="chip-pr" style="font-size:10px;padding:1px 5px;border-radius:6px">A</span></span></div>
           <div class="req-item" style="border-left:2px solid var(--soil);padding-left:6px"><span class="req-id">E-6</span><span class="req-name">ノンバーバル・devising体験 <span class="chip-ge" style="font-size:10px;padding:1px 5px;border-radius:6px">B</span></span></div>
-        </div>
-      </div>
-      <div class="special-card" style="display:none">
-        <div class="special-card-title">目指すべきロールモデル</div>
-        <div class="special-grid">
-          <div class="special-item"><div class="special-id" style="background:var(--seed-bg);color:var(--seed-text)">A型</div><div class="special-name">前川知大（iaku）</div><div class="special-desc">SEEDリサーチャーとして派遣中の現役劇作家。日本社会の「今」を切り取り国際展開を模索する実践者。</div></div>
-          <div class="special-item"><div class="special-id" style="background:var(--seed-bg);color:var(--seed-text)">A型</div><div class="special-name">Jez Butterworth（英）</div><div class="special-desc">「Jerusalem」等イギリス特有の風土に根ざした戯曲をウエストエンド→ブロードウェイへ転生。特定文化が普遍に届く原理を体現。</div></div>
-          <div class="special-item"><div class="special-id" style="background:var(--seed-bg);color:var(--seed-text)">A型 ★NY</div><div class="special-name">David Hein（Come From Away）</div><div class="special-desc">「人の声を聞くことから始める」ドキュメンタリー的アプローチ。「歌い始めと歌い終えでキャラクターの感情が変化していること」。Introduction→Lift→Bridge(Shift)→Last Momentの楽曲設計。</div></div>
-          <div class="special-item"><div class="special-id" style="background:var(--seed-bg);color:var(--seed-text)">A型 ★NY</div><div class="special-name">Matt Gould（Lempicka）</div><div class="special-desc">「良い曲を書くことと物語を動かす曲を書くことは全く違う」「The stakes have to be life and death」。俳優経験を持つcomposerとして「なぜここで歌うのか」の設計を徹底する。</div></div>
-          <div class="special-item"><div class="special-id" style="background:var(--seed-bg);color:var(--seed-text)">A型 ★NY</div><div class="special-name">Crystal Monee Hall（Lincoln）</div><div class="special-desc">「The show is the star」「Nothing is random, nothing is wasted」。Thematic writingでモチーフが全体を通じて機能する設計。「You can't write it like me, but I can't arrange it like you」——分業と信頼の哲学。</div></div>
-          <div class="special-item"><div class="special-id" style="background:var(--soil-bg);color:var(--soil-text)">B型</div><div class="special-name">Pina Bausch（独）</div><div class="special-desc">テキストではなくイメージ・身体・繰り返しで「物語」を成立させるタンツテアターを確立。言語なしに語る構造設計の先駆者。</div></div>
         </div>
       </div>
       <div class="special-card">
@@ -576,13 +2944,6 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
         → 各シナリオの固有の能力・経験・機会の詳細は <strong>⑤ 職能別個別要件</strong> タブへ
       </div>
 
-      <div style="display:none"><!-- 旧コンテンツ（非表示） -->
-      <div class="role-header director">
-        <div class="role-title director">演出家 ToBe モデル <span style="font-size:11px;font-weight:400;opacity:0.7">v2 SOIL統合</span></div>
-        <div class="role-tobe">「作品の探求を導き、多様なアーティストと協働しながら、日本の物語を世界の観客に届けられる演出家」</div>
-        <div class="role-sub">シナリオA：英国・北米の商業演劇文法でIP作品を立体化する。シナリオB：身体・空間・リズムのみで感情と物語を成立させるノンバーバル演出の専門家として機能する。<span style="color:var(--director);font-weight:700">シナリオC'：社会的文脈・時代性を持つ作品や古典の現代的再解釈を通じて、国際フェスティバルで評価される演出を生み出す。</span></div>
-      </div>
-      </div><!-- /hidden old content -->
 
       <div class="req-grid">
         <div class="req-card">
@@ -622,15 +2983,6 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
           <div class="req-item"><span class="req-id">E-4</span><span class="req-name">現場体験（劇場で働く・見る）</span></div>
           <div class="req-item" style="border-left:2px solid var(--soil);padding-left:6px"><span class="req-id">E-5</span><span class="req-name">フィジカルシアター・ノンバーバル制作体験 <span class="chip-ge" style="font-size:10px;padding:1px 5px;border-radius:6px">B</span></span></div>
           <div class="req-item" style="border-left:2px solid var(--soil);padding-left:6px"><span class="req-id">E-6</span><span class="req-name">国際フェスティバルへの出展・参加体験 <span class="chip-ge" style="font-size:10px;padding:1px 5px;border-radius:6px">B</span></span></div>
-        </div>
-      </div>
-      <div class="special-card" style="display:none">
-        <div class="special-card-title">目指すべきロールモデル</div>
-        <div class="special-grid">
-          <div class="special-item"><div class="special-id" style="background:var(--seed-bg);color:var(--seed-text)">A型</div><div class="special-name">Bartlett Sher（米）</div><div class="special-desc">リンカーンセンターでRodgers & Hammerstein作品を現代的に再演出しトニー賞受賞。「探求を導く」演出スタイルと商業の両立を体現。</div></div>
-          <div class="special-item"><div class="special-id" style="background:var(--seed-bg);color:var(--seed-text)">A型</div><div class="special-name">岡田利規（チェルフィッチュ）</div><div class="special-desc">日本語・日本の身体感覚を武器にウィーン・ベルリン等の国際フェスティバルに繋いだ演出家。日本性を普遍的文脈に着地させる技術の体現者。</div></div>
-          <div class="special-item"><div class="special-id" style="background:var(--soil-bg);color:var(--soil-text)">B型</div><div class="special-name">Lloyd Newson（DV8）</div><div class="special-desc">社会的テーマを身体のみで表現するフィジカルシアターを世界規模に展開。言語なしで意味・感情・物語を成立させる演出文法の第一人者。</div></div>
-          <div class="special-item"><div class="special-id" style="background:var(--soil-bg);color:var(--soil-text)">B型</div><div class="special-name">Akram Khan（英）</div><div class="special-desc">南アジアのカタックと現代ダンスを融合し、Royal Ballet等と国際共同制作で世界展開。自文化の身体技術を普遍的感情に変換する技術を確立。</div></div>
         </div>
       </div>
       <div class="special-card">
@@ -766,13 +3118,6 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
         → 各シナリオの固有の能力・経験・機会の詳細は <strong>⑤ 職能別個別要件</strong> タブへ
       </div>
 
-      <div style="display:none"><!-- 旧コンテンツ（非表示） -->
-      <div class="role-header producer">
-        <div class="role-tobe">「日本にしかないコンテンツを見極め、転生装置と繋がり、世界市場に送り出せるプロデューサー」</div>
-        <div class="role-sub">シナリオA：IPホルダーと文化機関を繋ぎ、NT・Barbican等との共同制作を設計する。シナリオB：ノンバーバル作品をインバウンドでテストし、フリンジから世界展開するIPとして育てる。<span style="color:var(--director);font-weight:700">シナリオC'：国際フェスティバルのキュレーターと長期信頼関係を築き、社会的文脈・固有文脈を持つ作品を国際舞台に送り出す。</span><br>
-        <span style="color:var(--text-tertiary);font-size:11px">▶ NYリサーチ追加：WOM設計力・GM分業の理解・段階的開発文化・Taste（審美眼）・マーケティング能力</span></div>
-      </div>
-      </div><!-- /hidden old content -->
 
       <div class="req-grid">
         <div class="req-card">
@@ -817,19 +3162,6 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
           <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">E-3</span><span class="req-name">転生装置との接点体験（フェス・公演視察）</span></div>
           <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">E-4</span><span class="req-name">国際共同制作への参加・見学 <span class="chip-pr" style="font-size:10px;padding:1px 5px;border-radius:6px">A</span></span></div>
           <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">E-5</span><span class="req-name">IPホルダーとの交渉・協働経験 <span class="chip-pr" style="font-size:10px;padding:1px 5px;border-radius:6px">A</span></span></div>
-        </div>
-      </div>
-      <div class="special-card" style="display:none">
-        <div class="special-card-title">目指すべきロールモデル</div>
-        <div class="special-grid">
-          <div class="special-item"><div class="special-id" style="background:var(--seed-bg);color:var(--seed-text)">A型</div><div class="special-name">Cameron Mackintosh（英）</div><div class="special-desc">Cats・Les Mis・Phantomをウエストエンド→ブロードウェイ→世界ツアーへ。長期投資と国際ライセンス展開の設計を体現。</div></div>
-          <div class="special-item"><div class="special-id" style="background:var(--seed-bg);color:var(--seed-text)">A型</div><div class="special-name">松田誠（東宝）</div><div class="special-desc">日本産ミュージカルの海外展開を担うSEEDアドバイザリーボードメンバー。国内大手とアーティストの間に立ち海外に橋渡しする日本型プロデュース。</div></div>
-          <div class="special-item"><div class="special-id" style="background:var(--seed-bg);color:var(--seed-text)">A型 ★NY</div><div class="special-name">Jeffrey Richards（NY）</div><div class="special-desc">Maybe Happy Ending・Spring Awakening等。「4成功要因：IP・TR（Title Recognition）・SP（Star Power）・WOM→WTSF（Want To See Factor）」の分析フレームで作品を選択。「作品を愛し続けられること」が最重要。</div></div>
-          <div class="special-item"><div class="special-id" style="background:var(--seed-bg);color:var(--seed-text)">A型 ★NY</div><div class="special-name">Mara Isaacs（Hadestown）</div><div class="special-desc">「プロデューサーは権力者ではなく助産師的存在」。ビジョン・美意識・価値観を持つことが最重要。Youth licensing→audience growth→ロングランのTouch Point戦略を確立。</div></div>
-          <div class="special-item"><div class="special-id" style="background:var(--seed-bg);color:var(--seed-text)">A型 ★NY</div><div class="special-name">Sue Frost（Come From Away）</div><div class="special-desc">「WOM＝観客が誰かへ話したくなること」。「もし自分がやらなかったら後悔する作品かどうか」が作品選択の基準。Regional Theaterを活用した段階的作品育成の名手。</div></div>
-          <div class="special-item"><div class="special-id" style="background:var(--seed-bg);color:var(--seed-text)">A型 ★NY</div><div class="special-name">Patrick Catullo（American Utopia）</div><div class="special-desc">「Taste（審美眼）こそがプロデューサーに最終的に残る信用」「今の観客は劇場でしか体験できないものを求めている」。マーケティングを作品開発と同時に設計する独立系プロデューサー。</div></div>
-          <div class="special-item"><div class="special-id" style="background:var(--soil-bg);color:var(--soil-text)">B型</div><div class="special-name">Luke Cresswell & Steve McNicholas（英）</div><div class="special-desc">STOMPをフリンジから30年以上の長期公演・世界展開IPに育てた。ノンバーバル作品を繰り返し上演できるフォーマットとして設計する思考。</div></div>
-          <div class="special-item"><div class="special-id" style="background:var(--soil-bg);color:var(--soil-text)">B型</div><div class="special-name">Shim Jae-Won（韓国）</div><div class="special-desc">言語不要のノンバーバル料理ショーNANTA（ナンタ）を観光特化から世界ツアーへ。インバウンドをテストマーケットにしてスケールする戦略。</div></div>
         </div>
       </div>
       <div class="special-card">
@@ -900,7 +3232,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
           <div class="meeting-date">2025/11/05</div>
         </div>
         <div class="meeting-docs">
-          <a class="doc-btn" href="../governance/meetings/第1回_アドバイザリーボード定例.pdf" target="_blank"><span class="doc-btn-icon">📄</span>資料</a>
+          <a class="doc-btn" href="governance/meetings/第1回_アドバイザリーボード定例.pdf" target="_blank"><span class="doc-btn-icon">📄</span>資料</a>
         </div>
       </div>
       <div class="meeting-row">
@@ -910,7 +3242,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
           <div class="meeting-date">2026/02/13</div>
         </div>
         <div class="meeting-docs">
-          <a class="doc-btn" href="../governance/meetings/第2回_アドバイザリーボード定例.pdf" target="_blank"><span class="doc-btn-icon">📄</span>資料</a>
+          <a class="doc-btn" href="governance/meetings/第2回_アドバイザリーボード定例.pdf" target="_blank"><span class="doc-btn-icon">📄</span>資料</a>
         </div>
       </div>
       <div class="meeting-row">
@@ -920,7 +3252,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
           <div class="meeting-date">2026/04/17</div>
         </div>
         <div class="meeting-docs">
-          <a class="doc-btn" href="../governance/meetings/第3回_アドバイザリーボード定例.pdf" target="_blank"><span class="doc-btn-icon">📄</span>資料</a>
+          <a class="doc-btn" href="governance/meetings/第3回_アドバイザリーボード定例.pdf" target="_blank"><span class="doc-btn-icon">📄</span>資料</a>
         </div>
       </div>
       <div class="meeting-add-hint">＋ 次回以降の資料・議事録はここに追加</div>
@@ -1607,63 +3939,6 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 
 <div class="ge-section">
   <div class="ge-section-title">一般教養 vs 職能別プログラム ── 棲み分け原則</div>
-  <div style="display:none">
-  <table class="ge-common-table">
-    <thead>
-      <tr><th>大学・機関</th><th>カバーしていること（確認済）</th><th>不足しているもの（SEEDが補う）</th></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>日本大学芸術学部 演劇学科</strong><br><span style="font-size:10px;color:var(--text-tertiary)">東演連加盟。劇作・演出・企画制作・演技・デザイン技術の3コース10専攻</span></td>
-        <td>演劇史（日本・西洋）、各専攻別技術実習（照明・音響・舞台美術）、学生主導の学内公演（年複数本）、戯曲輪読・集団創作</td>
-        <td>英語での表現・議論、国際市場の理解、商業演劇の財務・法務教育、業界人との体系的接続（単発外部講師が主流）</td>
-      </tr>
-      <tr>
-        <td><strong>玉川大学 演劇・舞踊学科</strong><br><span style="font-size:10px;color:var(--text-tertiary)">東演連加盟。身体表現・舞台創造・芸術応用の3コース</span></td>
-        <td>1年次横断必修（音楽表現・身体表現・舞台技術）、劇場接遇演習、オーディション演習、演劇史・理論、上演実習</td>
-        <td>英語・国際展開の具体的プログラムなし、商業演劇プロデュース、スクリーン演技・映像との接続</td>
-      </tr>
-      <tr>
-        <td><strong>多摩美術大学 演劇舞踊デザイン学科</strong><br><span style="font-size:10px;color:var(--text-tertiary)">東演連加盟。演劇舞踊コース＋劇場美術デザインコース</span></td>
-        <td>演技・振付・劇作・演出・コレオグラフィ演習、舞台美術・照明・衣裳・映像美術、社会的背景を踏まえた演劇史・理論</td>
-        <td>英語・国際展開教育、業界接続の仕組み、商業演劇プロデュース</td>
-      </tr>
-      <tr>
-        <td><strong>桐朋学園芸術短大 演劇専攻</strong><br><span style="font-size:10px;color:var(--text-tertiary)">東演連加盟。2年制。ストレートプレイ・ミュージカル・声優の3コース</span></td>
-        <td>「本を読む力・身体の鍛錬・アンサンブル」の3指針。ボイストレーニング・身体・演技発表会・卒業公演への集中特化</td>
-        <td>俳優育成特化のためプロデューサー・劇作家・演出家育成は対象外。英語・国際展開の記述なし</td>
-      </tr>
-      <tr>
-        <td><strong>桜美林大学 芸術文化学群</strong><br><span style="font-size:10px;color:var(--text-tertiary)">東演連加盟。演劇・ダンス専修 + 2025年度よりプロデュース＆マネジメント領域拡充</span></td>
-        <td>演劇・ダンス・ミュージカル・舞台技術スタッフワーク・アートプロデュース・2025年度より声優・映像演技・テーマパークダンス対応科目新設</td>
-        <td>「グローバルアウトリーチプログラム」が示唆されるが詳細不明。具体的な国際展開教育は未確認</td>
-      </tr>
-      <tr>
-        <td><strong>昭和音楽大学 アートマネジメントコース</strong><br><span style="font-size:10px;color:var(--text-tertiary)">1994年日本初のアートマネジメント教育。米国AAAE認定取得</span></td>
-        <td>アートマネジメント実務（企画・交渉・運営一貫）、<strong>アートマネジメント英語①②必修</strong>、50社超のインターンシップ、3年次：学生企画の公演を実費制作</td>
-        <td>演劇固有のドラマトゥルギー・劇作・演出の深度、自分の作品・ビジョンを継続して「語り続ける」表現訓練</td>
-      </tr>
-      <tr>
-        <td><strong>早稲田大学 文学部 演劇映像コース</strong><br><span style="font-size:10px;color:var(--text-tertiary)">研究・批評系。実技系ではない</span></td>
-        <td>日本古典演劇（能・浄瑠璃・歌舞伎）・民俗芸能・西洋演劇・現代舞台芸術・映画史理論・演劇批評</td>
-        <td>実技・実習なし。国際展開・英語プレゼン・プロデュース実践はカリキュラム外</td>
-      </tr>
-      <tr style="background:var(--seed-bg)">
-        <td colspan="3">
-          <strong>🔬 海外比較で見えてくる構造的ギャップ（RADA・Yale・K-Arts）</strong><br>
-          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:8px;font-size:11.5px">
-            <div><strong style="color:var(--seed-text)">英語・国際交渉</strong>：RADAは国際演劇祭参加が正規プログラム。日本は昭和音大のみ「アートマネジメント英語」を必修化。東演連5校は未整備。</div>
-            <div><strong style="color:var(--seed-text)">商業演劇プロデュース</strong>：Yale Theater Management MFAでは会計・財務・労働法・ガバナンス・資金調達・観客開発を専門課程として設置。日本にはない。</div>
-            <div><strong style="color:var(--seed-text)">ドラマトゥルギーの実践的科目化</strong>：RADAはBA ActingにDramaturgy必修。YaleはMFA独立専攻。日本は理論系にとどまる。</div>
-            <div><strong style="color:var(--seed-text)">業界構造・キャリア設計</strong>：RADAはエージェント・キャスティング・プロデューサーによるセミナーを必修化。Yaleは初日から実務従事。日本は単発外部講師が主流。</div>
-            <div><strong style="color:var(--seed-text)">ミュージカル創作</strong>：K-Artsは Musical Theatre Writing Program（大学院）として国策育成。日本に独立プログラムなし。</div>
-            <div><strong style="color:var(--urgent-text)">共通の最大ギャップ → SEEDが担う</strong>：「表現の力（sustained oral discourse）」——知識を持ちながら、英語で・継続的に・論理的に「話し続ける」訓練が、どの大学でも圧倒的に不足。</div>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  </div>
   <div class="ge-split-grid" style="margin-top:12px">
     <div class="ge-split-card ge-split-left">
       <div class="ge-split-title">一般教養がカバーすること</div>
@@ -1708,110 +3983,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
   </div>
 </div>
 
-<!-- 海外詳細比較はタブ③に移動済み（このブロックは非表示） -->
-<div style="display:none">
-<div class="ge-section">
-  <div class="ge-section-title">海外の演劇教育との詳細比較（タブ③に移動済み）</div>
 
-  <!-- 主要海外機関のサマリー -->
-  <div style="overflow-x:auto;margin-bottom:1.5rem">
-  <table class="ge-common-table">
-    <thead>
-      <tr><th>機関（国）</th><th>特徴的な科目・プログラム</th><th>日本との最大の差</th></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>RADA</strong><br><span style="font-size:10px;color:var(--text-tertiary)">英国・BA Acting 3年制</span></td>
-        <td><strong>Dramaturgy（Year 1 必修）</strong>・国際フェスティバル参加必須（Year 2：META / Gdansk Shakespeare Festival / Utah等）・Reflective Practice（継続）・Agents/CD/Producers による業界セミナー（必修）・RADA Buddy Mentoring</td>
-        <td>Year 2 に国際フェスティバル参加が<strong>カリキュラムとして制度化</strong>。ドラマトゥルギーが学部1年次から必修。業界人との接点を科目化。</td>
-      </tr>
-      <tr>
-        <td><strong>Guildhall School</strong><br><span style="font-size:10px;color:var(--text-tertiary)">英国・BA Acting 3年制</span></td>
-        <td><strong>Self-led Practice（劇作・ドラマトゥルギー・独立プロジェクト必修）</strong>・専任 Industry Consultant 配置・Making It Festival（学生創作発表）・3年次でAgents/CD/Directors向けショーケース・Alumni Gym（卒業後継続トレーニング）</td>
-        <td><strong>専任 Industry Consultant を学校に配置</strong>し、学生のキャリア構築を個別支援。日本では単発外部講師が主流。</td>
-      </tr>
-      <tr>
-        <td><strong>Rose Bruford</strong><br><span style="font-size:10px;color:var(--text-tertiary)">英国・学部+MA</span></td>
-        <td>European Theatre Arts（欧州6ヶ国セメスター留学、675名実績）・American Theatre Arts（米国主要都市留学）・<strong>MA Directing 正式科目：Budgeting / Fundraising / Pitching Ideas / Professional Networking</strong></td>
-        <td><strong>演出家の育成課程でピッチ・資金調達・ネットワーキングを正式科目として設置</strong>。欧米への演劇特化留学が制度化されている。</td>
-      </tr>
-      <tr>
-        <td><strong>Yale School of Drama</strong><br><span style="font-size:10px;color:var(--text-tertiary)">米国・MFA各専攻</span></td>
-        <td><strong>Theater Management MFA 16科目（Financial Accounting / Strategic Planning / Law and the Arts / Principles of Marketing / Advanced Topics in Branding / Labor and Employee Relations / Governance / Producing for the Commercial Theater 等）</strong>・Bridge to the Profession（年12回・6単位）・MFA/MBA Joint Degree・Yale Rep初日から実務参加</td>
-        <td>Theater Management が独立MFA専攻として確立。<strong>劇場経営に必要な全知識（財務・法務・労使・政策・ガバナンス）を体系化</strong>。日本に同等の専門大学院なし。</td>
-      </tr>
-      <tr>
-        <td><strong>Yale Playwriting/Directing/Dramaturgy</strong><br><span style="font-size:10px;color:var(--text-tertiary)">米国・MFA各専攻</span></td>
-        <td>Playwriting：<strong>Teach What You Write（自分の作品を教える=言語化の最高到達点）・Theater Now NYC（業界没入リサーチ）・Writing for Film and Television（必修）</strong>。Directing：Bridge to the Profession / Choreographic Imagination / Opera Practicum / World Performance / Director's Thesis Casebook。Dramaturgy：Criticism Workshop（3年間継続）・Literary Office Practicum・Translation（語学をドラマトゥルギーとして統合）</td>
-        <td>劇作家が映像脚本も学ぶ、演出家がOpera・振付・World Performanceを横断する、ドラマトゥルグが文学部の実務も担う——<strong>専攻間の横断学習が必修として制度化</strong>。</td>
-      </tr>
-      <tr>
-        <td><strong>Juilliard School</strong><br><span style="font-size:10px;color:var(--text-tertiary)">米国・BFA Drama 4年制</span></td>
-        <td>Year 1-2：<strong>Essentials of Entrepreneurship（起業家精神・必修）</strong>。Year 3：<strong>Elements of Producing（俳優も必修）・Acting on Camera。</strong>Year 4：Bridge to the Profession（6単位）・American Theater Landscape・<strong>Actor Presentations（NY&LA のエージェント/CDへのライブショーケース）</strong></td>
-        <td>俳優育成課程に起業家精神・プロデュース基礎を必修化。4年次に<strong>実際の業界人の前でのショーケースを制度化</strong>（＝「松田さんの前で話す」の海外版）。</td>
-      </tr>
-      <tr>
-        <td><strong>CMU School of Drama</strong><br><span style="font-size:10px;color:var(--text-tertiary)">米国・BFA Dramaturgy</span></td>
-        <td>Dramaturgy が独立学科として存在。<strong>Interactive Lobby Dramaturgy（観客エンゲージメントの専門訓練が科目課題）</strong>・Dramaturgy Forum（上級生主導の業界/思想討議）・必修インターンシップ（提携主要劇場）</td>
-        <td>ドラマトゥルジーが<strong>4年制の独立学科</strong>として存在。「劇場ロビーでの観客との対話」まで演劇教育に統合されている。</td>
-      </tr>
-      <tr>
-        <td><strong>K-Arts（韓国）</strong><br><span style="font-size:10px;color:var(--text-tertiary)">韓国・School of Drama 5学科</span></td>
-        <td>演出科を<strong>「劇作家（dramatist）として演出家を養成」</strong>・毎学期24本の大小公演・<strong>Arts Management 専攻が School of Drama 内に独立</strong>・Musical Theatre Writing Program（大学院3年：劇作・作詞・作曲を統合育成）・英米露欧のメソッドを統合した教員陣</td>
-        <td>Arts Managementが演劇学科の中に専攻として独立。ミュージカル創作を国策として大学院で体系育成。<strong>演出家を「書く人」として養成する発想</strong>が日本と全く異なる。</td>
-      </tr>
-    </tbody>
-  </table>
-  </div>
-
-  <!-- 海外にあって日本にない科目リスト -->
-  <div style="font-size:13px;font-weight:700;color:var(--text-primary);margin-bottom:10px">海外にあって日本にない ── 具体的科目名（SEEDの一般教養で補うべき視点）</div>
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1.5rem;font-size:11.5px">
-    <div style="padding:10px 12px;background:var(--seed-bg);border-radius:10px;border:1px solid #BDD3F8">
-      <div style="font-weight:700;color:var(--seed-text);margin-bottom:6px">業界接続の制度化</div>
-      <div style="color:var(--text-secondary);line-height:1.7">Bridge to the Profession（Yale/Juilliard・年12回・6単位）<br>Actor Presentations（NY&LA 業界人ショーケース）<br>Industry Practice I/II（Yale・業界に自作を持ち込む）<br>Industry Consultant 常駐（Guildhall）<br>Professional Colloquium（NYU・業界人との議論）</div>
-    </div>
-    <div style="padding:10px 12px;background:var(--soil-bg);border-radius:10px;border:1px solid #A8DEC8">
-      <div style="font-weight:700;color:var(--soil-text);margin-bottom:6px">表現・言語化の正式訓練</div>
-      <div style="color:var(--text-secondary);line-height:1.7">Teach What You Write（Yale・自作を教える）<br>Criticism Workshop（Yale・3年間継続執筆）<br>Pitching Ideas（Rose Bruford Directing MA）<br>Business Writing for Theater Managers（Yale）<br>Authentic Collaboration（Yale・協働の言語化）<br>Reflective Practice（RADA/Guildhall・省察の習慣化）</div>
-    </div>
-    <div style="padding:10px 12px;background:var(--director-bg);border-radius:10px;border:1px solid var(--director-border)">
-      <div style="font-weight:700;color:var(--director);margin-bottom:6px">起業・経営・政策</div>
-      <div style="color:var(--text-secondary);line-height:1.7">Essentials of Entrepreneurship（Juilliard・Year 1-2必修）<br>Elements of Producing（Juilliard・俳優も必修）<br>Producing for the Commercial Theater（Yale）<br>Governance / Labor and Employee Relations（Yale）<br>Cultural Policy（Yale）<br>Fundraising / Budgeting（Rose Bruford）</div>
-    </div>
-    <div style="padding:10px 12px;background:var(--playwright-bg);border-radius:10px;border:1px solid var(--playwright-border)">
-      <div style="font-weight:700;color:var(--playwright);margin-bottom:6px">国際フェスティバル参加</div>
-      <div style="color:var(--text-secondary);line-height:1.7">Year 2 必修参加（RADA：META/Gdansk等）<br>European Theatre Arts（Rose Bruford：6ヶ国留学・675名実績）<br>American Theatre Arts（Rose Bruford：米国主要都市）<br>Theater Now NYC（Yale：業界没入リサーチ）</div>
-    </div>
-    <div style="padding:10px 12px;background:var(--bg);border-radius:10px;border:1px solid var(--border)">
-      <div style="font-weight:700;color:var(--text-primary);margin-bottom:6px">3職能横断学習の必修化</div>
-      <div style="color:var(--text-secondary);line-height:1.7">DRAM 50a（Yale：劇作家×演出家×俳優×デザイナー×ドラマトゥルグが3週間協働）<br>New Play Lab（Yale/CMU：全職能でフィードバック）<br>Playwrights & Directors Practicum（Yale）<br>Cross-school "undisciplined"（Guildhall：音楽×演劇×デザイン）</div>
-    </div>
-    <div style="padding:10px 12px;background:var(--bg);border-radius:10px;border:1px solid var(--border)">
-      <div style="font-weight:700;color:var(--text-primary);margin-bottom:6px">映像・TV・多メディア統合</div>
-      <div style="color:var(--text-secondary);line-height:1.7">Episodic Writing I（NYU：TVスペック執筆・劇作家も必修）<br>Writing for Film and Television（Yale Playwriting・必修）<br>Screen Acting / Acting on Camera（RADA・Juilliard・Guildhall）<br>Directing for Camera（Rose Bruford）</div>
-    </div>
-  </div>
-
-  <!-- 表現の力の比較 -->
-  <div style="font-size:13px;font-weight:700;color:var(--text-primary);margin-bottom:10px">「表現の力（話し続ける力）」に対応する海外の具体的な訓練方法</div>
-  <div style="overflow-x:auto">
-  <table class="ge-common-table">
-    <thead>
-      <tr><th>訓練の種類</th><th>海外の具体的科目名</th><th>機関</th><th>SEEDでの対応（UNIT）</th></tr>
-    </thead>
-    <tbody>
-      <tr><td><strong>「なぜ表現するか」の言語化</strong></td><td>Teach What You Write（自作を教えることで言語化）<br>Authentic Collaboration（協働の意図を言語化）<br>Reflective Practice（省察を継続的に書く）</td><td>Yale / RADA / Guildhall</td><td>UNIT E1（自分の文化・作品を5分で語る）</td></tr>
-      <tr><td><strong>業界人の前での語り（live pitch）</strong></td><td>Actor Presentations（NY&LA業界人向けショーケース）<br>Bridge to the Profession（Artistic Leadersへのプロジェクトピッチ）<br>Industry Practice I/II（業界に自作を持ち込む）<br>Pitching Ideas（演出家課程の正式科目）</td><td>Juilliard / Yale / Rose Bruford</td><td>UNIT E2（10分プレゼン・業界のプロの前で=修了基準）</td></tr>
-      <tr><td><strong>批評的言語化の継続</strong></td><td>Criticism Workshop（3年間毎週継続）<br>Dramaturgy Forum（上級生が主導する週次討議）<br>Business Writing for Theater Managers</td><td>Yale / CMU</td><td>企画1（海外演劇誌×英語ディスカッション）での継続</td></tr>
-      <tr><td><strong>声の段階的訓練</strong></td><td>Voice I/II/III（Juilliard・4年間継続）<br>Voice & Speech（RADA・3年間継続）<br>Voice（方言・歌唱・音声メディア統合・Guildhall）</td><td>Juilliard / RADA / Guildhall</td><td>（演出家・劇作家の職能別プログラムで対応）</td></tr>
-      <tr><td><strong>起業家精神・自己設計力</strong></td><td>Essentials of Entrepreneurship（Year 1-2必修）<br>American Theater Landscape（年4の業界構造理解）<br>Founding Visions（創業者ビジョンの言語化）</td><td>Juilliard / Yale</td><td>UNIT K1（市場地図・3シナリオ・自分の立ち位置）→ E1/E2での言語化</td></tr>
-    </tbody>
-  </table>
-  </div>
-
-</div>
-</div><!-- /.hidden overseas section -->
 
 <!-- 6ユニット -->
 <div class="ge-section">
@@ -2594,14 +4766,22 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 </div>
 
 <script>
+function activateTab(name) {
+  const target = document.getElementById('tab-' + name);
+  if (!target) return false;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  target.classList.add('active');
+  return true;
+}
 document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    activateTab(btn.dataset.tab);
+    history.replaceState(null, '', '#' + btn.dataset.tab);
   });
 });
+if (location.hash) activateTab(location.hash.slice(1));
+window.addEventListener('hashchange', () => activateTab(location.hash.slice(1)));
 
 document.querySelectorAll('.role-tab-btn').forEach(btn => {
   btn.addEventListener('click', () => {
