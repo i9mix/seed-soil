@@ -6,6 +6,12 @@
       "runtimeExecutable": "npx",
       "runtimeArgs": ["serve", ".", "-p", "3000", "--no-clipboard"],
       "port": 3000
+    },
+    {
+      "name": "engineko",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "C:/Users/ikumi/OneDrive/Desktop/engineko-repo", "-p", "4173", "--no-clipboard"],
+      "port": 4173
     }
   ]
 }
