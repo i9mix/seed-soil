@@ -847,6 +847,115 @@ body {
   color: var(--seed);
   background: var(--seed-bg);
 }
+/* ── Ecosystem Analysis (about tab) ── */
+.eco-wrap { display:flex; flex-direction:column; gap:1.5rem; }
+.eco-thesis {
+  background: linear-gradient(135deg, #1A2A44 0%, #24405F 100%);
+  border-radius: 16px;
+  padding: 2rem;
+  color: #fff;
+  text-align: center;
+}
+.eco-thesis-eyebrow {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+  color: #8FB4E0; font-family: 'DM Mono', monospace; margin-bottom: 0.9rem;
+}
+.eco-thesis-quote { font-size: 20px; font-weight: 700; line-height: 1.6; letter-spacing: -0.01em; }
+.eco-thesis-quote em { color: #F3C24B; font-style: normal; }
+.eco-thesis-sub {
+  font-size: 12.5px; color: #B9C6D6; line-height: 1.8; margin: 1rem auto 0; max-width: 620px;
+}
+.eco-thesis-sub strong { color: #F3C24B; font-weight: 700; }
+.eco-block-label {
+  font-size: 12.5px; font-weight: 700; letter-spacing: 0.03em;
+  color: var(--text-secondary); margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+}
+.eco-block-label .eco-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px; border-radius: 6px; font-size: 11px;
+  background: var(--seed-bg); color: var(--seed-text); font-family: 'DM Mono', monospace; flex-shrink: 0;
+}
+.eco-block-note { font-size: 12px; color: var(--text-tertiary); line-height: 1.75; margin-top: 8px; }
+/* 三圏マップ */
+.eco-map { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem; }
+.eco-map-inner { display: flex; gap: 12px; }
+.eco-yaxis {
+  writing-mode: vertical-rl; transform: rotate(180deg);
+  font-size: 10.5px; color: var(--text-tertiary); font-weight: 600; text-align: center;
+  padding: 6px 0; letter-spacing: 0.06em; flex-shrink: 0;
+}
+.eco-bands { flex: 1; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.eco-band { border-radius: 12px; padding: 12px 14px; border: 1px solid; }
+.eco-band.core { background: #E7F5EF; border-color: #A8DEC8; }
+.eco-band.adjacent { background: #FAF4E6; border-color: #E8D8B0; }
+.eco-band.upstream { background: #EDF1F7; border-color: #C6D5E8; }
+.eco-band-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
+.eco-band-name { font-size: 13px; font-weight: 700; }
+.eco-band.core .eco-band-name { color: #1D7A57; }
+.eco-band.adjacent .eco-band-name { color: #A9822F; }
+.eco-band.upstream .eco-band-name { color: #2B4C7E; }
+.eco-band-desc { font-size: 11px; color: var(--text-tertiary); }
+.eco-players { display: flex; flex-wrap: wrap; gap: 6px; }
+.eco-player {
+  font-size: 11.5px; font-weight: 500; padding: 4px 10px; border-radius: 16px;
+  background: rgba(255,255,255,0.78); border: 1px solid rgba(0,0,0,0.08); color: var(--text-primary);
+}
+.eco-player.star { background: #FBEFC8; border: 1.5px solid #E0B23C; color: #8A6410; font-weight: 700; }
+.eco-xaxis {
+  display: flex; justify-content: space-between; font-size: 10.5px; color: var(--text-tertiary);
+  font-weight: 600; margin-top: 10px; padding: 0 4px; letter-spacing: 0.03em;
+}
+.eco-gap {
+  display: flex; align-items: center; gap: 8px; justify-content: center;
+  font-size: 11px; font-weight: 700; color: #B4791A; background: #FEF6E4;
+  border: 1px dashed #E0B23C; border-radius: 10px; padding: 7px 12px;
+}
+/* マトリクス */
+.eco-matrix-scroll { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; }
+.eco-matrix { border-collapse: collapse; width: 100%; min-width: 660px; font-size: 11.5px; }
+.eco-matrix th, .eco-matrix td { border: 1px solid var(--border); padding: 8px 9px; text-align: left; vertical-align: top; }
+.eco-matrix thead th { background: var(--bg); font-weight: 700; color: var(--text-secondary); font-size: 10.5px; line-height: 1.4; }
+.eco-matrix tbody th { background: var(--bg); font-weight: 700; color: var(--text-primary); font-size: 11px; }
+.eco-matrix td.ideal { background: #E7F5EF; }
+.eco-matrix td.drain { background: #FDECEA; }
+.eco-mcase { font-weight: 600; color: var(--text-primary); }
+.eco-mcase.ideal { color: #1D7A57; }
+.eco-mcase.drain { color: var(--urgent-text); }
+.eco-mtag { display: block; font-size: 10px; color: var(--text-tertiary); margin-top: 2px; line-height: 1.4; }
+/* case cards */
+.eco-case-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+@media (max-width: 700px) { .eco-case-grid { grid-template-columns: 1fr; } }
+.eco-case { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.1rem; border-left: 4px solid var(--border); }
+.eco-case.ideal { border-left-color: #1D7A57; }
+.eco-case.warn { border-left-color: var(--urgent-text); }
+.eco-case.ref { border-left-color: var(--seed); }
+.eco-case-top { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; flex-wrap: wrap; }
+.eco-case-name { font-size: 14px; font-weight: 700; color: var(--text-primary); }
+.eco-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 12px; white-space: nowrap; }
+.eco-badge.ideal { background: #E1F5EE; color: #1D7A57; }
+.eco-badge.warn { background: var(--urgent-bg); color: var(--urgent-text); }
+.eco-badge.ref { background: var(--seed-bg); color: var(--seed-text); }
+.eco-badge.neutral { background: var(--bg); color: var(--text-tertiary); }
+.eco-case-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.7; }
+/* generic rows */
+.eco-rows { display: flex; flex-direction: column; gap: 8px; }
+.eco-row { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 10px 13px; display: flex; gap: 13px; align-items: flex-start; }
+.eco-row-key { font-size: 12.5px; font-weight: 700; color: var(--text-primary); min-width: 132px; flex-shrink: 0; }
+.eco-row-val { font-size: 12px; color: var(--text-secondary); line-height: 1.7; }
+.eco-row-val strong { color: var(--text-primary); }
+@media (max-width: 600px) { .eco-row { flex-direction: column; gap: 4px; } .eco-row-key { min-width: 0; } }
+/* priority ranking */
+.eco-rank { display: flex; flex-direction: column; gap: 8px; }
+.eco-rank-row { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface); }
+.eco-rank-row.first { border-color: #A8DEC8; background: #F1FAF6; }
+.eco-rank-row.avoid { border-color: var(--urgent-border); background: var(--urgent-bg); }
+.eco-rank-pos { font-size: 11px; font-weight: 700; font-family: 'DM Mono', monospace; padding: 3px 9px; border-radius: 8px; white-space: nowrap; flex-shrink: 0; background: var(--bg); color: var(--text-secondary); }
+.eco-rank-row.first .eco-rank-pos { background: #1D7A57; color: #fff; }
+.eco-rank-row.avoid .eco-rank-pos { background: var(--urgent-text); color: #fff; }
+.eco-rank-body { font-size: 12.5px; color: var(--text-primary); line-height: 1.55; }
+.eco-rank-body span { color: var(--text-tertiary); font-size: 11.5px; }
+.eco-source-note { font-size: 11px; color: var(--text-tertiary); line-height: 1.75; background: var(--bg); border-radius: 8px; padding: 9px 13px; }
+.eco-source-note code { font-family: 'DM Mono', monospace; font-size: 10.5px; background: var(--border); padding: 1px 5px; border-radius: 4px; color: var(--text-secondary); }
 /* ── Meetings ── */
 .meetings-container {
   max-width: 960px;
@@ -2575,6 +2684,195 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
           <strong>JPASN（日本舞台芸術ネットワーク）</strong>・<strong>SOIL</strong> との連携のもと、
           産業全体の経済規模拡大を視野に入れた人材育成モデルを構築する。
         </p>
+      </div>
+    </div>
+
+    <!-- エコシステム分析 -->
+    <div>
+      <div class="about-section-title">エコシステム分析 ── 日本に欠けている「最後の一層」</div>
+      <div class="eco-wrap">
+
+        <!-- Thesis -->
+        <div class="eco-thesis">
+          <div class="eco-thesis-eyebrow">Ecosystem Thesis</div>
+          <div class="eco-thesis-quote">日本に欠けているのは、才能でも機関でもなく、<br><em>最後の一層 ── 中核（＝転生）</em>である。</div>
+          <div class="eco-thesis-sub">
+            上流（育成）には野田・鈴木・宮城ら国際的に検証済みの才能があり、隣接（歌舞伎・鼓童・山海塾）には完成形の海外展開もある。しかし「商業的成功」と「その価値を日本へ還流させる」中核の一層＝<strong>転生装置</strong>が存在しない。SEED／SOIL はこの一層を設計する事業である。
+          </div>
+        </div>
+
+        <!-- 01 三圏マップ -->
+        <div>
+          <div class="eco-block-label"><span class="eco-num">01</span>日本の舞台芸術「海外展開」の三圏マップ</div>
+          <div class="eco-map">
+            <div class="eco-map-inner">
+              <div class="eco-yaxis">上流（育成・プレステージ） → 中核（商業還流）</div>
+              <div class="eco-bands">
+                <div class="eco-band core">
+                  <div class="eco-band-head"><span class="eco-band-name">中核圏</span><span class="eco-band-desc">転生（商業的成功＋本国への還流）＝目標象限</span></div>
+                  <div class="eco-players">
+                    <span class="eco-player">となりのトトロ（日IP × 英RSC）</span>
+                    <span class="eco-player">ナンタ（韓・比較）</span>
+                    <span class="eco-player star">★ 転生装置の標的（IF TOKYO）</span>
+                  </div>
+                </div>
+                <div class="eco-gap">▲ ここが構造的空白 ── 上流から中核へ跳ぶ「転生装置」がない</div>
+                <div class="eco-band adjacent">
+                  <div class="eco-band-head"><span class="eco-band-name">隣接圏</span><span class="eco-band-desc">完成形を国外で上演するモード</span></div>
+                  <div class="eco-players">
+                    <span class="eco-player">歌舞伎（古典）</span>
+                    <span class="eco-player">鼓童</span>
+                    <span class="eco-player">山海塾（舞踏）</span>
+                  </div>
+                </div>
+                <div class="eco-band upstream">
+                  <div class="eco-band-head"><span class="eco-band-name">上流圏</span><span class="eco-band-desc">作家主導・公共の国際非営利回路（育成・プレステージ）</span></div>
+                  <div class="eco-players">
+                    <span class="eco-player">野田秀樹</span>
+                    <span class="eco-player">宮城聰／SPAC</span>
+                    <span class="eco-player">岡田利規</span>
+                    <span class="eco-player">平田オリザ</span>
+                    <span class="eco-player">タニノクロウ</span>
+                    <span class="eco-player">鈴木忠志／SCOT</span>
+                  </div>
+                </div>
+                <div class="eco-xaxis"><span>← 言語依存</span><span>非言語 →</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="eco-block-note">縦軸＝上流（育成）から中核（商業還流）への距離／横軸＝言語依存 ↔ 非言語。上流の才能・隣接の完成度はすでにあるが、中核へ跳ぶ「転生装置」が空白になっている。</div>
+        </div>
+
+        <!-- 02 マトリクス -->
+        <div>
+          <div class="eco-block-label"><span class="eco-num">02</span>総括マトリクス ── 開発の型 × 還流の型（10事例）</div>
+          <div class="eco-matrix-scroll">
+            <table class="eco-matrix">
+              <thead>
+                <tr>
+                  <th style="min-width:118px">開発の型 ＼ 還流の型</th>
+                  <th>① 補助団体が<br>捕捉→再投資</th>
+                  <th>② 非営利が<br>利益参加</th>
+                  <th>③ 作家・創作者<br>に直接帰属</th>
+                  <th>④ IP保有者が<br>国際共創→還流 ★</th>
+                  <th>⑤ 民間IP保有<br>（流出）✕</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>A. 補助劇場の<br>内製・共同製作</th>
+                  <td><span class="eco-mcase">キュリアス・インシデント</span><span class="eco-mtag">戦火の馬／マチルダ（NT・RSC）</span></td>
+                  <td>—</td><td>—</td>
+                  <td class="ideal"><span class="eco-mcase ideal">となりのトトロ ★</span><span class="eco-mtag">RSC × 日テレ／ジブリ／久石</span></td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <th>B. 非営利孵化器・<br>単一拠点</th>
+                  <td>—</td>
+                  <td><span class="eco-mcase">ハミルトン</span><span class="eco-mtag">パブリック・シアター（NY）</span></td>
+                  <td>—</td><td>—</td><td>—</td>
+                </tr>
+                <tr>
+                  <th>C. 非営利の多段・<br>越境リレー</th>
+                  <td>—</td>
+                  <td><span class="eco-mcase">ハデスタウン</span></td>
+                  <td><span class="eco-mcase">Dear Evan Hansen</span><br><span class="eco-mcase">カム・フロム・アウェイ</span><span class="eco-mtag">加・小国発／作家所有</span></td>
+                  <td>—</td><td>—</td>
+                </tr>
+                <tr>
+                  <th>D. 作家所有IP・<br>国際共創</th>
+                  <td>—</td><td>—</td>
+                  <td><span class="eco-mcase">Maybe Happy Ending</span><span class="eco-mtag">韓 → 米ブロードウェイ</span></td>
+                  <td>—</td><td>—</td>
+                </tr>
+                <tr>
+                  <th>E. 公共インキュベー<br>ション公募</th>
+                  <td>—</td><td>—</td><td>—</td><td>—</td>
+                  <td class="drain"><span class="eco-mcase drain">マリ・キュリー ✕</span><span class="eco-mtag">韓・公共育成 → 民間IP → 流出</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="eco-block-note"><strong style="color:#1D7A57">④（緑）＝理想</strong>：日本側がIPを保有・主導したまま海外の開発力で転生。&nbsp;<strong style="color:var(--urgent-text)">⑤（赤）＝回避</strong>：公共が育てたのに民間がIPを持ち、還流ゼロ。</div>
+        </div>
+
+        <!-- 03 5事例 -->
+        <div>
+          <div class="eco-block-label"><span class="eco-num">03</span>SEEDに直結する5つの事例</div>
+          <div class="eco-case-grid">
+            <div class="eco-case ideal">
+              <div class="eco-case-top"><span class="eco-case-name">となりのトトロ</span><span class="eco-badge ideal">★ 理想型 A×④</span></div>
+              <div class="eco-case-desc">ジブリ／日テレが<strong>IPを手放さず</strong>、英RSCの長期R&D・国際ブランドを活用。久石譲が製作総指揮で座組の頂点に。オリヴィエ賞6部門、ウエストエンドで29万枚超。海外の開発力を「使う」がIPは日本に残す。</div>
+            </div>
+            <div class="eco-case ref">
+              <div class="eco-case-top"><span class="eco-case-name">カム・フロム・アウェイ</span><span class="eco-badge ref">小国発 C×③</span></div>
+              <div class="eco-case-desc">カナダ初の大学発インキュベーター（CMTP）第一号作がブロードウェイへ。<strong>作家がIPを保有</strong>したため、商業化を米国に委ねても価値はカナダへ還流。米英以外の市場でも「作家所有＋本国還流」が成り立つ実証。</div>
+            </div>
+            <div class="eco-case">
+              <div class="eco-case-top"><span class="eco-case-name">野田秀樹</span><span class="eco-badge neutral">継ぎ目の個人実証</span></div>
+              <div class="eco-case-desc">NODA・MAP（権利を持つ制作会社）＋東京芸術劇場（公共基盤）の<strong>2層構造</strong>で価値を日本側に保持。英語オリジナル・多言語版で言語の壁も突破。ただし達成は属人的 ── だからこそ制度化（＝転生装置）が要る。</div>
+            </div>
+            <div class="eco-case">
+              <div class="eco-case-top"><span class="eco-case-name">鼓童</span><span class="eco-badge neutral">所有権分離の先行例</span></div>
+              <div class="eco-case-desc">50か国・7,500回超。<strong>3法人分離</strong>（北前船＝商業／音大工＝著作権／文化財団＝研修・公益）で「所有権の線引き」を日本で先行実装。佐渡の2年制研修所は上流育成の実モデル。課題は商業フランチャイズ化。</div>
+            </div>
+            <div class="eco-case warn">
+              <div class="eco-case-top"><span class="eco-case-name">マリ・キュリー</span><span class="eco-badge warn">✕ 最重要警告 E×⑤</span></div>
+              <div class="eco-case-desc">韓国の公的資金（KOCCA）で育成 → <strong>IPを民間（ライブ社）が保有</strong> → 日欧・ウエストエンド展開に成功するも、公共・創作エコへの還流はゼロ。「公共で育て、IPが民間に帰属する」設計は同じ轍を踏む。</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 04 設計原則 -->
+        <div>
+          <div class="eco-block-label"><span class="eco-num">04</span>転生装置の設計原則（10事例から）</div>
+          <div class="eco-rows">
+            <div class="eco-row"><div class="eco-row-key">IPは日本側が保有</div><div class="eco-row-val">トトロ（ジブリ／日テレ）・カム・フロム・アウェイ（作家所有）。<strong>誰がIPを持つか</strong>が還流を守る最大の防波堤。劇作家プログラムの戯曲IP帰属を最初に設計する。</div></div>
+            <div class="eco-row"><div class="eco-row-key">公共投資に還流条項</div><div class="eco-row-val">マリ・キュリー（反面）／ハミルトン（総収益1.5%＋利益5%の利益参加）。助成金・共同製作契約に<strong>還流機構を明記</strong>する。</div></div>
+            <div class="eco-row"><div class="eco-row-key">海外の開発力を「使う」</div><div class="eco-row-val">トトロ（RSC活用しつつジブリ主導）・野田（ソーホーと共同製作しNODA・MAP保有）。海外連携は<strong>「上演の場」であってIP譲渡ではない</strong>。Traverse連携もこの原則で。</div></div>
+            <div class="eco-row"><div class="eco-row-key">組織を機能で分ける</div><div class="eco-row-val">鼓童（商業／著作権／公益の3法人）・野田（制作会社／公共劇場）。SEED／SOIL／JPASN の役割分担を明確に設計する。</div></div>
+            <div class="eco-row"><div class="eco-row-key">上流＋転生装置で連結</div><div class="eco-row-val">カム・フロム・アウェイはインキュベーターがあっても転生装置がなく商業化を米国に委ねた。<strong>SEED＝上流／SOIL＝転生装置</strong>の接続設計が鍵。</div></div>
+          </div>
+        </div>
+
+        <!-- 05 言語の壁 -->
+        <div>
+          <div class="eco-block-label"><span class="eco-num">05</span>言語の壁を越える4つの道</div>
+          <div class="eco-rows">
+            <div class="eco-row"><div class="eco-row-key">① 非言語・身体</div><div class="eco-row-val">ナンタ／STOMP／ブルーマン／鼓童。演出家・プロデューサープログラムの制作方針として意識する。</div></div>
+            <div class="eco-row"><div class="eco-row-key">② 各国語で再創造</div><div class="eco-row-val">野田秀樹『赤鬼』（日／英／タイ／韓）。劇作家プログラムの「翻訳可能性」評価基準に直結する。</div></div>
+            <div class="eco-row"><div class="eco-row-key">③ バイリンガル共創</div><div class="eco-row-val">Maybe Happy Ending（韓＋英で10年）。Traverse リーディングの英訳フェーズと整合する。</div></div>
+            <div class="eco-row"><div class="eco-row-key">④ 英語オリジナル</div><div class="eco-row-val">カム・フロム・アウェイ／THE BEE。英語圏の商業回路に障壁なく乗れるが難易度は高い。</div></div>
+          </div>
+        </div>
+
+        <!-- 06 優先順位 -->
+        <div>
+          <div class="eco-block-label"><span class="eco-num">06</span>SEEDが参照すべきモデルの優先順位</div>
+          <div class="eco-rank">
+            <div class="eco-rank-row first">
+              <span class="eco-rank-pos">1st</span>
+              <div class="eco-rank-body"><strong>となりのトトロ型（A×④）</strong> ── 日本がIPを主導し、海外の開発力を活用する。<span>最もリターンが大きい。</span></div>
+            </div>
+            <div class="eco-rank-row">
+              <span class="eco-rank-pos">2nd</span>
+              <div class="eco-rank-body"><strong>カム・フロム・アウェイ型（C×③）</strong> ── 作家がIPを保有し、小国発でも本国へ還流させる。<span>SEED上流の実モデルに最も近い。</span></div>
+            </div>
+            <div class="eco-rank-row">
+              <span class="eco-rank-pos">ref</span>
+              <div class="eco-rank-body"><strong>ハミルトン型（B×②）</strong> ── 利益参加契約の数値モデル（総収益1.5%＋利益5%）。<span>IP契約設計の参照値。</span></div>
+            </div>
+            <div class="eco-rank-row avoid">
+              <span class="eco-rank-pos">avoid</span>
+              <div class="eco-rank-body"><strong>マリ・キュリー型（E×⑤）</strong> ── 公共育成 → 民間IP保有 → 流出。<span>最初の設計で回避すべき失敗型。</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="eco-source-note">
+          出典：事務局（野村善文）によるエコシステム分析リサーチ ── 三圏マップ・総括マトリクス・個別事例13本。原資料は <code>docs/strategy/ecosystem-analysis/</code>。分析の詳細は <code>seed-executive</code> エージェントのナレッジベースに統合済み。
+        </div>
+
       </div>
     </div>
 
