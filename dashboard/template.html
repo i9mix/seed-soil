@@ -1136,6 +1136,181 @@ body {
   text-align: center;
   margin-top: 4px;
 }
+/* clickable meeting row (has detail) */
+.meeting-row.has-detail {
+  cursor: pointer;
+  position: relative;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.05s;
+}
+.meeting-row.has-detail:hover {
+  border-color: var(--seed);
+  box-shadow: 0 2px 14px rgba(0,0,0,0.06);
+}
+.meeting-row.has-detail:active { transform: translateY(1px); }
+.meeting-detail-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10.5px;
+  font-weight: 700;
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 0.02em;
+  color: var(--seed-text);
+  background: var(--seed-bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2px 9px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+.meeting-chevron {
+  font-size: 18px;
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+  transition: color 0.15s, transform 0.15s;
+}
+.meeting-row.has-detail:hover .meeting-chevron { color: var(--seed); transform: translateX(3px); }
+.doc-btn.doc-btn-primary {
+  border-color: var(--seed);
+  color: var(--seed);
+  background: var(--seed-bg);
+}
+.doc-btn.doc-btn-primary:hover { background: var(--seed); color: #fff; }
+/* ── Meeting summary modal ── */
+.meeting-summary-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(15,23,38,0.55);
+  backdrop-filter: blur(3px);
+  padding: 3vh 16px;
+  overflow-y: auto;
+}
+.meeting-summary-modal.open { display: block; }
+.msm-panel {
+  max-width: 900px;
+  margin: 0 auto;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+  overflow: hidden;
+}
+.msm-head {
+  position: sticky;
+  top: 0;
+  background: linear-gradient(135deg, #1A2A44, #24405F);
+  color: #fff;
+  padding: 1.3rem 1.6rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  z-index: 2;
+}
+.msm-head-title { font-size: 17px; font-weight: 800; margin-bottom: 4px; }
+.msm-head-sub { font-size: 12px; color: #C6D4E8; line-height: 1.6; }
+.msm-close {
+  flex-shrink: 0;
+  background: rgba(255,255,255,0.14);
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  line-height: 1;
+  width: 34px; height: 34px;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.msm-close:hover { background: rgba(255,255,255,0.28); }
+.msm-body { padding: 1.5rem 1.7rem 2rem; }
+.msm-toc {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1.6rem;
+}
+.msm-toc-h { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 8px; }
+.msm-toc ol { margin: 0; padding-left: 1.2rem; columns: 2; column-gap: 1.5rem; }
+.msm-toc li { font-size: 12.5px; line-height: 1.9; color: var(--text-secondary); break-inside: avoid; }
+.msm-lead {
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  background: rgba(243,194,75,0.1);
+  border: 1px solid rgba(243,194,75,0.35);
+  border-radius: 12px;
+  padding: 1rem 1.2rem;
+  margin-bottom: 1.6rem;
+}
+.msm-lead b { color: var(--text-primary); }
+.msm-lead ul { margin: 8px 0 0; padding-left: 1.2rem; }
+.msm-lead li { margin-bottom: 3px; }
+.msm-sec { margin-bottom: 1.7rem; padding-bottom: 1.5rem; border-bottom: 1px dashed var(--border); }
+.msm-sec:last-child { border-bottom: none; }
+.msm-sec-h {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15.5px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+.msm-sec-num {
+  flex-shrink: 0;
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  background: var(--seed);
+  color: #fff;
+  width: 26px; height: 26px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 8px;
+}
+.msm-sec-h.cross .msm-sec-num { background: #6B4FA0; }
+.msm-cross-tag {
+  font-size: 10px; font-weight: 700; color: #6B4FA0;
+  border: 1px solid #6B4FA0; border-radius: 6px; padding: 1px 6px; margin-left: 2px;
+}
+.msm-block { margin-bottom: 10px; }
+.msm-block-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 2px 10px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+}
+.msm-block.msm-gist .msm-block-label { background: #E8EEF6; color: #34506F; }
+.msm-block.msm-issue .msm-block-label { background: #FBE9E7; color: #B4442E; }
+.msm-block.msm-todo .msm-block-label { background: #E4F3EA; color: #2C7A4B; }
+html[data-theme="dark"] .msm-block.msm-gist .msm-block-label { background: rgba(90,130,180,0.25); color: #AFC6E4; }
+html[data-theme="dark"] .msm-block.msm-issue .msm-block-label { background: rgba(180,68,46,0.28); color: #F0A99A; }
+html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(44,122,75,0.28); color: #9BD6B2; }
+.msm-block ul { margin: 0; padding-left: 1.25rem; }
+.msm-block li { font-size: 13px; line-height: 1.75; color: var(--text-secondary); margin-bottom: 5px; }
+.msm-block p { font-size: 13px; line-height: 1.78; color: var(--text-secondary); margin: 0 0 6px; }
+.msm-block li b, .msm-block p b { color: var(--text-primary); }
+.msm-who { font-weight: 700; color: var(--seed-text); }
+.msm-foot {
+  margin-top: 0.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.1rem 1.3rem;
+}
+.msm-foot-h { font-size: 13px; font-weight: 800; color: var(--text-primary); margin-bottom: 8px; }
+.msm-foot ul { margin: 0; padding-left: 1.25rem; }
+.msm-foot li { font-size: 12.5px; line-height: 1.7; color: var(--text-secondary); margin-bottom: 4px; }
+.msm-srcnote { font-size: 11px; color: var(--text-tertiary); margin-top: 1.2rem; line-height: 1.6; }
+@media (max-width: 640px) {
+  .msm-toc ol { columns: 1; }
+  .msm-body { padding: 1.2rem 1.1rem 1.6rem; }
+}
 /* ── Program Progress ── */
 .prog-container {
   max-width: 960px;
@@ -2984,6 +3159,11 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
             <div class="about-ms-text">アドバイザリーボード第3回定例 <span>サマースクール設計レビュー</span></div>
           </div>
           <div class="about-ms-row">
+            <div class="about-ms-date">2026/07</div>
+            <div class="about-ms-dot done"></div>
+            <div class="about-ms-text">アドバイザリーボード第4回定例 <span>個別ヒアリング／プログラム方向性レビュー</span></div>
+          </div>
+          <div class="about-ms-row">
             <div class="about-ms-date">2026 夏</div>
             <div class="about-ms-dot plan"></div>
             <div class="about-ms-text">サマースクール 開催 <span>受講生選考・プログラム実施</span></div>
@@ -3799,9 +3979,477 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
           <a class="doc-btn" href="governance/meetings/第3回_アドバイザリーボード定例.pdf" target="_blank"><span class="doc-btn-icon">📄</span>資料</a>
         </div>
       </div>
+      <div class="meeting-row has-detail" data-summary="msm-ab4" role="button" tabindex="0" aria-label="第4回アドバイザリーボード定例の議事サマリを開く">
+        <div class="meeting-round">第4回</div>
+        <div class="meeting-info">
+          <div class="meeting-name">アドバイザリーボード定例<span class="meeting-detail-chip">📝 議事サマリあり</span></div>
+          <div class="meeting-date">2026/07・個別ヒアリング形式（渡辺ミキ／奥山緑／高萩宏／松田誠／福井健策）</div>
+        </div>
+        <div class="meeting-docs">
+          <a class="doc-btn" href="governance/meetings/第4回_アドバイザリーボード定例.pdf" target="_blank" onclick="event.stopPropagation()"><span class="doc-btn-icon">📄</span>資料</a>
+          <button type="button" class="doc-btn doc-btn-primary" data-summary="msm-ab4" onclick="event.stopPropagation()"><span class="doc-btn-icon">📝</span>議事サマリ</button>
+        </div>
+        <div class="meeting-chevron" aria-hidden="true">›</div>
+      </div>
       <div class="meeting-add-hint">＋ 次回以降の資料・議事録はここに追加</div>
     </div>
   </div>
+
+  <!-- ── 第4回 議事サマリ モーダル ── -->
+  <div class="meeting-summary-modal" id="msm-ab4" role="dialog" aria-modal="true" aria-labelledby="msm-ab4-title">
+    <div class="msm-panel" onclick="event.stopPropagation()">
+      <div class="msm-head">
+        <div>
+          <div class="msm-head-title" id="msm-ab4-title">第4回アドバイザリーボード定例 ｜ サマリと課題整理</div>
+          <div class="msm-head-sub">2026/07・個別ヒアリング形式（渡辺ミキ／奥山緑／高萩宏／松田誠／福井健策）<br>出典：5名分の文字起こし ＋ 添付資料（30p デッキ）</div>
+        </div>
+        <button type="button" class="msm-close" aria-label="閉じる">×</button>
+      </div>
+      <div class="msm-body">
+
+        <!-- 目次 -->
+        <div class="msm-toc">
+          <div class="msm-toc-h">目次（全13項目）</div>
+          <ol>
+            <li>事業全体</li>
+            <li>作品マップと3つのシナリオ</li>
+            <li>SEEDの目指すべき方向性</li>
+            <li>人材要件の定義</li>
+            <li>プロデューサー講座</li>
+            <li>演出家講座</li>
+            <li>劇作家講座</li>
+            <li>一般教養講座</li>
+            <li>【横断】ミュージカル・音楽劇の扱い</li>
+            <li>【横断】英米モデルの「なぞり」とアジア・独自性</li>
+            <li>【横断】対象は学生か、現役のプロか</li>
+            <li>【横断】リサーチ成果のアウトプットと共有</li>
+            <li>【横断】事業間接続（SEED／SOIL／R&D／IF／SEED the 10）</li>
+          </ol>
+        </div>
+
+        <!-- 全体サマリー -->
+        <div class="msm-lead">
+          <b>全体サマリー：</b>日程調整と「思想の部分を深く議論したい」意図から、今回は5名個別ヒアリング形式で実施。伊藤（達哉）氏が各回に同席、事務局から野村・横堀・赤羽・川名・倉沢（一部回）・遠藤らが参加。5名とも「思考が着実に進んでいる」と一定の評価。一方で<b>5名に共通して繰り返し出た論点が4つ</b>あり、SEEDの方向性を左右する最重要テーマ：
+          <ul>
+            <li>① ミュージカル・音楽劇をどう扱うか（全員が言及）</li>
+            <li>② 英米モデルを「なぞる」危うさとアジア・独自性の視点（福井・奥山）</li>
+            <li>③ 対象は学生か、現役のプロ（社会人）か（松田・奥山・高萩）</li>
+            <li>④ リサーチ成果のアウトプットと共有のタイミング（ミキ・奥山・福井）</li>
+          </ul>
+          <b>進捗の事実確認：</b>プロデューサーリサーチ渡航＝井川さん（ホリプロ／ニューヨーク）・時田さん（ゴーチ／ロンドン）、各1週間弱で11〜12名にヒアリング。8〜9月に演出家職のNYリサーチを予定。大学連携＝日藝（後期）・桐朋学園（前期から通年）で講義型、課外活動は日藝×フランス国際共同制作（4月終了）、多摩美×台湾研修・桐朋×ドイツ研修を準備中。プロデューサーリサーチの小嶋さん（東宝）は東宝のミュージカル育成にも関与。
+        </div>
+
+        <!-- 1. 事業全体 -->
+        <section class="msm-sec">
+          <div class="msm-sec-h"><span class="msm-sec-num">1</span>事業全体</div>
+          <div class="msm-block msm-gist">
+            <span class="msm-block-label">要旨</span>
+            <ul>
+              <li><span class="msm-who">高萩</span>：SEEDは文化庁の<b>委託事業</b>で、本来は「カリキュラム／プログラムを作って提出するまで」が守備範囲。実際に使って人材育成まで行う実行フェーズへ踏み込む点に注意、少し<b>自重</b>を。SoilとSeedは性格が違う（Soilは成功例づくり、Seedはカリキュラム設計）。→ 事務局：文化庁との月次定例で「展開まで含め3年（＋2年で計5年）でやりきってよい」と確認済み。やりすぎないよう連携する。</li>
+              <li><span class="msm-who">高萩</span>：今回のリサーチの最大の収穫は、カリキュラムを考えるためのリサーチが<b>業界構造全体を考える機会</b>になったこと。「トップ育成」だけでなく<b>業界のあり方の提案</b>が出てくるべき。作品のブレイクスルーに飛び越えていないか。</li>
+              <li><span class="msm-who">高萩</span>：日本と海外（ロンドン／NY／ソウル）の最大の違いは<b>ロングランがない＝投資が起きない</b>（鶏と卵）。国内で作品が習熟しないまま海外でロングランできるのか。</li>
+              <li><span class="msm-who">福井</span>：事業間のレイヤーが混在。SEED／SOILは<b>プロジェクト名</b>だがR&Dは<b>機能</b>。3段階の記載が混線。</li>
+            </ul>
+          </div>
+          <div class="msm-block msm-issue">
+            <span class="msm-block-label">課題</span>
+            <ul>
+              <li>委託本来スコープ（カリキュラム設計）と、事務局が志向する実行・展開フェーズとの線引きが曖昧。</li>
+              <li>「育成」の成果が、それを受け入れる業界構造（ロングラン・投資の不在）とセットで語られないと片手落ち。</li>
+              <li>SEED / SOIL / R&D企画のレイヤー（事業名 vs 機能）が資料上で混線。</li>
+            </ul>
+          </div>
+          <div class="msm-block msm-todo">
+            <span class="msm-block-label">検討事項</span>
+            <ul>
+              <li>文化庁・芸文振との月次定例で、スコープの合意内容を文書として明示的に残す。</li>
+              <li>「業界のあり方提案」を成果物の一つに位置づけるか判断（委託スコープとの整合に注意）。</li>
+              <li>R&D＝機能であることを踏まえSOILとの重複を整理（→ 項目13）。</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 2. 作品マップと3つのシナリオ -->
+        <section class="msm-sec">
+          <div class="msm-sec-h"><span class="msm-sec-num">2</span>作品マップと3つのシナリオ</div>
+          <div class="msm-block msm-gist">
+            <span class="msm-block-label">要旨</span>
+            <ul>
+              <li>市場構造マップ（縦軸＝対象の広さ／横軸＝複製芸術⇔希少芸術）は<b>全員が高評価</b>。</li>
+              <li><span class="msm-who">ミキ</span>：「ライツビジネスで権利を売る」が目標なら主に<b>A（IP型）とB（ノンバーバル型）に特化</b>すべき。<b>C（国際文脈展開型）は文化庁・文科省が既に手厚く助成しており、入れると焦点がボケる</b>。ただしCは日本文化の発信・ファン増には有効。→ 事務局：Cも戯曲のライセンス化文脈ではライツと接続。（野村）綿江先生も「Cは既存助成の文脈。新規に切り開くならA・B寄り」との意見。</li>
+              <li><span class="msm-who">ミキ</span>：<b>A（IP型）にトトロ・パターンを入れるなら注意</b>。トトロは「日本でビルド」していない。ジブリの依田氏がRSCと共同制作し、ロンドンでは<b>RSCのプロダクション</b>として立ち上がった（だからオリヴィエ賞受賞）。東宝の千と千尋（日本発）とは別。デスノート（ホリプロ）は「日本でビルドして進出」型。<b>IP展開に最低2ケース</b>（共同制作型／国内ビルド→進出型）を。</li>
+              <li><span class="msm-who">高萩</span>：8ページ図の<b>「歌舞伎」の隣は「能」→「能狂言」</b>に修正を。「ロングランも投資もない作品だけが国際展開できる」構図でよいか。</li>
+              <li><span class="msm-who">福井</span>：3×3マトリクスに<b>当てはまらないもの</b>がある（オール日本人キャスト・バーバルの千と千尋、スーパー歌舞伎＝横内謙介・作 等）。網羅性を念頭に。</li>
+            </ul>
+          </div>
+          <div class="msm-block msm-issue">
+            <span class="msm-block-label">課題</span>
+            <ul>
+              <li>Cシナリオを残すか外すか（焦点のシャープさ vs 網羅性）で助言が割れる。</li>
+              <li>A（IP型）が「国際共同制作」だけに見え、国内ビルド→進出型が抜けている。</li>
+              <li>マトリクスが網羅的でない（バーバル／オール日本人キャスト型が落ちる）。</li>
+              <li>図中の分類語（歌舞伎／能）の精度。</li>
+            </ul>
+          </div>
+          <div class="msm-block msm-todo">
+            <span class="msm-block-label">検討事項</span>
+            <ul>
+              <li>Cを「主軸から外す／補助的に残す」を事務局で意思決定（選択と集中）。</li>
+              <li>A（IP型）を2ケース（共同制作型・国内ビルド型）に分けてケーススタディ設計。トトロは依田氏本人へのヒアリングを検討。</li>
+              <li>マトリクスに「バーバル／日本人キャスト型」の位置づけを追記するか検討。</li>
+              <li>図の表記修正（能→能狂言）。</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 3. SEEDの目指すべき方向性 -->
+        <section class="msm-sec">
+          <div class="msm-sec-h"><span class="msm-sec-num">3</span>SEEDの目指すべき方向性</div>
+          <div class="msm-block msm-gist">
+            <span class="msm-block-label">要旨</span>
+            <ul>
+              <li>「ライツビジネスとして国外に権利を売る形での進出」を明言した点は<span class="msm-who">高萩・高く評価</span>（「今まではっきり言えていなかった」）。</li>
+              <li><span class="msm-who">福井</span>：<b>IPライセンスを「理想／第二段階」のように書くのは種類が違う</b>。ライセンスは低リスクの収入手段・バリエーションで、出かけて公演する第一段階とは相互補完。政府はお金でしか進捗を測れないから後押ししたがるが、そればかりだと非常に狭くなる。</li>
+              <li><span class="msm-who">福井</span>：「稼ぐ」自体は正しい（金がないと続かない／政府事業では必要なテク）。<b>既存の成長モデルだけだと弱い</b>という趣旨。</li>
+              <li><span class="msm-who">奥山</span>：「<b>外貨を稼ぐ</b>」という表現（V2スライド）は品がない。同じ内容で別の言い方を。</li>
+              <li><span class="msm-who">奥山</span>：舞台芸術は生で人が動く産業。<b>寝ている間に外貨を稼げるのは「権利」だけ</b>（劇作・作曲、演出のIP化）。職能の順は 劇作 ＞ 作曲家 ＞ 演出家（のIP化）＞ プロデューサー。</li>
+              <li><span class="msm-who">ミキ</span>：<b>海外進出に向く作品と国内ヒットに向く作品は分かれる</b>。「国内で大ヒット→海外へ」の仮説は外れる。海外向けと割り切らないと中途半端（ただし千と千尋のように結果的に受けた例もある）。</li>
+            </ul>
+          </div>
+          <div class="msm-block msm-issue">
+            <span class="msm-block-label">課題</span>
+            <ul>
+              <li>「稼ぐ／外貨」メッセージが前面に出すぎ、クリエイティブの本質（他が持っていないものの提示）が霞むリスク（→ 項目10）。</li>
+              <li>IPライセンスの位置づけ（到達点ではなく収入手段・相互補完）の整理。</li>
+              <li>「国内ヒット⇔海外向け」の違いをSEEDとして言語化する必要。</li>
+            </ul>
+          </div>
+          <div class="msm-block msm-todo">
+            <span class="msm-block-label">検討事項</span>
+            <ul>
+              <li>「外貨を稼ぐ」の言い換え（例：「国際市場での持続可能な収益化」等、品位ある表現へ）。</li>
+              <li>ライセンスを「到達点」でなく「相互補完的な手段」として資料上の位置づけを修正。</li>
+              <li>「海外向け／国内向けの分岐」を人材要件・プログラムに必ず織り込む（どちらを選ぶかを本人に問う設計）。伊藤氏コミット済み。</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 4. 人材要件の定義 -->
+        <section class="msm-sec">
+          <div class="msm-sec-h"><span class="msm-sec-num">4</span>人材要件の定義</div>
+          <div class="msm-block msm-gist">
+            <span class="msm-block-label">要旨</span>
+            <ul>
+              <li>前回「マインドセットに偏りすぎ」（松田・福井）を受け、<b>知識・スキル・経験</b>の具体を追加。3職能×3ページ構成（ToBeモデル／ABC別の核心要件／具体スキル）。</li>
+              <li><span class="msm-who">福井</span>：<b>既存の成長モデルをなぞると縮小再生産</b>。学ぶのはよいが「なぞる」のは危険。ロールモデルに既存の成功者を置き「その人になろう」とするのはやめた方がよい。</li>
+              <li><span class="msm-who">福井</span>：ToBe像・具体スキルが<b>「既存モデルへの答え合わせ」</b>になっている（例：16p「A＝翻案前提／英訳を想定して戯曲設計」）。ワンピース・ジブリ・鬼滅・ベビーメタルは翻訳/海外を前提に作っていない。<b>彼らが持っていないものを提示したときに大成功</b>している。</li>
+              <li><span class="msm-who">福井</span>：17p左（IP型）で「ミュージカルの楽曲構造を知る」は重要だが、ロールモデルに<b>前川知大氏</b>が置かれているのは不思議（前川氏は能の構造は身につけているがミュージカル楽曲は専門外）。</li>
+              <li><span class="msm-who">福井</span>：13pのアウトプット3点（人材要件定義／モデルカリキュラム／テキスト＋習熟度テスト）は<b>異存なし</b>。「テスト」は自分の提案。夢は多様でよいが<b>共通の基本スキル（＝包丁の使い方）は必ずある</b>。ただしスキルばかりだと飽きるので<b>やる気を出させる仕掛け</b>を。</li>
+              <li><span class="msm-who">松田</span>：人材要件は<b>理想と現実の戦い</b>。当てはまる人が本当にいるか。理想に振り切るのは10年後を見据えるなら妥当。</li>
+            </ul>
+          </div>
+          <div class="msm-block msm-issue">
+            <span class="msm-block-label">課題</span>
+            <ul>
+              <li>ロールモデル・要件が「既存成功者のコピー」志向で、独自性（ブレイクスルー）の視点が弱い。</li>
+              <li>個別スキル（英訳前提の戯曲設計等）が特定モデル前提で、他の成功類型を取りこぼす。</li>
+              <li>ロールモデルの人選と要件の対応にミスマッチ（例：前川氏×ミュージカル楽曲）。</li>
+              <li>理想像に振り切ることと、短期で対象者を見つける現実との両立。</li>
+            </ul>
+          </div>
+          <div class="msm-block msm-todo">
+            <span class="msm-block-label">検討事項</span>
+            <ul>
+              <li>過去ケースの言語化は「なぞるため」でなく「差分を見出し、自分たちが何をすべきかを言語化するため」と位置づけ直す（伊藤氏整理済み）。</li>
+              <li>「共通の基本スキル」と「シナリオ別の特化要件」を明確に分離。基本スキル習得に飽きさせない仕掛けを設計。</li>
+              <li>ロールモデルの人選を要件と厳密に対応させて再点検（ミュージカル系の適切なモデル選定）。</li>
+              <li>マインドセット／知識／スキル／経験の4分類でよいか、ABC別に整理する方針でよいかを次回諮る。</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 5. プロデューサー講座 -->
+        <section class="msm-sec">
+          <div class="msm-sec-h"><span class="msm-sec-num">5</span>プロデューサー講座</div>
+          <div class="msm-block msm-gist">
+            <span class="msm-block-label">要旨</span>
+            <ul>
+              <li>赤羽氏より説明。3フェーズ：<b>①座学</b>（一般教養と連携）／<b>②ゼミ形式</b>（ABC＋マーケのテーマ別、有識者ゼミ長×学生で約3ヶ月→合同発表会）／<b>③クリエーション合宿</b>（来年度以降、劇作・演出と協働）。</li>
+              <li>座学案：①未来のプロデューサー像（渡航した小嶋〔東宝〕・井川〔ホリプロ〕・時田〔ゴーチ〕の座談会）②ABC別特別講義（A：IP×マーケ＝<b>西野亮廣氏〔キングコング／『えんとつ町のプペル』プロデューサー〕</b>／B：ノンバーバル×インバウンド＝松田氏／C：海外招聘とフェス＝高橋戦車〔鹿殺し〕・ハンチ由井ら）③マーケティングのラウンドテーブル。オープン講座は学生＋社会人に広く、集中講座（ゼミ）は学生中心。</li>
+              <li><span class="msm-who">松田</span>：<b>そもそも日本に演劇プロデューサーがいない</b>。日本のそれはテレビ局等の社員＝担当者。欧米は個人／制作会社のプロデューサー。<b>海外を目指すプロデューサーは10人いない</b>。成功例もない（あえて言えばトトロの日本テレビ・依田氏）。<b>ベンチマークがない</b>からいつもライオンキングを引き合いに出す。</li>
+              <li><span class="msm-who">松田</span>：<b>座学（一方向講義）は「すごいな」で終わりがち</b>。現役プロ数名の<b>パネルディスカッション</b>で「やれたこと・やれていないこと・ぶつかった壁」を実践的に語り、学生が見て質問する形が良い。プロとアマ混在で。</li>
+              <li><span class="msm-who">松田</span>：<b>ゼミを学生だけに絞ると「夢・理想だけ語って終わる」</b>恐れ。現場の制作者が混ざると化学反応（代アニでの経験：非現実的な企画書が対話で現実化）。</li>
+              <li><span class="msm-who">松田</span>：<b>ゼミ長は米田氏〔SIZ〕・伊藤氏〔ゴーチ〕クラス</b>を、学生と同じ目線で。彼らも「新しい人材が育つかも」というモチベで参加。オープン講座が入り口・宣伝になり、参加者が「この人のゼミに」と繋がる有機的設計を。集める側も「学びたい人をゲットする勝負」の気概で。</li>
+              <li><span class="msm-who">高萩</span>：西野氏はぜひ話を聞きたい人。プロデューサー編はもっとやり方がある。</li>
+            </ul>
+          </div>
+          <div class="msm-block msm-issue">
+            <span class="msm-block-label">課題</span>
+            <ul>
+              <li>対象母集団の根本的希少性（日本に海外志向のプロデューサーがほぼいない／成功例・ベンチマーク不在）。</li>
+              <li>座学中心の設計が「聞いて終わり」になりやすい。</li>
+              <li>ゼミを学生限定にすると現実味・化学反応を欠く（受益者を学生に寄せる事業趣旨との緊張）。</li>
+              <li>ゼミ長の人選・稼働負荷（優秀な人ほど多忙で薄まる）。</li>
+            </ul>
+          </div>
+          <div class="msm-block msm-todo">
+            <span class="msm-block-label">検討事項</span>
+            <ul>
+              <li>座学を<b>現役プロのパネルディスカッション＋学生の質疑</b>形式へ再設計。</li>
+              <li>ゼミに現場の制作者／小劇場で来年海外公演を控える人などを混在させ、学生とセットに（赤羽氏「その方向で変えたい」）。</li>
+              <li>ゼミ長に米田・伊藤クラスを起用し、学生と同じ位置で伴走。</li>
+              <li>オープン講座を<b>入り口・宣伝の場</b>として集中講座と有機的に接続（赤羽氏、設計し直す方針）。</li>
+              <li>西野亮廣氏へのアプローチ検討。</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 6. 演出家講座 -->
+        <section class="msm-sec">
+          <div class="msm-sec-h"><span class="msm-sec-num">6</span>演出家講座</div>
+          <div class="msm-block msm-gist">
+            <span class="msm-block-label">要旨</span>
+            <ul>
+              <li>川名氏（＋演出家・田中万衣子氏）で設計中。フェーズ1＝試験的プログラム→選考→<b>フェーズ2＝5日間の集中モデルプログラム</b>（都内稽古場、18〜25歳対象、古典等のテキストで1シーン演出）→成果公開。</li>
+              <li>ねらい：演出家という職業が学生に浸透していない。<b>「5日間で海外を視野に演出を学べるモデルプログラムを作ること」自体を目的</b>に。間口拡大のため<b>映像化・ドキュメンタリー化</b>して一般公開し「演出とはこういう仕事だ」がパッとわかるものに。</li>
+              <li><span class="msm-who">松田</span>：演出家・脚本家は<b>向かうベクトルが明確</b>なので「プログラムを作ること」をメインに置く発想は良い（フォーマットがないから）。</li>
+              <li><span class="msm-who">高萩</span>：<b>ミュージカル／音楽劇の演出家が日本にいない・育て方がわからない＝一番遅れている部分</b>。可能ならミュージカルに手をつけてほしい。海外志向の演出家として宮城氏〔SPAC〕・長谷川寧氏を例示。</li>
+              <li><span class="msm-who">福井</span>：「英米の商業演劇文法を知り、それに沿った人を育てる」発想は<b>韓国と同じ</b>。成功モデルと言われると面白くない（→ 項目10）。</li>
+            </ul>
+          </div>
+          <div class="msm-block msm-issue">
+            <span class="msm-block-label">課題</span>
+            <ul>
+              <li>5日間・広く浅い入り口設計と、海外展開できる演出家という到達目標との距離。</li>
+              <li>ミュージカル／音楽劇の演出家育成という「最も遅れた領域」に踏み込むか。</li>
+              <li>「英米文法をなぞる」設計への警戒。</li>
+            </ul>
+          </div>
+          <div class="msm-block msm-todo">
+            <span class="msm-block-label">検討事項</span>
+            <ul>
+              <li>「モデルプログラムを作る」ことを成果物として明確化（松田・支持）。ドキュメンタリー化で間口拡大。</li>
+              <li>使用テキストの選定（古典中心の想定／ミュージカル・音楽劇を扱えるか検討）。</li>
+              <li>海外志向演出家（宮城・長谷川ら）のリサーチ／登壇・メンター起用検討。</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 7. 劇作家講座 -->
+        <section class="msm-sec">
+          <div class="msm-sec-h"><span class="msm-sec-num">7</span>劇作家講座</div>
+          <div class="msm-block msm-gist">
+            <span class="msm-block-label">要旨</span>
+            <ul>
+              <li>倉沢麻梨絵氏（エジンバラ現地）を中心に、阿部希氏（前川氏・坂手氏らの作品翻訳者、リサーチャー兼務）がバックについて設計。フェーズ0＝講義／ラウンドテーブル／ワークショップ（阿部氏・前川氏に協力打診中、9月末PABで一部公開予定）→選考→メンターシップで自作をブラッシュアップ→日英ドラフト→<b>トラバース・シアター（エジンバラ）でのリーディング</b>。数が限られるため各段階で選考。</li>
+              <li>課題認識：劇作家の共通知識がない／プロとの出会いの場がない／挑戦の場が少ない／翻訳上演を経験する重要性が認識されていない。</li>
+              <li><span class="msm-who">高萩</span>：<b>好きに書かせるとバラける</b>。ある小説を題材に作品化するプログラムの方がうまくいく（権利問題はあるが）。イギリスのダガー賞など話題作を素材に。トラバースは話がついているか？ → 事務局：アーティスティック・ディレクターとコンタクト済み、一度話はできている（決定前）。</li>
+              <li><span class="msm-who">高萩</span>：<b>斉藤慶氏</b>（トラバース留学経験、ドラマターグ的活動、興文協のSOIL系メンターにも関与）に相談を。</li>
+              <li><span class="msm-who">ミキ</span>：<b>ミュージカルの劇作家は欧米フォーマットで書ける人を作る</b>。<b>ミュージカルとストレートプレイの作家は完全に分けて教育すべき</b>、一緒は無理。現状はストレートプレイ寄り（野村：整理する）。ミュージカル作家は<b>米英の大学で学ぶのが早い</b>→国は<b>留学支援＋英語教育</b>を。国内育成はパイ拡大に必要だが「誰が教えるのか」が問題。海外講師コストの見込みも。</li>
+            </ul>
+          </div>
+          <div class="msm-block msm-issue">
+            <span class="msm-block-label">課題</span>
+            <ul>
+              <li>「自由に書かせる」設計だと成果が拡散。題材固定（既存小説の作品化）の方が学びが可視化される。</li>
+              <li>トラバースとの合意は未確定（キーパーソン・過去の経緯の活用余地）。</li>
+              <li>ミュージカルとストレートプレイの分離（現状ストレートプレイ寄り）。</li>
+              <li>ミュージカル劇作は「留学が最短」vs「国内育成でパイ拡大」の役割分担、および国内の指導者不在。</li>
+            </ul>
+          </div>
+          <div class="msm-block msm-todo">
+            <span class="msm-block-label">検討事項</span>
+            <ul>
+              <li>題材固定型（例：話題小説の舞台化）を選択肢として検討（権利処理含む）。</li>
+              <li>斉藤慶氏への相談、トラバースとの交渉継続。</li>
+              <li>ミュージカル／ストレートプレイの扱いを整理（分離の是非）。</li>
+              <li>「留学支援＋英語教育（SEED外の別施策）」と「国内育成（SEED）」の役割分担を明確化（伊藤氏：即効性＝留学、遅効性＝国内育成の両輪）。海外講師コストの試算。</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 8. 一般教養講座 -->
+        <section class="msm-sec">
+          <div class="msm-sec-h"><span class="msm-sec-num">8</span>一般教養講座</div>
+          <div class="msm-block msm-gist">
+            <span class="msm-block-label">要旨</span>
+            <ul>
+              <li>野村氏中心に設計。4本案：①海外トレンド／国際情勢の理解＋英語（THE STAGEの記事等を教材にディスカッション）②リーディング（本を読み議論する素養）③鑑賞（EPAD等と協力し作品を観て議論）④<b>権利のケーススタディ</b>（福井氏の再三の指摘を反映、3職能共通）。</li>
+              <li><span class="msm-who">奥山</span>：<b>古典の授業を必ず入れるべき</b>。海外では「日本文化を知っているか」が問われる。<b>日本の音楽・古典芸能（4種）への造詣</b>が「拠って立つ場所」「海外で誰とも違える点」になる。それで売るのでなくても必須。→ 事務局：一般教養に入れる（野村担当）。</li>
+              <li><span class="msm-who">福井</span>：「<b>権利</b>」は「<b>権利と契約</b>」にした方がよい（最終的に必要なのは契約）。福井氏は協力可の意向。</li>
+            </ul>
+          </div>
+          <div class="msm-block msm-issue">
+            <span class="msm-block-label">課題</span>
+            <ul>
+              <li>古典・日本文化（音楽／古典芸能）の科目が現状の一般教養に不足。</li>
+              <li>「権利」の射程が狭い（契約実務まで含める必要）。</li>
+            </ul>
+          </div>
+          <div class="msm-block msm-todo">
+            <span class="msm-block-label">検討事項</span>
+            <ul>
+              <li>一般教養に<b>古典・日本の伝統芸能・日本音楽</b>の講座を追加（奥山・強く推奨）。</li>
+              <li>「権利」→「<b>権利と契約</b>」に名称・内容を拡張（福井）。</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 9. 横断：ミュージカル -->
+        <section class="msm-sec">
+          <div class="msm-sec-h cross"><span class="msm-sec-num">9</span>ミュージカル・音楽劇の扱い<span class="msm-cross-tag">横断</span></div>
+          <div class="msm-block msm-gist">
+            <span class="msm-block-label">要旨（全員が言及）</span>
+            <ul>
+              <li><span class="msm-who">奥山</span>：権利で稼ぐ本命は劇作・<b>作曲</b>。日藝も<b>ミュージカルをゼロから作れる演出家を1人入れたい</b>が誰がいいかわからない。韓国も日本もミュージカルをやらざるを得ない状況。</li>
+              <li><span class="msm-who">高萩</span>：<b>日本にミュージカルの作曲家も演出家も育っていない＝一番遅れた領域</b>。日本は海外作曲家の作品を持ってきているのが実情。J-POPは強い→日本独自の音楽劇が出れば面白い。</li>
+              <li><span class="msm-who">ミキ</span>：ミュージカルとストレートプレイの<b>作家は完全分離</b>して教育を。ミュージカル系は留学が最短。</li>
+              <li><span class="msm-who">松田</span>：ミュージカルは手をつけにくく、Soilはつけやすい。だが国際展開を考えると避けられない。</li>
+              <li><span class="msm-who">福井</span>：音楽は舞台より一歩先に世界展開。海外で圧倒的なのはベビーメタル（プロデューサー本人が「海外マーケティングは一切考えなかった」と発言）。</li>
+            </ul>
+          </div>
+          <div class="msm-block msm-issue">
+            <span class="msm-block-label">課題</span>
+            <ul><li>ミュージカル・音楽劇は「国際展開・ライツ化の本命」でありながら、日本で作曲家・演出家・劇作家の育成基盤が最も欠けている。現状のSEED各講座はストレートプレイ寄り。</li></ul>
+          </div>
+          <div class="msm-block msm-todo">
+            <span class="msm-block-label">検討事項</span>
+            <ul>
+              <li>各講座（特に劇作・演出）にミュージカル／音楽劇のトラックを設けるか明示的に判断。</li>
+              <li>ミュージカルを教えられる人材（国内不在→海外講師・メンター）の探索とコスト試算。</li>
+              <li>日藝のミュージカル演出家招聘に資する人材情報の提供（奥山からの依頼事項）。</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 10. 横断：なぞり・アジア -->
+        <section class="msm-sec">
+          <div class="msm-sec-h cross"><span class="msm-sec-num">10</span>英米モデルの「なぞり」とアジア・独自性の視点<span class="msm-cross-tag">横断</span></div>
+          <div class="msm-block msm-gist">
+            <span class="msm-block-label">要旨</span>
+            <ul>
+              <li><span class="msm-who">福井</span>：既存モデルの模倣は<b>縮小再生産</b>。「彼らが持っていないもの」を提示したときに大成功する（ワンピース・ジブリ・鬼滅・ベビーメタル）。<b>欧米という鏡を通してしか自分を見られない「アジアの悲しい現実」</b>。だが世界人口の6割はアジア。<b>アジアを作品が生まれる場・マーケットとして捉える視点</b>を。東宝芸能・池田社長の逸話（Kミュージカルマーケットで韓国勢が東宝ブースに売り込みに来る／アジア発への関心の薄さ）。</li>
+              <li><span class="msm-who">奥山</span>：展開先を<b>ナショナルシアター／NYに偏らせず、韓国・台湾・東南アジア</b>など親和性の高い地域も広く。「ロンドンで成功しないと成功でない」的な発想への疑問。韓国のカリキュラム（弘益大等）もNYU TISCHの模倣で、それが本当に日本／アジアに最適か。</li>
+            </ul>
+          </div>
+          <div class="msm-block msm-issue">
+            <span class="msm-block-label">課題</span>
+            <ul><li>現状の方向性が英米（特にロンドン／NY）と韓国モデルへの追随に偏り、独自性とアジア市場の視点が弱い。</li></ul>
+          </div>
+          <div class="msm-block msm-todo">
+            <span class="msm-block-label">検討事項</span>
+            <ul>
+              <li>展開先候補にアジア（韓国・台湾・東南アジア）を明示的に加え、リサーチ対象に含める。</li>
+              <li>ケーススタディを「なぞる」ためでなく「差分・独自性を抽出する」目的に再定義。</li>
+              <li>韓国リサーチ（ミュージカル／劇作家・プロデューサー領域が手薄）の補強。奥山氏の人脈紹介の申し出あり。</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 11. 横断：学生かプロか -->
+        <section class="msm-sec">
+          <div class="msm-sec-h cross"><span class="msm-sec-num">11</span>対象は学生か、現役のプロ（社会人）か<span class="msm-cross-tag">横断</span></div>
+          <div class="msm-block msm-gist">
+            <span class="msm-block-label">要旨</span>
+            <ul>
+              <li><span class="msm-who">松田</span>：学生だけだと夢・理想で終わる恐れ。プロ・アマ混在で化学反応を。座学は現役プロのパネルが良い。</li>
+              <li><span class="msm-who">奥山</span>：<b>本当にいい学生を大学が選んで出す</b>ことが講座の質を決める。仮想でなくリアリティの高い企画（学生に交渉をCCして責任を持たせる等）で人が育つ。</li>
+              <li><span class="msm-who">高萩</span>：オープン講座は学生＋卒業生＋会員に、集中講座は学生中心、と対象が分かれる。日程調整が難しい層。一期生が肝。</li>
+              <li>事務局：受益者を学生に寄せる事業趣旨がある一方、SEED→SOIL→R&Dの入れ子で社会人・学生が行き来しうる。SEEDの守備範囲の線引きが論点。</li>
+            </ul>
+          </div>
+          <div class="msm-block msm-issue">
+            <span class="msm-block-label">課題</span>
+            <ul><li>事業趣旨（学生中心）と、実効性・現実味（プロ混在）の緊張。講座ごとに最適な対象が異なる。</li></ul>
+          </div>
+          <div class="msm-block msm-todo">
+            <span class="msm-block-label">検討事項</span>
+            <ul>
+              <li>講座別に対象（学生限定／学生＋社会人）を設計。オープン講座は広く、ゼミ・集中講座に現場人材を適度に混在。</li>
+              <li>大学に「本当にいい学生を選抜して送る」ことを依頼（奥山）。</li>
+              <li>SEED / SOIL 間の対象者の行き来を前提に守備範囲を整理。</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 12. 横断：リサーチ成果 -->
+        <section class="msm-sec">
+          <div class="msm-sec-h cross"><span class="msm-sec-num">12</span>リサーチ成果のアウトプットと共有<span class="msm-cross-tag">横断</span></div>
+          <div class="msm-block msm-gist">
+            <span class="msm-block-label">要旨</span>
+            <ul>
+              <li><span class="msm-who">ミキ</span>：ヒアリング内容は人材要件・プログラムに反映済みだが、<b>リサーチ成果としてのアウトプットが未完</b>。議事録は手元にあるが「こう分かった」という成果物がまだ。共有時期・形式は？</li>
+              <li><span class="msm-who">奥山</span>：<b>RAWデータでいいから早く欲しい</b>（大学は11月に翌年の非常勤を確定／入試は2年先まで確定済み）。2025年度分だけでも。各リサーチャー50〜70ページの報告書＋文字起こしあり。<b>大学へのフィードバック時期／大学間シラバスチェックの有無</b>は？</li>
+              <li><span class="msm-who">福井</span>：ヒアリングで<b>拾えないもの</b>へのシビアな目を。文献・統計・専門家の文章で補完。痛いところをつくヒアリングを。個別ヒアリングは否定にさらされず甘くなる→<b>時々全員で顔を合わせ矛盾を感じる場</b>も必要。</li>
+            </ul>
+          </div>
+          <div class="msm-block msm-issue">
+            <span class="msm-block-label">課題</span>
+            <ul><li>蓄積したRAWデータ（報告書・文字起こし）の<b>アウトプット形式が未確定</b>で共有が遅延。大学の意思決定サイクル（11月・入試2年先）に間に合わせる必要。ヒアリング偏重による網羅性・批判性の不足。</li></ul>
+          </div>
+          <div class="msm-block msm-todo">
+            <span class="msm-block-label">検討事項</span>
+            <ul>
+              <li>横堀氏中心に、7〜8月でリサーチ成果の共有形式・時期を確定（26年度は井川・時田＋演出家リサーチの計3名で締め、25年度分と合わせ計約10名分を報告）。</li>
+              <li>大学へは<b>RAWデータ段階でも先出し</b>（奥山の11月締切に配慮）。大学間シラバスチェック・国内外大学のデスクリサーチ（昭和音大等含む）を並行。</li>
+              <li>ヒアリングの盲点補完（文献・統計、追加質問の運用）、全員合議の場の設定を検討。</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 13. 横断：事業間接続 -->
+        <section class="msm-sec">
+          <div class="msm-sec-h cross"><span class="msm-sec-num">13</span>事業間接続（SEED／SOIL／R&D／IF／SEED the 10／サマースクール）<span class="msm-cross-tag">横断</span></div>
+          <div class="msm-block msm-gist">
+            <span class="msm-block-label">要旨</span>
+            <ul>
+              <li><span class="msm-who">ミキ</span>：サマースクール等で作ったものに<b>資金をつけ、国が海外進出まで支援</b>する立て付けはどうか。「勉強のための勉強」でなくゴール（稼げれば経産省もジョインし予算拡大／できなければSEED継続）を。第一期生が互いを選び合いチーム化→海外へ。</li>
+              <li><span class="msm-who">野村・ミキ</span>：これは<b>SEED the 10／IF（JPASNフェス）</b>の構想に近い。2028年（＝再来年度・SEED4年目）のIFで、Kミュージカルマーケットの40分ショーケースのような<b>R&D企画発表の場</b>を国内に作る。学生チーム＋既存プロダクションも募る「SEED発の日本版SIX」的コーナーをIF東京で。ミキ「発表会で終わらせず成果を出すべき」。</li>
+              <li><span class="msm-who">福井</span>：<b>SOILは既にR&D的</b>（他クリエイターを巻き込み作品づくりに入っている）。SOILとR&Dの違いが不明瞭。レイヤー整理を。</li>
+              <li>事務局：SEEDの受益者が大学生・若年層である制約と、実利（作品を海外へ）を求めるならSOILの方が相性が良いという役割分担の難しさ。ガバナンス（JPASN統括団体としてどちらで進めるか）が課題。<b>サマースクール</b>（3職能チームアップ／合宿形式）は4〜5年目（＝28年度）の実装を想定。まず各職能単発→ブラッシュアップ→合流の順で。</li>
+            </ul>
+          </div>
+          <div class="msm-block msm-issue">
+            <span class="msm-block-label">課題</span>
+            <ul><li>SEED（育成）／SOIL（海外展開育成支援）／R&D企画／IF・SEED the 10／サマースクールの<b>役割分担とガバナンスが未整理</b>で、似た企画が並走。SEEDの受益者制約（学生・若年）と実利追求の相性。</li></ul>
+          </div>
+          <div class="msm-block msm-todo">
+            <span class="msm-block-label">検討事項</span>
+            <ul>
+              <li>SOILとR&D機能の重複を解消し、レイヤー（事業名／機能）を明確化（福井）。</li>
+              <li>2028年IF内にR&D企画発表（SEED the 10）を位置づけ、学生＋プロを募る設計を具体化（ミキ・強く推奨、野村も同方向）。</li>
+              <li>サマースクールは各職能単発→ブラッシュアップ→合流→合宿（28年度）のロードマップで整理。</li>
+              <li>JPASN内でSEED/SOIL/IFの統括ガバナンスを整理。</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- フッター -->
+        <div class="msm-foot">
+          <div class="msm-foot-h">伊藤氏が各回で合意・コミットした主な事項</div>
+          <ul>
+            <li>「外貨を稼ぐ」等の表現を修正する（奥山・福井）。</li>
+            <li>「国内向け／海外向けの分岐」を人材要件・プログラムに織り込む（ミキ）。</li>
+            <li>ケーススタディは「なぞるため」でなく「差分を言語化するため」と位置づける（福井）。</li>
+            <li>展開先を英米に偏らせず再検討（奥山・福井）。</li>
+            <li>リサーチ成果を7〜8月に共有形式を固め、大学へ先出し（奥山）。</li>
+            <li>一般教養に古典を追加、「権利」→「権利と契約」に（奥山・福井）。</li>
+            <li><b>次回は5名そろっての会</b>を8月末目処で設定し、プログラムの最終方針を報告。</li>
+          </ul>
+        </div>
+        <div class="msm-foot" style="margin-top:12px;">
+          <div class="msm-foot-h">直近の実務マイルストーン</div>
+          <ul>
+            <li><b>9月末：PAB（国際フォーラム）</b>でプロデューサー・劇作家講座のプレ講座を一部公開予定（急ぎで準備中）。</li>
+            <li>リサーチ成果・大学デスクリサーチのアウトプットを7〜8月に共有形式確定。</li>
+            <li>8月末目処で5名合同のアドバイザリーボードを設定し、プログラム最終方針を報告。</li>
+          </ul>
+        </div>
+
+        <div class="msm-srcnote">出典：`governance/meetings/第4回_アドバイザリーボード定例_文字起こし/` 内の5名分文字起こし ＋ 添付資料PDF（30p デッキ）。固有名詞・表記はヒアリングにより確定済み。</div>
+      </div>
+    </div>
+  </div><!-- /#msm-ab4 -->
 </div><!-- /#tab-meetings -->
 
 <!-- ════ Program Progress Tab ════ -->
@@ -5364,6 +6012,31 @@ document.querySelectorAll('.rs-tab-btn').forEach(btn => {
     document.getElementById('rs-' + btn.dataset.rsRole).classList.add('active');
   });
 });
+
+/* ── Meeting summary modal ── */
+function openMeetingSummary(id) {
+  const modal = document.getElementById(id);
+  if (!modal) return;
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeMeetingSummary() {
+  document.querySelectorAll('.meeting-summary-modal.open').forEach(m => m.classList.remove('open'));
+  document.body.style.overflow = '';
+}
+document.querySelectorAll('[data-summary]').forEach(el => {
+  el.addEventListener('click', () => openMeetingSummary(el.dataset.summary));
+  if (el.getAttribute('role') === 'button') {
+    el.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openMeetingSummary(el.dataset.summary); }
+    });
+  }
+});
+document.querySelectorAll('.meeting-summary-modal').forEach(modal => {
+  modal.addEventListener('click', closeMeetingSummary); // backdrop click (panel stops propagation)
+});
+document.querySelectorAll('.msm-close').forEach(btn => btn.addEventListener('click', closeMeetingSummary));
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMeetingSummary(); });
 </script>
 
 </body>
