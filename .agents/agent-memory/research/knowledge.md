@@ -29,13 +29,24 @@
 
 | リサーチャー | 派遣先 | 状況 |
 |---|---|---|
-| 井川荃芬（ホリプロ） | ニューヨーク | 確定 |
-| 時田曜子 | ロンドン | 確定 |
+| 井川荃芬（ホリプロ） | ニューヨーク | ✅ 報告書提出済・ToBeモデル統合済（producer v5 / playwright v3） |
+| 時田曜子（ゴーチ） | ロンドン | ✅ **報告書提出済（7/19）・報告会実施（7/23）・ToBeモデル統合済（producer v6 / playwright v4）** |
 | 田窪桜子 | ソウル（候補） | 6月派遣目標 |
 | 小川絵梨子 | ニューヨーク | 確定 |
 | 未定 | 未定 | 9月末までに派遣 |
 
 **2025年度派遣実績**：7名（小栗・阿部・上田・小山・田中・前川・小嶋）
+
+### 時田曜子ロンドン派遣（2026年6/19〜7/10）の要点
+
+> 詳細：`talent/research/20260723_時田曜子_ロンドン派遣リサーチまとめ.md`（原本報告書・報告会文字起こしも同フォルダ）
+
+- インタビュー10件（Rupert Hands・Tom Morton-Smith・Simon Stephens・Richard Twyman(ETT)・Despina Tsatsas(RSC)・Kate McGrath(Fuel)・Alexander Gifford(Marylebone)・Craig Gilbert(Donmar)・Chris Campbell(元RC/NT Literary Manager)・Clare Slater+Joel Tan(NT Studio)）＋Fuel Sharing参加＋観劇14本
+- **中心的発見**：新作開発・人材育成・国際共同制作は「Development」という思想で結びついた一つのシステム。英国の強さは相互に育ち合うエコロジー（Development / Community / Ecology / Long-term Relationship）
+- **プロデューサー**：日本はProducer＋Company Manager兼務で長期視点の時間が構造的にない→機会損失（Richard Twyman）。「Development Producer」の専門職化が育成ターゲット候補
+- **劇作家**：Open Access×Selection、上演（Rehearsed Reading）から学ぶ、Generation（世代）を育てる、"You belong to the world."（Joel Tan）
+- **具体提案**：Japan Play Development Lab（7ステージ）／New Japanese Voices（6〜8本の日本新作戯曲を群でRehearsed Reading紹介、Chris Campbell提案）／Theatre Makers' Workshop（職種横断WS）
+- **残課題**：セレクションする側の人材要件（未掘り下げ）、演出家特化の海外インプット（今後の演出家リサーチ派遣で補完）、Chris Campbell・Richard Twyman両氏との継続的関係構築（International Advisory Board候補）
 
 ### リサーチの整理フレーム
 

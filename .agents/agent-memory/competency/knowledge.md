@@ -13,13 +13,14 @@
 
 | 職種 | ToBeモデル状況 | ファイル |
 |---|---|---|
-| プロデューサー | ✅ **v5**完成（SOIL統合＋井川NYリサーチ統合） | `talent/roles/SEEDプロデューサー人材要件ToBeモデル_v5_井川リサーチ統合.md` |
-| 演出家 | ✅ v2完成（SOIL統合・A/Bシナリオ対応） | `talent/roles/SEED演出家人材要件ToBeモデル_v2_SOIL統合.md` |
-| 劇作家 | ✅ **v3**完成（SOIL統合＋井川NYリサーチ統合） | `talent/roles/SEED劇作家人材要件ToBeモデル_v3_井川リサーチ統合.md` |
+| プロデューサー | ✅ **v6**完成（SOIL統合＋井川NY統合＋時田ロンドン統合） | `talent/tobe-models/SEEDプロデューサー人材要件ToBeモデル_v6_時田リサーチ統合.md` |
+| 演出家 | ✅ v2完成（SOIL統合・A/Bシナリオ対応）※海外インプット不足が既知課題 | `talent/tobe-models/SEED演出家人材要件ToBeモデル_v2_SOIL統合.md` |
+| 劇作家 | ✅ **v4**完成（SOIL統合＋井川NY統合＋時田ロンドン統合） | `talent/tobe-models/SEED劇作家人材要件ToBeモデル_v4_時田リサーチ統合.md` |
 
 **共通リサーチ出典**：前川知大（ソウル）・小栗基裕（ロンドン）・阿部のぞみ（ロンドン）・上田一豪（ニューヨーク）各氏のリサーチ派遣報告書（フェーズ０）  
 **SOIL統合出典**（2026年6月追加）：`0_docs/soil_strategy/international_strategy_framework.md`  
 **井川NYリサーチ統合**（2026年6月追加）：井川荃芬（ホリプロ）ブロードウェイ派遣報告書・15件インタビュー（Barbara Whitman・Mara Isaacs・Jeffrey Richards・Sue Frost・Patrick Catullo・Lauren Tucker・Thomas Laub・Vivek Tiwary・David Hein・Crystal Monee Hall・Matt Gould等）  
+**時田ロンドンリサーチ統合**（2026年7月追加）：時田曜子（ゴーチ）ロンドン派遣報告書（7/19提出）・報告会（7/23）・10件インタビュー（Rupert Hands・Tom Morton-Smith・Simon Stephens・Richard Twyman・Despina Tsatsas・Kate McGrath・Alexander Gifford・Craig Gilbert・Chris Campbell・Clare Slater・Joel Tan）。核心概念＝Development（作品が育つ環境のデザイン）／Ecology／Development Producer（P-10）／New Japanese Voices構想。まとめ：`talent/research/20260723_時田曜子_ロンドン派遣リサーチまとめ.md`  
 **主軸シナリオ**：A（トトロ型：IP × 文化機関共同制作）・B（ストンプ型：ノンバーバル × フリンジ転生）
 
 ---
