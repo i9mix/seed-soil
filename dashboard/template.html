@@ -2793,6 +2793,134 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
     padding: 8px 0 2px;
   }
 }
+/* ── PAB Plan Tab (⑦) ── */
+.pab-event-list {
+  display:flex;
+  flex-direction:column;
+  gap:12px
+}
+.pab-event {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-left:4px solid var(--border);
+  border-radius:12px;
+  padding:1rem
+}
+.pab-event.pab-producer, .pab-block.pab-producer { border-left-color:var(--producer) }
+.pab-event.pab-director, .pab-block.pab-director { border-left-color:var(--director) }
+.pab-event.pab-seed, .pab-block.pab-seed { border-left-color:var(--seed) }
+.pab-event.pab-playwright, .pab-block.pab-playwright { border-left-color:var(--playwright) }
+.pab-event-head {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:6px
+}
+.pab-event-head strong { font-size:13.5px }
+.pab-time {
+  font-size:12px;
+  color:var(--text-secondary);
+  font-family:'DM Mono',monospace
+}
+.pab-badge {
+  font-size:10px;
+  font-weight:700;
+  padding:2px 8px;
+  border-radius:8px;
+  white-space:nowrap
+}
+.pab-badge.pab-main { background:var(--wip-bg); color:var(--wip-text) }
+.pab-badge.pab-sub { background:var(--bg); color:var(--text-secondary); border:1px solid var(--border) }
+.pab-badge.pab-format { background:var(--plan-bg); color:var(--plan-text) }
+.pab-badge.pab-wip { background:var(--urgent-bg); color:var(--urgent-text) }
+.pab-event-desc {
+  font-size:12.5px;
+  color:var(--text-secondary);
+  line-height:1.7
+}
+.pab-tl-scroll { overflow-x:auto; -webkit-overflow-scrolling:touch }
+.pab-tl {
+  min-width:640px;
+  display:grid;
+  grid-template-columns:52px minmax(320px,1fr) minmax(170px,230px);
+  grid-template-rows:auto repeat(26,26px);
+  column-gap:14px
+}
+.pab-tl-head {
+  grid-row:1;
+  font-size:11px;
+  font-weight:700;
+  color:var(--text-secondary);
+  letter-spacing:.05em;
+  padding-bottom:10px
+}
+.pab-tick {
+  grid-column:1;
+  font-size:11px;
+  color:var(--text-tertiary);
+  text-align:right;
+  transform:translateY(-0.6em);
+  padding-right:4px;
+  font-family:'DM Mono',monospace
+}
+.pab-rule {
+  grid-column:1/-1;
+  border-top:1px solid var(--border);
+  height:0;
+  align-self:start;
+  pointer-events:none
+}
+.pab-block {
+  grid-column:2;
+  margin:2px 0;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-left:4px solid var(--border);
+  border-radius:8px;
+  padding:6px 12px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:1px;
+  z-index:1
+}
+.pab-block .pab-b-time {
+  font-size:10.5px;
+  color:var(--text-tertiary);
+  font-family:'DM Mono',monospace
+}
+.pab-block .pab-b-name {
+  font-size:12.5px;
+  font-weight:700;
+  line-height:1.4
+}
+.pab-block .pab-b-format {
+  font-size:10.5px;
+  color:var(--text-secondary)
+}
+.pab-sideband {
+  grid-column:3;
+  grid-row:2 / span 26;
+  margin:2px 0;
+  background:var(--bg);
+  border:1.5px dashed var(--text-tertiary);
+  border-radius:8px;
+  padding:12px;
+  font-size:11.5px;
+  color:var(--text-secondary);
+  line-height:1.7;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  z-index:1
+}
+.pab-sideband .pab-b-name {
+  font-size:12.5px;
+  font-weight:700;
+  color:var(--text-primary)
+}
 </style>
 </head>
 <body>
@@ -2864,6 +2992,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
       <button class="tab-btn" data-tab="general-education">④ 一般教養プログラム</button>
       <button class="tab-btn" data-tab="role-specific">⑤ 職能別個別要件</button>
       <button class="tab-btn" data-tab="research-agenda">⑥ 追加リサーチ検討</button>
+      <button class="tab-btn" data-tab="pab-plan">⑦ PAB企画案</button>
     </div>
   </div>
 </div>
@@ -5973,6 +6102,128 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 
 </div>
 </div><!-- /#tab-research-agenda -->
+
+<!-- ════ PAB Plan Tab ════ -->
+<div id="tab-pab-plan" class="tab-content">
+<div class="ge-container">
+
+<div class="soil-intro-card">
+  <strong>⑦ PAB企画案：</strong>2026年9月26日（土）、東京国際フォーラムで開催されるPABにて、SEEDの<strong>リサーチ報告会 兼 プレ講座</strong>として5企画を1日で実施する。<br>
+  <span style="font-size:12.5px;color:var(--text-secondary)">①〜④は同一のメイン会場で順次開催、⑤のみ別会場で終日実施。①・②・④の講座は「座談会 → ワークショップ → 振り返り」の共通形式で行う。</span>
+</div>
+
+<div class="ge-section">
+  <div class="ge-section-title">イベント一覧</div>
+  <div class="pab-event-list">
+
+    <div class="pab-event pab-producer">
+      <div class="pab-event-head">
+        <strong>① プロデューサー講座「未来のプロデューサーを考える」</strong>
+        <span class="pab-time">11:00–12:30</span>
+        <span class="pab-badge pab-main">メイン会場</span>
+        <span class="pab-badge pab-format">座談会 → WS → 振り返り</span>
+      </div>
+      <div class="pab-event-desc">登壇：小嶋さん・井川さん。時田さんは当日スケジュールNGのため、事前MTGで内容にご意見をいただき、質問を預かる形式を想定。</div>
+    </div>
+
+    <div class="pab-event pab-director">
+      <div class="pab-event-head">
+        <strong>② 演出家講座</strong>
+        <span class="pab-time">13:00–14:30</span>
+        <span class="pab-badge pab-main">メイン会場</span>
+        <span class="pab-badge pab-format">座談会 → WS → 振り返り</span>
+      </div>
+      <div class="pab-event-desc">田中さんご登壇。上田一豪さんをお招きし、リサーチをテーマに「こういった教育ができたらいいね」を語る座談会から展開（上田さんが難しい場合は川名さんが話を伺う形）。スライド投影あり。ターゲットはあくまで学生とし、内容・情報のレベルを合わせる。</div>
+    </div>
+
+    <div class="pab-event pab-seed">
+      <div class="pab-event-head">
+        <strong>③ SEEDプログラム説明会</strong>
+        <span class="pab-time">15:00–15:45</span>
+        <span class="pab-badge pab-main">メイン会場</span>
+      </div>
+      <div class="pab-event-desc">SEEDのプログラム内容について、学生に向けた45分程度の説明会。</div>
+    </div>
+
+    <div class="pab-event pab-playwright">
+      <div class="pab-event-head">
+        <strong>④ 劇作家講座</strong>
+        <span class="pab-time">16:00–17:30</span>
+        <span class="pab-badge pab-main">メイン会場</span>
+        <span class="pab-badge pab-format">座談会 → WS → 振り返り</span>
+      </div>
+      <div class="pab-event-desc">講師：阿部さん。実際に学生が書く設計を目指すワークショップ。30分レクチャー → 書く時間 → 共有したい人は共有、の流れ。</div>
+    </div>
+
+    <div class="pab-event">
+      <div class="pab-event-head">
+        <strong>⑤ 一般教養講座（ビデオポッドキャスト公開収録）</strong>
+        <span class="pab-time">終日</span>
+        <span class="pab-badge pab-sub">別会場</span>
+      </div>
+      <div class="pab-event-desc">CINRAに企画依頼。2人が座れて機材が置けるブースまたはスペースを1日中使用する。</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="ge-section">
+  <div class="ge-section-title">当日タイムライン ── メイン会場（①〜④）と別会場（⑤）</div>
+  <div class="pab-tl-scroll">
+    <div class="pab-tl">
+      <div class="pab-tl-head" style="grid-column:2">メイン会場（①〜④）</div>
+      <div class="pab-tl-head" style="grid-column:3">別会場（⑤）</div>
+
+      <div class="pab-tick" style="grid-row:2">11:00</div><div class="pab-rule" style="grid-row:2"></div>
+      <div class="pab-tick" style="grid-row:6">12:00</div><div class="pab-rule" style="grid-row:6"></div>
+      <div class="pab-tick" style="grid-row:10">13:00</div><div class="pab-rule" style="grid-row:10"></div>
+      <div class="pab-tick" style="grid-row:14">14:00</div><div class="pab-rule" style="grid-row:14"></div>
+      <div class="pab-tick" style="grid-row:18">15:00</div><div class="pab-rule" style="grid-row:18"></div>
+      <div class="pab-tick" style="grid-row:22">16:00</div><div class="pab-rule" style="grid-row:22"></div>
+      <div class="pab-tick" style="grid-row:26">17:00</div><div class="pab-rule" style="grid-row:26"></div>
+
+      <div class="pab-block pab-producer" style="grid-row:2 / span 6">
+        <span class="pab-b-time">11:00–12:30</span>
+        <span class="pab-b-name">① プロデューサー講座「未来のプロデューサーを考える」</span>
+        <span class="pab-b-format">座談会 → ワークショップ → 振り返り</span>
+      </div>
+      <div class="pab-block pab-director" style="grid-row:10 / span 6">
+        <span class="pab-b-time">13:00–14:30</span>
+        <span class="pab-b-name">② 演出家講座</span>
+        <span class="pab-b-format">座談会 → ワークショップ → 振り返り</span>
+      </div>
+      <div class="pab-block pab-seed" style="grid-row:18 / span 3">
+        <span class="pab-b-time">15:00–15:45</span>
+        <span class="pab-b-name">③ SEEDプログラム説明会</span>
+      </div>
+      <div class="pab-block pab-playwright" style="grid-row:22 / span 6">
+        <span class="pab-b-time">16:00–17:30</span>
+        <span class="pab-b-name">④ 劇作家講座（阿部さん）</span>
+        <span class="pab-b-format">座談会 → ワークショップ → 振り返り</span>
+      </div>
+
+      <div class="pab-sideband">
+        <span class="pab-b-name">⑤ 一般教養講座</span>
+        <span>ビデオポッドキャスト<br>公開収録（終日）</span>
+        <span>CINRAに企画依頼<br>2人掛け＋機材ブース</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="ge-section">
+  <div class="ge-section-title">調整中・確認事項</div>
+  <div style="display:flex;flex-direction:column;gap:8px;font-size:12.5px;line-height:1.7">
+    <div><span class="pab-badge pab-wip">調整中</span> ① 時田さんの事前MTG日程と「質問預かり」の運用（当日NG／井川さん・小嶋さんは参加OK）</div>
+    <div><span class="pab-badge pab-wip">調整中</span> ② 上田一豪さんの登壇可否。難しい場合は川名さんが話を伺う形式に切り替え</div>
+    <div><span class="pab-badge pab-wip">調整中</span> ⑤ CINRAへの企画依頼、およびブース（2人掛け＋機材設置・終日使用）の確保</div>
+    <div><span class="pab-badge pab-main">前提</span> ②③は前半の時間帯（26日13時台など）で確保できると望ましい</div>
+    <div><span class="pab-badge pab-main">前提</span> 各講座は「リサーチ報告会 兼 プレ講座」の建付けで揃える</div>
+  </div>
+</div>
+
+</div>
+</div><!-- /#tab-pab-plan -->
 
 <div class="footer">
   <span>Slackデイリーレポートより自動生成（毎朝9:00更新）</span>
