@@ -2844,7 +2844,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   min-width:640px;
   display:grid;
   grid-template-columns:52px minmax(320px,1fr) minmax(170px,230px);
-  grid-template-rows:auto repeat(26,26px);
+  grid-template-rows:auto repeat(49,20px);
   column-gap:14px
 }
 .pab-tl-head {
@@ -2902,7 +2902,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
 }
 .pab-sideband {
   grid-column:3;
-  grid-row:2 / span 26;
+  grid-row:2 / span 48;
   margin:2px 0;
   background:var(--bg);
   border:1.5px dashed var(--text-tertiary);
@@ -2920,6 +2920,58 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   font-size:12.5px;
   font-weight:700;
   color:var(--text-primary)
+}
+.pab-block.pab-ops {
+  background:var(--bg);
+  border:1.5px dashed var(--text-tertiary);
+  border-radius:8px;
+  color:var(--text-secondary)
+}
+.pab-block.pab-ops .pab-b-name {
+  color:var(--text-secondary)
+}
+.pab-st {
+  display:inline-block;
+  font-size:10px;
+  font-weight:700;
+  padding:2px 8px;
+  border-radius:8px;
+  white-space:nowrap
+}
+.pab-st-todo { background:var(--bg); color:var(--text-secondary); border:1px solid var(--border) }
+.pab-st-wip { background:var(--wip-bg); color:var(--wip-text) }
+.pab-st-wait { background:var(--plan-bg); color:var(--plan-text) }
+.pab-st-done { background:var(--soil-bg); color:var(--soil-text) }
+.pab-link { color:var(--seed); text-decoration:underline; text-underline-offset:2px }
+.pab-info-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px
+}
+@media (max-width:700px) {
+  .pab-info-grid { grid-template-columns:1fr }
+}
+.pab-info-card {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:12px 14px;
+  font-size:12px;
+  color:var(--text-secondary);
+  line-height:1.8
+}
+.pab-info-card .pab-info-title {
+  font-size:11px;
+  font-weight:700;
+  color:var(--text-primary);
+  letter-spacing:.05em;
+  margin-bottom:6px
+}
+.pab-info-card .pab-info-value {
+  font-size:15px;
+  font-weight:700;
+  color:var(--text-primary);
+  font-family:'DM Mono','Noto Sans JP',monospace
 }
 </style>
 </head>
@@ -2992,7 +3044,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
       <button class="tab-btn" data-tab="general-education">④ 一般教養プログラム</button>
       <button class="tab-btn" data-tab="role-specific">⑤ 職能別個別要件</button>
       <button class="tab-btn" data-tab="research-agenda">⑥ 追加リサーチ検討</button>
-      <button class="tab-btn" data-tab="pab-plan">⑦ PAB企画案</button>
+      <button class="tab-btn" data-tab="pab-plan">⑦ PAB企画・制作進行</button>
     </div>
   </div>
 </div>
@@ -6108,8 +6160,152 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 <div class="ge-container">
 
 <div class="soil-intro-card">
-  <strong>⑦ PAB企画案：</strong>2026年9月26日（土）、東京国際フォーラムで開催されるPABにて、SEEDの<strong>リサーチ報告会 兼 プレ講座</strong>として5企画を1日で実施する。<br>
-  <span style="font-size:12.5px;color:var(--text-secondary)">①〜④は同一のメイン会場で順次開催、⑤のみ別会場で終日実施。①・②・④の講座は「座談会 → ワークショップ → 振り返り」の共通形式で行う。</span>
+  <strong>⑦ PAB企画・制作進行：</strong>2026年9月26日（土）、東京国際フォーラムで開催されるPABにて、SEEDの<strong>リサーチ報告会 兼 プレ講座</strong>として5企画を1日で実施する。このタブで企画内容と制作進行を一元管理する。<br>
+  <span style="font-size:12.5px;color:var(--text-secondary)">①〜④は同一のメイン会場で順次開催、⑤のみ別会場で終日実施。①・②・④の講座は「座談会 → ワークショップ → 振り返り」の共通形式で行う。<br>
+  プログラム実施 <strong>11:00〜17:30</strong>／会場利用 <strong>9:00〜21:00</strong>（設営・撤収込み）</span>
+</div>
+
+<div class="ge-section">
+  <div class="ge-section-title">制作進行タスクボード ── 2026/8/10 打合せ時点</div>
+  <div style="overflow-x:auto">
+  <table class="ge-common-table" style="min-width:760px">
+    <thead>
+      <tr>
+        <th style="width:26%">タスク</th>
+        <th style="width:8%">区分</th>
+        <th style="width:15%">担当</th>
+        <th style="width:11%">ステータス</th>
+        <th style="width:40%">メモ・次アクション</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>申し込み受付の手配</strong></td>
+        <td>制作</td>
+        <td>制作チーム</td>
+        <td><span class="pab-st pab-st-wip">検討中</span></td>
+        <td>申し込みが必要な場合は各事業ごとに手配。Web受付が間に合えばWeb、難しければformrunを使用</td>
+      </tr>
+      <tr>
+        <td><strong>会場条件の最終確認</strong><br><span style="font-size:11px;color:var(--text-tertiary)">広さ・利用時間・手配人員・機材〆切</span></td>
+        <td>制作</td>
+        <td>制作チーム ⇄ PAB担当</td>
+        <td><span class="pab-st pab-st-wait">担当者待ち</span></td>
+        <td>PAB側で別担当の方がつき、その方とやり取りする。現状の想定は下記「会場・設備情報」参照</td>
+      </tr>
+      <tr>
+        <td><strong>機材希望の提出</strong></td>
+        <td>制作</td>
+        <td>制作チーム ⇄ PAB担当</td>
+        <td><span class="pab-st pab-st-todo">未着手</span></td>
+        <td>提出〆切は担当の方と確認。付帯設備は<a class="pab-link" href="https://www.t-i-forum.co.jp/organizer/service/bihin/" target="_blank" rel="noopener">会議室共通備品</a>のため先着順の可能性 → 早めに希望を確定する</td>
+      </tr>
+      <tr>
+        <td><strong>大学生向け広報計画</strong></td>
+        <td>広報</td>
+        <td>高本さん・赤羽さん</td>
+        <td><span class="pab-st pab-st-wip">調整中</span></td>
+        <td>おしごとなびで繋がっている大学・サークル宛に広報を投げられるか、高本さんと調整（赤羽さんに繋いでいただく）</td>
+      </tr>
+      <tr>
+        <td><strong>当日人員計画の確定</strong></td>
+        <td>制作</td>
+        <td>制作チーム</td>
+        <td><span class="pab-st pab-st-wip">調整中</span></td>
+        <td>大野さんはこの後確認／遠藤さんは具体これから・必要に応じて。下記「当日人員計画」参照</td>
+      </tr>
+      <tr>
+        <td><strong>写真撮影の依頼</strong></td>
+        <td>制作</td>
+        <td>野村さん</td>
+        <td><span class="pab-st pab-st-wait">依頼予定</span></td>
+        <td>野村さんからコムラさんに依頼</td>
+      </tr>
+      <tr>
+        <td><strong>制作タスクのDB整理</strong></td>
+        <td>制作</td>
+        <td>制作チーム</td>
+        <td><span class="pab-st pab-st-todo">未着手</span></td>
+        <td>他にも諸々あるため、制作まわりのタスクをDBに整理する</td>
+      </tr>
+      <tr>
+        <td><strong>① 時田さん事前MTG・質問預かり</strong></td>
+        <td>企画</td>
+        <td>制作チーム</td>
+        <td><span class="pab-st pab-st-wip">調整中</span></td>
+        <td>当日はスケジュールNG。事前MTGで座談会内容にご意見をいただき、質問を預かる形式を想定</td>
+      </tr>
+      <tr>
+        <td><strong>② 上田一豪さん登壇可否</strong></td>
+        <td>企画</td>
+        <td>制作チーム</td>
+        <td><span class="pab-st pab-st-wip">調整中</span></td>
+        <td>難しい場合は川名さんが話を伺う形式に切り替え</td>
+      </tr>
+      <tr>
+        <td><strong>⑤ CINRA企画依頼・ブース確保</strong></td>
+        <td>企画</td>
+        <td>制作チーム</td>
+        <td><span class="pab-st pab-st-wip">調整中</span></td>
+        <td>2人が座れて機材が置けるブースまたはスペースを終日確保</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="ge-section">
+  <div class="ge-section-title">会場・設備情報 ── 現状の想定（PAB担当者と要最終確認）</div>
+  <div class="pab-info-grid">
+    <div class="pab-info-card">
+      <div class="pab-info-title">会場の広さ</div>
+      <div class="pab-info-value">200㎡</div>
+      <a class="pab-link" href="https://www.t-i-forum.co.jp/organizer/facilities/conference/layout/G701_layout_openfloor.pdf" target="_blank" rel="noopener">会場空図面（G701・PDF）</a>
+    </div>
+    <div class="pab-info-card">
+      <div class="pab-info-title">利用時間</div>
+      <div class="pab-info-value">9/26(土) 9:00–21:00</div>
+      搬入は前日20:20〜21:00の可能性もあるが、基本は当日準備の想定
+    </div>
+    <div class="pab-info-card">
+      <div class="pab-info-title">PABで手配される人員</div>
+      <div class="pab-info-value">受付・案内 1〜2名</div>
+      ラウンジと併せて2名想定。開場中など忙しいタイミングは2名、開催中は1名になる可能性あり
+    </div>
+    <div class="pab-info-card">
+      <div class="pab-info-title">機材・備品</div>
+      <div class="pab-info-value">共通備品（先着順の可能性）</div>
+      付帯設備は<a class="pab-link" href="https://www.t-i-forum.co.jp/organizer/service/bihin/" target="_blank" rel="noopener">会議室共通備品</a>。希望提出〆切はPAB担当の方と確認
+    </div>
+  </div>
+</div>
+
+<div class="ge-section">
+  <div class="ge-section-title">当日人員計画</div>
+  <div style="overflow-x:auto">
+  <table class="ge-common-table" style="min-width:640px">
+    <thead>
+      <tr>
+        <th style="width:20%">メンバー</th>
+        <th style="width:28%">稼働時間・範囲</th>
+        <th style="width:12%">ステータス</th>
+        <th style="width:40%">備考</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>赤羽さん</strong></td><td>朝〜SEED終了まで</td><td><span class="pab-st pab-st-done">確定</span></td><td>終日対応OK</td></tr>
+      <tr><td><strong>横堀さん</strong></td><td>10:00〜15:00</td><td><span class="pab-st pab-st-done">確定</span></td><td></td></tr>
+      <tr><td><strong>野村さん</strong></td><td>時間未定</td><td><span class="pab-st pab-st-wait">参加予定</span></td><td>写真撮影の依頼窓口（→コムラさん）</td></tr>
+      <tr><td><strong>川名さん</strong></td><td>時間未定</td><td><span class="pab-st pab-st-wait">参加予定</span></td><td>②演出家講座で上田さん不可の場合は聞き手</td></tr>
+      <tr><td><strong>倉沢さん</strong></td><td>時間未定</td><td><span class="pab-st pab-st-wait">参加予定</span></td><td></td></tr>
+      <tr><td><strong>佐々木さん</strong></td><td>時間未定</td><td><span class="pab-st pab-st-wait">参加予定</span></td><td></td></tr>
+      <tr><td><strong>鈴木さん</strong></td><td>時間未定</td><td><span class="pab-st pab-st-wait">参加予定</span></td><td></td></tr>
+      <tr><td><strong>遠藤さん</strong></td><td>必要に応じて</td><td><span class="pab-st pab-st-wip">確認中</span></td><td>具体はこれから。こちらで必要であればという形</td></tr>
+      <tr><td><strong>大野さん</strong></td><td>—</td><td><span class="pab-st pab-st-wip">確認中</span></td><td>この後確認</td></tr>
+      <tr><td><strong>PAB手配（受付・案内）</strong></td><td>開場中 2名／開催中 1名の可能性</td><td><span class="pab-st pab-st-wait">会場側手配</span></td><td>ラウンジと併せて2名想定</td></tr>
+    </tbody>
+  </table>
+  </div>
 </div>
 
 <div class="ge-section">
@@ -6168,38 +6364,52 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 </div>
 
 <div class="ge-section">
-  <div class="ge-section-title">当日タイムライン ── メイン会場（①〜④）と別会場（⑤）</div>
+  <div class="ge-section-title">当日タイムライン ── 会場利用 9:00〜21:00（設営・撤収込み）</div>
   <div class="pab-tl-scroll">
     <div class="pab-tl">
       <div class="pab-tl-head" style="grid-column:2">メイン会場（①〜④）</div>
       <div class="pab-tl-head" style="grid-column:3">別会場（⑤）</div>
 
-      <div class="pab-tick" style="grid-row:2">11:00</div><div class="pab-rule" style="grid-row:2"></div>
-      <div class="pab-tick" style="grid-row:6">12:00</div><div class="pab-rule" style="grid-row:6"></div>
-      <div class="pab-tick" style="grid-row:10">13:00</div><div class="pab-rule" style="grid-row:10"></div>
-      <div class="pab-tick" style="grid-row:14">14:00</div><div class="pab-rule" style="grid-row:14"></div>
-      <div class="pab-tick" style="grid-row:18">15:00</div><div class="pab-rule" style="grid-row:18"></div>
-      <div class="pab-tick" style="grid-row:22">16:00</div><div class="pab-rule" style="grid-row:22"></div>
-      <div class="pab-tick" style="grid-row:26">17:00</div><div class="pab-rule" style="grid-row:26"></div>
+      <div class="pab-tick" style="grid-row:2">9:00</div><div class="pab-rule" style="grid-row:2"></div>
+      <div class="pab-tick" style="grid-row:6">10:00</div><div class="pab-rule" style="grid-row:6"></div>
+      <div class="pab-tick" style="grid-row:10">11:00</div><div class="pab-rule" style="grid-row:10"></div>
+      <div class="pab-tick" style="grid-row:14">12:00</div><div class="pab-rule" style="grid-row:14"></div>
+      <div class="pab-tick" style="grid-row:18">13:00</div><div class="pab-rule" style="grid-row:18"></div>
+      <div class="pab-tick" style="grid-row:22">14:00</div><div class="pab-rule" style="grid-row:22"></div>
+      <div class="pab-tick" style="grid-row:26">15:00</div><div class="pab-rule" style="grid-row:26"></div>
+      <div class="pab-tick" style="grid-row:30">16:00</div><div class="pab-rule" style="grid-row:30"></div>
+      <div class="pab-tick" style="grid-row:34">17:00</div><div class="pab-rule" style="grid-row:34"></div>
+      <div class="pab-tick" style="grid-row:38">18:00</div><div class="pab-rule" style="grid-row:38"></div>
+      <div class="pab-tick" style="grid-row:42">19:00</div><div class="pab-rule" style="grid-row:42"></div>
+      <div class="pab-tick" style="grid-row:46">20:00</div><div class="pab-rule" style="grid-row:46"></div>
+      <div class="pab-tick" style="grid-row:50">21:00</div><div class="pab-rule" style="grid-row:50"></div>
 
-      <div class="pab-block pab-producer" style="grid-row:2 / span 6">
+      <div class="pab-block pab-ops" style="grid-row:2 / span 8">
+        <span class="pab-b-time">9:00–11:00</span>
+        <span class="pab-b-name">設営・準備（当日搬入・機材セッティング・受付準備）</span>
+      </div>
+      <div class="pab-block pab-producer" style="grid-row:10 / span 6">
         <span class="pab-b-time">11:00–12:30</span>
         <span class="pab-b-name">① プロデューサー講座「未来のプロデューサーを考える」</span>
         <span class="pab-b-format">座談会 → ワークショップ → 振り返り</span>
       </div>
-      <div class="pab-block pab-director" style="grid-row:10 / span 6">
+      <div class="pab-block pab-director" style="grid-row:18 / span 6">
         <span class="pab-b-time">13:00–14:30</span>
         <span class="pab-b-name">② 演出家講座</span>
         <span class="pab-b-format">座談会 → ワークショップ → 振り返り</span>
       </div>
-      <div class="pab-block pab-seed" style="grid-row:18 / span 3">
+      <div class="pab-block pab-seed" style="grid-row:26 / span 3">
         <span class="pab-b-time">15:00–15:45</span>
         <span class="pab-b-name">③ SEEDプログラム説明会</span>
       </div>
-      <div class="pab-block pab-playwright" style="grid-row:22 / span 6">
+      <div class="pab-block pab-playwright" style="grid-row:30 / span 6">
         <span class="pab-b-time">16:00–17:30</span>
         <span class="pab-b-name">④ 劇作家講座（阿部さん）</span>
         <span class="pab-b-format">座談会 → ワークショップ → 振り返り</span>
+      </div>
+      <div class="pab-block pab-ops" style="grid-row:36 / span 14">
+        <span class="pab-b-time">17:30–21:00</span>
+        <span class="pab-b-name">撤収・原状回復（21:00まで利用可）</span>
       </div>
 
       <div class="pab-sideband">
@@ -6208,17 +6418,6 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
         <span>CINRAに企画依頼<br>2人掛け＋機材ブース</span>
       </div>
     </div>
-  </div>
-</div>
-
-<div class="ge-section">
-  <div class="ge-section-title">調整中・確認事項</div>
-  <div style="display:flex;flex-direction:column;gap:8px;font-size:12.5px;line-height:1.7">
-    <div><span class="pab-badge pab-wip">調整中</span> ① 時田さんの事前MTG日程と「質問預かり」の運用（当日NG／井川さん・小嶋さんは参加OK）</div>
-    <div><span class="pab-badge pab-wip">調整中</span> ② 上田一豪さんの登壇可否。難しい場合は川名さんが話を伺う形式に切り替え</div>
-    <div><span class="pab-badge pab-wip">調整中</span> ⑤ CINRAへの企画依頼、およびブース（2人掛け＋機材設置・終日使用）の確保</div>
-    <div><span class="pab-badge pab-main">前提</span> ②③は前半の時間帯（26日13時台など）で確保できると望ましい</div>
-    <div><span class="pab-badge pab-main">前提</span> 各講座は「リサーチ報告会 兼 プレ講座」の建付けで揃える</div>
   </div>
 </div>
 
