@@ -2806,10 +2806,10 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   border-radius:12px;
   padding:1rem
 }
-.pab-event.pab-producer, .pab-block.pab-producer { border-left-color:var(--producer) }
-.pab-event.pab-director, .pab-block.pab-director { border-left-color:var(--director) }
-.pab-event.pab-seed, .pab-block.pab-seed { border-left-color:var(--seed) }
-.pab-event.pab-playwright, .pab-block.pab-playwright { border-left-color:var(--playwright) }
+.pab-event.pab-producer, .pab-block.pab-producer, .pab-todo-card.pab-producer { border-left-color:var(--producer) }
+.pab-event.pab-director, .pab-block.pab-director, .pab-todo-card.pab-director { border-left-color:var(--director) }
+.pab-event.pab-seed, .pab-block.pab-seed, .pab-todo-card.pab-seed { border-left-color:var(--seed) }
+.pab-event.pab-playwright, .pab-block.pab-playwright, .pab-todo-card.pab-playwright { border-left-color:var(--playwright) }
 .pab-event-head {
   display:flex;
   align-items:center;
@@ -2973,6 +2973,50 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   color:var(--text-primary);
   font-family:'DM Mono','Noto Sans JP',monospace
 }
+.pab-todo-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px
+}
+@media (max-width:700px) {
+  .pab-todo-grid { grid-template-columns:1fr }
+}
+.pab-todo-card {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-left:4px solid var(--border);
+  border-radius:12px;
+  padding:12px 14px
+}
+.pab-todo-card .pab-todo-head {
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:8px
+}
+.pab-todo-list {
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  font-size:12px;
+  color:var(--text-secondary);
+  line-height:1.7
+}
+.pab-todo-list li {
+  padding-left:1.4em;
+  text-indent:-1.4em
+}
+.pab-todo-list li::before {
+  content:"☐";
+  margin-right:6px;
+  color:var(--text-tertiary)
+}
+.pab-todo-empty {
+  font-size:12px;
+  color:var(--text-tertiary);
+  padding:6px 0
+}
+.pab-todo-list .pab-st { margin-left:6px }
 </style>
 </head>
 <body>
@@ -6258,29 +6302,45 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
         <td><span class="pab-st pab-st-todo">未着手</span></td>
         <td>他にも諸々あるため、制作まわりのタスクをDBに整理する</td>
       </tr>
-      <tr>
-        <td><strong>① 時田さん事前MTG・質問預かり</strong></td>
-        <td>企画</td>
-        <td>制作チーム</td>
-        <td><span class="pab-st pab-st-wip">調整中</span></td>
-        <td>当日はスケジュールNG。事前MTGで座談会内容にご意見をいただき、質問を預かる形式を想定</td>
-      </tr>
-      <tr>
-        <td><strong>② 上田一豪さん登壇可否</strong></td>
-        <td>企画</td>
-        <td>制作チーム</td>
-        <td><span class="pab-st pab-st-wip">調整中</span></td>
-        <td>難しい場合は川名さんが話を伺う形式に切り替え</td>
-      </tr>
-      <tr>
-        <td><strong>⑤ CINRA企画依頼・ブース確保</strong></td>
-        <td>企画</td>
-        <td>制作チーム</td>
-        <td><span class="pab-st pab-st-wip">調整中</span></td>
-        <td>2人が座れて機材が置けるブースまたはスペースを終日確保</td>
-      </tr>
     </tbody>
   </table>
+  </div>
+  <div style="font-size:11.5px;color:var(--text-tertiary);margin-top:8px">※講座内容に関わるタスクは下記「講座別ToDoリスト」で管理</div>
+</div>
+
+<div class="ge-section">
+  <div class="ge-section-title">講座別ToDoリスト</div>
+  <div class="pab-todo-grid">
+
+    <div class="pab-todo-card pab-producer">
+      <div class="pab-todo-head">① プロデューサー講座</div>
+      <ul class="pab-todo-list">
+        <li>時田さんの事前MTG日程調整（座談会内容へのご意見をいただく）<span class="pab-st pab-st-wip">調整中</span></li>
+        <li>時田さんから預かる質問の取りまとめ（当日はスケジュールNG）</li>
+      </ul>
+    </div>
+
+    <div class="pab-todo-card pab-director">
+      <div class="pab-todo-head">② 演出家講座</div>
+      <ul class="pab-todo-list">
+        <li>上田一豪さんの登壇可否確認（難しい場合は川名さんが聞き手に切り替え）<span class="pab-st pab-st-wip">調整中</span></li>
+        <li>スライド投影の手配（機材希望に含める）</li>
+      </ul>
+    </div>
+
+    <div class="pab-todo-card pab-playwright">
+      <div class="pab-todo-head">④ 劇作家講座</div>
+      <div class="pab-todo-empty">ToDo未登録</div>
+    </div>
+
+    <div class="pab-todo-card">
+      <div class="pab-todo-head">⑤ 一般教養講座</div>
+      <ul class="pab-todo-list">
+        <li>CINRAへの企画依頼 <span class="pab-st pab-st-wip">調整中</span></li>
+        <li>収録ブースの確保（2人が座れて機材が置けるスペース・終日）<span class="pab-st pab-st-wip">調整中</span></li>
+      </ul>
+    </div>
+
   </div>
 </div>
 
@@ -6325,11 +6385,11 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
     <tbody>
       <tr><td><strong>赤羽さん</strong></td><td>朝〜SEED終了まで</td><td><span class="pab-st pab-st-done">確定</span></td><td>終日対応OK</td></tr>
       <tr><td><strong>横堀さん</strong></td><td>10:00〜15:00</td><td><span class="pab-st pab-st-done">確定</span></td><td></td></tr>
-      <tr><td><strong>野村さん</strong></td><td>時間未定</td><td><span class="pab-st pab-st-wait">参加予定</span></td><td>写真撮影の依頼窓口（→コムラさん）</td></tr>
-      <tr><td><strong>川名さん</strong></td><td>時間未定</td><td><span class="pab-st pab-st-wait">参加予定</span></td><td>②演出家講座で上田さん不可の場合は聞き手</td></tr>
-      <tr><td><strong>倉沢さん</strong></td><td>時間未定</td><td><span class="pab-st pab-st-wait">参加予定</span></td><td></td></tr>
-      <tr><td><strong>佐々木さん</strong></td><td>時間未定</td><td><span class="pab-st pab-st-wait">参加予定</span></td><td></td></tr>
-      <tr><td><strong>鈴木さん</strong></td><td>時間未定</td><td><span class="pab-st pab-st-wait">参加予定</span></td><td></td></tr>
+      <tr><td><strong>野村さん</strong></td><td>終日</td><td><span class="pab-st pab-st-done">確定</span></td><td>写真撮影の依頼窓口（→コムラさん）</td></tr>
+      <tr><td><strong>川名さん</strong></td><td>終日</td><td><span class="pab-st pab-st-done">確定</span></td><td>②演出家講座で上田さん不可の場合は聞き手</td></tr>
+      <tr><td><strong>倉沢さん</strong></td><td>終日</td><td><span class="pab-st pab-st-done">確定</span></td><td></td></tr>
+      <tr><td><strong>佐々木さん</strong></td><td>終日</td><td><span class="pab-st pab-st-done">確定</span></td><td></td></tr>
+      <tr><td><strong>鈴木さん</strong></td><td>終日</td><td><span class="pab-st pab-st-done">確定</span></td><td></td></tr>
       <tr><td><strong>遠藤さん</strong></td><td>必要に応じて</td><td><span class="pab-st pab-st-wip">確認中</span></td><td>具体はこれから。こちらで必要であればという形</td></tr>
       <tr><td><strong>大野さん</strong></td><td>—</td><td><span class="pab-st pab-st-wip">確認中</span></td><td>この後確認</td></tr>
       <tr><td><strong>PAB手配（受付・案内）</strong></td><td>開場中 2名／開催中 1名の可能性</td><td><span class="pab-st pab-st-wait">会場側手配</span></td><td>ラウンジと併せて2名想定</td></tr>
