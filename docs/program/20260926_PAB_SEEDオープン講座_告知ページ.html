@@ -1,0 +1,1306 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SEED PAB特別プログラム＆講座説明会｜2026.9.26（土）東京国際フォーラム</title>
+<meta name="description" content="劇作家・演出家・プロデューサーという舞台をつくる三つの仕事を、座談会・ワークショップ・説明会の3パートで体験できる一日。学生を中心にどなたでも参加OK・参加無料。2026年9月26日（土）11:00〜15:00、東京国際フォーラム ガラス棟7F 701会議室（Performing Arts Base 2026 内）。">
+<meta name="theme-color" content="#ffffff">
+
+<!-- SNSシェア用（OGP）。og:url と og:image は公開URLが決まったら差し替えてください -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:site_name" content="SEED">
+<meta property="og:title" content="SEED PAB特別プログラム＆講座説明会｜2026.9.26（土）東京国際フォーラム">
+<meta property="og:description" content="舞台芸術を、仕事にする。日本の舞台を、世界へ。三つの仕事に一日で出会う公開講座。どなたでも参加できます。参加無料・申込締切9月24日（木）。">
+<meta property="og:url" content="https://seed-open-course.vercel.app/">
+<meta property="og:image" content="https://seed-open-course.vercel.app/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+
+<style>
+  /* ══════════════════════════════════════
+     tokens
+     ══════════════════════════════════════ */
+  /* 本ページは白地＋グレーの単一デザインに固定する。
+     閲覧側のOSがダークモードでも反転させないため、
+     prefers-color-scheme / data-theme のブロックは意図的に持たない。 */
+  :root {
+    color-scheme: only light;
+
+    --ground:    #ffffff;
+    --ground-2:  #f4f5f6;   /* ロゴ台紙のグレー */
+    --surface:   #ffffff;
+    --ink:       #1a1c1e;
+    --ink-2:     #5f6469;
+    --ink-3:     #9aa0a5;
+    --mark:      #aeb2b5;   /* ロゴマークのグレー */
+    --line:      #e3e5e7;
+    --line-2:    #cfd2d5;
+    --shadow:    rgba(26,28,30,.09);
+
+    --display: "Futura", "Century Gothic", "Avenir Next", "Avenir", "Trebuchet MS", "Hiragino Sans", sans-serif;
+    --gothic:  "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic Medium", "Yu Gothic", Meiryo, sans-serif;
+
+    --pad: 1.15rem;         /* 画面端の余白（モバイル基準） */
+
+    /* 角丸：SEEDロゴの曲線に合わせたデザインシステム */
+    --r-pill: 999px;        /* タグ・チップ類 */
+    --r-sm:   12px;         /* ボタン・小さなセル */
+    --r-md:   18px;         /* カード・グリッド・モーダル */
+    --r-lg:   28px;         /* セクションのパネル */
+  }
+
+  /* ══════════════════════════════════════
+     base（モバイルファースト）
+     ══════════════════════════════════════ */
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--gothic);
+    font-size: 16px;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+    word-break: auto-phrase;   /* 日本語の折り返しを文節単位に */
+    overflow-wrap: break-word;
+    /* 固定CTAバーぶんの余白（モバイル・デスクトップ共通で常時表示） */
+    padding-bottom: calc(5.4rem + env(safe-area-inset-bottom));
+  }
+  a { color: inherit; }
+  img { max-width: 100%; height: auto; display: block; }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+  .visually-hidden {
+    position: absolute; width: 1px; height: 1px; overflow: hidden;
+    clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+  }
+
+  .wrap {
+    max-width: 62rem; margin: 0 auto;
+    padding-left: max(var(--pad), env(safe-area-inset-left));
+    padding-right: max(var(--pad), env(safe-area-inset-right));
+  }
+
+  .en {
+    font-family: var(--display);
+    letter-spacing: .18em; text-transform: uppercase;
+    font-variant-numeric: tabular-nums;
+    word-break: keep-all;
+  }
+
+  /* ══ masthead ══ */
+  .mast { border-bottom: 1px solid var(--line); position: sticky; top: 0; background: var(--ground); z-index: 10; }
+  .mast .wrap {
+    display: flex; align-items: center; gap: .7rem;
+    padding-top: .95rem; padding-bottom: .95rem;
+  }
+  .logo-img { height: 34px; width: auto; }
+  .logo-word {
+    font-family: var(--display); font-size: 1.2rem; letter-spacing: .12em;
+    font-weight: 400; color: var(--ink); line-height: 1;
+  }
+  .mast-nav { margin-left: auto; display: none; gap: 1.6rem; }
+  .mast-nav a {
+    font-family: var(--display); font-size: .68rem; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--ink-2); text-decoration: none;
+  }
+  .mast-nav a:hover { color: var(--ink); }
+
+  /* ══ hero ══ */
+  .hero { border-bottom: 1px solid var(--line); }
+  .hero .wrap { padding-top: 2.6rem; padding-bottom: 2.6rem; display: grid; gap: 2rem; }
+  .hero-eyebrow {
+    font-size: .68rem; color: var(--ink-2); margin: 0;
+    display: flex; align-items: center; gap: .8rem;
+  }
+  .hero-eyebrow::after {
+    content: ""; flex: 1; height: 1px;
+    background: linear-gradient(to right, var(--line-2), transparent);
+  }
+  .hero h1 {
+    font-size: clamp(1.6rem, 6.6vw, 3rem);
+    font-weight: 600; letter-spacing: .03em; line-height: 1.5;
+    margin: 0; text-wrap: balance;
+  }
+  .hero h1 .lift {
+    display: block; color: var(--ink-3);
+    font-size: .46em; letter-spacing: .16em; font-weight: 400; margin-bottom: .9rem;
+  }
+  /* 見出しは文節単位でのみ改行させる（「仕/事」のような分断を防ぐ） */
+  .hero h1 .seg { display: inline-block; white-space: nowrap; }
+  .hero-sub { margin: 0; max-width: 33em; color: var(--ink-2); font-size: .97rem; }
+
+  /* 開催情報：スペック表のグリッド */
+  .facts {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+    background: var(--line); border: 1px solid var(--line);
+    border-radius: var(--r-md); overflow: hidden;
+    margin: 0;
+  }
+  .fact { background: var(--surface); padding: .85rem 1rem .95rem; display: grid; gap: .1rem; align-content: start; margin: 0; }
+  .fact.span2 { grid-column: 1 / -1; }
+  .fact dt {
+    font-family: var(--display); font-size: .58rem; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .fact dd { margin: 0; font-weight: 600; font-size: .95rem; line-height: 1.6; }
+  /* 補足は2段目として必ず改行させる */
+  .fact dd .sm { display: block; font-weight: 400; font-size: .8rem; color: var(--ink-2); }
+  .fact dd.num { font-family: var(--display); font-variant-numeric: tabular-nums; letter-spacing: .04em; font-weight: 400; font-size: 1.25rem; }
+  .fact dd.num .dow { font-size: .55em; letter-spacing: .2em; color: var(--ink-3); margin-left: .5em; }
+
+  .hero-cta { display: grid; gap: .85rem; }
+  .btn {
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    width: 100%; text-decoration: none;
+    background: var(--ink); color: var(--ground);
+    border-radius: var(--r-sm);
+    font-family: var(--display); font-size: .84rem; letter-spacing: .14em; text-transform: uppercase;
+    padding: 1.05rem 1.4rem; min-height: 48px;
+    transition: opacity .16s ease, transform .16s ease;
+  }
+  .btn .arr { font-family: var(--gothic); transition: transform .16s ease; }
+  .btn:hover { opacity: .84; }
+  .btn:hover .arr { transform: translateX(4px); }
+  .btn:active { transform: scale(.99); }
+  .btn-note { font-size: .8rem; color: var(--ink-3); line-height: 1.7; }
+
+  /* ══ sections ══ */
+  main { display: grid; gap: 0; }
+  .sec > .wrap { display: grid; gap: 1.4rem; padding-top: 3rem; padding-bottom: 3.4rem; }
+
+  /* セクションを1つおきに淡いグレーのパネルにして、
+     どこで区切れているかを地色の切り替わりで示す（罫線1本より圧倒的に分かりやすい）。
+     角を丸めることでロゴの曲線言語に揃え、パネルが積み重なって見えるようにする。 */
+  main > .sec:nth-of-type(even) {
+    background: var(--ground-2);
+    border-radius: var(--r-lg);
+  }
+  /* 淡グレーのパネル上では、同じ色の要素を白に反転させて沈まないようにする */
+  main > .sec:nth-of-type(even) .apply { background: var(--surface); border: 1px solid var(--line); }
+  main > .sec:nth-of-type(even) .tbd,
+  main > .sec:nth-of-type(even) .fmt { background: var(--surface); }
+
+  .sec-head { display: grid; grid-template-columns: auto 1fr; align-items: baseline; gap: .2rem 1.1rem; }
+  .sec-head .kicker {
+    font-size: .64rem; color: var(--ink-2); grid-column: 1 / -1;
+    display: flex; align-items: center; gap: .6rem;
+  }
+  /* セクションの開始を示す小さな丸バー */
+  .sec-head .kicker::before {
+    content: ""; flex: none;
+    width: 14px; height: 2px; border-radius: var(--r-pill);
+    background: var(--mark);
+  }
+  .sec-head h2 { font-size: 1.3rem; font-weight: 600; letter-spacing: .05em; margin: 0; text-wrap: balance; }
+  /* 見出しの罫線は右端がふわっと消えるグラデーション（硬い直線を避ける） */
+  .sec-head .rule {
+    height: 1px; align-self: center; border-radius: var(--r-pill);
+    background: linear-gradient(to right, var(--line-2), var(--line) 60%, transparent);
+  }
+
+  p { margin: 0; }
+  .lede { max-width: 38em; display: grid; gap: .9rem; }
+  .lede p { color: var(--ink-2); }
+  .lede .drop { font-size: 1.08rem; line-height: 1.8; letter-spacing: .01em; font-weight: 600; color: var(--ink); }
+
+  /* 補足の囲み（PABの説明など、本文とは別レイヤーの情報） */
+  .note-card {
+    border: 1px solid var(--line); background: var(--surface);
+    border-radius: var(--r-md); padding: 1.1rem 1.2rem 1.25rem;
+    display: grid; gap: .5rem; max-width: 44em;
+  }
+  .note-card-h {
+    justify-self: start;
+    font-family: var(--display); font-size: .62rem; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--ink-2); border: 1px solid var(--line-2); padding: .22rem .8rem;
+    border-radius: var(--r-pill);
+  }
+  .note-card p { font-size: .88rem; color: var(--ink-2); }
+  .note-card p b { color: var(--ink); font-weight: 600; }
+
+  /* ══ 参加形式（順次 vs 同時） ══ */
+  .how { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; }
+  .how-item { background: var(--surface); padding: 1.15rem 1.2rem 1.25rem; display: grid; gap: .45rem; align-content: start; }
+  .how-tag {
+    justify-self: start;
+    font-family: var(--display); font-size: .62rem; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--ink-2); border: 1px solid var(--line-2); padding: .22rem .8rem;
+    border-radius: var(--r-pill);
+  }
+  .how-item .h { font-weight: 700; font-size: 1rem; line-height: 1.65; }
+  .how-item .d { font-size: .86rem; color: var(--ink-2); }
+  .how-item .h b { border-bottom: 2px solid var(--mark); padding-bottom: .1em; }
+
+  /* ══ timetable ══ */
+  .tt { display: grid; border-top: 1px solid var(--line); }
+  .tt-row {
+    display: grid; gap: .4rem;
+    padding: 1.15rem 0 1.3rem; border-bottom: 1px solid var(--line);
+  }
+  .tt-time {
+    font-family: var(--display); font-variant-numeric: tabular-nums;
+    font-size: .84rem; letter-spacing: .05em; color: var(--ink); line-height: 1.6;
+    word-break: keep-all; white-space: nowrap;
+  }
+  .tt-row.is-quiet .tt-time { color: var(--ink-3); }
+  .tt-body { display: grid; gap: .35rem; }
+  .tt-name { font-weight: 700; font-size: 1.02rem; letter-spacing: .02em; line-height: 1.6; }
+  .tt-row.is-quiet .tt-name { font-weight: 400; color: var(--ink-2); }
+  .tt-desc { font-size: .88rem; color: var(--ink-2); }
+
+  .fmt {
+    justify-self: start;
+    font-family: var(--display); font-size: .6rem; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--ink-2); background: var(--ground-2); padding: .24rem .8rem;
+    border-radius: var(--r-pill);
+  }
+
+  /* 順次開催：モバイルは縦（↓）、デスクトップは横（→）のチェーン */
+  .seq { display: flex; flex-direction: column; align-items: stretch; gap: .3rem; margin-top: .35rem; }
+  .seq-cell {
+    border: 1px solid var(--line-2); background: var(--surface);
+    border-radius: var(--r-sm);
+    padding: .5rem .8rem;
+    display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+  }
+  .seq-cell .r { font-family: var(--display); font-size: .6rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); }
+  .seq-cell .t { font-family: var(--display); font-size: .78rem; letter-spacing: .06em; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .seq-arrow { color: var(--ink-3); font-size: .85rem; align-self: center; transform: rotate(90deg); }
+
+  /* 同時開催：縦に並ぶ3列 */
+  .par { display: grid; grid-template-columns: repeat(3, 1fr); gap: .45rem; margin-top: .35rem; }
+  .par-cell {
+    border: 1px solid var(--line-2); background: var(--surface);
+    border-top: 3px solid var(--mark);
+    border-radius: var(--r-sm);
+    padding: .55rem .7rem .6rem; display: grid; gap: .05rem; align-content: start;
+  }
+  .par-cell .r { font-family: var(--display); font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink); }
+  .par-cell .d { font-size: .72rem; color: var(--ink-2); line-height: 1.6; }
+  .tt-foot { font-size: .8rem; color: var(--ink-3); margin-top: .3rem; }
+
+  /* ══ courses ══ */
+  .courses { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; }
+  .course {
+    background: var(--surface); padding: 1.5rem 1.3rem 1.7rem;
+    display: grid; gap: .85rem; align-content: start;
+    transition: background .18s ease;
+  }
+  .course:hover { background: var(--ground-2); }
+  .course-index {
+    display: flex; align-items: baseline; gap: .65rem;
+    font-family: var(--display); font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-3);
+    word-break: keep-all;
+  }
+  .course-index .n { font-size: 1.5rem; letter-spacing: 0; color: var(--mark); line-height: 1; }
+  .course h3 { font-size: 1.1rem; font-weight: 700; letter-spacing: .02em; line-height: 1.6; margin: 0; text-wrap: balance; }
+  .course dl { margin: 0; display: grid; gap: .7rem; }
+  .course dt { font-family: var(--display); font-size: .62rem; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3); }
+  .course dd { margin: 0; font-size: .88rem; color: var(--ink-2); }
+  .course dd b { color: var(--ink); font-weight: 600; }
+
+  /* ══ speakers ══ */
+  .speakers { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem .9rem; }
+  .spk { display: grid; gap: .5rem; align-content: start; }
+  .spk-photo {
+    aspect-ratio: 4 / 5; background: var(--ground-2);
+    border-radius: var(--r-md); overflow: hidden;
+    display: grid; place-content: center; gap: .3rem; text-align: center;
+  }
+  .spk-photo .ini { font-size: 1.35rem; color: var(--mark); letter-spacing: .08em; }
+  .spk-photo .ph { font-family: var(--display); font-size: .56rem; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-3); }
+  .spk-role { font-family: var(--display); font-size: .62rem; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3); }
+  .spk-name { margin: 0; font-size: 1.02rem; font-weight: 700; letter-spacing: .04em; line-height: 1.45; }
+  .spk-name .ruby { display: block; font-size: .64rem; letter-spacing: .08em; color: var(--ink-3); font-weight: 400; margin-top: .15rem; }
+  .spk-affil { font-size: .79rem; color: var(--ink-2); line-height: 1.7; }
+  .spk-affil .title { display: block; color: var(--ink-3); }
+  .spk-bio { font-size: .81rem; line-height: 1.8; color: var(--ink-2); }
+
+  /* 差し替え用マーカー：本番公開時はこの class を外す */
+  .tbd {
+    border: 1px dashed var(--line-2); background: var(--ground-2);
+    border-radius: var(--r-sm);
+    color: var(--ink-2); padding: .4rem .65rem; font-size: .77rem; line-height: 1.7;
+  }
+  .tbd::before {
+    content: "要差し替え"; display: block;
+    font-family: var(--display); font-size: .56rem; letter-spacing: .16em;
+    color: var(--ink-3); margin-bottom: .1rem;
+  }
+
+  /* ══ apply ══ */
+  #apply { scroll-margin-top: 4rem; }
+  .apply { display: grid; gap: 1.5rem; background: var(--ground-2); border-radius: var(--r-md); padding: 1.5rem var(--pad) 1.7rem; }
+  .apply-steps { display: grid; gap: 1rem; counter-reset: step; }
+  .apply-step {
+    display: grid; grid-template-columns: 2rem 1fr; gap: .15rem .7rem;
+    padding-bottom: 1rem; border-bottom: 1px solid var(--line-2);
+  }
+  .apply-step:last-child { border-bottom: 0; padding-bottom: 0; }
+  .apply-step::before {
+    counter-increment: step; content: counter(step, decimal-leading-zero);
+    font-family: var(--display); font-size: .78rem; letter-spacing: .08em; color: var(--mark);
+    grid-row: 1 / span 2; padding-top: .35rem;
+  }
+  .apply-step .st-h { font-weight: 700; font-size: .96rem; letter-spacing: .02em; line-height: 1.6; }
+  .apply-step .st-d { font-size: .87rem; color: var(--ink-2); }
+  .apply-step .st-d ul { margin: .35rem 0; padding-left: 0; list-style: none; display: grid; gap: .15rem; }
+  .apply-step .st-d li { padding-left: 1em; text-indent: -1em; }
+  .apply-step .st-d li::before { content: "─ "; color: var(--ink-3); }
+
+  /* ワークショップの選択肢：講座名と対象をひとまとめのカードで示す */
+  .ws-choices { gap: .5rem !important; margin: .6rem 0 .8rem !important; }
+  .ws-choices li {
+    padding: .7rem .85rem !important; text-indent: 0 !important;
+    background: var(--ground-2); border: 1px solid var(--line);
+    border-radius: var(--r-sm);
+    display: grid; gap: .1rem;
+  }
+  .ws-choices li::before { content: none !important; }
+  .ws-role {
+    font-family: var(--display); font-size: .6rem; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .ws-title { font-weight: 700; color: var(--ink); font-size: .9rem; line-height: 1.55; }
+  .ws-cap { font-size: .78rem; color: var(--ink-2); }
+  .ws-cap b { color: var(--ink); font-weight: 700; }
+  .apply-foot { font-size: .81rem; color: var(--ink-3); line-height: 1.75; }
+
+  /* ══ outline ══ */
+  .outline { display: grid; margin: 0; border-top: 1px solid var(--line); }
+  .outline-row {
+    display: grid; gap: .1rem;
+    padding: .85rem 0; border-bottom: 1px solid var(--line); font-size: .89rem;
+  }
+  .outline-row dt { font-size: .72rem; font-weight: 700; color: var(--ink-3); letter-spacing: .1em; }
+  .outline-row dd { margin: 0; color: var(--ink-2); }
+  .outline-row dd b { color: var(--ink); font-weight: 600; }
+  .outline-row dd a { color: var(--ink); text-underline-offset: .2em; }
+
+  .notes { font-size: .84rem; color: var(--ink-2); margin: 0; padding-left: 0; list-style: none; display: grid; gap: .4rem; }
+  .notes li { padding-left: 1.1em; text-indent: -1.1em; }
+  .notes li::before { content: "※ "; color: var(--ink-3); }
+
+  footer { background: var(--ground-2); }
+  footer .wrap {
+    padding-top: 1.7rem; padding-bottom: 2rem;
+    display: grid; gap: 1.2rem;
+    font-size: .78rem; color: var(--ink-3);
+  }
+  footer .f-brand { display: grid; gap: .5rem; justify-items: start; }
+  footer .f-logo { height: 30px; width: auto; }
+  footer .f-name { font-family: var(--display); font-size: .95rem; letter-spacing: .14em; color: var(--ink); }
+
+  /* ══ モバイル固定CTA ══ */
+  .sticky-cta {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
+    background: var(--ground); border-top: 1px solid var(--line);
+    border-radius: var(--r-md) var(--r-md) 0 0;
+    box-shadow: 0 -2px 14px var(--shadow);
+    padding: .6rem max(var(--pad), env(safe-area-inset-left)) calc(.6rem + env(safe-area-inset-bottom));
+    display: grid; grid-template-columns: 1fr auto; align-items: center; gap: .8rem;
+  }
+  .sticky-cta .sc-info { display: grid; gap: 0; line-height: 1.4; min-width: 0; }
+  .sticky-cta .sc-date { font-family: var(--display); font-size: .82rem; letter-spacing: .06em; font-variant-numeric: tabular-nums; }
+  .sticky-cta .sc-note { font-size: .68rem; color: var(--ink-3); }
+  .sticky-cta .btn { width: auto; padding: .8rem 1.4rem; font-size: .76rem; letter-spacing: .12em; }
+
+  /* ══════════════════════════════════════
+     ≥ 40rem（大きめの端末・タブレット）
+     ══════════════════════════════════════ */
+  @media (min-width: 40rem) {
+    :root { --pad: 1.6rem; }
+    body { font-size: 15px; line-height: 1.9; }
+    .hero .wrap { padding-top: 3.8rem; padding-bottom: 3.2rem; gap: 2.3rem; }
+    .facts { grid-template-columns: repeat(4, 1fr); }
+    .fact.span2 { grid-column: auto; }
+    .fact.f-date { grid-column: 1 / -1; }
+    .hero-cta { grid-auto-flow: column; align-items: center; justify-content: start; gap: 1.4rem; }
+    .btn { display: inline-flex; width: auto; padding: .95rem 1.8rem; }
+    .sec > .wrap { padding-top: 3.4rem; padding-bottom: 3.8rem; }
+    .sec-head { grid-template-columns: auto auto 1fr; }
+    .sec-head .kicker { grid-column: auto; }
+    .how { grid-template-columns: 1fr 1fr; }
+    .fit-list { grid-template-columns: 1fr 1fr; }
+    .note-card { padding: 1.3rem 1.5rem 1.45rem; }
+    .gains { grid-template-columns: repeat(3, 1fr); }
+    .seq { flex-direction: row; flex-wrap: wrap; align-items: center; gap: .45rem; }
+    .seq-cell { display: grid; gap: 0; min-width: 6.4rem; padding: .5rem .9rem; }
+    .seq-arrow { transform: none; align-self: auto; }
+    .tt-row { grid-template-columns: 8rem 1fr; gap: 0 1.5rem; }
+    .outline-row { grid-template-columns: 8.5rem 1fr; gap: .2rem 1.4rem; }
+    .apply { padding: 2rem 1.8rem 2.2rem; }
+    .speakers { gap: 1.7rem 1.3rem; }
+    footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 1rem 2rem; }
+
+    /* 申込バー（可動フッター）：画面幅いっぱいをやめ、中央に浮かぶ操作パネルにする */
+    .sticky-cta {
+      left: 50%; right: auto; transform: translateX(-50%);
+      width: min(calc(100% - 2rem), 44rem);
+      bottom: 1rem;
+      padding: .7rem .8rem .7rem 1.5rem;
+      border: 1px solid var(--line);
+      border-radius: var(--r-pill);
+      box-shadow: 0 6px 28px var(--shadow);
+    }
+    .sticky-cta .btn { border-radius: var(--r-pill); }
+  }
+
+  /* ══════════════════════════════════════
+     ≥ 54rem（デスクトップ）
+     ══════════════════════════════════════ */
+  @media (min-width: 54rem) {
+    .mast .wrap { padding-top: 1.1rem; padding-bottom: 1.1rem; }
+    .logo-img { height: 38px; }
+    .mast-nav { display: flex; }
+    .facts { grid-template-columns: minmax(14rem, 1.4fr) repeat(4, 1fr); }
+    .fact.f-date { grid-column: auto; grid-row: 1; }
+    .how { grid-template-columns: repeat(3, 1fr); }
+    .courses { grid-template-columns: repeat(3, 1fr); }
+    .course { padding: 1.7rem 1.5rem 1.9rem; }
+    .speakers { grid-template-columns: repeat(4, 1fr); }
+    .spk-photo .ini { font-size: 1.6rem; }
+  }
+
+  /* ══ こんな人に（checklist） ══ */
+  .fit-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .55rem; }
+  .fit-list li {
+    display: flex; gap: .7rem; align-items: flex-start;
+    font-size: .92rem; color: var(--ink-2); line-height: 1.75;
+    border: 1px solid var(--line); background: var(--surface); padding: .75rem .95rem;
+    border-radius: var(--r-sm);
+  }
+  .fit-list li::before { content: "✓"; font-family: var(--display); color: var(--ink); flex: none; }
+  .fit-note { font-size: .85rem; color: var(--ink-3); }
+
+  .sub-h { font-size: 1.05rem; font-weight: 700; letter-spacing: .04em; margin: 1.2rem 0 0; }
+
+  /* ══ 得られるもの ══ */
+  .gains { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; counter-reset: gain; }
+  .gain { background: var(--surface); padding: 1.15rem 1.2rem 1.3rem; display: grid; gap: .3rem; align-content: start; }
+  .gain::before {
+    counter-increment: gain; content: counter(gain, decimal-leading-zero);
+    font-family: var(--display); font-size: 1.3rem; color: var(--mark); letter-spacing: .04em;
+  }
+  .gain .g-h { font-weight: 700; font-size: .97rem; line-height: 1.6; }
+  .gain .g-d { font-size: .86rem; color: var(--ink-2); }
+
+  /* ══ この先に続く道（path） ══ */
+  .path { display: grid; }
+  .path-step { display: grid; grid-template-columns: 1.1rem 1fr; gap: 0 1rem; }
+  .path-node { display: grid; grid-template-rows: auto 1fr; justify-items: center; }
+  .path-dot { width: 11px; height: 11px; border: 2px solid var(--ink); border-radius: 50%; background: var(--surface); margin-top: .45rem; }
+  .path-step.is-now .path-dot { background: var(--ink); }
+  .path-line { width: 1px; background: var(--line-2); border-radius: var(--r-pill); }
+  .path-step:last-child .path-line { display: none; }
+  .path-body { padding-bottom: 2rem; display: grid; gap: .35rem; align-content: start; }
+  .path-step:last-child .path-body { padding-bottom: .4rem; }
+  .path-when { font-family: var(--display); font-size: .66rem; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3); }
+  .path-h { font-weight: 700; font-size: 1.05rem; letter-spacing: .02em; line-height: 1.6; }
+  .path-d { font-size: .88rem; color: var(--ink-2); max-width: 38em; }
+
+  /* ══ FAQ ══ */
+  .faq { display: grid; border-top: 1px solid var(--line); }
+  .faq details { border-bottom: 1px solid var(--line); }
+  .faq summary {
+    cursor: pointer; list-style: none;
+    display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+    padding: 1rem 0; font-weight: 700; font-size: .95rem; line-height: 1.7;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: "＋"; color: var(--ink-3); font-weight: 400; flex: none; }
+  .faq details[open] summary::after { content: "−"; }
+  .faq .a { padding: 0 0 1.1rem; font-size: .88rem; color: var(--ink-2); max-width: 40em; }
+
+  /* ══ 共有ボタン ══ */
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: .6rem;
+    background: transparent; color: var(--ink);
+    border: 1px solid var(--line-2); cursor: pointer;
+    border-radius: var(--r-sm);
+    font-family: var(--display); font-size: .78rem; letter-spacing: .14em; text-transform: uppercase;
+    padding: .95rem 1.6rem; min-height: 48px;
+    transition: border-color .16s ease;
+  }
+  .btn-ghost:hover { border-color: var(--ink); }
+
+  /* ══ 講座カード：クリック可能なUI ══ */
+  .course[data-modal] { cursor: pointer; }
+  .course:focus-visible { outline: 2px solid var(--ink); outline-offset: -2px; }
+  .course-more {
+    justify-self: start; margin-top: .3rem;
+    display: inline-flex; align-items: center; gap: .5rem;
+    font-family: var(--display); font-size: .66rem; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--ink-2); border-bottom: 1px solid var(--line-2); padding-bottom: .2rem;
+    transition: color .16s ease, border-color .16s ease;
+  }
+  .course-more .arr { font-family: var(--gothic); transition: transform .16s ease; }
+  .course:hover .course-more { color: var(--ink); border-color: var(--ink); }
+  .course:hover .course-more .arr { transform: translateX(3px); }
+
+  /* ══ 講座詳細モーダル ══ */
+  .modal {
+    position: fixed; inset: 0; z-index: 50; display: none;
+    align-items: flex-end; justify-content: center;
+    background: rgba(26,28,30,.45);
+    isolation: isolate;
+  }
+  .modal.open { display: flex; }
+  .modal-panel {
+    position: relative;
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: var(--r-md) var(--r-md) 0 0;   /* モバイル：下から出るシート */
+    box-shadow: 0 -8px 32px var(--shadow);
+    width: 100%; max-width: 40rem; max-height: 88vh; overflow-y: auto;
+    padding: 1.7rem var(--pad) 2.2rem;
+    animation: rise .3s cubic-bezier(.2,.7,.3,1) both;
+  }
+  .modal-close {
+    position: absolute; top: .7rem; right: .7rem;
+    width: 44px; height: 44px; display: grid; place-content: center;
+    background: none; border: none; cursor: pointer;
+    border-radius: var(--r-pill);
+    font-size: 1.25rem; line-height: 1; color: var(--ink-2);
+    transition: background .16s ease, color .16s ease;
+  }
+  .modal-close:hover { color: var(--ink); background: var(--ground-2); }
+  .modal-head { display: grid; gap: .5rem; padding-right: 2.6rem; margin-bottom: 1.2rem; }
+  .modal-head h3 { font-size: 1.25rem; font-weight: 700; letter-spacing: .03em; line-height: 1.55; margin: 0; text-wrap: balance; }
+  .modal-dl { margin: 0; display: grid; gap: .9rem; }
+  .modal-dl dt {
+    font-family: var(--display); font-size: .64rem; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .modal-dl dd { margin: 0; font-size: .9rem; color: var(--ink-2); }
+  .modal-dl dd b { color: var(--ink); font-weight: 600; }
+  @media (min-width: 40rem) {
+    .modal { align-items: center; padding: 2rem; }
+    .modal-panel { padding: 2.1rem 2.2rem 2.4rem; border-radius: var(--r-md); box-shadow: 0 8px 32px var(--shadow); }
+  }
+
+  /* ══ motion ══ */
+  /* セクション見出しが視界に入るときに立ち上がる。
+     スクロール連動はJSではなくCSSのview timelineで行う（compositor処理のみでjankが出ない）。
+     未対応ブラウザでは @supports が偽になり、単に静止した状態で表示される。 */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .sec-head, .tt-row, .spk, .path-step, .faq details {
+        animation: rise linear both;
+        animation-timeline: view();
+        animation-range: entry 5% entry 40%;
+      }
+    }
+  }
+
+  .rise { animation: rise .75s cubic-bezier(.2,.7,.3,1) both; }
+  .rise:nth-child(2) { animation-delay: .05s; }
+  .rise:nth-child(3) { animation-delay: .1s; }
+  .rise:nth-child(4) { animation-delay: .15s; }
+  .rise:nth-child(5) { animation-delay: .2s; }
+  @keyframes rise { from { opacity: 0; transform: translateY(9px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .rise { animation: none; }
+    * { transition: none !important; }
+  }
+</style>
+</head>
+
+<body>
+
+<header class="mast">
+  <div class="wrap">
+    <!-- ロゴ：このHTMLと同じ階層に seed-logo.svg を置いてください。
+         読み込めない場合は自動でテキスト表記にフォールバックします。 -->
+    <img class="logo-img" src="seed-logo.svg" alt="SEED" width="437" height="200"
+         onerror="this.remove(); document.getElementById('logo-fallback').hidden = false;">
+    <span class="logo-word" id="logo-fallback" hidden>SEED</span>
+    <nav class="mast-nav">
+      <a href="#timetable">Timetable</a>
+      <a href="#courses">Courses</a>
+      <a href="#speakers">Speakers</a>
+      <a href="#program">Program</a>
+      <a href="#faq">FAQ</a>
+      <a href="#apply">Apply</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <p class="hero-eyebrow en rise">Performing Arts Base 2026</p>
+    <h1 class="rise"><span class="lift">SEED PAB特別プログラム＆講座説明会</span><span class="seg">舞台芸術を、</span><span class="seg">仕事にする。</span><br><span class="seg">日本の舞台を、</span><span class="seg">世界へ。</span></h1>
+    <p class="hero-sub rise">劇作家・演出家・プロデューサー。日本の舞台芸術を世界へ届けるために欠かせない三つの仕事を、<b>聴いて（座談会）</b>・<b>やってみて（ワークショップ）</b>・<b>この先を知る（説明会）</b>一日。学生のみなさんを中心に、どなたでも参加できます。</p>
+
+    <dl class="facts rise">
+      <div class="fact f-date span2">
+        <dt>Date</dt>
+        <dd class="num">2026.09.26<span class="dow en">Sat</span></dd>
+      </div>
+      <div class="fact">
+        <dt>Time</dt>
+        <dd>11:00 – 15:00<span class="sm">開場 10:30</span></dd>
+      </div>
+      <div class="fact">
+        <dt>Venue</dt>
+        <dd>東京国際フォーラム<span class="sm">ガラス棟7F 701会議室</span></dd>
+      </div>
+      <div class="fact">
+        <dt>料金</dt>
+        <dd>無料</dd>
+      </div>
+      <div class="fact">
+        <dt>対象</dt>
+        <dd>どなたでも<span class="sm">学生歓迎／ワークショップのみ年齢条件あり</span></dd>
+      </div>
+    </dl>
+
+    <div class="hero-cta rise">
+      <a class="btn" href="https://form.run/@seed-pab" target="_blank" rel="noopener"><span>参加を申し込む</span><span class="arr" aria-hidden="true">→</span><span class="visually-hidden">（別タブで開きます）</span></a>
+      <span class="btn-note">申込締切 9月24日（木）<br>定員に達し次第、受付を終了します</span>
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <!-- ── イントロ ── -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker en">About</span>
+        <h2>SEEDについて</h2>
+        <span class="rule"></span>
+      </div>
+      <div class="lede">
+        <p class="drop">SEEDは、舞台をつくる仕事をめざす人のための学びの場をつくっています。日本で生まれた作品を世界に届けられる人を育てたい、というのが出発点です。</p>
+        <p>劇作家・演出家・プロデューサーの3職能を対象に、国際的に通用するスキルとマインドセットを備えた人材を育成するためのプログラムを開発しています。この一年は、国内外の現場をまわるリサーチを重ねてきました。</p>
+        <p>9月26日は、その成果を交えた<b>座談会</b>、実際に手を動かす<b>ワークショップ</b>、そして今後のプログラムをご案内する<b>説明会</b>の3つを、一日で行います。</p>
+        <p class="fit-note">学校・部活動・ゼミなどでのご紹介も歓迎しています。</p>
+      </div>
+
+      <div class="note-card">
+        <span class="note-card-h">Performing Arts Base 2026 とは</span>
+        <p>東京都などが主催する「東京舞台芸術祭 2026」のショーケースイベントです。演劇・ダンス・大道芸などジャンルを越えたアーティストが集まり、各作品のエッセンスを約20分に凝縮したパフォーマンスやトークショーを上演します。SEEDのこの一日も、そのプログラムのひとつとして開催します。</p>
+        <p><b>会場では、SEEDの講座のほかにも一日を通してさまざまな舞台芸術を無料で自由に鑑賞できます。</b>行き帰りの時間に、気になる公演を覗いてみてください。</p>
+      </div>
+
+      <h3 class="sub-h">一日は、3つのパートでできています</h3>
+      <div class="how">
+        <div class="how-item">
+          <span class="how-tag">01 Talk ── 座談会</span>
+          <span class="h">午前・順番に3本 ── <b>すべて聴けます</b></span>
+          <span class="d">劇作家・演出家・プロデューサーの座談会を30分ずつ、続けて実施します。移動も選択も不要。<br><b>対象：どなたでも</b></span>
+        </div>
+        <div class="how-item">
+          <span class="how-tag">02 Workshop ── ワークショップ</span>
+          <span class="h">午後・3つ同時進行 ── <b>参加はひとつだけ</b></span>
+          <span class="d">職能ごとのテーブルに分かれて、実際に手を動かします。申込時にひとつお選びください。<br><b>対象：25歳まで</b>（26歳以上の方も見学できます）<br><b>定員：10〜20名</b>（講座により異なります）</span>
+        </div>
+        <div class="how-item">
+          <span class="how-tag">03 Guidance ── 説明会</span>
+          <span class="h">最後に20分 ── <b>参加は任意</b></span>
+          <span class="d">この秋から始まるSEEDの育成プログラムの内容と、参加のしかたをご案内します。<br><b>対象：どなたでも</b></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── こんな人に・得られるもの ── -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker en">For You</span>
+        <h2>こんな人に来てほしい</h2>
+        <span class="rule"></span>
+      </div>
+      <ul class="fit-list">
+        <li>観劇が好きで、「つくる側」が気になっている</li>
+        <li>映画・音楽・アニメなど、エンタメの世界で働くことに興味がある</li>
+        <li>物語やせりふを書くのが好き（劇作の経験は不要）</li>
+        <li>ライブやフェスのような「体験をつくる仕事」が気になる</li>
+        <li>文化祭やイベントの企画・運営が楽しかった</li>
+        <li>海外や留学に関心がある</li>
+        <li>舞台に関わりたいけれど、俳優以外の道を知らない</li>
+        <li>進路はまだ決まっていないが、好きなことを仕事にしたい</li>
+      </ul>
+      <p class="fit-note">ひとつでも当てはまったら、きっと楽しめます。演劇の経験も、舞台にくわしいことも必要ありません。</p>
+
+      <h3 class="sub-h">参加すると得られる3つのこと</h3>
+      <div class="gains">
+        <div class="gain">
+          <div class="g-h">第一線のプロに、直接聞ける</div>
+          <div class="g-d">少人数のワークショップに加えて、講師陣と同じテーブルを囲むランチ交流も。仕事のリアルも進路の疑問も、その場で本人に聞けます。</div>
+        </div>
+        <div class="gain">
+          <div class="g-h">三つの仕事を、一日で比べられる</div>
+          <div class="g-d">座談会は三職能すべて聴けるので、自分の興味がどこに向いているか、一日で確かめられます。</div>
+        </div>
+        <div class="gain">
+          <div class="g-h">次の一歩に、つながる</div>
+          <div class="g-d">この講座は、この秋から始まるSEED育成プログラムの入口。ここから世界をめざす道すじが始まります。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── タイムテーブル ── -->
+  <section class="sec" id="timetable">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker en">Timetable</span>
+        <h2>一日の流れ</h2>
+        <span class="rule"></span>
+      </div>
+      <div class="tt">
+        <div class="tt-row is-quiet">
+          <div class="tt-time">10:30</div>
+          <div class="tt-body"><div class="tt-name">開場・受付</div></div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">11:00 – 12:30</div>
+          <div class="tt-body">
+            <div class="tt-name">座談会</div>
+            <span class="fmt">順番に3本 ── すべて聴けます</span>
+            <div class="tt-desc">全員で同じ場に集まり、三つの職能の話を30分ずつ続けて聴きます。</div>
+            <div class="seq">
+              <span class="seq-cell"><span class="r">Playwright</span><span class="t">30 min</span></span>
+              <span class="seq-arrow" aria-hidden="true">→</span>
+              <span class="seq-cell"><span class="r">Director</span><span class="t">30 min</span></span>
+              <span class="seq-arrow" aria-hidden="true">→</span>
+              <span class="seq-cell"><span class="r">Producer</span><span class="t">30 min</span></span>
+            </div>
+            <div class="tt-foot">※ 実施順は変更になる場合があります。</div>
+          </div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">12:30 – 13:15</div>
+          <div class="tt-body">
+            <div class="tt-name">ランチ交流</div>
+            <span class="fmt">講師と同じテーブルで</span>
+            <div class="tt-desc">前半30分は、講師陣が各テーブルに分かれてのランチ交流。後半15分はフリータイムです。昼食は持参が基本ですが、事前注文のお弁当（1,500円）もご用意する予定です。</div>
+          </div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">13:15 – 14:00</div>
+          <div class="tt-body">
+            <div class="tt-name">ワークショップ</div>
+            <span class="fmt">3つ同時に進行 ── 参加はいずれかひとつ</span>
+            <div class="tt-desc">職能ごとのテーブルに分かれて、同じ時間帯に並行して実施します。参加するのは、申込時に選んだひとつです。</div>
+            <div class="par">
+              <span class="par-cell"><span class="r">Playwright</span><span class="d">グループで物語を書く</span></span>
+              <span class="par-cell"><span class="r">Director</span><span class="d">つくりたい舞台を思い描く</span></span>
+              <span class="par-cell"><span class="r">Producer</span><span class="d">チームで企画を立ち上げる</span></span>
+            </div>
+          </div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">14:00 – 14:40</div>
+          <div class="tt-body">
+            <div class="tt-name">全体共有</div>
+            <span class="fmt">一本の舞台ができる順番で</span>
+            <div class="tt-desc">劇作家チームの脚本の朗読から、演出家チームの構想発表、プロデューサーチームの2分間プレゼンへ。今日生まれたものを「舞台ができていく順番」で全チームが発表します。最後は講師陣が、職能の垣根をこえてフィードバック。</div>
+          </div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">14:40 – 15:00</div>
+          <div class="tt-body">
+            <div class="tt-name">この続きのご案内 ── SEED育成プログラム説明会</div>
+            <div class="tt-desc">今日の講座には続きがあります。SEEDがこの秋から開講する、劇作家・演出家・プロデューサーそれぞれの育成プログラムの内容と参加方法を、20分でご案内します（参加は任意）。</div>
+          </div>
+        </div>
+      </div>
+      <ul class="notes">
+        <li>座談会のみ・ワークショップのみの参加もできます。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── 三つの講座 ── -->
+  <section class="sec" id="courses">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker en">Courses</span>
+        <h2>三つの講座</h2>
+        <span class="rule"></span>
+      </div>
+      <p class="intro" style="max-width:38em;color:var(--ink-2)">座談会（Talk）は順番に開催されるので、三職能すべて聴けます。ワークショップ（Workshop）は同じ時間帯の並行開催のため、参加できるのは<b style="color:var(--ink)">ひとつだけ</b>。申込時にお選びください。<br>26歳以上の方も、ワークショップを<b style="color:var(--ink)">見学</b>していただけます。</p>
+      <div class="courses">
+
+        <article class="course" data-modal="modal-playwright" role="button" tabindex="0" aria-haspopup="dialog">
+          <div class="course-index"><span class="n">01</span><span>Playwright</span></div>
+          <h3>SEEDを見つける：劇作入門講座＋書いてみようの会</h3>
+          <dl>
+            <dt>Talk</dt>
+            <dd>物語の種はどこにあるのか。イギリスでのリサーチ報告と、戯曲の書き始め方がわかる劇作入門講座。</dd>
+            <dt>Workshop</dt>
+            <dd>グループでひとつの物語を書き上げるライティングワークショップ。戯曲の執筆経験は問いません。</dd>
+            <dt>Speakers</dt>
+            <dd><b>阿部 のぞみ</b></dd>
+            <dt>対象・定員</dt>
+            <dd>報告会・講義は<b>どなたでも</b><br>ワークショップは<b>25歳まで</b>・<b>定員20名</b></dd>
+          </dl>
+          <span class="course-more">詳細を見る <span class="arr" aria-hidden="true">→</span></span>
+        </article>
+
+        <article class="course" data-modal="modal-director" role="button" tabindex="0" aria-haspopup="dialog">
+          <div class="course-index"><span class="n">02</span><span>Director</span></div>
+          <h3>舞台に夢を描く仕事 ―演出家の入り口に立ってみる―</h3>
+          <dl>
+            <dt>Talk</dt>
+            <dd>SEEDのリサーチ派遣の結果を紹介しながら、日本や世界の演出家の仕事についてお話を伺います。</dd>
+            <dt>Workshop</dt>
+            <dd>チームに分かれ、演出家の視点から「どんな舞台をつくりたいか」を思い描き、最後に各チームが構想した舞台を発表します。</dd>
+            <dt>Speakers</dt>
+            <dd><b>田中 麻衣子</b>（演出家）</dd>
+            <dt>対象・定員</dt>
+            <dd>座談会は<b>どなたでも</b><br>ワークショップは<b>25歳まで</b>・<b>定員10名</b></dd>
+          </dl>
+          <span class="course-more">詳細を見る <span class="arr" aria-hidden="true">→</span></span>
+        </article>
+
+        <article class="course" data-modal="modal-producer" role="button" tabindex="0" aria-haspopup="dialog">
+          <div class="course-index"><span class="n">03</span><span>Producer</span></div>
+          <h3>未来会議 ― 10年後のプロデューサー像を考える</h3>
+          <dl>
+            <dt>Talk</dt>
+            <dd>日本の舞台芸術の海外展開を最前線で牽引するプロデューサーたちに、なぜ今の仕事をしているのかから現場の今まで、幅広く伺います。</dd>
+            <dt>Workshop</dt>
+            <dd>くじで引いた条件（テーマ・ターゲットなど）をもとに、4人前後のチームで企画を立ち上げ、最後は2分間のプレゼンテーション。登壇者による総評つき。</dd>
+            <dt>Speakers</dt>
+            <dd><b>井川 荃芬</b>（ホリプロ）<br><b>小嶋 麻倫子</b>（東宝）<br><b>松本 美千穂</b>（株式会社ネルケプランニング）ほか</dd>
+            <dt>対象・定員</dt>
+            <dd>座談会は<b>どなたでも</b><br>ワークショップは<b>25歳まで</b>・<b>定員20名</b></dd>
+          </dl>
+          <span class="course-more">詳細を見る <span class="arr" aria-hidden="true">→</span></span>
+        </article>
+
+      </div>
+      <ul class="notes"><li>登壇者は追加予定です。決定次第このページで公開します。</li></ul>
+    </div>
+  </section>
+
+  <!-- ── 登壇者 ── -->
+  <section class="sec" id="speakers">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker en">Speakers</span>
+        <h2>登壇者</h2>
+        <span class="rule"></span>
+      </div>
+      <div class="speakers">
+
+        <div class="spk">
+          <!-- TODO: <img src="speaker-abe.jpg" alt="阿部 のぞみ" style="aspect-ratio:4/5;object-fit:cover"> に差し替え -->
+          <div class="spk-photo"><span class="ini">阿部</span><span class="ph">Photo</span></div>
+          <div class="spk-role">Playwright</div>
+          <h3 class="spk-name">阿部 のぞみ<span class="ruby">あべ のぞみ</span></h3>
+          <div class="spk-affil tbd">ご所属・肩書を記載</div>
+          <p class="spk-bio tbd">プロフィール文（150字程度）。</p>
+        </div>
+
+        <div class="spk">
+          <div class="spk-photo"><span class="ini">田中</span><span class="ph">Photo</span></div>
+          <div class="spk-role">Director</div>
+          <h3 class="spk-name">田中 麻衣子<span class="ruby">たなか まいこ</span></h3>
+          <div class="spk-affil tbd">ご所属・肩書を記載</div>
+          <p class="spk-bio tbd">プロフィール文（150字程度）。</p>
+        </div>
+
+        <div class="spk">
+          <div class="spk-photo"><span class="ini">井川</span><span class="ph">Photo</span></div>
+          <div class="spk-role">Producer</div>
+          <h3 class="spk-name">井川 荃芬<span class="ruby">いかわ かおる</span></h3>
+          <div class="spk-affil">株式会社ホリプロ<span class="title">プロデューサー</span></div>
+          <p class="spk-bio tbd">プロフィール文（150字程度）。SEEDリサーチャーとしてニューヨークに派遣され、現地のプロデュース体制を調査。</p>
+        </div>
+
+        <div class="spk">
+          <div class="spk-photo"><span class="ini">小嶋</span><span class="ph">Photo</span></div>
+          <div class="spk-role">Producer</div>
+          <h3 class="spk-name">小嶋 麻倫子<span class="ruby">こじま まりこ</span></h3>
+          <div class="spk-affil">東宝株式会社<span class="title">プロデューサー</span></div>
+          <p class="spk-bio tbd">プロフィール文（150字程度）。SEEDリサーチャーとしてニューヨークに派遣され、現地のプロデュース体制を調査。</p>
+        </div>
+
+        <div class="spk">
+          <div class="spk-photo"><span class="ini">松本</span><span class="ph">Photo</span></div>
+          <div class="spk-role">Producer</div>
+          <h3 class="spk-name">松本 美千穂<span class="ruby tbd" style="display:inline-block">よみがな確認中</span></h3>
+          <div class="spk-affil">株式会社ネルケプランニング<span class="title tbd">肩書を記載</span></div>
+          <p class="spk-bio tbd">プロフィール文（150字程度）。</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── この先に続く道 ── -->
+  <section class="sec" id="program">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker en">Program</span>
+        <h2>この先に続く道</h2>
+        <span class="rule"></span>
+      </div>
+      <p class="intro" style="max-width:38em;color:var(--ink-2)">9月26日のオープン講座は、SEED育成プログラムの入口です。この日をきっかけに、それぞれの職能ごとの本格的なプログラムへ進むことができます。</p>
+      <div class="path">
+
+        <div class="path-step is-now">
+          <div class="path-node"><span class="path-dot"></span><span class="path-line"></span></div>
+          <div class="path-body">
+            <span class="path-when">2026.09.26 ── You Are Here</span>
+            <div class="path-h">SEED PAB特別プログラム＆講座説明会</div>
+            <div class="path-d">三つの仕事に出会う一日。座談会とワークショップで、自分の関心がどこにあるかを確かめます。</div>
+          </div>
+        </div>
+
+        <div class="path-step">
+          <div class="path-node"><span class="path-dot"></span><span class="path-line"></span></div>
+          <div class="path-body">
+            <span class="path-when">2026 Autumn –</span>
+            <div class="path-h">職能別プログラム、順次開講</div>
+            <div class="path-d">劇作家・演出家・プロデューサーそれぞれの職能に、リサーチをもとに設計した本格的な育成プログラムを用意しています。内容と参加方法は、当日の説明会でご案内します。</div>
+          </div>
+        </div>
+
+        <div class="path-step">
+          <div class="path-node"><span class="path-dot"></span><span class="path-line"></span></div>
+          <div class="path-body">
+            <span class="path-when">And Beyond</span>
+            <div class="path-h">職能をこえて、いっしょにつくる</div>
+            <div class="path-d">職能別のプログラムのほかにも、劇作家・演出家・プロデューサーをめざす人たちが合同で参加できるプログラムなど、さまざまな展開を構想しています。</div>
+          </div>
+        </div>
+
+      </div>
+      <ul class="notes"><li>各プログラムの募集要項は、確定し次第SEEDのWebサイトでご案内します。</li></ul>
+    </div>
+  </section>
+
+  <!-- ── FAQ ── -->
+  <section class="sec" id="faq">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker en">FAQ</span>
+        <h2>よくある質問</h2>
+        <span class="rule"></span>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>演劇の経験がなくても大丈夫ですか？</summary>
+          <div class="a">はい。初めての方を前提に設計しています。専門用語の予習も不要です。</div>
+        </details>
+        <details>
+          <summary>一人で参加しても大丈夫ですか？</summary>
+          <div class="a">一人参加の方が多い想定です。ワークショップは当日その場でグループを組むので、心配いりません。もちろん、友達との参加も歓迎です。</div>
+        </details>
+        <details>
+          <summary>座談会だけ、ワークショップだけの参加もできますか？</summary>
+          <div class="a">できます。申込時に、参加したいプログラムをお選びください。</div>
+        </details>
+        <details>
+          <summary>途中入場・途中退出はできますか？</summary>
+          <div class="a">できます。受付でスタッフにお声がけください。</div>
+        </details>
+        <details>
+          <summary>服装や持ち物の指定はありますか？</summary>
+          <div class="a">服装は自由です。持ち物は筆記用具のみ（紙は会場でご用意します）。プロデューサーのワークショップに参加する方は、プレゼンテーション機能（PowerPoint・Keynoteなど）のあるパソコンがあると望ましいですが、必須ではありません。</div>
+        </details>
+        <details>
+          <summary>参加に年齢制限はありますか？</summary>
+          <div class="a">座談会と説明会は、どなたでも参加できます。ワークショップのみ<b>25歳まで</b>の方が対象です（3講座とも同じ）。26歳以上の方も、ワークショップを見学していただけます。</div>
+        </details>
+        <details>
+          <summary>定員はありますか？</summary>
+          <div class="a">ワークショップに定員があります。劇作家 <b>20名</b>／演出家 <b>10名</b>／プロデューサー <b>20名</b>です。定員に達し次第、受付を終了しますので、参加をお考えの方はお早めにお申し込みください。</div>
+        </details>
+        <details>
+          <summary>会場はどこですか？迷わず行けますか？</summary>
+          <div class="a">東京国際フォーラム（JR有楽町駅より徒歩1分）の<b>ガラス棟7階 701会議室</b>です。同じ会場でPerforming Arts Base 2026が開催されているので、館内の案内表示をたよりに7階までお越しください。</div>
+        </details>
+        <details>
+          <summary>SEEDの講座以外にも、会場で何かやっていますか？</summary>
+          <div class="a">はい。同じ会場でPerforming Arts Base 2026が開かれていて、演劇・ダンス・大道芸などのパフォーマンスを一日中、無料で自由に鑑賞できます。講座の前後にぜひ立ち寄ってみてください。</div>
+        </details>
+        <details>
+          <summary>お昼ごはんはどうすればいいですか？</summary>
+          <div class="a">持参が基本です。希望者向けに事前注文のお弁当（1,500円）もご用意する予定です。ランチの時間は講師陣が各テーブルに分かれて参加者と交流します。</div>
+        </details>
+        <details>
+          <summary>申込後に参加できなくなった場合は？</summary>
+          <div class="a">SEED事務局（<a href="mailto:seed@jpasn.net" style="color:var(--ink);text-underline-offset:.2em">seed@jpasn.net</a>）までキャンセルのご連絡をお願いします。</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 申込 ── -->
+  <section class="sec" id="apply">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker en">Apply</span>
+        <h2>参加方法</h2>
+        <span class="rule"></span>
+      </div>
+      <div class="apply">
+        <div class="apply-steps">
+
+          <div class="apply-step">
+            <div class="st-h">座談会に参加するか決める</div>
+            <div class="st-d">11:00〜12:30。三職能の座談会が順番に開催されるので、参加すれば3本すべて聴けます。ワークショップだけの参加もできます。</div>
+          </div>
+
+          <div class="apply-step">
+            <div class="st-h">ワークショップの職能をひとつ選ぶ</div>
+            <div class="st-d">
+              13:15〜14:00。3つのワークショップは同じ時間帯に並行して行われるため、参加できるのはひとつだけです。いずれも<b>対象は25歳まで</b>で、定員は講座ごとに異なります。
+              <ul class="ws-choices">
+                <li>
+                  <span class="ws-role">Playwright</span>
+                  <span class="ws-title">SEEDを見つける：劇作入門講座＋書いてみようの会</span>
+                  <span class="ws-cap">定員 <b>20名</b></span>
+                </li>
+                <li>
+                  <span class="ws-role">Director</span>
+                  <span class="ws-title">舞台に夢を描く仕事 ―演出家の入り口に立ってみる―</span>
+                  <span class="ws-cap">定員 <b>10名</b></span>
+                </li>
+                <li>
+                  <span class="ws-role">Producer</span>
+                  <span class="ws-title">未来会議 ― 10年後のプロデューサー像を考える</span>
+                  <span class="ws-cap">定員 <b>20名</b></span>
+                </li>
+              </ul>
+              座談会のみのご参加も歓迎です。26歳以上の方も、ワークショップを見学していただけます。
+            </div>
+          </div>
+
+          <div class="apply-step">
+            <div class="st-h">説明会に出るかを選ぶ</div>
+            <div class="st-d">14:40〜15:00。この秋から始まる職能別の育成プログラムの内容と参加方法をご案内します。「この続き」に興味がある方はぜひ。</div>
+          </div>
+
+        </div>
+
+        <div style="display:flex;flex-wrap:wrap;gap:.7rem;align-items:center">
+          <a class="btn" href="https://form.run/@seed-pab" target="_blank" rel="noopener" style="width:auto"><span>申込フォームへ</span><span class="arr" aria-hidden="true">→</span><span class="visually-hidden">（別タブで開きます）</span></a>
+          <button class="btn-ghost js-share" type="button"><span>このページを共有する</span></button>
+        </div>
+
+        <div class="apply-foot">
+          参加費無料／申込締切 2026年9月24日（木）／定員に達し次第、受付を終了します。<br>
+          所要1〜2分で完了します。
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 開催概要 ── -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker en">Details</span>
+        <h2>開催概要</h2>
+        <span class="rule"></span>
+      </div>
+      <dl class="outline">
+        <div class="outline-row"><dt>名称</dt><dd>SEED PAB特別プログラム＆講座説明会（Performing Arts Base 2026 内）</dd></div>
+        <div class="outline-row"><dt>日時</dt><dd><b>2026年9月26日（土）11:00〜15:00</b>（開場 10:30）</dd></div>
+        <div class="outline-row"><dt>内容</dt><dd>3職能（劇作家・演出家・プロデューサー）ごとの座談会・ワークショップに加えて、今後SEEDが実施するプログラムに関する説明会を実施</dd></div>
+        <div class="outline-row"><dt>会場</dt><dd><b>東京国際フォーラム ガラス棟7F 701会議室</b><br>東京都千代田区丸の内3-5-1<br>JR有楽町駅より徒歩1分／東京駅より徒歩5分、東京メトロ有楽町線 有楽町駅直通<br><a href="https://maps.google.com/?q=東京国際フォーラム" target="_blank" rel="noopener">地図を開く</a></dd></div>
+        <div class="outline-row"><dt>対象</dt><dd>学生を中心に、誰でも参加OK。座談会・説明会はどなたでも。ワークショップのみ<b>25歳まで</b>の方が対象です（3講座とも同じ）。26歳以上の方も、ワークショップを見学していただけます。</dd></div>
+        <div class="outline-row"><dt>参加費</dt><dd><b>無料</b></dd></div>
+        <div class="outline-row"><dt>定員</dt><dd>ワークショップ　劇作家 <b>20名</b>／演出家 <b>10名</b>／プロデューサー <b>20名</b><br>定員に達し次第、受付を終了します</dd></div>
+        <div class="outline-row"><dt>申込締切</dt><dd>2026年9月24日（木）</dd></div>
+        <div class="outline-row"><dt>主催</dt><dd>SEED（JPASN）</dd></div>
+        <div class="outline-row"><dt>お問い合わせ</dt><dd>SEED事務局　<a href="mailto:seed@jpasn.net">seed@jpasn.net</a></dd></div>
+      </dl>
+      <ul class="notes">
+        <li>昼食は持参が基本です。希望者向けに事前注文のお弁当（1,500円）もご用意する予定です。</li>
+        <li>当日は記録用の写真撮影が入ります。写り込みを避けたい方は、受付でお申し出ください。</li>
+        <li>筆記用具はご自身でお持ちください。プロデューサーのワークショップはプレゼンテーション機能のあるパソコンがあると望ましいです（必須ではありません）。</li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-brand">
+      <img class="f-logo" src="seed-logo.svg" alt="SEED" width="437" height="200"
+           onerror="this.remove(); document.getElementById('f-fallback').hidden = false;">
+      <span class="f-name" id="f-fallback" hidden>SEED</span>
+      <span>次世代を担う舞台芸術人材育成プログラム／JPASN</span>
+    </div>
+    <span>お問い合わせ：SEED事務局 <a href="mailto:seed@jpasn.net" style="color:var(--ink-2);text-underline-offset:.2em">seed@jpasn.net</a></span>
+  </div>
+</footer>
+
+<!-- モバイル固定CTA -->
+<div class="sticky-cta">
+  <div class="sc-info">
+    <span class="sc-date">2026.09.26 SAT</span>
+    <span class="sc-note">参加無料／締切 9.24（木）</span>
+  </div>
+  <a class="btn" href="https://form.run/@seed-pab" target="_blank" rel="noopener">申し込む<span class="visually-hidden">（別タブで開きます）</span></a>
+</div>
+
+<!-- ══ 講座詳細モーダル（本文は仮。納品され次第差し替え） ══ -->
+<div class="modal" id="modal-playwright" role="dialog" aria-modal="true" aria-labelledby="modal-playwright-title">
+  <div class="modal-panel">
+    <button class="modal-close" type="button" aria-label="閉じる">×</button>
+    <div class="modal-head">
+      <div class="course-index"><span class="n">01</span><span>Playwright</span></div>
+      <h3 id="modal-playwright-title">SEEDを見つける：劇作入門講座＋書いてみようの会</h3>
+    </div>
+    <dl class="modal-dl">
+      <dt>概要</dt>
+      <dd>物語の種はどこにあるのか。戯曲はどのように書き始めれば良いのか。阿部のぞみ先生のイギリスでのリサーチから劇作へのヒントが見つかるかもしれません。グループで物語を書き上げるライティングワークショップも開催。戯曲の執筆経験は問いません。劇作やストーリーライティングに少しでも興味がある方のご参加をお待ちしています。</dd>
+      <dt>① 報告会・講義</dt>
+      <dd>阿部のぞみさんによる、リサーチ報告会および劇作入門講座を実施します。</dd>
+      <dt>② ワークショップ</dt>
+      <dd class="tbd">内容の納品待ち。確定次第ここに差し替え。</dd>
+      <dt>対象</dt>
+      <dd>報告会・講義はどなたでも。ワークショップは<b>25歳まで</b>の方が対象です。26歳以上の方も、ワークショップを見学していただけます。</dd>
+      <dt>定員</dt>
+      <dd>ワークショップ <b>20名</b>（定員に達し次第、受付を終了します）</dd>
+      <dt>持ち物</dt>
+      <dd>筆記用具のみ。紙は会場でご用意します。</dd>
+    </dl>
+  </div>
+</div>
+
+<div class="modal" id="modal-director" role="dialog" aria-modal="true" aria-labelledby="modal-director-title">
+  <div class="modal-panel">
+    <button class="modal-close" type="button" aria-label="閉じる">×</button>
+    <div class="modal-head">
+      <div class="course-index"><span class="n">02</span><span>Director</span></div>
+      <h3 id="modal-director-title">舞台に夢を描く仕事 ―演出家の入り口に立ってみる―</h3>
+    </div>
+    <dl class="modal-dl">
+      <dt>概要</dt>
+      <dd>ロンドンにて演出家のリサーチを行った田中麻衣子さんを迎えての座談会と、演出家の最初の仕事である「作品の夢を思い描く」ことを体験できるようなワークショップを行います。海外の知見も取り入れながら、「演出家」という仕事の入り口の景色を体感してみる90分間です。</dd>
+      <dt>① 座談会</dt>
+      <dd>これまでSEEDで行ってきたリサーチ派遣の結果を紹介しながら、日本や世界の演出家の仕事についてお話を伺います。</dd>
+      <dt>② ワークショップ</dt>
+      <dd>チームに分かれ、演出家の視点から「どんな舞台をつくりたいか」を思い描くワークショップを行います。最後には各チームが構想した舞台を発表し、それぞれの夢やアイデアを共有します。</dd>
+      <dt>対象</dt>
+      <dd>座談会はどなたでも。ワークショップは<b>25歳まで</b>の方が対象です。26歳以上の方も、ワークショップを見学していただけます。</dd>
+      <dt>定員</dt>
+      <dd>ワークショップ <b>10名</b>（定員に達し次第、受付を終了します）</dd>
+      <dt>持ち物</dt>
+      <dd>筆記用具のみ。紙は会場でご用意します。</dd>
+    </dl>
+  </div>
+</div>
+
+<div class="modal" id="modal-producer" role="dialog" aria-modal="true" aria-labelledby="modal-producer-title">
+  <div class="modal-panel">
+    <button class="modal-close" type="button" aria-label="閉じる">×</button>
+    <div class="modal-head">
+      <div class="course-index"><span class="n">03</span><span>Producer</span></div>
+      <h3 id="modal-producer-title">未来会議 ― 10年後のプロデューサー像を考える</h3>
+    </div>
+    <dl class="modal-dl">
+      <dt>概要</dt>
+      <dd>主役は10年後のあなた！<br>この企画は、日本の舞台芸術の海外展開を最前線で牽引するプロデューサーによる座談会と、実際に企画を考えるワークの2つを行います。最後にはチームで考えた企画をプレゼンし、座談会登壇者による総評も。次世代プロデューサーが「10年後」を仲間と共に構想する90分間です。</dd>
+      <dt>① 座談会</dt>
+      <dd>舞台芸術の海外展開を最前線で牽引する、東宝の小嶋麻倫子さん、ホリプロの井川荃芬さん、株式会社ネルケプランニングの松本美千穂さんによる座談会。なぜ今のお仕事をされているかから、現場の今まで、幅広くお話を伺います。</dd>
+      <dd class="tbd">登壇者もう1名依頼中（決定次第追記）。</dd>
+      <dt>② ワークショップ</dt>
+      <dd>くじ引きをして、チームごとに企画を考えるワークショップです。くじには、テーマ・ターゲットなど、企画を考えるときに条件になる項目が記載されています。4人前後のチームで企画を立ち上げ、最後は2分間のプレゼンテーションを行います。</dd>
+      <dt>対象</dt>
+      <dd>座談会はどなたでも。ワークショップは<b>25歳まで</b>の方が対象です。26歳以上の方も、ワークショップを見学していただけます。</dd>
+      <dt>定員</dt>
+      <dd>ワークショップ <b>20名</b>（4人前後×5チーム／定員に達し次第、受付を終了します）</dd>
+      <dt>持ち物</dt>
+      <dd>パソコン（PowerPoint・Keynoteなどプレゼンテーション機能があると望ましい）／筆記用具</dd>
+    </dl>
+  </div>
+</div>
+
+<script>
+/* 講座詳細モーダル */
+(function () {
+  var lastTrigger = null;
+  var FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+  function openModal(id, trigger) {
+    var m = document.getElementById(id);
+    if (!m) return;
+    lastTrigger = trigger || null;
+    m.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    var closeBtn = m.querySelector('.modal-close');
+    if (closeBtn) closeBtn.focus();
+  }
+  function closeModal() {
+    document.querySelectorAll('.modal.open').forEach(function (m) { m.classList.remove('open'); });
+    document.body.style.overflow = '';
+    if (lastTrigger) { lastTrigger.focus(); lastTrigger = null; }
+  }
+  /* フォーカストラップ：モーダル表示中はTab/Shift+Tabをパネル内に閉じ込める */
+  function trapFocus(e) {
+    if (e.key !== 'Tab') return;
+    var open = document.querySelector('.modal.open');
+    if (!open) return;
+    var focusables = Array.prototype.slice.call(open.querySelectorAll(FOCUSABLE));
+    if (!focusables.length) return;
+    var first = focusables[0];
+    var last = focusables[focusables.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault(); last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault(); first.focus();
+    }
+  }
+  document.querySelectorAll('[data-modal]').forEach(function (card) {
+    card.addEventListener('click', function () { openModal(card.dataset.modal, card); });
+    card.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(card.dataset.modal, card); }
+    });
+  });
+  document.querySelectorAll('.modal').forEach(function (m) {
+    m.addEventListener('click', closeModal);                 /* 背景クリックで閉じる */
+    m.querySelector('.modal-panel').addEventListener('click', function (e) { e.stopPropagation(); });
+  });
+  document.querySelectorAll('.modal-close').forEach(function (b) { b.addEventListener('click', closeModal); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { closeModal(); return; }
+    trapFocus(e);
+  });
+})();
+
+/* 共有ボタン：モバイルはOSの共有シート、非対応環境はURLコピー */
+document.querySelectorAll('.js-share').forEach(function (btn) {
+  btn.addEventListener('click', async function () {
+    var data = {
+      title: document.title,
+      text: 'SEED オープン講座｜2026.9.26（土）東京国際フォーラム／参加無料',
+      url: location.href
+    };
+    if (navigator.share) {
+      try { await navigator.share(data); } catch (e) { /* キャンセルは無視 */ }
+    } else {
+      var label = btn.querySelector('span');
+      try {
+        await navigator.clipboard.writeText(location.href);
+        label.textContent = 'リンクをコピーしました';
+      } catch (e) {
+        label.textContent = 'このページのURLをコピーしてください';
+      }
+      setTimeout(function () { label.textContent = 'このページを共有する'; }, 2200);
+    }
+  });
+});
+</script>
+
+</body>
+</html>

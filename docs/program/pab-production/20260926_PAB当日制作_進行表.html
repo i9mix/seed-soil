@@ -1,0 +1,1254 @@
+<title>PAB当日制作 進行表</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap">
+
+<style>
+  /* ══════════════════════════════════════
+     tokens — SEEDデザインシステム準拠
+     白地＋グレー階調の単一デザインに固定する。
+     閲覧側のOSがダークモードでも反転させない。
+     ══════════════════════════════════════ */
+  :root {
+    color-scheme: only light;
+
+    --ground:    #ffffff;
+    --ground-2:  #f4f5f6;
+    --surface:   #ffffff;
+    --ink:       #1a1c1e;
+    --ink-2:     #5f6469;
+    --ink-3:     #9aa0a5;
+    --mark:      #aeb2b5;
+    --line:      #e3e5e7;
+    --line-2:    #cfd2d5;
+    --shadow:    rgba(26,28,30,.09);
+
+    /* 内部資料のみ：状態を示す機能色。1系統に絞る（必ずラベル文字を併記） */
+    --alert:     #c00000;
+    --alert-bg:  #fcdcdc;
+
+    --display: "Futura", "Century Gothic", "Avenir Next", "Avenir", "Jost", "Trebuchet MS", "Hiragino Sans", sans-serif;
+    --gothic:  "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic Medium", "Yu Gothic", Meiryo, sans-serif;
+
+    --pad: 1.15rem;
+
+    --r-pill: 999px;
+    --r-sm:   12px;
+    --r-md:   18px;
+    --r-lg:   28px;
+  }
+
+  /* ══ base ══ */
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--gothic);
+    font-size: 16px;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+    word-break: auto-phrase;
+    overflow-wrap: break-word;
+  }
+  a { color: inherit; }
+  p { margin: 0; }
+  ul { margin: 0; padding-left: 1.15em; }
+  li { margin: 0; }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 4px; }
+  .visually-hidden {
+    position: absolute; width: 1px; height: 1px; overflow: hidden;
+    clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+  }
+
+  .wrap {
+    max-width: 62rem; margin: 0 auto;
+    padding-left: max(var(--pad), env(safe-area-inset-left));
+    padding-right: max(var(--pad), env(safe-area-inset-right));
+  }
+
+  .en {
+    font-family: var(--display);
+    letter-spacing: .18em; text-transform: uppercase;
+    font-variant-numeric: tabular-nums;
+    word-break: keep-all;
+  }
+  .num {
+    font-family: var(--display);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: .06em;
+    word-break: keep-all;
+  }
+
+  /* ══ masthead ══ */
+  .mast {
+    position: sticky; top: 0; z-index: 20;
+    background: var(--ground);
+    border-bottom: 1px solid var(--line);
+  }
+  .mast .wrap {
+    display: flex; align-items: center; gap: .8rem;
+    padding-top: .7rem; padding-bottom: .7rem;
+  }
+  .mast-mark {
+    font-family: var(--display);
+    letter-spacing: .3em; text-transform: uppercase;
+    font-size: .85rem; color: var(--ink);
+  }
+  .mast-sep { width: 1px; height: 1.1rem; background: var(--line-2); flex: none; }
+  .mast-title {
+    font-size: .78rem; color: var(--ink-2); letter-spacing: .02em;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .mast-ver {
+    margin-left: auto; flex: none;
+    font-family: var(--display); font-size: .68rem; letter-spacing: .12em;
+    color: var(--ink-3); font-variant-numeric: tabular-nums;
+  }
+
+  /* ══ head ══ */
+  .head { padding-top: 2.6rem; padding-bottom: 2rem; }
+  .head-kicker {
+    display: flex; align-items: center; gap: .6rem;
+    font-family: var(--display); font-size: .7rem;
+    letter-spacing: .2em; text-transform: uppercase; color: var(--ink-3);
+    margin-bottom: 1rem;
+  }
+  .head-kicker::before {
+    content: ""; width: 1.6rem; height: 3px; border-radius: var(--r-pill);
+    background: var(--mark); flex: none;
+  }
+  .head h1 {
+    margin: 0 0 1.1rem;
+    font-size: clamp(1.85rem, 6.4vw, 2.9rem);
+    line-height: 1.32; font-weight: 600; letter-spacing: .01em;
+    text-wrap: balance;
+  }
+  .head-lead { color: var(--ink-2); font-size: 1rem; max-width: 40rem; }
+
+  .facts {
+    margin-top: 1.9rem;
+    display: grid; gap: 1px; background: var(--line);
+    border: 1px solid var(--line); border-radius: var(--r-md);
+    overflow: hidden;
+  }
+  .fact { background: var(--surface); padding: 1rem 1.1rem; }
+  .fact dt {
+    font-family: var(--display); font-size: .64rem;
+    letter-spacing: .18em; text-transform: uppercase; color: var(--ink-3);
+    margin-bottom: .35rem;
+  }
+  .fact dd { margin: 0; font-size: .95rem; line-height: 1.55; }
+  .fact dd .big {
+    font-family: var(--display); font-size: 1.28rem; letter-spacing: .04em;
+    font-variant-numeric: tabular-nums; display: block; line-height: 1.3;
+  }
+  .fact dd small { display: block; color: var(--ink-2); font-size: .8rem; line-height: 1.5; }
+
+  /* ══ nav ══ */
+  .navbar {
+    position: sticky; top: 3.1rem; z-index: 15;
+    background: var(--ground);
+    border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  }
+  .navbar-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .navbar-scroll::-webkit-scrollbar { display: none; }
+  .navbar ul {
+    display: flex; gap: .4rem; list-style: none; margin: 0;
+    padding: .6rem max(var(--pad), env(safe-area-inset-left));
+    width: max-content; min-width: 100%;
+  }
+  .navbar a {
+    display: block; text-decoration: none; white-space: nowrap;
+    font-size: .8rem; color: var(--ink-2);
+    padding: .34rem .82rem; border-radius: var(--r-pill);
+    border: 1px solid transparent;
+  }
+  .navbar a:hover { background: var(--ground-2); color: var(--ink); }
+
+  /* ══ section ══ */
+  .sec { padding-top: 3.2rem; padding-bottom: 3.2rem; }
+  .sec.alt { background: var(--ground-2); }
+  .sec-head { margin-bottom: 1.8rem; }
+  .sec-kicker {
+    display: flex; align-items: center; gap: .6rem;
+    font-family: var(--display); font-size: .68rem;
+    letter-spacing: .2em; text-transform: uppercase; color: var(--ink-3);
+    margin-bottom: .6rem;
+  }
+  .sec-kicker::before {
+    content: ""; width: 1.1rem; height: 3px; border-radius: var(--r-pill);
+    background: var(--mark); flex: none;
+  }
+  .sec-kicker::after {
+    content: ""; flex: 1 1 auto; height: 1px; background: var(--line);
+  }
+  .sec h2 {
+    margin: 0 0 .5rem; font-size: clamp(1.28rem, 4.4vw, 1.6rem);
+    font-weight: 600; line-height: 1.45; text-wrap: balance;
+  }
+  .sec-note { color: var(--ink-2); font-size: .92rem; max-width: 42rem; }
+
+  /* ══ alert panel ══ */
+  .alert {
+    border: 1px solid var(--line); border-radius: var(--r-lg);
+    background: var(--surface); padding: 1.4rem 1.25rem;
+  }
+  .alert-title {
+    display: flex; align-items: center; gap: .6rem; flex-wrap: wrap;
+    font-weight: 600; font-size: 1.02rem; margin-bottom: .9rem;
+  }
+  .tag-alert {
+    font-family: var(--display); font-size: .6rem; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--alert); background: var(--alert-bg);
+    border-radius: var(--r-pill); padding: .2rem .6rem; flex: none;
+  }
+  .checks { display: grid; gap: 1px; background: var(--line); border-radius: var(--r-md); overflow: hidden; border: 1px solid var(--line); }
+  .check { background: var(--surface); padding: .85rem 1rem; display: flex; gap: .8rem; align-items: baseline; }
+  .check-n {
+    font-family: var(--display); font-size: .78rem; color: var(--mark);
+    font-variant-numeric: tabular-nums; flex: none; padding-top: .12rem;
+  }
+  .check-b strong { display: block; font-weight: 600; font-size: .95rem; line-height: 1.5; }
+  .check-b span { display: block; color: var(--ink-2); font-size: .84rem; line-height: 1.6; margin-top: .15rem; }
+
+  /* ══ timeline ══ */
+  .phase { margin-top: 2.2rem; }
+  .phase:first-of-type { margin-top: 0; }
+  .phase-head {
+    display: flex; align-items: baseline; gap: .75rem; flex-wrap: wrap;
+    padding-bottom: .7rem; margin-bottom: 1.1rem;
+    border-bottom: 1px solid var(--line-2);
+  }
+  .phase-head h3 { margin: 0; font-size: 1.06rem; font-weight: 600; }
+  .phase-head .range {
+    font-family: var(--display); font-size: .8rem; letter-spacing: .1em;
+    color: var(--ink-2); font-variant-numeric: tabular-nums;
+  }
+  .phase-head .meta { margin-left: auto; font-size: .78rem; color: var(--ink-3); }
+
+  .tl { display: grid; gap: .5rem; }
+  .row {
+    display: grid; grid-template-columns: 4.9rem 1fr; gap: .85rem;
+    background: var(--surface);
+    border: 1px solid var(--line); border-radius: var(--r-md);
+    padding: .85rem .95rem;
+    position: relative;
+  }
+  .sec.alt .row { border-color: var(--line-2); }
+  .row-time {
+    font-family: var(--display); font-size: .84rem; letter-spacing: .04em;
+    font-variant-numeric: tabular-nums; color: var(--ink);
+    line-height: 1.45; padding-top: .1rem;
+  }
+  .row-time small {
+    display: block; font-size: .66rem; letter-spacing: .1em;
+    color: var(--ink-3); margin-top: .1rem;
+  }
+  .row-body { min-width: 0; }
+  .row-title { font-weight: 600; font-size: .97rem; line-height: 1.6; }
+  .row-title .who {
+    font-weight: 400; color: var(--ink-2); font-size: .88rem;
+  }
+  .row-desc { color: var(--ink-2); font-size: .86rem; line-height: 1.7; margin-top: .28rem; }
+  .row-tags { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .5rem; }
+  .tag {
+    font-size: .7rem; letter-spacing: .02em; color: var(--ink-2);
+    background: var(--ground-2); border-radius: var(--r-pill);
+    padding: .16rem .62rem; white-space: nowrap;
+  }
+  .sec.alt .tag { background: var(--ground); }
+  .tag.line { background: transparent; border: 1px solid var(--line-2); }
+
+  /* 山場：全員が入るブロック */
+  .row.key { border-color: var(--ink); border-width: 1.5px; }
+  .row.key .row-title::after {
+    content: "全員"; margin-left: .5rem; vertical-align: .12em;
+    font-family: var(--display); font-size: .58rem; letter-spacing: .14em;
+    color: var(--ground); background: var(--ink);
+    border-radius: var(--r-pill); padding: .18rem .55rem;
+  }
+  .row.quiet { background: transparent; border-style: dashed; }
+
+  /* ══ picker ══ */
+  .picker { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1.5rem; }
+  .chip {
+    font-family: inherit; font-size: .85rem; line-height: 1.4;
+    color: var(--ink-2); background: var(--surface);
+    border: 1px solid var(--line-2); border-radius: var(--r-pill);
+    padding: .38rem .9rem; cursor: pointer;
+  }
+  .chip:hover { border-color: var(--ink-3); color: var(--ink); }
+  .chip[aria-pressed="true"] {
+    background: var(--ink); color: var(--ground); border-color: var(--ink);
+  }
+
+  .mine { border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--surface); overflow: hidden; }
+  .mine-head {
+    padding: 1.15rem 1.25rem; border-bottom: 1px solid var(--line);
+    display: flex; align-items: baseline; gap: .7rem; flex-wrap: wrap;
+  }
+  .mine-head .nm { font-size: 1.22rem; font-weight: 600; }
+  .mine-head .rl { color: var(--ink-2); font-size: .87rem; line-height: 1.55; }
+  .mine-empty { padding: 1.5rem 1.25rem; color: var(--ink-2); font-size: .9rem; }
+  .mine-list { display: grid; gap: 1px; background: var(--line); }
+  .mine-item {
+    background: var(--surface); padding: .8rem 1.25rem;
+    display: grid; grid-template-columns: 1fr; gap: .12rem;
+  }
+  .mine-item .ph {
+    font-family: var(--display); font-size: .66rem; letter-spacing: .13em;
+    text-transform: uppercase; color: var(--ink-3);
+    font-variant-numeric: tabular-nums;
+  }
+  .mine-item .dt { font-size: .93rem; line-height: 1.65; }
+  .mine-item.hot { background: var(--ground-2); }
+  .mine-task {
+    padding: 1.05rem 1.25rem; border-top: 1px solid var(--line);
+    background: var(--surface);
+  }
+  .mine-task h4 {
+    margin: 0 0 .6rem; font-size: .8rem; font-weight: 600; color: var(--ink-2);
+    letter-spacing: .04em;
+  }
+  .mine-task ul { list-style: none; padding: 0; display: grid; gap: .45rem; }
+  .mine-task li {
+    display: grid; grid-template-columns: 4.4rem 1fr; gap: .7rem;
+    font-size: .88rem; line-height: 1.6; align-items: baseline;
+  }
+  .mine-task .due {
+    font-family: var(--display); font-size: .74rem; letter-spacing: .06em;
+    font-variant-numeric: tabular-nums; color: var(--ink-2);
+  }
+  .mine-task .due.soon { color: var(--alert); }
+
+  /* ══ table ══ */
+  .scroller {
+    overflow-x: auto; -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line); border-radius: var(--r-md);
+    background: var(--surface);
+  }
+  table { border-collapse: collapse; width: max-content; min-width: 100%; font-size: .82rem; }
+  th, td {
+    text-align: left; vertical-align: top;
+    padding: .62rem .75rem; border-bottom: 1px solid var(--line);
+    border-right: 1px solid var(--line); line-height: 1.6;
+  }
+  th:last-child, td:last-child { border-right: 0; }
+  tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+  thead th {
+    background: var(--ground-2); font-weight: 600; white-space: nowrap;
+    font-family: var(--display); font-size: .64rem;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2);
+    font-variant-numeric: tabular-nums; position: sticky; top: 0; z-index: 1;
+  }
+  tbody th {
+    font-weight: 600; white-space: nowrap; background: var(--surface);
+    position: sticky; left: 0; z-index: 2;
+    border-right: 1px solid var(--line-2);
+  }
+  td { min-width: 8.4rem; color: var(--ink-2); }
+  td strong { color: var(--ink); font-weight: 600; }
+  tbody tr.on th, tbody tr.on td { background: var(--ground-2); }
+  tbody tr.on th { box-shadow: inset 3px 0 0 var(--ink); }
+
+  /* ══ cards ══ */
+  .grid { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; }
+  .card { background: var(--surface); padding: 1.15rem 1.15rem 1.25rem; }
+  .card h3 { margin: 0 0 .5rem; font-size: .98rem; font-weight: 600; line-height: 1.55; }
+  .card p, .card ul { color: var(--ink-2); font-size: .87rem; line-height: 1.75; }
+  .card ul { display: grid; gap: .3rem; }
+  .card .lead-n {
+    font-family: var(--display); font-size: .68rem; letter-spacing: .16em;
+    color: var(--mark); display: block; margin-bottom: .45rem;
+  }
+
+  /* ══ plan diagram ══ */
+  .plan {
+    border: 1px solid var(--line); border-radius: var(--r-md);
+    background: var(--surface); padding: 1.3rem 1.15rem;
+    display: grid; gap: .65rem;
+  }
+  .plan-cap {
+    font-family: var(--display); font-size: .62rem; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--ink-3); text-align: center;
+  }
+  .plan-stage {
+    border: 1px dashed var(--line-2); border-radius: var(--r-sm);
+    padding: .55rem; text-align: center; font-size: .78rem; color: var(--ink-2);
+  }
+  .plan-pair { display: grid; grid-template-columns: 1fr 1fr; gap: .65rem; }
+  .plan-box {
+    border: 1px solid var(--line-2); border-radius: var(--r-sm);
+    padding: .85rem .7rem; text-align: center; background: var(--ground-2);
+  }
+  .plan-box b { display: block; font-size: .88rem; font-weight: 600; }
+  .plan-box span { display: block; font-size: .74rem; color: var(--ink-2); margin-top: .12rem; }
+  .plan-gap {
+    text-align: center; font-size: .72rem; color: var(--ink-3);
+    letter-spacing: .06em; padding: .15rem 0;
+  }
+
+  /* ══ tasks ══ */
+  .tasks { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; }
+  .task {
+    background: var(--surface); padding: .78rem 1rem;
+    display: grid; grid-template-columns: 4.6rem 1fr; gap: .85rem; align-items: baseline;
+  }
+  .task.on { background: var(--ground-2); }
+  .task-due {
+    font-family: var(--display); font-size: .76rem; letter-spacing: .05em;
+    font-variant-numeric: tabular-nums; color: var(--ink-2); white-space: nowrap;
+  }
+  .task-due.soon { color: var(--alert); font-weight: 500; }
+  .task-b { min-width: 0; }
+  .task-b .t { font-size: .91rem; line-height: 1.6; }
+  .task-b .o { font-size: .76rem; color: var(--ink-3); margin-top: .1rem; }
+  .task-group {
+    background: var(--ground-2); padding: .5rem 1rem;
+    font-family: var(--display); font-size: .64rem; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--ink-2);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ══ open questions ══ */
+  .opens { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; }
+  .open { background: var(--surface); padding: .95rem 1rem; display: grid; gap: .3rem; }
+  .open-top { display: flex; align-items: center; gap: .55rem; flex-wrap: wrap; }
+  .open-top .q { font-weight: 600; font-size: .93rem; line-height: 1.55; }
+  .open-why { font-size: .82rem; color: var(--ink-2); line-height: 1.65; }
+
+  /* ══ footer ══ */
+  .foot {
+    border-top: 1px solid var(--line); padding-top: 2.2rem; padding-bottom: 3rem;
+    color: var(--ink-3); font-size: .8rem; line-height: 1.9;
+  }
+  .foot strong { color: var(--ink-2); font-weight: 600; }
+
+  /* ══ ≥40rem ══ */
+  @media (min-width: 40rem) {
+    :root { --pad: 1.6rem; }
+    body { font-size: 16.5px; }
+    .facts { grid-template-columns: repeat(2, 1fr); }
+    .plan-pair { gap: 1rem; }
+    .grid.two { grid-template-columns: repeat(2, 1fr); }
+    .mine-item { grid-template-columns: 11rem 1fr; gap: 1rem; align-items: baseline; }
+    .row { grid-template-columns: 5.6rem 1fr; gap: 1.1rem; padding: 1rem 1.15rem; }
+  }
+  @media (min-width: 54rem) {
+    .facts { grid-template-columns: repeat(4, 1fr); }
+    .grid.three { grid-template-columns: repeat(3, 1fr); }
+    .head { padding-top: 3.6rem; padding-bottom: 2.6rem; }
+    .sec { padding-top: 4rem; padding-bottom: 4rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+  }
+
+  @media print {
+    .mast, .navbar { position: static; }
+    .sec { padding: 1.2rem 0; break-inside: avoid; }
+    .sec.alt { background: none; }
+    .row, .card, .task { break-inside: avoid; }
+  }
+</style>
+
+<header class="mast">
+  <div class="wrap">
+    <span class="mast-mark">Seed</span>
+    <span class="mast-sep" aria-hidden="true"></span>
+    <span class="mast-title">PAB当日制作 進行表</span>
+    <span class="mast-ver">v0.4</span>
+  </div>
+</header>
+
+<div class="wrap head">
+  <div class="head-kicker">Production Run Sheet</div>
+  <h1>PAB × SEED<br>当日の進行と役割分担</h1>
+  <p class="head-lead">2026年9月26日（土）、東京国際フォーラムで開催する「SEED PAB特別プログラム＆講座説明会」の当日制作をまとめたページです。進行表・自分の動線・役割・準備タスクをここで確認してください。</p>
+
+  <dl class="facts">
+    <div class="fact">
+      <dt>Date</dt>
+      <dd><span class="big">09.26 SAT</span><small>2026年9月26日（土）</small></dd>
+    </div>
+    <div class="fact">
+      <dt>Venue</dt>
+      <dd>東京国際フォーラム<small>ガラス棟7F 701会議室</small></dd>
+    </div>
+    <div class="fact">
+      <dt>Load in / out</dt>
+      <dd><span class="big">9:00 – 18:00</span><small>搬入9:00・撤収完了18:00まで</small></dd>
+    </div>
+    <div class="fact">
+      <dt>Open / Close</dt>
+      <dd><span class="big">10:30 – 15:00</span><small>開場10:30・本編11:00〜15:00</small></dd>
+    </div>
+  </dl>
+</div>
+
+<nav class="navbar" aria-label="ページ内の移動">
+  <div class="navbar-scroll">
+    <ul>
+      <li><a href="#check">まず確認したいこと</a></li>
+      <li><a href="#run">当日の流れ</a></li>
+      <li><a href="#mine">あなたの一日</a></li>
+      <li><a href="#roles">役割分担</a></li>
+      <li><a href="#venue">レイアウトと音</a></li>
+      <li><a href="#tasks">準備タスク</a></li>
+      <li><a href="#open">未確定の論点</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ══ まず確認したいこと ══ -->
+<section class="sec" id="check">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">Before Anything Else</div>
+      <h2>8月31日までに確かめたいこと</h2>
+      <p class="sec-note">下見とPAB主催への確認で、まとめて片づけられるものが並んでいます。ここが決まると進行表をv1.0に確定できます。</p>
+    </div>
+
+    <div class="alert">
+      <div class="alert-title">
+        <span class="tag-alert">要確認</span>
+        仕込みが90分しかありません
+      </div>
+      <p style="color:var(--ink-2); font-size:.9rem; margin-bottom:1.1rem;">搬入9:00・開場10:30。島テーブルの設営がボトルネックで、そこに受付設営・講師コールタイム・音のリハ・ブリーフィングを詰めることになります。<strong style="color:var(--ink);">会場に事前レイアウト（島配置）を発注できれば、設営35分が15分になり一気に楽になります。</strong>これが最優先の確認事項です。</p>
+
+      <div class="checks">
+        <div class="check">
+          <span class="check-n">01</span>
+          <span class="check-b"><strong>会場に事前レイアウト（島配置）を発注できるか</strong><span>仕込み90分が成立するかの分かれ目。9:00時点で島が組まれていれば、こちらは椅子のシアター化と受付設営だけで済みます。</span></span>
+        </div>
+        <div class="check">
+          <span class="check-n">02</span>
+          <span class="check-b"><strong>701会議室のキャパ（座談会時／島モード時）</strong><span>弁当数の上限と、座談会のみ参加枠に定員を設けるかの判断に直結します。</span></span>
+        </div>
+        <div class="check">
+          <span class="check-n">03</span>
+          <span class="check-b"><strong>弁当の数量を9月24日のいつまでに出すか</strong><span>申込締切と同日のため、時刻レベルで確認したいところ。回答次第で締切を9/22に前倒すか、猶予をもらうかを決めます。</span></span>
+        </div>
+        <div class="check">
+          <span class="check-n">04</span>
+          <span class="check-b"><strong>廊下・ホワイエをワークショップで使えるか</strong><span>パーテーションがないため、プロデューサーWSのプレゼン練習を外に逃がせるかが音対策の生命線になります。</span></span>
+        </div>
+        <div class="check">
+          <span class="check-n">05</span>
+          <span class="check-b"><strong>ホワイトボード／掲示パネルを借りられるか</strong><span>パーテーションの代替。視線が切れるだけでも集中は上がります。</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 当日の流れ ══ -->
+<section class="sec alt" id="run">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">Run Sheet</div>
+      <h2>当日の流れ</h2>
+      <p class="sec-note">座談会は各30分厳守。転換は別枠で確保しています。<strong>12:40〜12:45の転換だけは全員が入ります。</strong></p>
+    </div>
+
+    <!-- 仕込み -->
+    <div class="phase">
+      <div class="phase-head">
+        <h3>仕込み</h3>
+        <span class="range">9:00 – 10:30</span>
+        <span class="meta">90分・余白なし</span>
+      </div>
+      <div class="tl">
+        <div class="row key">
+          <div class="row-time">9:00</div>
+          <div class="row-body">
+            <div class="row-title">搬入開始・集合</div>
+            <div class="row-desc">9:00に全員が揃っていることが前提です。遅刻が1名出るだけで押します。</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="row-time">9:00<small>–9:35</small></div>
+          <div class="row-body">
+            <div class="row-title">島テーブル設営 <span class="who">鈴木（リード）・佐々木・大野・PAB受付①②</span></div>
+            <div class="row-desc">事前レイアウトを発注できた場合は配置確認のみ、15分に短縮できます。</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="row-time">9:00<small>–9:40</small></div>
+          <div class="row-body">
+            <div class="row-title">機材設置・投影確認 <span class="who">会場PA／映像オペ（窓口：佐々木）</span></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="row-time">9:20<small>–9:55</small></div>
+          <div class="row-body">
+            <div class="row-title">受付設営・館内誘導サイン <span class="who">大野・PAB受付①②</span></div>
+            <div class="row-desc">名簿・名札・掲示。テーブル設営から順次抜けます。</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="row-time">9:35<small>–9:50</small></div>
+          <div class="row-body">
+            <div class="row-title">椅子を前向きに寄せてシアター形式に <span class="who">鈴木・佐々木</span></div>
+            <div class="row-desc">テーブルは動かしません。椅子だけを前方に寄せます。</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="row-time">9:45<small>–10:05</small></div>
+          <div class="row-body">
+            <div class="row-title">講師コールタイム <span class="who">遠藤</span></div>
+            <div class="row-desc">順次到着。控室のご案内・進行説明・スライド受領。</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="row-time">9:50<small>–10:00</small></div>
+          <div class="row-body">
+            <div class="row-title">音の被りリハ <span class="who">髙田・鈴木・佐々木</span></div>
+            <div class="row-desc">3名が各島で通常の声量で話し、被り具合を実地確認します。ここで無理と判断したら、その場でプロデューサーWSをホワイエに出す判断をします。</div>
+            <div class="row-tags"><span class="tag line">判断ポイント</span></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="row-time">10:00</div>
+          <div class="row-body">
+            <div class="row-title">外注カメラマン到着 <span class="who">大野</span></div>
+            <div class="row-desc">そのままブリーフィングに同席してもらい、撮影NG運用を確定します。</div>
+          </div>
+        </div>
+        <div class="row key">
+          <div class="row-time">10:05<small>–10:20</small></div>
+          <div class="row-body">
+            <div class="row-title">スタッフ全体ブリーフィング <span class="who">髙田</span></div>
+            <div class="row-desc">進行・持ち場・転換手順・撮影NG運用・緊急時導線。ワークショップで拡声しない方針も、ここで全ファシリに明言します。</div>
+          </div>
+        </div>
+        <div class="row quiet">
+          <div class="row-time">10:20<small>–10:30</small></div>
+          <div class="row-body">
+            <div class="row-title">最終確認・各自持ち場へ</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 本番 -->
+    <div class="phase">
+      <div class="phase-head">
+        <h3>本番</h3>
+        <span class="range">10:30 – 15:15</span>
+        <span class="meta">座談会は各30分厳守</span>
+      </div>
+      <div class="tl">
+        <div class="row">
+          <div class="row-time">10:30</div>
+          <div class="row-body">
+            <div class="row-title">開場・受付開始</div>
+            <div class="row-desc">名札（職能別カラー）を発行します。座談会はシアター形式なので着席は自由ですが、<strong>「名札の色で午後の島が決まる」ことを必ず口頭で伝えてください。</strong></div>
+            <div class="row-tags"><span class="tag">受付：大野・PAB受付①②</span></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="row-time">10:55<small>–11:00</small></div>
+          <div class="row-body">
+            <div class="row-title">開会挨拶・一日の流れ説明 <span class="who">野村</span></div>
+            <div class="row-desc">撮影が入ること、お手洗い、緊急時の導線、そして「昼に席替えがある」ことを予告します。</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="row-time">11:00<small>–11:30</small></div>
+          <div class="row-body">
+            <div class="row-title">座談会① 劇作家</div>
+            <div class="row-desc">イギリスでのリサーチ報告と、戯曲の書き始め方。</div>
+            <div class="row-tags"><span class="tag">登壇：阿部 のぞみ</span><span class="tag line">モデレーター：倉沢</span></div>
+          </div>
+        </div>
+        <div class="row quiet">
+          <div class="row-time">11:30<small>–11:35</small></div>
+          <div class="row-body">
+            <div class="row-title">転換（登壇者交代・マイク差し替え） <span class="who">鈴木・佐々木</span></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="row-time">11:35<small>–12:05</small></div>
+          <div class="row-body">
+            <div class="row-title">座談会② 演出家</div>
+            <div class="row-desc">海外の演出家教育のリサーチをもとに、日本での可能性を話します。<strong>スライド投影あり。</strong>会場オペと送りの段取りを事前に確認しておきます。</div>
+            <div class="row-tags"><span class="tag">登壇：田中 麻衣子</span><span class="tag line">モデレーター：川名</span><span class="tag line">投影あり</span></div>
+          </div>
+        </div>
+        <div class="row quiet">
+          <div class="row-time">12:05<small>–12:10</small></div>
+          <div class="row-body">
+            <div class="row-title">転換（3名分の椅子とマイクを配置） <span class="who">鈴木・佐々木</span></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="row-time">12:10<small>–12:40</small></div>
+          <div class="row-body">
+            <div class="row-title">座談会③ プロデューサー</div>
+            <div class="row-desc">海外展開を牽引するプロデューサーに、現場の今まで幅広く伺います。ハンドマイク4本体制。</div>
+            <div class="row-tags"><span class="tag">登壇：井川 荃芬</span><span class="tag">小嶋 麻倫子</span><span class="tag">松本 美千穂</span><span class="tag line">モデレーター：赤羽</span></div>
+          </div>
+        </div>
+        <div class="row key">
+          <div class="row-time">12:40<small>–12:45</small></div>
+          <div class="row-body">
+            <div class="row-title">会場転換・弁当配置・着席案内</div>
+            <div class="row-desc">椅子を島へ戻すだけの5分です。参加者には一旦立ってもらい、名札の色＝島番号で誘導します。<strong>ここは削れません。</strong>座談会が押した場合は、ランチの30分から削ってください。</div>
+            <div class="row-tags"><span class="tag line">リード：鈴木</span><span class="tag line">アナウンス：野村</span></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="row-time">12:45<small>–13:15</small></div>
+          <div class="row-body">
+            <div class="row-title">ランチ交流</div>
+            <div class="row-desc">講師陣が各島に分かれて参加者と交流します。弁当はPAB側手配で参加者全員無料。フリータイムは取りません。13:10頃からWS資材を各島へ配布します。</div>
+            <div class="row-tags"><span class="tag line">講師誘導：遠藤</span><span class="tag line">資材：鈴木</span></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="row-time">13:15<small>–14:00</small></div>
+          <div class="row-body">
+            <div class="row-title">ワークショップ 3本 同室並行</div>
+            <div class="row-desc"><strong>各WSでマイクは一切使いません。</strong>1つでも拡声すると他2本が対抗して、45分間ずっと音量競争になります。</div>
+            <div class="row-tags"><span class="tag">劇作20名：倉沢・阿部さん</span><span class="tag">演出10名：川名・佐々木</span><span class="tag">プロデューサー20名：赤羽・大野</span><span class="tag line">巡回：鈴木</span></div>
+          </div>
+        </div>
+        <div class="row quiet">
+          <div class="row-time">13:55</div>
+          <div class="row-body">
+            <div class="row-title">「残り5分」の合図 <span class="who">横堀</span></div>
+            <div class="row-desc">全体に1回だけ出します。各WSが個別に声を出さないでください。各講座はこの時点までに発表者を決めておきます。</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="row-time">14:00<small>–14:40</small></div>
+          <div class="row-body">
+            <div class="row-title">全体共有 <span class="who">司会：野村／時間管理：横堀</span></div>
+            <div class="row-desc">舞台ができていく順番で発表します。<strong>各職能10分厳守。</strong>発表者・組数は各講座に一任しますが、10分を超えると講師陣のフィードバックが削れます。</div>
+            <div class="row-tags"><span class="tag">14:03 劇作</span><span class="tag">14:13 演出</span><span class="tag">14:23 プロデューサー</span><span class="tag line">14:33 講師フィードバック</span></div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="row-time">14:40<small>–15:00</small></div>
+          <div class="row-body">
+            <div class="row-title">SEED育成プログラム説明会 <span class="who">野村</span></div>
+            <div class="row-desc">この秋から始まる職能別プログラムの内容と、参加のしかたをご案内します。</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="row-time">15:00<small>–15:15</small></div>
+          <div class="row-body">
+            <div class="row-title">終了・見送り</div>
+            <div class="row-desc">アンケート回収、講師へのご挨拶。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 撤収 -->
+    <div class="phase">
+      <div class="phase-head">
+        <h3>撤収</h3>
+        <span class="range">15:15 – 18:00</span>
+        <span class="meta">2時間45分・余裕あり</span>
+      </div>
+      <div class="tl">
+        <div class="row">
+          <div class="row-time">15:15<small>–16:15</small></div>
+          <div class="row-body">
+            <div class="row-title">撤収・原状復帰 <span class="who">全員（鈴木がリード）</span></div>
+            <div class="row-desc">忘れ物確認、機材返却、ゴミ搬出。</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="row-time">16:15<small>–17:15</small></div>
+          <div class="row-body">
+            <div class="row-title">スタッフ振り返り <span class="who">髙田</span></div>
+            <div class="row-desc">会場を使って腰を据えて実施できます。秋以降の職能別プログラムに向けて、参加者の反応・アンケートの手応え・WSの手触りを、記憶が新しいうちに回収します。</div>
+          </div>
+        </div>
+        <div class="row quiet">
+          <div class="row-time">17:15<small>–17:45</small></div>
+          <div class="row-body">
+            <div class="row-title">最終確認・会場引き渡し <span class="who">髙田・鈴木</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ あなたの一日 ══ -->
+<section class="sec" id="mine">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">Your Day</div>
+      <h2>あなたの一日</h2>
+      <p class="sec-note">名前を選ぶと、その人の動線と担当タスクだけが表示されます。当日はここを開いておいてください。</p>
+    </div>
+
+    <div class="picker" id="picker" role="group" aria-label="担当者を選ぶ"></div>
+    <div class="mine" id="mine-panel" aria-live="polite"></div>
+
+    <div style="margin-top:2rem;">
+      <div class="sec-kicker">All Staff</div>
+      <div class="scroller" style="margin-top:.9rem;">
+        <table id="matrix">
+          <caption class="visually-hidden">担当者別の当日動線</caption>
+          <thead><tr id="matrix-head"></tr></thead>
+          <tbody id="matrix-body"></tbody>
+        </table>
+      </div>
+      <p style="color:var(--ink-3); font-size:.78rem; margin-top:.7rem;">横にスクロールできます。12:40〜12:45の転換は全員が入ります。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 役割分担 ══ -->
+<section class="sec alt" id="roles">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">Roles</div>
+      <h2>役割分担で気をつけたいこと</h2>
+      <p class="sec-note">SEED側12名に加えて、会場PA／映像オペと外注カメラマン、そして劇作WSでは講師の阿部さんも一緒に動きます。</p>
+    </div>
+
+    <div class="grid three">
+      <div class="card">
+        <span class="lead-n">01</span>
+        <h3>佐々木さんは「オペする人」ではなく「オペに伝える人」</h3>
+        <p>実オペは会場PA／映像オペが担います。佐々木さんの仕事はキューの意図を伝えること。スライド送りのタイミング、マイクの受け渡し、全体共有での発表切り替えなどです。前提として、9月15日までに会場オペへ進行表を共有し、キューの段取りを詰めておきます。</p>
+      </div>
+      <div class="card">
+        <span class="lead-n">02</span>
+        <h3>鈴木さんはワークショップ中、遊撃に回れます</h3>
+        <p>劇作WSに阿部さんが入るため、鈴木さんは劇作補助から外れて3WSの巡回に専念できます。同室並行で最も読めないのが音とグループ分けの混乱なので、動ける人が1人いるのは大きいです。</p>
+      </div>
+      <div class="card">
+        <span class="lead-n">03</span>
+        <h3>受付は10:30〜11:00がピーク、その後は常駐1名</h3>
+        <p>座談会中はPAB受付①が常駐して途中入場に対応します。大野さんは前半のみ受付に残り、後半は場内へ。</p>
+      </div>
+      <div class="card">
+        <span class="lead-n">04</span>
+        <h3>撮影NGの方の情報は、受付から3方向へ</h3>
+        <p>受付（大野・PAB受付①②）から、外注カメラマン・髙田・野村（MCとして集合写真時に配慮）へ。カメラマンが10:05のブリーフィングに同席するので、そこで運用を確定させます。</p>
+      </div>
+      <div class="card">
+        <span class="lead-n">05</span>
+        <h3>PAB受付のお二人は、SEEDの事情をご存じない前提で</h3>
+        <p>申込データの管理と名簿の最終判断は髙田です。判断が要る案件は必ず大野さんか髙田に回してもらう運用を、ブリーフィングで徹底します。</p>
+      </div>
+      <div class="card">
+        <span class="lead-n">06</span>
+        <h3>座談会のモデレーターは、そのまま午後のWS進行へ</h3>
+        <p>劇作＝倉沢、演出＝川名、プロデューサー＝赤羽。同じ人が座談会からワークショップまで通して担当するので、講師との関係が一日切れません。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ レイアウトと音 ══ -->
+<section class="sec" id="venue">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">Floor &amp; Sound</div>
+      <h2>会場レイアウトと音対策</h2>
+      <p class="sec-note">パーテーションがないため、島の物理的な置き方と「拡声しない」運用が音対策のすべてになります。</p>
+    </div>
+
+    <div class="grid two" style="margin-bottom:1.6rem;">
+      <div class="card">
+        <h3>テーブルは終日動かしません</h3>
+        <p>仕込みの時点でテーブルを島配置で確定させ、座談会中は椅子だけを前方に寄せて前向きに並べます（見た目はシアター形式）。転換は椅子を戻すだけの5分。</p>
+        <p style="margin-top:.7rem;">テーブルの大移動をすると10〜15分かかり、終了が15:15までずれます。これを避けるための設計です。</p>
+      </div>
+      <div class="card">
+        <h3>島は職能単位で組みます</h3>
+        <ul>
+          <li>劇作：20名 → 4〜5卓</li>
+          <li>演出：10名 → 2〜3卓</li>
+          <li>プロデューサー：20名 → 5卓（4人前後×5チーム）</li>
+          <li>座談会のみ参加の方は、ランチ以降は後方に集約</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="plan" role="img" aria-label="701会議室の島配置。奥に演出と劇作、手前入口側にプロデューサー。間に通路を広く取る。">
+      <div class="plan-cap">Screen / Stage</div>
+      <div class="plan-stage">スクリーン・登壇席</div>
+      <div class="plan-pair">
+        <div class="plan-box"><b>演出</b><span>10名・2〜3卓</span></div>
+        <div class="plan-box"><b>劇作</b><span>20名・4〜5卓／最奥・静かな側</span></div>
+      </div>
+      <div class="plan-gap">← 通路を広く空けて緩衝帯にする →</div>
+      <div class="plan-pair" style="grid-template-columns:1fr;">
+        <div class="plan-box"><b>プロデューサー</b><span>20名・5卓／入口側・議論が最も大きい</span></div>
+      </div>
+      <div class="plan-cap">Entrance / Reception</div>
+    </div>
+
+    <div style="margin-top:1.8rem;">
+      <div class="sec-kicker">Sound</div>
+      <div class="grid two" style="margin-top:.9rem;">
+        <div class="card">
+          <h3>拡声しない</h3>
+          <p>各WSでハンドマイクを一切使いません。1つでも拡声すると他2本が対抗して拡声し、45分間ずっと音量競争になります。ファシリの地声で届く島間隔にします。ブリーフィングで全ファシリに明言します。</p>
+        </div>
+        <div class="card">
+          <h3>アナウンスは横堀さんに一本化</h3>
+          <p>「残り5分」などの合図は横堀さんが1回だけ全体に出します。各WSが個別に大声を出さないでください。</p>
+        </div>
+        <div class="card">
+          <h3>プレゼン練習はホワイエへ逃がす</h3>
+          <p>プロデューサーWSの2分プレゼン練習を廊下・ホワイエに出せると、最も効きます。パーテーションがない以上ここが代替手段の本命なので、使用可否を事前に確認しておきます。</p>
+        </div>
+        <div class="card">
+          <h3>劇作WSは「音がある環境」前提で</h3>
+          <p>静かな個人執筆よりも、グループでの声出し中心のほうがこの環境では成立しやすくなります。阿部さんに進め方をすり合わせておきたいところです。BGMは流しません（かえって全体の声量が上がるため）。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 準備タスク ══ -->
+<section class="sec alt" id="tasks">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">Countdown</div>
+      <h2>準備タスク</h2>
+      <p class="sec-note">本番まで30日。「あなたの一日」で名前を選んでいると、担当分がここでも目立ちます。</p>
+    </div>
+    <div class="tasks" id="task-list"></div>
+  </div>
+</section>
+
+<!-- ══ 未確定 ══ -->
+<section class="sec" id="open">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">Open</div>
+      <h2>まだ決まっていないこと</h2>
+      <p class="sec-note">決まり次第このページを更新します。</p>
+    </div>
+    <div class="opens">
+      <div class="open">
+        <div class="open-top"><span class="tag-alert">要判断</span><span class="q">弁当の数量締切（9/24）が、申込締切と同日</span></div>
+        <p class="open-why">締切当日に確定数を出すのは運用として無理があります。加えて座談会のみ参加には定員がなく、弁当数が構造的に読み切れません（LPで「参加者全員に無料」と約束済み）。<strong style="color:var(--ink);">申込締切を9月22日（火）に前倒すのを推奨しています。</strong>あわせて、座談会のみ参加にも上限人数を設けることを検討したいです。</p>
+      </div>
+      <div class="open">
+        <div class="open-top"><span class="tag-alert">要確認</span><span class="q">LP（告知ページ）の時間割が実際の進行とずれています</span></div>
+        <p class="open-why">座談会は「11:00〜12:30」→「11:00〜12:40」へ、ランチ交流は「12:30〜13:15」→「12:45〜13:15」へ修正が必要です。<strong style="color:var(--ink);">ランチの「後半15分フリータイム」は消滅します。</strong>ワークショップ13:15以降の時刻は変更ありません。9月5日までに更新します。</p>
+      </div>
+      <div class="open">
+        <div class="open-top"><span class="tag-alert">要確認</span><span class="q">劇作ワークショップの進め方が納品待ち</span></div>
+        <p class="open-why">LP上も「詳しい進め方は納品待ち」のままです。音のある環境を前提にした設計として、9月5日までに確定させたいところです。</p>
+      </div>
+      <div class="open">
+        <div class="open-top"><span class="tag-alert">要確認</span><span class="q">登壇者のプロフィールと顔写真が未回収</span></div>
+        <p class="open-why">LPは現在すべてダミーのままです。松本 美千穂さんのよみがなと肩書も確定していません。</p>
+      </div>
+      <div class="open">
+        <div class="open-top"><span class="tag-alert">要確認</span><span class="q">外注カメラマンの入り時間・立ち位置・納品条件</span></div>
+        <p class="open-why">手配は進行中。当日の動線と、撮影NGの方の共有方法を9月5日までに詰めます。</p>
+      </div>
+      <div class="open">
+        <div class="open-top"><span class="tag-alert">要確認</span><span class="q">講師の謝金・交通費を当日処理するかどうか</span></div>
+        <p class="open-why">当日処理する場合、遠藤さんの業務量と必要書類が変わります。</p>
+      </div>
+      <div class="open">
+        <div class="open-top"><span class="tag-alert">要確認</span><span class="q">PAB主催側の当日窓口と連絡系統</span></div>
+        <p class="open-why">館内サインの掲出可否を含めて、緊急時にどう連絡するかを決めておきます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap foot">
+  <p><strong>SEED PAB特別プログラム＆講座説明会</strong>／Performing Arts Base 2026 内プログラム</p>
+  <p>2026年9月26日（土）東京国際フォーラム ガラス棟7F 701会議室／主催：SEED（JPASN）</p>
+  <p style="margin-top:.9rem;">当日制作マスター v0.4（2026年8月27日時点）。内容が変わった箇所はこのページを更新します。<br>お問い合わせ：SEED事務局 <a href="mailto:seed@jpasn.net">seed@jpasn.net</a></p>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  var PHASES = [
+    { key: "load",  label: "仕込み",        time: "9:00–10:30" },
+    { key: "recep", label: "受付",          time: "10:30–11:00" },
+    { key: "talk",  label: "座談会",        time: "11:00–12:40" },
+    { key: "lunch", label: "転換・ランチ",  time: "12:40–13:15" },
+    { key: "ws",    label: "ワークショップ", time: "13:15–14:00" },
+    { key: "share", label: "全体共有",      time: "14:00–14:40" },
+    { key: "close", label: "説明会・終了",  time: "14:40–15:15" },
+    { key: "out",   label: "撤収",          time: "15:15–" }
+  ];
+
+  var PEOPLE = [
+    { name: "髙田", role: "総合統括（進行判断・PAB主催折衝・申込データ最終判断）", cells: [
+      "全体統括・PAB立会・ブリーフィング主宰", "受付フロア全体（名簿の最終判断）", "後方で全体監視・押し戻し判断",
+      "転換 → 全体監視", "3WS巡回・音の被り監視", "全体監視", "見送り", "撤収統括・振り返り主宰・引き渡し" ] },
+    { name: "野村", role: "MC／司会・SEED説明会 登壇", cells: [
+      "原稿最終チェック", "場内で開演準備", "開会挨拶・各パート繋ぎ",
+      "転換 → 着席案内アナウンス", "説明会準備", "全体共有 司会", "説明会 登壇・終了アナウンス", "講師見送り・振り返り" ] },
+    { name: "横堀", role: "進行／タイムキープ（キュー出し・転換号令・残り5分の全体合図）", cells: [
+      "進行表最終確認・カンペ準備", "場内", "キュー出し・時間管理・転換号令",
+      "転換 → タイムキープ", "13:55 残り5分の全体合図", "発表の時間管理（10分厳守）", "説明会のタイムキープ", "振り返り" ] },
+    { name: "遠藤", role: "講師アテンド統括（控室・誘導・スライド受領・謝金／交通費の精算）", cells: [
+      "9:45 講師コールタイム・控室・スライド受領", "控室で講師対応", "袖でアテンド・次登壇者スタンバイ",
+      "転換 → 講師を担当島へ誘導", "控室・謝金書類準備", "講師をフィードバック席へ", "謝金／交通費 精算", "講師見送り・振り返り" ] },
+    { name: "倉沢", role: "座談会① モデレーター／劇作WS 進行（阿部さんと共同）", cells: [
+      "劇作WS資材の確認", "場内", "座談会① モデレーター",
+      "転換 → 劇作島でランチ", "劇作WS 進行（20名）", "劇作チーム発表の段取り", "場内", "振り返り" ] },
+    { name: "川名", role: "座談会② モデレーター／演出WS 進行", cells: [
+      "演出WS資材の確認", "場内", "座談会② モデレーター（スライド）",
+      "転換 → 演出島でランチ", "演出WS 進行（10名）", "演出チーム発表の段取り", "場内", "振り返り" ] },
+    { name: "赤羽", role: "座談会③ モデレーター／プロデューサーWS 進行", cells: [
+      "プロデューサーWS資材の確認", "場内", "座談会③ モデレーター",
+      "転換 → プロデューサー島でランチ", "プロデューサーWS 進行（20名）", "発表の段取り", "場内", "振り返り" ] },
+    { name: "佐々木", role: "会場PA／映像オペとの連携窓口（キュー伝達・スライド送り・マイク受け渡し）／演出WS補助", cells: [
+      "島設営 → 会場オペと段取り確認・椅子シアター化・音の被りリハ", "受付応援", "会場オペへのキュー伝達・登壇席の転換",
+      "転換", "演出WS 補助", "キュー伝達", "キュー伝達", "機材返却立会・振り返り" ] },
+    { name: "大野", role: "受付責任者／外注カメラマン窓口／プロデューサーWS補助", cells: [
+      "島設営 → 受付設営・カメラマン受け入れ", "受付責任者（名簿照合・名札発行）", "受付常駐（前半）→ 場内",
+      "転換", "プロデューサーWS 補助", "場内", "アンケート回収", "撤収・振り返り" ] },
+    { name: "鈴木", role: "会場・転換／備品（12:40転換のリード）／WS中は3WS巡回・遊撃", cells: [
+      "島設営リード・椅子シアター化・音の被りリハ", "場内整備", "登壇席の転換（椅子・マイク）",
+      "転換リード・弁当配置", "13:10 資材配布 → 3WS巡回・遊撃", "発表資材の回収", "場内", "撤収リード・原状復帰・引き渡し" ] },
+    { name: "PAB受付①", role: "受付（座談会中も常駐・途中入退場対応）／弁当搬入・配置", cells: [
+      "島設営 → 受付設営", "受付（名簿照合・名札発行）", "受付常駐（途中入退場）",
+      "転換・弁当搬入配置", "場内サポート", "場内", "見送り", "撤収" ] },
+    { name: "PAB受付②", role: "受付／場内サポート／弁当搬入・配置", cells: [
+      "島設営 → 受付設営", "受付（名簿照合・名札発行）", "場内サポート",
+      "転換・弁当搬入配置", "場内サポート", "場内", "アンケート回収", "撤収" ] }
+  ];
+
+  var TASKS = [
+    { due: "8/31", soon: true,  t: "会場に事前レイアウト（島配置）を発注できるか確認", o: "髙田", who: ["髙田"] },
+    { due: "8/31", soon: true,  t: "701会議室のキャパを確認", o: "髙田", who: ["髙田"] },
+    { due: "8/31", soon: true,  t: "弁当数量を9/24のいつまでに出すか確認 → 締切前倒しの可否を決定", o: "髙田", who: ["髙田"] },
+    { due: "8/31", soon: true,  t: "ホワイトボード／掲示パネルの借用可否", o: "髙田", who: ["髙田"] },
+    { due: "8/31", soon: true,  t: "廊下・ホワイエをワークショップで使えるか確認", o: "髙田", who: ["髙田"] },
+    { due: "8/31", soon: true,  t: "PAB主催との運営取り決め（窓口・館内サイン・搬入出・連絡系統）", o: "髙田", who: ["髙田"] },
+    { due: "8/31", soon: true,  t: "座談会モデレーターの依頼と、各講師への事前連絡", o: "髙田・遠藤", who: ["髙田","遠藤"] },
+    { due: "8/31", soon: true,  t: "阿部さんに劇作WSの共同進行を正式に依頼・進め方のすり合わせ", o: "倉沢", who: ["倉沢"] },
+    { due: "9/5",  soon: false, t: "LP時間割の修正（座談会・ランチ表記＋締切の判断を反映）", o: "髙田", who: ["髙田"] },
+    { due: "9/5",  soon: false, t: "ワークショップ内容の最終確定（劇作WSは音環境を前提に）", o: "倉沢・川名・赤羽", who: ["倉沢","川名","赤羽"] },
+    { due: "9/5",  soon: false, t: "登壇者プロフィール・顔写真の回収 → LP差し替え", o: "髙田", who: ["髙田"] },
+    { due: "9/5",  soon: false, t: "松本 美千穂さんのよみがな・肩書確定", o: "髙田", who: ["髙田"] },
+    { due: "9/5",  soon: false, t: "外注カメラマンの入り時間・立ち位置・納品条件を確定", o: "大野", who: ["大野"] },
+    { due: "9/10", soon: false, t: "印刷物の内容確定（職能カラー名札・名簿・島サイン・アンケート）", o: "大野", who: ["大野"] },
+    { due: "9/10", soon: false, t: "謝金・交通費の当日処理有無を確定、書類準備", o: "遠藤", who: ["遠藤"] },
+    { due: "9/10", soon: false, t: "SEED側持参機材の確定（PC・クリッカー・アダプタ）", o: "佐々木", who: ["佐々木"] },
+    { due: "9/15", soon: false, t: "進行表 v1.0 確定 → 講師・スタッフ全員へ共有", o: "髙田", who: ["髙田"] },
+    { due: "9/15", soon: false, t: "会場PA／映像オペに進行表を共有・キューの段取りを事前確認", o: "佐々木", who: ["佐々木"] },
+    { due: "9/15", soon: false, t: "講師向け香盤（コールタイム・集合場所・控室・ランチ担当島）送付", o: "遠藤", who: ["遠藤"] },
+    { due: "9/15", soon: false, t: "全体共有の発表の出し方を各講座で決める（10分厳守の前提を共有）", o: "倉沢・川名・赤羽", who: ["倉沢","川名","赤羽"] },
+    { due: "9/18", soon: false, t: "申込の中間集計 → 定員調整・繰上げ判断", o: "髙田", who: ["髙田"] },
+    { due: "9/22", soon: false, t: "申込締切（前倒しする場合）", o: "髙田", who: ["髙田"] },
+    { due: "9/23", soon: false, t: "最終参加者リスト確定・島割り表の作成", o: "髙田・大野", who: ["髙田","大野"] },
+    { due: "9/24", soon: false, t: "弁当数の最終連絡（PAB側へ）── デッドライン", o: "髙田", who: ["髙田"] },
+    { due: "9/24", soon: false, t: "名札・名簿の印刷", o: "大野", who: ["大野"] },
+    { due: "9/25", soon: false, t: "資材梱包・搬入リスト最終確認・9:00集合の徹底連絡", o: "全員", who: [] },
+    { due: "9/26", soon: false, t: "本番（搬入9:00／撤収18:00まで）", o: "全員", who: [] }
+  ];
+
+  var STORE = "pab-run-sheet-person";
+  var selected = null;
+
+  function read() {
+    try { return window.localStorage.getItem(STORE); } catch (e) { return null; }
+  }
+  function write(v) {
+    try {
+      if (v === null) { window.localStorage.removeItem(STORE); }
+      else { window.localStorage.setItem(STORE, v); }
+    } catch (e) { /* プライベートモード等では黙って諦める */ }
+  }
+
+  var picker = document.getElementById("picker");
+  var mine   = document.getElementById("mine-panel");
+  var mHead  = document.getElementById("matrix-head");
+  var mBody  = document.getElementById("matrix-body");
+  var tasksEl = document.getElementById("task-list");
+
+  /* ── 名前チップ ── */
+  PEOPLE.forEach(function (p) {
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "chip";
+    b.textContent = p.name;
+    b.setAttribute("aria-pressed", "false");
+    b.addEventListener("click", function () {
+      select(selected === p.name ? null : p.name);
+    });
+    picker.appendChild(b);
+  });
+
+  /* ── 香盤テーブル ── */
+  (function buildMatrix() {
+    var blank = document.createElement("th");
+    blank.scope = "col";
+    blank.textContent = "担当";
+    mHead.appendChild(blank);
+    PHASES.forEach(function (ph) {
+      var th = document.createElement("th");
+      th.scope = "col";
+      th.innerHTML = ph.label + "<br>" + ph.time;
+      mHead.appendChild(th);
+    });
+
+    PEOPLE.forEach(function (p) {
+      var tr = document.createElement("tr");
+      tr.dataset.name = p.name;
+      var th = document.createElement("th");
+      th.scope = "row";
+      th.textContent = p.name;
+      tr.appendChild(th);
+      p.cells.forEach(function (c) {
+        var td = document.createElement("td");
+        if (c.indexOf("転換") === 0) {
+          td.innerHTML = "<strong>" + c + "</strong>";
+        } else {
+          td.textContent = c;
+        }
+        tr.appendChild(td);
+      });
+      mBody.appendChild(tr);
+    });
+  })();
+
+  /* ── タスク一覧 ── */
+  (function buildTasks() {
+    var lastDue = null;
+    TASKS.forEach(function (t) {
+      if (t.due !== lastDue) {
+        var g = document.createElement("div");
+        g.className = "task-group";
+        g.textContent = t.due + " まで";
+        tasksEl.appendChild(g);
+        lastDue = t.due;
+      }
+      var d = document.createElement("div");
+      d.className = "task";
+      d.dataset.who = t.who.join(",");
+      d.innerHTML =
+        '<span class="task-due' + (t.soon ? " soon" : "") + '">' + t.due + "</span>" +
+        '<span class="task-b"><span class="t"></span><span class="o"></span></span>';
+      d.querySelector(".t").textContent = t.t;
+      d.querySelector(".o").textContent = t.o;
+      tasksEl.appendChild(d);
+    });
+  })();
+
+  /* ── 選択 ── */
+  function select(name) {
+    selected = name;
+    write(name);
+
+    Array.prototype.forEach.call(picker.children, function (b) {
+      b.setAttribute("aria-pressed", b.textContent === name ? "true" : "false");
+    });
+
+    Array.prototype.forEach.call(mBody.children, function (tr) {
+      tr.classList.toggle("on", tr.dataset.name === name);
+    });
+
+    Array.prototype.forEach.call(tasksEl.children, function (el) {
+      if (!el.classList.contains("task")) { return; }
+      var who = el.dataset.who ? el.dataset.who.split(",") : [];
+      el.classList.toggle("on", !!name && who.indexOf(name) !== -1);
+    });
+
+    renderMine(name);
+  }
+
+  function renderMine(name) {
+    mine.textContent = "";
+
+    if (!name) {
+      var e = document.createElement("div");
+      e.className = "mine-empty";
+      e.textContent = "上から名前を選ぶと、その人の一日と担当タスクが表示されます。";
+      mine.appendChild(e);
+      return;
+    }
+
+    var p = null;
+    PEOPLE.forEach(function (x) { if (x.name === name) { p = x; } });
+    if (!p) { return; }
+
+    var head = document.createElement("div");
+    head.className = "mine-head";
+    var nm = document.createElement("span");
+    nm.className = "nm";
+    nm.textContent = p.name;
+    var rl = document.createElement("span");
+    rl.className = "rl";
+    rl.textContent = p.role;
+    head.appendChild(nm);
+    head.appendChild(rl);
+    mine.appendChild(head);
+
+    var list = document.createElement("div");
+    list.className = "mine-list";
+    PHASES.forEach(function (ph, i) {
+      var item = document.createElement("div");
+      item.className = "mine-item" + (ph.key === "lunch" ? " hot" : "");
+      var a = document.createElement("span");
+      a.className = "ph";
+      a.textContent = ph.label + " " + ph.time;
+      var b = document.createElement("span");
+      b.className = "dt";
+      b.textContent = p.cells[i];
+      item.appendChild(a);
+      item.appendChild(b);
+      list.appendChild(item);
+    });
+    mine.appendChild(list);
+
+    var my = TASKS.filter(function (t) { return t.who.indexOf(name) !== -1; });
+    var box = document.createElement("div");
+    box.className = "mine-task";
+    var h = document.createElement("h4");
+    h.textContent = my.length ? "本番までの担当タスク" : "本番までの担当タスク";
+    box.appendChild(h);
+
+    if (!my.length) {
+      var none = document.createElement("p");
+      none.style.color = "var(--ink-2)";
+      none.style.fontSize = ".87rem";
+      none.textContent = "個別の割り当てはありません。9月25日の資材梱包・搬入リスト確認と、9:00集合の確認をお願いします。";
+      box.appendChild(none);
+    } else {
+      var ul = document.createElement("ul");
+      my.forEach(function (t) {
+        var li = document.createElement("li");
+        var due = document.createElement("span");
+        due.className = "due" + (t.soon ? " soon" : "");
+        due.textContent = t.due;
+        var txt = document.createElement("span");
+        txt.textContent = t.t;
+        li.appendChild(due);
+        li.appendChild(txt);
+        ul.appendChild(li);
+      });
+      box.appendChild(ul);
+    }
+    mine.appendChild(box);
+  }
+
+  var saved = read();
+  var valid = false;
+  PEOPLE.forEach(function (p) { if (p.name === saved) { valid = true; } });
+  select(valid ? saved : null);
+})();
+</script>
