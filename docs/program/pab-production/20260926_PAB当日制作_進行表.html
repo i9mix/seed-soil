@@ -911,6 +911,9 @@
     { name: "野村", role: "司会進行（開会挨拶・各パート繋ぎ・全体共有 司会）／SEED説明会 登壇", cells: [
       "原稿最終チェック", "場内で開演準備", "開会挨拶・各パート繋ぎ",
       "転換 → 着席案内アナウンス", "説明会準備", "全体共有 司会", "説明会 登壇・終了アナウンス", "講師見送り・振り返り" ] },
+    { name: "鈴木", role: "全体制作統括（鈴木 萌加）── 進行判断・PAB主催折衝・ブリーフィング主宰・12:40転換のリード・撤収統括", cells: [
+      "仕込み全体の統括・島設営リード・椅子シアター化・音の被りリハ", "場内統括・受付フロア全体を見る", "場内統括・押し戻し判断・登壇席の転換",
+      "転換リード・弁当配置", "3WS巡回・音の被り監視・13:10 資材配布", "発表資材の回収・全体監視", "場内統括", "撤収統括・原状復帰・振り返り主宰・会場引き渡し" ] },
     { name: "横堀", role: "進行／タイムキープ（キュー出し・転換号令・残り5分の全体合図）", cells: [
       "進行表最終確認・カンペ準備", "場内", "キュー出し・時間管理・転換号令",
       "転換 → タイムキープ", "13:55 残り5分の全体合図", "発表の時間管理（10分厳守）", "説明会のタイムキープ", "振り返り" ] },
@@ -932,9 +935,6 @@
     { name: "大野", role: "受付責任者（受付イレギュラーの現場判断者）／外注カメラマン窓口／プロデューサーWS補助", cells: [
       "島設営 → 受付設営・カメラマン受け入れ・音の被りリハ", "受付責任者（名簿照合・名札発行・イレギュラーの現場判断）", "受付常駐（前半）→ 場内",
       "転換", "プロデューサーWS 補助", "場内", "アンケート回収", "撤収・振り返り" ] },
-    { name: "鈴木", role: "全体制作統括（鈴木 萌加）── 進行判断・PAB主催折衝・ブリーフィング主宰・12:40転換のリード・撤収統括", cells: [
-      "仕込み全体の統括・島設営リード・椅子シアター化・音の被りリハ", "場内統括・受付フロア全体を見る", "場内統括・押し戻し判断・登壇席の転換",
-      "転換リード・弁当配置", "3WS巡回・音の被り監視・13:10 資材配布", "発表資材の回収・全体監視", "場内統括", "撤収統括・原状復帰・振り返り主宰・会場引き渡し" ] },
     { name: "PAB受付①", role: "受付（座談会中も常駐・途中入退場対応）／弁当搬入・配置", cells: [
       "島設営 → 受付設営", "受付（名簿照合・名札発行）", "受付常駐（途中入退場）",
       "転換・弁当搬入配置", "場内サポート", "場内", "見送り", "撤収" ] },
@@ -942,6 +942,10 @@
       "島設営 → 受付設営", "受付（名簿照合・名札発行）", "場内サポート",
       "転換・弁当搬入配置", "場内サポート", "場内", "アンケート回収", "撤収" ] }
   ];
+
+  // 本番までの担当タスク。データは保持したまま、いまは非表示にしている。
+  // 表示に戻すときは SHOW_TASKS を true にするだけでよい（セクションもナビも復活する）。
+  var SHOW_TASKS = false;
 
   var TASKS = [
     { due: "8/31", soon: true,  t: "会場に事前レイアウト（島配置）を発注できるか確認", o: "髙田", who: ["髙田"] },
@@ -1044,6 +1048,14 @@
 
   /* ── タスク一覧 ── */
   (function buildTasks() {
+    if (!SHOW_TASKS) {
+      // セクションとページ内ナビのリンクごと取り除く
+      var sec = document.getElementById("tasks");
+      if (sec) { sec.parentNode.removeChild(sec); }
+      var link = document.querySelector('.navbar a[href="#tasks"]');
+      if (link && link.parentNode) { link.parentNode.parentNode.removeChild(link.parentNode); }
+      return;
+    }
     var lastDue = null;
     TASKS.forEach(function (t) {
       if (t.due !== lastDue) {
@@ -1078,11 +1090,13 @@
       tr.classList.toggle("on", tr.dataset.name === name);
     });
 
-    Array.prototype.forEach.call(tasksEl.children, function (el) {
-      if (!el.classList.contains("task")) { return; }
-      var who = el.dataset.who ? el.dataset.who.split(",") : [];
-      el.classList.toggle("on", !!name && who.indexOf(name) !== -1);
-    });
+    if (SHOW_TASKS && tasksEl) {
+      Array.prototype.forEach.call(tasksEl.children, function (el) {
+        if (!el.classList.contains("task")) { return; }
+        var who = el.dataset.who ? el.dataset.who.split(",") : [];
+        el.classList.toggle("on", !!name && who.indexOf(name) !== -1);
+      });
+    }
 
     renderMine(name);
   }
@@ -1130,6 +1144,8 @@
       list.appendChild(item);
     });
     mine.appendChild(list);
+
+    if (!SHOW_TASKS) { return; }
 
     var my = TASKS.filter(function (t) { return t.who.indexOf(name) !== -1; });
     var box = document.createElement("div");
