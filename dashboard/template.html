@@ -6744,10 +6744,6 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
           <span class="check-n">04</span>
           <span class="check-b"><strong>ホワイトボード／掲示パネルを借りられるか<span class="stat">PAB担当者に確認中</span></strong><span>パーテーションの代替。視線が切れるだけでも集中は上がります。</span></span>
         </div>
-        <div class="check">
-          <span class="check-n">05</span>
-          <span class="check-b"><strong>お弁当代の集金と、告知ページの「無料」表記<span class="stat">要判断</span></strong><span>当日は参加者からお弁当代を集金する想定ですが、<strong style="color:var(--ink)">告知ページは5箇所で「お弁当は参加者全員に無料でご用意します」と案内しています。</strong>集金するなら告知ページの修正と、すでに申し込んだ方へのご連絡が必要です。</span></span>
-        </div>
       </div>
     </div>
   </div>
@@ -6854,7 +6850,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
           <div class="row-body">
             <div class="row-title">開場・受付開始</div>
             <div class="row-desc">名札（職能別カラー）を発行します。座談会はシアター形式なので着席は自由ですが、<strong>「名札の色で午後の島が決まる」ことを必ず口頭で伝えてください。</strong></div>
-            <div class="row-tags"><span class="tag">受付：大野・PAB受付①②</span><span class="tag line">お弁当代の集金：遠藤</span></div>
+            <div class="row-tags"><span class="tag">受付：大野・PAB受付①②</span><span class="tag line">受付サポート：遠藤・佐々木</span></div>
           </div>
         </div>
         <div class="row">
@@ -6913,7 +6909,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
           <div class="row-body">
             <div class="row-title">ランチ交流</div>
             <div class="row-desc">講師陣が各島に分かれて参加者と交流します。弁当はPAB側手配で参加者全員無料です。13:10頃からWS資材を各島へ配布します。</div>
-            <div class="row-tags"><span class="tag line">講師誘導：横堀</span><span class="tag line">資材：鈴木</span></div>
+            <div class="row-tags"><span class="tag line">講師誘導：横堀</span><span class="tag line">お弁当：遠藤</span><span class="tag line">資材：鈴木</span></div>
           </div>
         </div>
         <div class="row">
@@ -7118,9 +7114,9 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
     { name: "横堀", role: "講師アテンド（控室・誘導・スライド受領）／進行・タイムキープ（座談会のキュー出し・転換号令）", cells: [
       "進行表最終確認・カンペ準備 → 9:45 講師コールタイム・控室ご案内・スライド受領", "控室で講師対応", "キュー出し・転換号令・袖で講師アテンド（次登壇者スタンバイ）",
       "転換 → 講師を担当島へ誘導", "控室・場内", "講師をフィードバック席へ", "説明会のタイムキープ", "講師見送り" ] },
-    { name: "遠藤", role: "当日の金銭まわり（参加者からのお弁当代の集金・集計）／受付サポート", cells: [
-      "集金の準備（釣り銭・領収書・集金袋）・受付設営のサポート", "受付でお弁当代の集金", "受付常駐（集金の取りこぼし対応）",
-      "転換 → 弁当の配布確認・集金の残り対応", "集金の集計・現金の管理", "場内", "集計の確定", "現金・記録の引き継ぎ" ] },
+    { name: "遠藤", role: "お弁当まわりの責任者（受け取り・数の照合・配布）／受付サポート／アンケート回収", cells: [
+      "受付設営のサポート・お弁当の搬入受け取り（PAB側と数を照合）", "受付サポート（名簿照合・名札発行）", "受付常駐（途中入場対応）",
+      "転換 → お弁当の配布・数の確認・過不足の判断", "場内サポート・ゴミの回収", "場内", "アンケート回収", "撤収" ] },
     { name: "倉沢", role: "劇作WS 進行（阿部さんと共同）", cells: [
       "劇作WS資材の確認", "場内", "座談会① の場付き（阿部さんのサポート）",
       "転換 → 劇作島でランチ", "劇作WS 進行（20名）", "劇作チーム発表の段取り", "場内", "撤収" ] },
@@ -7162,7 +7158,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
     { due: "9/5",  soon: false, t: "松本 美千穂さんのよみがな・肩書確定", o: "髙田", who: ["髙田"] },
     { due: "9/5",  soon: false, t: "外注カメラマンの入り時間・立ち位置・納品条件を確定", o: "大野", who: ["大野"] },
     { due: "9/10", soon: false, t: "印刷物の内容確定（職能カラー名札・名簿・島サイン・アンケート）", o: "大野", who: ["大野"] },
-    { due: "9/10", soon: false, t: "お弁当代の集金方法を確定（金額・釣り銭・領収書の要否・記録の残し方）", o: "遠藤", who: ["遠藤"] },
+    { due: "9/10", soon: false, t: "お弁当の受け取り手順を確定（PAB側との受け渡し時刻・数の照合方法・過不足時の対応）", o: "遠藤", who: ["遠藤"] },
     { due: "9/10", soon: false, t: "SEED側持参機材の確定（PC・クリッカー・アダプタ）", o: "赤羽・大野", who: ["赤羽","大野"] },
     { due: "9/15", soon: false, t: "進行表 v1.0 確定 → 講師・スタッフ全員へ共有", o: "髙田", who: ["髙田"] },
     { due: "9/15", soon: false, t: "全体制作統括・司会進行の引き継ぎ（鈴木・野村へ当日の判断範囲を説明）", o: "髙田", who: ["髙田","鈴木","野村"] },
