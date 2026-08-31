@@ -360,8 +360,11 @@
   }
   td { min-width: 8.4rem; color: var(--ink-2); }
   td strong { color: var(--ink); font-weight: 600; }
-  tbody tr.on th, tbody tr.on td { background: var(--ground-2); }
-  tbody tr.on th { box-shadow: inset 3px 0 0 var(--ink); }
+  /* 選んだ担当の列を通しでハイライト */
+  td.on { background: var(--ground-2); }
+  thead th.on { background: var(--ink); color: var(--ground); }
+  tbody th .t { display: block; font-family: var(--display); font-size: .68rem;
+    letter-spacing: .06em; color: var(--ink-2); font-variant-numeric: tabular-nums; font-weight: 400; }
 
   /* ══ cards ══ */
   .grid { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; }
@@ -471,7 +474,7 @@
     <span class="mast-mark">Seed</span>
     <span class="mast-sep" aria-hidden="true"></span>
     <span class="mast-title">PAB当日制作 進行表</span>
-    <span class="mast-ver">v0.5</span>
+    <span class="mast-ver">v0.6</span>
   </div>
 </header>
 
@@ -495,7 +498,7 @@
     </div>
     <div class="fact">
       <dt>Open / Close</dt>
-      <dd><span class="big">10:30 – 15:00</span><small>開場10:30・本編11:00〜15:00</small></dd>
+      <dd><span class="big">10:30 – 15:15</span><small>開場10:30・本編11:00〜15:15</small></dd>
     </div>
   </dl>
 </div>
@@ -543,7 +546,7 @@
         </div>
         <div class="check">
           <span class="check-n">04</span>
-          <span class="check-b"><strong>ホワイトボード／掲示パネルを借りられるか<span class="stat">PAB担当者に確認中</span></strong><span>パーテーションの代替。視線が切れるだけでも集中は上がります。</span></span>
+          <span class="check-b"><strong>プロジェクターの手配先<span class="stat">確認中</span></strong><span>701会議室にスクリーンとプロジェクターは常設されていません。スクリーンは会場の備品（100インチ）を2枚借りて左右に投影しますが、<strong style="color:var(--ink)">プロジェクターは備品リストに無い</strong>ため、別の手配先を決める必要があります。</span></span>
         </div>
       </div>
     </div>
@@ -618,7 +621,7 @@
         <div class="row">
           <div class="row-time">10:00</div>
           <div class="row-body">
-            <div class="row-title">外注カメラマン到着 <span class="who">大野</span></div>
+            <div class="row-title">外注カメラマン到着 <span class="who">野村</span></div>
             <div class="row-desc">そのままブリーフィングに同席してもらい、撮影NG運用を確定します。</div>
           </div>
         </div>
@@ -642,7 +645,7 @@
     <div class="phase">
       <div class="phase-head">
         <h3>本番</h3>
-        <span class="range">10:30 – 15:15</span>
+        <span class="range">10:30 – 15:30</span>
         <span class="meta">座談会は各30分</span>
       </div>
       <div class="tl">
@@ -662,39 +665,39 @@
           </div>
         </div>
         <div class="row">
-          <div class="row-time">11:00<small>–11:30</small></div>
+          <div class="row-time">11:00<small>–11:25</small></div>
           <div class="row-body">
-            <div class="row-title">座談会① 劇作家</div>
+            <div class="row-title">座談会① 劇作家 <span class="who">25分</span></div>
             <div class="row-desc">イギリスでのリサーチ報告と、戯曲の書き始め方。<strong>スライド投影あり。</strong>モデレーターは立てず、阿部さんおひとりで進行します。</div>
             <div class="row-tags"><span class="tag">登壇：阿部 のぞみ</span><span class="tag line">モデレーターなし</span><span class="tag line">投影あり</span></div>
           </div>
         </div>
         <div class="row quiet">
-          <div class="row-time">11:30<small>–11:35</small></div>
+          <div class="row-time">11:25<small>–11:30</small></div>
           <div class="row-body">
             <div class="row-title">転換（登壇者交代・マイク差し替え） <span class="who">鈴木・佐々木</span></div>
           </div>
         </div>
         <div class="row">
-          <div class="row-time">11:35<small>–12:05</small></div>
+          <div class="row-time">11:30<small>–11:55</small></div>
           <div class="row-body">
-            <div class="row-title">座談会② 演出家</div>
+            <div class="row-title">座談会② 演出家 <span class="who">25分</span></div>
             <div class="row-desc">海外の演出家教育のリサーチをもとに、日本での可能性を話します。<strong>スライド投影あり。</strong>会場オペと送りの段取りを事前に確認しておきます。</div>
             <div class="row-tags"><span class="tag">登壇：田中 麻衣子</span><span class="tag line">モデレーター：川名</span><span class="tag line">投影あり</span></div>
           </div>
         </div>
         <div class="row quiet">
-          <div class="row-time">12:05<small>–12:10</small></div>
+          <div class="row-time">11:55<small>–12:00</small></div>
           <div class="row-body">
             <div class="row-title">転換（3名分の椅子とマイクを配置） <span class="who">鈴木・佐々木</span></div>
           </div>
         </div>
         <div class="row">
-          <div class="row-time">12:10<small>–12:40</small></div>
+          <div class="row-time">12:00<small>–12:40</small></div>
           <div class="row-body">
-            <div class="row-title">座談会③ プロデューサー</div>
-            <div class="row-desc">海外展開を牽引するプロデューサーに、現場の今まで幅広く伺います。<strong>スライド投影あり。</strong>ハンドマイク4本体制。</div>
-            <div class="row-tags"><span class="tag">登壇：井川 荃芬</span><span class="tag">小嶋 麻倫子</span><span class="tag">松本 美千穂</span><span class="tag line">モデレーター：赤羽</span><span class="tag line">投影あり</span></div>
+            <div class="row-title">座談会③ プロデューサー <span class="who">40分</span></div>
+            <div class="row-desc">海外展開を牽引するプロデューサーに、現場の今まで幅広く伺います。<strong>スライド投影あり。</strong>登壇が4名になったため40分枠。冒頭で<strong>お一人5分ずつの自己紹介</strong>を厚めに取ります。マイクは登壇者それぞれに1本、モデレーターと合わせて5本。</div>
+            <div class="row-tags"><span class="tag">登壇：井川 荃芬</span><span class="tag">小嶋 麻倫子</span><span class="tag">松本 美千穂</span><span class="tag">高橋 戦車</span><span class="tag line">モデレーター：赤羽</span><span class="tag line">投影あり</span></div>
           </div>
         </div>
         <div class="row key">
@@ -706,15 +709,15 @@
           </div>
         </div>
         <div class="row">
-          <div class="row-time">12:45<small>–13:15</small></div>
+          <div class="row-time">12:45<small>–13:30</small></div>
           <div class="row-body">
-            <div class="row-title">ランチ交流</div>
-            <div class="row-desc">講師陣が各島に分かれて参加者と交流します。弁当はPAB側手配で参加者全員無料です。13:10頃からWS資材を各島へ配布します。</div>
+            <div class="row-title">ランチ交流 <span class="who">45分</span></div>
+            <div class="row-desc">講師陣が各島に分かれて参加者と交流します。弁当はPAB側手配で参加者全員無料です。13:25頃からWS資材を各島へ配布します。</div>
             <div class="row-tags"><span class="tag line">講師誘導：横堀</span><span class="tag line">お弁当：遠藤</span><span class="tag line">資材：鈴木</span></div>
           </div>
         </div>
         <div class="row">
-          <div class="row-time">13:15<small>–14:00</small></div>
+          <div class="row-time">13:30<small>–14:15</small></div>
           <div class="row-body">
             <div class="row-title">ワークショップ 3本 同室並行</div>
             <div class="row-desc"><strong>各WSでマイクは一切使いません。</strong>1つでも拡声すると他2本が対抗して、45分間ずっと音量競争になります。</div>
@@ -722,29 +725,29 @@
           </div>
         </div>
         <div class="row quiet">
-          <div class="row-time">13:55</div>
+          <div class="row-time">14:10</div>
           <div class="row-body">
             <div class="row-title">「残り5分」の合図 <span class="who">鈴木</span></div>
             <div class="row-desc">全体に1回だけ出します。各WSが個別に声を出さないよう、合図は一本化します。各講座はこの時点までに発表者を決めておきます。</div>
           </div>
         </div>
         <div class="row">
-          <div class="row-time">14:00<small>–14:40</small></div>
+          <div class="row-time">14:15<small>–14:55</small></div>
           <div class="row-body">
             <div class="row-title">全体共有 <span class="who">司会：野村／時間管理：鈴木</span></div>
             <div class="row-desc">舞台ができていく順番で発表します。発表者・組数は各講座にお任せしますが、<strong>枠は各職能10分</strong>です。最後の講師フィードバックの時間を確保するため、この枠で収まる構成にしておきます。</div>
-            <div class="row-tags"><span class="tag">14:03 劇作</span><span class="tag">14:13 演出</span><span class="tag">14:23 プロデューサー</span><span class="tag line">14:33 講師フィードバック</span></div>
+            <div class="row-tags"><span class="tag">14:18 劇作</span><span class="tag">14:28 演出</span><span class="tag">14:38 プロデューサー</span><span class="tag line">14:48 講師フィードバック</span></div>
           </div>
         </div>
         <div class="row">
-          <div class="row-time">14:40<small>–15:00</small></div>
+          <div class="row-time">14:55<small>–15:15</small></div>
           <div class="row-body">
             <div class="row-title">SEED育成プログラム説明会 <span class="who">野村</span></div>
             <div class="row-desc">この秋から始まる職能別プログラムの内容と、参加のしかたをご案内します。</div>
           </div>
         </div>
         <div class="row">
-          <div class="row-time">15:00<small>–15:15</small></div>
+          <div class="row-time">15:15<small>–15:30</small></div>
           <div class="row-body">
             <div class="row-title">終了・見送り</div>
             <div class="row-desc">アンケート回収、講師へのご挨拶。</div>
@@ -757,19 +760,19 @@
     <div class="phase">
       <div class="phase-head">
         <h3>撤収</h3>
-        <span class="range">15:15 – 18:00</span>
+        <span class="range">15:30 – 18:00</span>
         <span class="meta">18:00まで・余裕あり</span>
       </div>
       <div class="tl">
         <div class="row">
-          <div class="row-time">15:15<small>–16:15</small></div>
+          <div class="row-time">15:30<small>–16:30</small></div>
           <div class="row-body">
             <div class="row-title">撤収・原状復帰 <span class="who">全員（鈴木が統括）</span></div>
             <div class="row-desc">忘れ物確認、機材返却、ゴミ搬出。</div>
           </div>
         </div>
         <div class="row quiet">
-          <div class="row-time">16:15<small>–16:45</small></div>
+          <div class="row-time">16:30<small>–17:00</small></div>
           <div class="row-body">
             <div class="row-title">最終確認・会場引き渡し <span class="who">鈴木</span></div>
           </div>
@@ -800,7 +803,7 @@
           <tbody id="matrix-body"></tbody>
         </table>
       </div>
-      <p style="color:var(--ink-3); font-size:.78rem; margin-top:.7rem;">横にスクロールできます。12:40〜12:45の転換は全員が入ります。</p>
+      <p style="color:var(--ink-3); font-size:.78rem; margin-top:.7rem;">縦が時間、横が担当です。横にスクロールできます。名前を選ぶとその列がハイライトされます。12:40〜12:45の転換は全員が入ります。</p>
     </div>
   </div>
 </section>
@@ -812,13 +815,13 @@
     <div class="sec-head">
       <div class="sec-kicker">Floor &amp; Sound</div>
       <h2>会場レイアウトと音対策</h2>
-      <p class="sec-note">パーテーションがないため、島の物理的な置き方と「拡声しない」運用が音対策のすべてになります。</p>
+      <p class="sec-note">会場の備品からパーティションを借りられることになりました。島の置き方と「拡声しない」運用に、遮蔽を足して組みます。</p>
     </div>
 
     <div class="grid two" style="margin-bottom:1.6rem;">
       <div class="card">
         <h3>テーブルは終日動かしません</h3>
-        <p>仕込みの時点でテーブルを島配置で確定させ、座談会中は椅子だけを前方に寄せて前向きに並べます（見た目はシアター形式）。転換は椅子を戻すだけの5分。</p>
+        <p>仕込みの時点でテーブルを<strong>ステージに対して90度</strong>の島配置で確定させ、座談会中は椅子の向きだけを正面に変えます。転換は椅子の振りを戻すだけの5分。</p>
         <p style="margin-top:.7rem;">テーブルの大移動をすると10〜15分かかり、終了が15:15までずれます。これを避けるための設計です。</p>
       </div>
       <div class="card">
@@ -858,8 +861,12 @@
           <p>「残り5分」などの合図は鈴木さんが1回だけ全体に出します。各WSが個別に大声を出さないでください。</p>
         </div>
         <div class="card">
-          <h3>すべて会場内で行います</h3>
-          <p>廊下・ホワイエは使えないため、プロデューサーWSの2分プレゼン練習も会場内で実施します。島の距離と向き、そして拡声しないことの徹底で吸収します。</p>
+          <h3>パーティションで区切ります</h3>
+          <p>会場の備品に三つ折り・キャスター付きのパーティションがあるので、3〜4枚を島の間に立てます。視線が切れるだけでも集中は上がります。ホワイトボードも併用を検討中です。</p>
+        </div>
+        <div class="card">
+          <h3>ワークショップは会場内で完結させます</h3>
+          <p>廊下は<strong>備品を一時的に出す程度なら使えます</strong>が、<strong>会場としては使えません</strong>。プロデューサーWSの2分プレゼン練習も含め、すべて701会議室の中で実施します。</p>
         </div>
         <div class="card">
           <h3>劇作WSは「音がある環境」前提で</h3>
@@ -886,7 +893,7 @@
 <footer class="wrap foot">
   <p><strong>SEED PAB特別プログラム＆講座説明会</strong>／Performing Arts Base 2026 内プログラム</p>
   <p>2026年9月26日（土）東京国際フォーラム ガラス棟7F 701会議室／主催：SEED（JPASN）</p>
-  <p style="margin-top:.9rem;">当日制作マスター v0.5（2026年8月31日時点）。内容が変わった箇所はこのページを更新します。<br>お問い合わせ：SEED事務局 <a href="mailto:seed@jpasn.net">seed@jpasn.net</a></p>
+  <p style="margin-top:.9rem;">当日制作マスター v0.6（2026年8月31日時点）。内容が変わった箇所はこのページを更新します。<br>お問い合わせ：SEED事務局 <a href="mailto:seed@jpasn.net">seed@jpasn.net</a></p>
 </footer>
 
 <script>
@@ -897,20 +904,20 @@
     { key: "load",  label: "仕込み",        time: "9:00–10:30" },
     { key: "recep", label: "受付",          time: "10:30–11:00" },
     { key: "talk",  label: "座談会",        time: "11:00–12:40" },
-    { key: "lunch", label: "転換・ランチ",  time: "12:40–13:15" },
-    { key: "ws",    label: "ワークショップ", time: "13:15–14:00" },
-    { key: "share", label: "全体共有",      time: "14:00–14:40" },
-    { key: "close", label: "説明会・終了",  time: "14:40–15:15" },
-    { key: "out",   label: "撤収",          time: "15:15–" }
+    { key: "lunch", label: "転換・ランチ",  time: "12:40–13:30" },
+    { key: "ws",    label: "ワークショップ", time: "13:30–14:15" },
+    { key: "share", label: "全体共有",      time: "14:15–14:55" },
+    { key: "close", label: "説明会・終了",  time: "14:55–15:30" },
+    { key: "out",   label: "撤収",          time: "15:30–" }
   ];
 
   var PEOPLE = [
-    { name: "野村", role: "司会進行（開会挨拶・各パート繋ぎ・全体共有 司会）／SEED説明会 登壇", cells: [
-      "原稿最終チェック", "場内で開演準備", "開会挨拶・各パート繋ぎ",
+    { name: "野村", role: "司会進行（開会挨拶・各パート繋ぎ・全体共有 司会）／SEED説明会 登壇／外注カメラマンの手配・当日窓口", cells: [
+      "原稿最終チェック・10:00 カメラマン受け入れ", "場内で開演準備", "開会挨拶・各パート繋ぎ",
       "転換 → 着席案内アナウンス", "説明会準備", "全体共有 司会", "説明会 登壇・終了アナウンス", "講師見送り" ] },
     { name: "鈴木", role: "全体制作統括（鈴木 萌加）── 進行判断・PAB主催折衝・ブリーフィング主宰・12:40転換のリード・撤収統括", cells: [
       "仕込み全体の統括・島設営リード・椅子シアター化・音の被りリハ", "場内統括・受付フロア全体を見る", "場内統括・押し戻し判断・登壇席の転換",
-      "転換リード・弁当配置", "3WS巡回・音の被り監視・13:10 資材配布・13:55 残り5分の合図", "発表の時間管理（10分）・発表資材の回収", "場内統括", "撤収統括・原状復帰・会場引き渡し" ] },
+      "転換リード・弁当配置", "3WS巡回・音の被り監視・13:25 資材配布・14:10 残り5分の合図", "発表の時間管理（10分）・発表資材の回収", "場内統括", "撤収統括・原状復帰・会場引き渡し" ] },
     { name: "横堀", role: "講師アテンド（控室・誘導・スライド受領）／進行・タイムキープ（座談会のキュー出し・転換号令）", cells: [
       "進行表最終確認・カンペ準備 → 9:45 講師コールタイム・控室ご案内・スライド受領", "控室で講師対応", "キュー出し・転換号令・袖で講師アテンド（次登壇者スタンバイ）",
       "転換 → 講師を担当島へ誘導", "控室・場内", "講師をフィードバック席へ", "説明会のタイムキープ", "講師見送り" ] },
@@ -929,8 +936,8 @@
     { name: "佐々木", role: "受付サポート／進行サポート／演出WS補助", cells: [
       "島設営・椅子シアター化", "受付サポート", "登壇席の転換（椅子・マイク）",
       "転換", "演出WS 補助", "進行のサポート", "場内", "撤収" ] },
-    { name: "大野", role: "受付責任者（受付イレギュラーの現場判断者）／会場PA／映像オペとの連携窓口／外注カメラマン窓口", cells: [
-      "受付設営・カメラマン受け入れ・機材設置の立会・音の被りリハ", "受付責任者（名簿照合・名札発行・イレギュラーの現場判断）", "受付常駐（前半）→ 座談会③ のキュー伝達",
+    { name: "大野", role: "受付責任者（受付イレギュラーの現場判断者）／会場PA／映像オペとの連携窓口", cells: [
+      "受付設営・機材設置の立会・音の被りリハ", "受付責任者（名簿照合・名札発行・イレギュラーの現場判断）", "受付常駐（前半）→ 座談会③ のキュー伝達",
       "転換", "プロデューサーWS 補助", "キュー伝達", "キュー伝達", "撤収" ] },
     { name: "PAB受付①", role: "受付（座談会中も常駐・途中入退場対応）／弁当搬入・配置", cells: [
       "島設営 → 受付設営", "受付（名簿照合・名札発行）", "受付常駐（途中入退場）",
@@ -956,10 +963,21 @@
     { due: "9/5",  soon: false, t: "ワークショップ内容の最終確定（劇作WSは音環境を前提に）", o: "倉沢・川名・赤羽", who: ["倉沢","川名","赤羽"] },
     { due: "9/5",  soon: false, t: "登壇者プロフィール・顔写真の回収 → LP差し替え", o: "髙田", who: ["髙田"] },
     { due: "9/5",  soon: false, t: "松本 美千穂さんのよみがな・肩書確定", o: "髙田", who: ["髙田"] },
-    { due: "9/5",  soon: false, t: "外注カメラマンの入り時間・立ち位置・納品条件を確定", o: "大野", who: ["大野"] },
+    { due: "9/5",  soon: false, t: "会場図面を引く（椅子・テーブルの数を確定させるため）", o: "赤羽", who: ["赤羽"] },
+    { due: "9/5",  soon: false, t: "備品の希望をPAB／会場へ提出（テーブル・椅子・登壇用チェア・パーティション・ホワイトボード・スクリーン2枚・ポータブルステージ）", o: "髙田", who: ["髙田"] },
+    { due: "9/5",  soon: false, t: "プロジェクターの手配先を決める（会場の備品リストに無い）", o: "髙田", who: ["髙田"] },
+    { due: "9/5",  soon: false, t: "クリッカーの有無を確認（無ければ倉沢がスライドを送る）", o: "倉沢", who: ["倉沢"] },
+    { due: "9/5",  soon: false, t: "SEEDでしか使わない備品の費用負担をPABと整理", o: "髙田", who: ["髙田"] },
+    { due: "9/5",  soon: false, t: "高橋 戦車さんの参加確定とプロフィール回収", o: "髙田", who: ["髙田"] },
+    { due: "9/5",  soon: false, t: "外注カメラマンの手配と、入り時間・立ち位置・納品条件の確定", o: "野村", who: ["野村"] },
     { due: "9/10", soon: false, t: "印刷物の内容確定（職能カラー名札・名簿・島サイン・アンケート）", o: "大野", who: ["大野"] },
     { due: "9/10", soon: false, t: "お弁当の受け取り手順を確定（PAB側との受け渡し時刻・数の照合方法・過不足時の対応）", o: "遠藤", who: ["遠藤"] },
     { due: "9/10", soon: false, t: "SEED側持参機材の確定（PC・クリッカー・アダプタ）", o: "赤羽・大野", who: ["赤羽","大野"] },
+    { due: "9/10", soon: false, t: "全体共有の発表方法を決める（マイクの本数がこれで決まる）", o: "倉沢・川名・赤羽", who: ["倉沢","川名","赤羽"] },
+    { due: "9/11", soon: false, t: "説明会スライドを各職能＋一般教養で作成（フェーズ1に絞る）", o: "各講座担当", who: ["倉沢","川名","赤羽","野村"] },
+    { due: "9/11", soon: false, t: "「SEEDとは」の全体パートを作成", o: "髙田・野村", who: ["髙田","野村"] },
+    { due: "9/8",  soon: false, t: "制作ミーティング（鈴木・大野と、当日の段取りを詰める）", o: "髙田", who: ["髙田","鈴木","大野"] },
+    { due: "9/14", soon: false, t: "説明会スライドの最終確認（定例でマージ）", o: "髙田", who: ["髙田"] },
     { due: "9/15", soon: false, t: "進行表 v1.0 確定 → 講師・スタッフ全員へ共有", o: "髙田", who: ["髙田"] },
     { due: "9/15", soon: false, t: "全体制作統括・司会進行の引き継ぎ（鈴木・野村へ当日の判断範囲を説明）", o: "髙田", who: ["髙田","鈴木","野村"] },
     { due: "9/15", soon: false, t: "会場PA／映像オペに進行表を共有・キューの段取りを事前確認", o: "赤羽・大野", who: ["赤羽","大野"] },
@@ -992,6 +1010,7 @@
 
   var picker = document.getElementById("picker");
   var mine   = document.getElementById("mine-panel");
+  var matrix = document.getElementById("matrix");
   var mHead  = document.getElementById("matrix-head");
   var mBody  = document.getElementById("matrix-body");
   var tasksEl = document.getElementById("task-list");
@@ -1010,27 +1029,30 @@
   });
 
   /* ── 香盤テーブル ── */
+  // 香盤は「縦＝時間／横＝担当」。ある時間に誰が空いているかを読み取れる形にする。
   (function buildMatrix() {
-    var blank = document.createElement("th");
-    blank.scope = "col";
-    blank.textContent = "担当";
-    mHead.appendChild(blank);
-    PHASES.forEach(function (ph) {
+    var corner = document.createElement("th");
+    corner.scope = "col";
+    corner.textContent = "時間";
+    mHead.appendChild(corner);
+    PEOPLE.forEach(function (p) {
       var th = document.createElement("th");
       th.scope = "col";
-      th.innerHTML = ph.label + "<br>" + ph.time;
+      th.dataset.name = p.name;
+      th.textContent = p.name;
       mHead.appendChild(th);
     });
 
-    PEOPLE.forEach(function (p) {
+    PHASES.forEach(function (ph, i) {
       var tr = document.createElement("tr");
-      tr.dataset.name = p.name;
       var th = document.createElement("th");
       th.scope = "row";
-      th.textContent = p.name;
+      th.innerHTML = ph.label + "<br><span class=\"t\">" + ph.time + "</span>";
       tr.appendChild(th);
-      p.cells.forEach(function (c) {
+      PEOPLE.forEach(function (p) {
         var td = document.createElement("td");
+        td.dataset.name = p.name;
+        var c = p.cells[i];
         if (c.indexOf("転換") === 0) {
           td.innerHTML = "<strong>" + c + "</strong>";
         } else {
@@ -1082,8 +1104,9 @@
       b.setAttribute("aria-pressed", b.textContent === name ? "true" : "false");
     });
 
-    Array.prototype.forEach.call(mBody.children, function (tr) {
-      tr.classList.toggle("on", tr.dataset.name === name);
+    // 選んだ担当の列をハイライトする
+    Array.prototype.forEach.call(matrix.querySelectorAll("[data-name]"), function (cell) {
+      cell.classList.toggle("on", !!name && cell.dataset.name === name);
     });
 
     if (SHOW_TASKS && tasksEl) {
