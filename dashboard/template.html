@@ -6409,6 +6409,15 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
   }
   .pabrs .check-b strong { display: block; font-weight: 600; font-size: .95rem; line-height: 1.5; }
   .pabrs .check-b span { display: block; color: var(--ink-2); font-size: .84rem; line-height: 1.6; margin-top: .15rem; }
+  /* 状況ラベル。色に頼らず文字で状態を示す（デザインシステムの方針） */
+  .pabrs .check-b .stat {
+    display: inline-block; margin: 0 0 0 .5rem; vertical-align: .06em;
+    font-size: .66rem; font-weight: 400; letter-spacing: .04em; line-height: 1.7;
+    color: var(--ink-2); background: var(--ground-2);
+    border: 1px solid var(--line-2); border-radius: var(--r-pill);
+    padding: .04rem .58rem; white-space: nowrap;
+  }
+  .pabrs .check-b .stat.fixed { color: var(--ink); background: transparent; border-color: var(--ink-3); }
 
   /* ══ timeline ══ */
   .pabrs .phase { margin-top: 2.2rem; }
@@ -6707,37 +6716,37 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
   <div class="wrap">
     <div class="sec-head">
       <div class="sec-kicker">Before Anything Else</div>
-      <h2>8月31日までに確かめたいこと</h2>
-      <p class="sec-note">下見とPAB主催への確認で、まとめて片づけられるものが並んでいます。ここが決まると進行表をv1.0に確定できます。</p>
+      <h2>いま確認中のこと</h2>
+      <p class="sec-note">回答が返ってきた順に、ここと進行表を更新します。すべて片づけば進行表をv1.0に確定できます。</p>
     </div>
 
     <div class="alert">
       <div class="alert-title">
-        <span class="tag-alert">要確認</span>
-        仕込みが90分しかありません
+        <span class="tag-alert">確認中</span>
+        仕込みの時間をどう確保するか
       </div>
-      <p style="color:var(--ink-2); font-size:.9rem; margin-bottom:1.1rem;">搬入9:00・開場10:30。島テーブルの設営がボトルネックで、そこに受付設営・講師コールタイム・音のリハ・ブリーフィングを詰めることになります。<strong style="color:var(--ink);">会場に事前レイアウト（島配置）を発注できれば、設営35分が15分になり一気に楽になります。</strong>これが最優先の確認事項です。</p>
+      <p style="color:var(--ink-2); font-size:.9rem; margin-bottom:1.1rem;">搬入9:00・開場10:30で、当日の仕込みは90分。島テーブルの設営がボトルネックで、そこに受付設営・講師コールタイム・音のリハ・ブリーフィングを詰めることになります。<strong style="color:var(--ink);">前日に仕込める可能性もあり、あわせて確認中です。</strong>前日仕込みか事前レイアウトの発注が通れば、当日は椅子のシアター化と受付設営だけで済み、一気に楽になります。</p>
 
       <div class="checks">
         <div class="check">
           <span class="check-n">01</span>
-          <span class="check-b"><strong>会場に事前レイアウト（島配置）を発注できるか</strong><span>仕込み90分が成立するかの分かれ目。9:00時点で島が組まれていれば、こちらは椅子のシアター化と受付設営だけで済みます。</span></span>
+          <span class="check-b"><strong>会場レイアウトと前日仕込み<span class="stat">確認中</span></strong><span>事前レイアウト（島配置）を発注できるか、および<strong style="color:var(--ink);">前日に仕込めるか</strong>を確認中。どちらかが通れば当日の90分に余裕が生まれます。通らなかった場合は9:00全員集合での設営になります。</span></span>
         </div>
         <div class="check">
           <span class="check-n">02</span>
-          <span class="check-b"><strong>701会議室のキャパ（座談会時／島モード時）</strong><span>弁当数の上限と、座談会のみ参加枠に定員を設けるかの判断に直結します。</span></span>
+          <span class="check-b"><strong>参加者数の上限<span class="stat fixed">一旦50名で設計</span></strong><span>参加者のMAXは50名。ワークショップの定員合計（劇作20／演出10／プロデューサー20）とちょうど同数のため、<strong style="color:var(--ink);">全員がWSに入ると座談会のみ参加の枠が残りません。</strong>この配分は要調整です。</span></span>
         </div>
         <div class="check">
           <span class="check-n">03</span>
-          <span class="check-b"><strong>弁当の数量を9月24日のいつまでに出すか</strong><span>申込締切と同日のため、時刻レベルで確認したいところ。回答次第で締切を9/22に前倒すか、猶予をもらうかを決めます。</span></span>
+          <span class="check-b"><strong>弁当の数量を9月24日のいつまでに出すか<span class="stat">PAB担当者に確認中</span></strong><span>申込締切と同日のため、時刻レベルで確認中。回答次第で締切を9/22に前倒すか、猶予をもらうかを決めます。</span></span>
         </div>
         <div class="check">
           <span class="check-n">04</span>
-          <span class="check-b"><strong>廊下・ホワイエをワークショップで使えるか</strong><span>パーテーションがないため、プロデューサーWSのプレゼン練習を外に逃がせるかが音対策の生命線になります。</span></span>
+          <span class="check-b"><strong>廊下・ホワイエをワークショップで使えるか<span class="stat">PAB担当者に確認中</span></strong><span>パーテーションがないため、プロデューサーWSのプレゼン練習を外に逃がせるかが音対策の生命線になります。</span></span>
         </div>
         <div class="check">
           <span class="check-n">05</span>
-          <span class="check-b"><strong>ホワイトボード／掲示パネルを借りられるか</strong><span>パーテーションの代替。視線が切れるだけでも集中は上がります。</span></span>
+          <span class="check-b"><strong>ホワイトボード／掲示パネルを借りられるか<span class="stat">PAB担当者に確認中</span></strong><span>パーテーションの代替。視線が切れるだけでも集中は上がります。</span></span>
         </div>
       </div>
     </div>
