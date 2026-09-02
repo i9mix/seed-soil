@@ -1,0 +1,68 @@
+<div id="tab-dashboard" class="tab-content active">
+  <div class="now-container">
+
+    <!-- ① 直近マイルストーン -->
+    <div class="now-count" id="now-count"></div>
+
+    <!-- ② 期限のあるタスク -->
+    <div class="now-block">
+      <div class="now-block-head">
+        <div class="now-block-title">期限のあるタスク</div>
+        <div class="now-block-sub">出典：⑦ PAB企画・制作進行（当日制作マスター v0.6）</div>
+      </div>
+      <div class="now-filter" id="now-filter"></div>
+      <div id="now-due"></div>
+    </div>
+
+    <!-- ③ 確認中・回答待ち -->
+    <div class="now-block">
+      <div class="now-block-head">
+        <div class="now-block-title">確認中・回答待ち</div>
+        <div class="now-block-sub">回答が返り次第、⑦タブと進行表を更新</div>
+      </div>
+      <div class="now-checks" id="now-checks"></div>
+    </div>
+
+    <!-- ④ 決定・完了の記録 -->
+    <div class="now-block">
+      <div class="now-block-head">
+        <div class="now-block-title">決定・完了の記録</div>
+        <div class="now-block-sub">8/31 サマースクール定例（当日制作マスター v0.6）以降</div>
+      </div>
+      <div class="now-log">
+        <div class="now-log-row"><span class="now-log-date">9/2</span><span>阿部さんへの<strong>劇作WS 共同進行の正式依頼・進め方のすり合わせが完了</strong>（倉沢）</span></div>
+        <div class="now-log-row"><span class="now-log-date">9/2</span><span>PAB担当者への確認5件（事前レイアウト・701キャパ・弁当数量の締切・ホワイトボード借用・運営取り決め）を<strong>「確認中」へ整理</strong>。回答待ちのため期限つきタスクからは外した</span></div>
+        <div class="now-log-row"><span class="now-log-date">8/31</span><span>お弁当は<strong>無料</strong>のまま。参加者からの集金は行わない（集金に関する記載は全て撤回）</span></div>
+        <div class="now-log-row"><span class="now-log-date">8/31</span><span>参加者上限は<strong>一旦50名で設計</strong>。WS定員合計（劇作20／演出10／プロデューサー20）と同数のため、座談会のみ参加の枠が残らない点は要調整</span></div>
+        <div class="now-log-row"><span class="now-log-date">8/31</span><span>髙田不在に伴う役割再配分：<strong>全体制作統括＝鈴木</strong>、<strong>司会進行＝野村</strong>、<strong>講師アテンド＝横堀</strong>、<strong>お弁当まわり＝遠藤</strong></span></div>
+        <div class="now-log-row"><span class="now-log-date">8/31</span><span>当日の構成を確定：座談会（各30分・計90分）→ 転換・ランチ → 職能別WS 45分 → 全体共有 → 説明会。<strong>12:40〜12:45の転換は全員で入る</strong></span></div>
+        <div class="now-log-row"><span class="now-log-date">8/31</span><span>LPの時間割を新スケジュールに修正</span></div>
+      </div>
+    </div>
+
+    <!-- ⑤ Slackデイリーレポート（NOW内の一セクションへ格下げ） -->
+    <details class="now-slack" id="now-slack" data-count="%%MEMBER_COUNT%%">
+      <summary>
+        Slackデイリーレポート
+        <span class="now-slack-mini">
+          <span>%%DATE%%</span>
+          <span>投稿 <span class="num">%%MEMBER_COUNT%%</span>名</span>
+          <span>緊急 <span class="num">%%TOTAL_URGENT%%</span></span>
+          <span>進行中 <span class="num">%%TOTAL_WIP%%</span></span>
+          <span>予定 <span class="num">%%TOTAL_PLAN%%</span></span>
+        </span>
+      </summary>
+      <div class="now-slack-body">
+        <div class="legend">
+          <div class="leg"><div class="leg-dot" style="background:var(--soil)"></div>SOIL</div>
+          <div class="leg"><div class="leg-dot" style="background:var(--seed)"></div>SEED</div>
+          <div class="leg"><div class="leg-dot" style="background:var(--border)"></div>共通</div>
+        </div>
+        <div class="grid">
+%%CARDS%%
+        </div>
+      </div>
+    </details>
+
+  </div>
+</div><!-- /#tab-dashboard -->

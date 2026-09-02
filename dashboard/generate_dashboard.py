@@ -200,10 +200,12 @@ def main():
     data = collect_all_reports(slack_client)
 
     if not data.get("reports"):
-        print("デイリーレポートが見つかりませんでした")
-        return
-
-    print(f"{len(data['reports'])}名分のタスクを収集")
+        # レポートが0件でも index.html は書き出す。
+        # テンプレート側の変更（タブの追加・修正）を反映させるため。
+        # 投稿0名のときは NOW タブの日報セクションが自動的に隠れる。
+        print("デイリーレポートが見つかりませんでした。テンプレートのみ反映します")
+    else:
+        print(f"{len(data['reports'])}名分のタスクを収集")
 
     print("HTMLを生成中...")
     html = generate_html(data)

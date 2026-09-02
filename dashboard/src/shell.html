@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--
+  このファイルは dashboard/build.mjs が生成しています。直接編集しないでください。
+    タブの中身      → dashboard/src/tabs/*.html
+    配色・レイアウト → dashboard/src/styles.css
+    ヘッダ・ナビ・JS → dashboard/src/shell.html
+  編集したら dashboard/ で `node build.mjs` を実行します。
+-->
+<title>SEEDダッシュボード</title>
+<style>
+<!--@CSS-->
+</style>
+</head>
+<body>
+
+<!-- Password Gate -->
+<div id="pw-gate">
+  <div class="pw-box">
+    <div class="pw-logo">SEED Dashboard</div>
+    <div class="pw-title">関係者専用ページ</div>
+    <div class="pw-sub">パスワードを入力してください</div>
+    <input id="pw-input" class="pw-input" type="password" placeholder="password" autocomplete="off">
+    <button class="pw-btn" onclick="checkPassword()">Enter</button>
+    <div class="pw-error" id="pw-error"></div>
+  </div>
+</div>
+<script>
+(function() {
+  if (sessionStorage.getItem('seed_auth') === '1') {
+    document.getElementById('pw-gate').classList.add('hidden');
+  }
+})();
+function checkPassword() {
+  var input = document.getElementById('pw-input');
+  if (input.value === 'jpasn-seed2025') {
+    sessionStorage.setItem('seed_auth', '1');
+    document.getElementById('pw-gate').classList.add('hidden');
+  } else {
+    input.classList.add('error');
+    document.getElementById('pw-error').textContent = 'パスワードが正しくありません';
+    setTimeout(function() { input.classList.remove('error'); input.value = ''; }, 600);
+  }
+}
+document.getElementById('pw-input').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') checkPassword();
+});
+</script>
+
+<div class="page-header">
+  <div>
+    <h1>SEEDダッシュボード</h1>
+    <div class="print-tab-name" id="print-tab-name"></div>
+    <div class="meta">
+      <span class="badge badge-slack">#101-会議関連</span>
+      <span class="badge badge-date">%%DATE%%</span>
+      <span class="badge badge-date">%%MEMBER_COUNT%%名</span>
+    </div>
+  </div>
+  <div class="header-right">
+    <button type="button" class="print-btn" id="print-btn" title="いま開いているタブを印刷します">印刷</button>
+    <div class="updated">最終更新<br>%%NOW%%</div>
+  </div>
+</div>
+
+<div class="tab-nav-wrapper">
+  <!-- 一次ナビ：4つの層 -->
+  <div class="layer-nav" role="group" aria-label="表示する層">
+    <button type="button" class="layer-btn active" data-layer="now">いま</button>
+    <button type="button" class="layer-btn" data-layer="track">進行</button>
+    <button type="button" class="layer-btn" data-layer="base">設計</button>
+    <button type="button" class="layer-btn" data-layer="case">案件</button>
+  </div>
+  <!-- 二次ナビ：層のなかのタブ -->
+  <div class="tab-nav">
+    <button class="tab-btn active" data-tab="dashboard" data-layer="now">今週のボード</button>
+    <button class="tab-btn" data-tab="progress" data-layer="track">プログラム進捗</button>
+    <button class="tab-btn" data-tab="timeline" data-layer="track">スケジュール</button>
+    <button class="tab-btn" data-tab="people" data-layer="track">関係者マップ</button>
+    <button class="tab-btn" data-tab="meetings" data-layer="track">会議資料</button>
+    <button class="tab-btn" data-tab="about" data-layer="base">事業概要</button>
+    <button class="tab-btn" data-tab="verification" data-layer="base">育成検証企画</button>
+    <button class="tab-btn" data-tab="soil-map" data-layer="base">① SEED 戦略マップ</button>
+    <button class="tab-btn" data-tab="hr" data-layer="base">② 人材要件 v2</button>
+    <button class="tab-btn" data-tab="university-analysis" data-layer="base">③ 大学教育に関する分析</button>
+    <button class="tab-btn" data-tab="general-education" data-layer="base">④ 一般教養プログラム</button>
+    <button class="tab-btn" data-tab="role-specific" data-layer="base">⑤ 職能別個別要件</button>
+    <button class="tab-btn" data-tab="research-agenda" data-layer="base">⑥ 追加リサーチ検討</button>
+    <button class="tab-btn" data-tab="pab-plan" data-layer="case">⑦ PAB企画・制作進行</button>
+  </div>
+</div>
+
+<!-- タブ横断検索 -->
+<div class="search-wrap">
+  <div class="search-box">
+    <input type="search" id="search-input" class="search-input"
+           placeholder="すべてのタブから探す（人名・施策名・日付など）"
+           autocomplete="off" spellcheck="false"
+           aria-label="タブ横断検索" aria-expanded="false" aria-controls="search-results">
+    <span class="search-hint" id="search-hint" aria-hidden="true">/</span>
+    <button type="button" class="search-clear" id="search-clear" aria-label="検索を消す" hidden>×</button>
+  </div>
+  <div class="search-results" id="search-results" role="listbox" aria-label="検索結果" hidden></div>
+</div>
+
+<!-- ════ Dashboard Tab ════ -->
+<!--@TAB:dashboard-->
+
+<!-- ════ About Tab ════ -->
+<!--@TAB:about-->
+
+<!-- ════ Verification Program Tab ════ -->
+<!--@TAB:verification-->
+
+<!-- ════ HR Requirements Tab ════ -->
+<!--@TAB:hr-->
+
+<!-- ════ Meetings Tab ════ -->
+<!--@TAB:meetings-->
+
+<!-- ════ Program Progress Tab ════ -->
+<!--@TAB:progress-->
+
+<!-- ════ Timeline Tab ════ -->
+<!--@TAB:timeline-->
+
+<!-- ════ People Map Tab ════ -->
+<!--@TAB:people-->
+
+<!-- ════ SOIL Map Tab ════ -->
+<!--@TAB:soil-map-->
+
+<!-- ════ University Analysis Tab ════ -->
+<!--@TAB:university-analysis-->
+
+<!-- ════ General Education Tab ════ -->
+<!--@TAB:general-education-->
+
+<!-- ════ Role-Specific Tab ════ -->
+<!--@TAB:role-specific-->
+
+<!-- ════ Research Agenda Tab ════ -->
+<!--@TAB:research-agenda-->
+
+<!-- ════ PAB Plan Tab ════ -->
+<!--@TAB:pab-plan-->
+
+<div class="footer">
+  <span>NOWタブのSlackデイリーレポートのみ自動生成（平日 毎朝9:00）。他のタブは手動更新です</span>
+  <span>i9mix/seed-soil</span>
+</div>
+
+<script>
+/* ── 2階層ナビ：層（いま／進行／設計／案件）→ タブ ── */
+var lastTabInLayer = {};
+
+function activateLayer(layer) {
+  document.querySelectorAll('.layer-btn').forEach(b => b.classList.toggle('active', b.dataset.layer === layer));
+  document.querySelectorAll('.tab-btn').forEach(b => { b.hidden = b.dataset.layer !== layer; });
+}
+
+function activateTab(name) {
+  const target = document.getElementById('tab-' + name);
+  if (!target) return false;
+  const btn = document.querySelector('.tab-btn[data-tab="' + name + '"]');
+  if (btn) {
+    activateLayer(btn.dataset.layer);
+    lastTabInLayer[btn.dataset.layer] = name;
+  }
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  target.classList.add('active');
+  /* 紙の上でどのタブを刷ったのかがわかるように、名前を控えておく */
+  const nameEl = document.getElementById('print-tab-name');
+  if (nameEl) {
+    const layerBtn = document.querySelector('.layer-btn.active');
+    const layer = layerBtn ? layerBtn.textContent.trim() : '';
+    const tabName = btn ? btn.textContent.trim() : '';
+    nameEl.textContent = layer && tabName ? layer + '　/　' + tabName : tabName;
+  }
+  /* モバイルでナビが横スクロールしているときは、選んだタブを見える位置へ */
+  if (btn) {
+    const nav = btn.parentElement;
+    if (nav && nav.scrollWidth > nav.clientWidth + 2) {
+      btn.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    }
+  }
+  return true;
+}
+
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    activateTab(btn.dataset.tab);
+    history.replaceState(null, '', '#' + btn.dataset.tab);
+  });
+});
+
+document.querySelectorAll('.layer-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const layer = btn.dataset.layer;
+    const remembered = lastTabInLayer[layer];
+    const first = document.querySelector('.tab-btn[data-layer="' + layer + '"]');
+    const name = (remembered && document.getElementById('tab-' + remembered)) ? remembered : (first && first.dataset.tab);
+    if (!name) return;
+    activateTab(name);
+    history.replaceState(null, '', '#' + name);
+  });
+});
+
+const printBtn = document.getElementById("print-btn");
+if (printBtn) printBtn.addEventListener("click", () => window.print());
+
+activateLayer('now');
+if (location.hash) activateTab(location.hash.slice(1));
+window.addEventListener('hashchange', () => activateTab(location.hash.slice(1)));
+
+document.querySelectorAll('.role-tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.role-tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.role-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('role-' + btn.dataset.role).classList.add('active');
+  });
+});
+
+document.querySelectorAll('.rs-tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.rs-tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.rs-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('rs-' + btn.dataset.rsRole).classList.add('active');
+  });
+});
+
+/* ── Meeting summary modal ── */
+function openMeetingSummary(id) {
+  const modal = document.getElementById(id);
+  if (!modal) return;
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeMeetingSummary() {
+  document.querySelectorAll('.meeting-summary-modal.open').forEach(m => m.classList.remove('open'));
+  document.body.style.overflow = '';
+}
+document.querySelectorAll('[data-summary]').forEach(el => {
+  el.addEventListener('click', () => openMeetingSummary(el.dataset.summary));
+  if (el.getAttribute('role') === 'button') {
+    el.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openMeetingSummary(el.dataset.summary); }
+    });
+  }
+});
+document.querySelectorAll('.meeting-summary-modal').forEach(modal => {
+  modal.addEventListener('click', closeMeetingSummary); // backdrop click (panel stops propagation)
+});
+document.querySelectorAll('.msm-close').forEach(btn => btn.addEventListener('click', closeMeetingSummary));
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMeetingSummary(); });
+</script>
+
+
+<!-- ══ NOW タブ ＋ 鮮度メタデータ ══ -->
+<script>
+(function () {
+  "use strict";
+
+  var TASK_YEAR  = 2026;  // ⑦ TASKS の期限が属する年
+  var NEAR_DAYS  = 14;    // マイルストーンを強調する残日数
+  var WINDOW_DAYS = 14;   // 期限ボードの既定表示範囲
+  var STALE_DAYS = 60;    // これを超えたタブに「要確認」を付ける
+
+  var today = new Date(); today.setHours(0, 0, 0, 0);
+  function ymd(y, m, d) { var x = new Date(y, m - 1, d); x.setHours(0, 0, 0, 0); return x; }
+  function diff(to) { return Math.round((to - today) / 86400000); }
+  function md(x) { return (x.getMonth() + 1) + '/' + x.getDate(); }
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+  /* ══ ① 直近マイルストーン ══ */
+  var MILESTONES = [
+    { date: ymd(2026, 9, 15), name: '進行表 v1.0 確定・全員へ共有', note: 'PAB当日運営の内部ゲート' },
+    { date: ymd(2026, 9, 26), name: 'PAB SEEDオープン講座 本番',   note: '搬入 9:00 ／ 撤収 18:00' },
+    { date: ymd(2026, 9, 26), name: '劇作家 Introductory Course 開講', note: '9/26〜10/3・最大20名' }
+  ];
+
+  var countEl = document.getElementById('now-count');
+  if (countEl) {
+    countEl.innerHTML = MILESTONES.map(function (m) {
+      var n = diff(m.date);
+      var big = n < 0 ? '終了' : (n === 0 ? '本日' : n + '<span class="unit">日後</span>');
+      return '<div class="now-count-card' + (n >= 0 && n <= NEAR_DAYS ? ' is-near' : '') + '">' +
+               '<div class="now-count-label">' + md(m.date) + '</div>' +
+               '<div class="now-count-days">' + big + '</div>' +
+               '<div class="now-count-name">' + esc(m.name) + '</div>' +
+               '<div class="now-count-note">' + esc(m.note) + '</div>' +
+             '</div>';
+    }).join('');
+  }
+
+  /* ══ ② 期限のあるタスク（⑦ PABタブの TASKS を唯一のデータ源にする） ══ */
+  var dueEl = document.getElementById('now-due');
+  var filterEl = document.getElementById('now-filter');
+  var TASKS = (window.SEED_PAB && window.SEED_PAB.TASKS) || [];
+  var person = 'all';
+  var showAll = false;
+
+  function parseDue(s) {
+    var p = String(s).split('/');
+    return ymd(TASK_YEAR, parseInt(p[0], 10), parseInt(p[1], 10));
+  }
+
+  function renderDue() {
+    if (!dueEl) return;
+
+    var rows = TASKS.map(function (t) {
+      return { d: parseDue(t.due), t: t.t, o: t.o, who: t.who || [] };
+    }).filter(function (r) {
+      if (person === 'all') return true;
+      return r.who.length === 0 || r.who.indexOf(person) !== -1;  // who が空＝全員
+    }).sort(function (a, b) { return a.d - b.d; });
+
+    var overdue = rows.filter(function (r) { return diff(r.d) < 0; });
+    var visible = showAll ? rows : rows.filter(function (r) {
+      var n = diff(r.d);
+      return n < 0 || n <= WINDOW_DAYS;
+    });
+
+    if (!visible.length) {
+      dueEl.innerHTML = '<div class="now-empty">この担当者の期限つきタスクはありません。</div>';
+      return;
+    }
+
+    var html = '';
+    if (overdue.length) {
+      html += '<div class="now-overdue-note"><strong>期限を過ぎたタスクが ' + overdue.length + ' 件あります。</strong>' +
+              '完了済みのものは ⑦ PAB企画・制作進行タブの <code>TASKS</code> を更新してください（このボードは⑦のデータをそのまま読んでいます）。</div>';
+    }
+
+    var groups = [];
+    visible.forEach(function (r) {
+      var key = md(r.d);
+      var g = groups[groups.length - 1];
+      if (!g || g.key !== key) { groups.push({ key: key, date: r.d, items: [r] }); }
+      else { g.items.push(r); }
+    });
+
+    groups.forEach(function (g) {
+      var n = diff(g.date);
+      var cls = n < 0 ? ' is-over' : (n <= 3 ? ' is-soon' : '');
+      var left = n < 0 ? (-n) + '日超過' : (n === 0 ? '本日' : 'あと' + n + '日');
+      html += '<div class="now-due-group' + cls + '">' +
+                '<div class="now-due-head">' +
+                  '<span class="now-due-date">' + g.key + '</span>' +
+                  '<span class="now-due-left">' + left + '</span>' +
+                  '<span class="now-due-line"></span>' +
+                '</div>' +
+                g.items.map(function (r) {
+                  return '<div class="now-task"><span class="now-task-owner">' + esc(r.o) + '</span><span>' + esc(r.t) + '</span></div>';
+                }).join('') +
+              '</div>';
+    });
+
+    var hidden = rows.length - visible.length;
+    if (hidden > 0 || showAll) {
+      html += '<div class="now-more"><button type="button" class="now-more-btn" id="now-more-btn">' +
+              (showAll ? '直近' + WINDOW_DAYS + '日にしぼる' : 'これ以降の期限も表示（残り ' + hidden + ' 件）') +
+              '</button></div>';
+    }
+
+    dueEl.innerHTML = html;
+    var moreBtn = document.getElementById('now-more-btn');
+    if (moreBtn) moreBtn.addEventListener('click', function () { showAll = !showAll; renderDue(); });
+  }
+
+  if (filterEl && TASKS.length) {
+    var names = [];
+    TASKS.forEach(function (t) {
+      (t.who || []).forEach(function (w) { if (names.indexOf(w) === -1) names.push(w); });
+    });
+    filterEl.innerHTML = '<button type="button" class="now-filter-btn active" data-p="all">すべて</button>' +
+      names.map(function (n) {
+        return '<button type="button" class="now-filter-btn" data-p="' + esc(n) + '">' + esc(n) + '</button>';
+      }).join('');
+    filterEl.addEventListener('click', function (e) {
+      var b = e.target.closest('.now-filter-btn');
+      if (!b) return;
+      person = b.dataset.p;
+      showAll = false;
+      filterEl.querySelectorAll('.now-filter-btn').forEach(function (x) { x.classList.toggle('active', x === b); });
+      renderDue();
+    });
+  }
+  renderDue();
+
+  /* ══ ③ 確認中・回答待ち（⑦の「いま確認中のこと」からそのまま拾う） ══ */
+  var checksEl = document.getElementById('now-checks');
+  if (checksEl) {
+    var src = document.querySelectorAll('#check .check');
+    if (!src.length) {
+      checksEl.innerHTML = '<div class="now-empty">確認中の項目はありません。</div>';
+    } else {
+      checksEl.innerHTML = Array.prototype.map.call(src, function (c) {
+        var n = c.querySelector('.check-n');
+        var b = c.querySelector('.check-b');
+        var strong = b ? b.querySelector('strong') : null;
+        if (!strong) return '';
+        var stat = strong.querySelector('.stat');
+        var status = stat ? stat.textContent.trim() : '';
+        var fixed = stat && stat.classList.contains('fixed');
+        var clone = strong.cloneNode(true);
+        var cs = clone.querySelector('.stat'); if (cs) cs.remove();
+        var title = clone.textContent.trim();
+        var desc = b.children.length > 1 ? b.children[b.children.length - 1].innerHTML : '';
+        return '<div class="now-check">' +
+                 '<span class="now-check-n">' + (n ? esc(n.textContent.trim()) : '') + '</span>' +
+                 '<span><span class="now-check-t">' + esc(title) +
+                   (status ? '<span class="now-check-s' + (fixed ? ' is-fixed' : '') + '">' + esc(status) + '</span>' : '') +
+                 '</span><span class="now-check-d">' + desc + '</span></span>' +
+               '</div>';
+      }).join('');
+    }
+  }
+
+  /* ══ ⑤ Slackデイリーレポート：投稿0名の日は出さない ══ */
+  var slackEl = document.getElementById('now-slack');
+  if (slackEl) {
+    var cnt = parseInt(slackEl.dataset.count, 10);
+    if (!(cnt > 0)) slackEl.hidden = true;
+  }
+
+  /* ══ 鮮度メタデータ：各タブに最終更新日と「要確認」を出す ══ */
+  document.querySelectorAll('.tab-content[data-updated]').forEach(function (el) {
+    var iso = el.dataset.updated;
+    var p = iso.split('-');
+    var age = Math.round((today - ymd(+p[0], +p[1], +p[2])) / 86400000);
+    var stale = age >= STALE_DAYS;
+
+    var bar = document.createElement('div');
+    bar.className = 'fresh-bar';
+    bar.innerHTML = 'このタブの最終更新 <span class="fresh-date">' + iso.replace(/-/g, '/') + '</span>（' + age + '日前）' +
+      (stale ? '<span class="fresh-flag">要確認</span><span>' + STALE_DAYS + '日以上更新されていません</span>' : '');
+    el.insertBefore(bar, el.firstChild);
+
+    if (stale) {
+      var btn = document.querySelector('.tab-btn[data-tab="' + el.id.replace(/^tab-/, '') + '"]');
+      if (btn && !btn.querySelector('.stale-dot')) {
+        btn.insertAdjacentHTML('beforeend', '<span class="stale-dot" title="' + STALE_DAYS + '日以上更新なし"></span>');
+      }
+    }
+  });
+
+  /* 層のボタンにも「要確認」のしるしを上げる */
+  document.querySelectorAll('.tab-btn .stale-dot').forEach(function (dot) {
+    var layer = dot.closest('.tab-btn').dataset.layer;
+    var lb = document.querySelector('.layer-btn[data-layer="' + layer + '"]');
+    if (lb && !lb.querySelector('.stale-dot')) {
+      lb.insertAdjacentHTML('beforeend', '<span class="stale-dot" title="この層に' + STALE_DAYS + '日以上更新のないタブがあります"></span>');
+    }
+  });
+
+  /* ══ #now を #dashboard の別名として扱う ══ */
+  function nowAlias() {
+    if (location.hash === '#now' && typeof activateTab === 'function') activateTab('dashboard');
+  }
+  nowAlias();
+  window.addEventListener('hashchange', nowAlias);
+})();
+</script>
+
+<!-- ══ タブ横断検索 ══ -->
+<script>
+(function () {
+  "use strict";
+
+  var input   = document.getElementById('search-input');
+  var results = document.getElementById('search-results');
+  var clearBt = document.getElementById('search-clear');
+  var hintEl  = document.getElementById('search-hint');
+  if (!input || !results) return;
+
+  var MAX_PER_TAB = 5;
+  var MAX_TOTAL   = 40;
+
+  /* 「葉のブロック」＝ブロック要素のうち、中にブロック要素を持たないもの。
+     これを1件の検索対象として扱う。<td><strong>x</strong>y</td> は td が1件になる。 */
+  var BLOCK = {
+    DIV:1, P:1, LI:1, TD:1, TH:1, DD:1, DT:1, SECTION:1, ARTICLE:1,
+    H1:1, H2:1, H3:1, H4:1, H5:1, H6:1, BLOCKQUOTE:1, FIGCAPTION:1, SUMMARY:1, CAPTION:1
+  };
+
+  var index = null;
+
+  function buildIndex() {
+    var out = [];
+    document.querySelectorAll('.tab-content').forEach(function (tab) {
+      var id  = tab.id.replace(/^tab-/, '');
+      var btn = document.querySelector('.tab-btn[data-tab="' + id + '"]');
+      if (!btn) return;
+      var tabName = btn.textContent.trim();
+      var layerBtn = document.querySelector('.layer-btn[data-layer="' + btn.dataset.layer + '"]');
+      var layerName = layerBtn ? layerBtn.textContent.trim() : '';
+
+      tab.querySelectorAll('*').forEach(function (el) {
+        if (!BLOCK[el.tagName]) return;
+        if (el.classList.contains('fresh-bar')) return;          // 鮮度バーは検索対象外
+        if (el.querySelector('style, script')) return;           // ⑦タブの中のCSS/JSを拾わない
+        for (var i = 0; i < el.children.length; i++) {
+          var c = el.children[i];
+          // 中身のあるブロックを持つなら親は葉ではない。
+          // 空のブロック（状態ドット等）は無視して、その親を1件として拾う。
+          if (BLOCK[c.tagName] && c.textContent.trim().length > 0) return;
+        }
+        var t = el.textContent.replace(/\s+/g, ' ').trim();
+        if (t.length < 4 || t.length > 600) return;
+        /* 「倉沢」のように短い見出しだけが当たると読み取れないので、
+           少し上の階層まで遡って、意味のわかる長さの文脈を表示用に持っておく。 */
+        var display = t;
+        if (t.length < 14) {
+          var p = el.parentElement;
+          while (p && p !== tab) {
+            var pt = p.textContent.replace(/\s+/g, ' ').trim();
+            if (pt.length > 300) break;
+            if (pt.length >= 14) { display = pt; break; }
+            p = p.parentElement;
+          }
+        }
+        out.push({ tab: id, tabName: tabName, layerName: layerName, el: el, text: t, display: display, lower: t.toLowerCase() });
+      });
+    });
+    return out;
+  }
+
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function snippet(text, q) {
+    var i = text.toLowerCase().indexOf(q);
+    if (i < 0) return esc(text.slice(0, 90));
+    var start = Math.max(0, i - 28);
+    var end   = Math.min(text.length, i + q.length + 52);
+    return (start > 0 ? '…' : '')
+         + esc(text.slice(start, i))
+         + '<mark>' + esc(text.slice(i, i + q.length)) + '</mark>'
+         + esc(text.slice(i + q.length, end))
+         + (end < text.length ? '…' : '');
+  }
+
+  /* ── 検索して結果を組み立てる ── */
+  var hits = [];
+
+  function run(raw) {
+    var q = raw.replace(/\s+/g, ' ').trim().toLowerCase();
+    if (q.length < 1) { close(); return; }
+    if (!index) index = buildIndex();
+
+    var byTab = {}, order = [], total = 0;
+    for (var i = 0; i < index.length && total < MAX_TOTAL * 3; i++) {
+      var e = index[i];
+      if (e.lower.indexOf(q) < 0) continue;
+      if (!byTab[e.tab]) { byTab[e.tab] = []; order.push(e.tab); }
+      byTab[e.tab].push(e);
+      total++;
+    }
+
+    hits = [];
+    var html = '', shown = 0;
+    order.forEach(function (tabId) {
+      var list = byTab[tabId];
+      var head = list[0];
+      html += '<div class="search-group"><div class="search-group-title">'
+            + esc(head.layerName) + '　/　' + esc(head.tabName)
+            + '（' + list.length + '件）</div>';
+      list.slice(0, MAX_PER_TAB).forEach(function (e) {
+        html += '<button type="button" class="search-hit-btn" role="option" data-i="' + hits.length + '">'
+              + snippet(e.display || e.text, q) + '</button>';
+        hits.push(e);
+        shown++;
+      });
+      if (list.length > MAX_PER_TAB) {
+        html += '<div class="search-meta">ほか ' + (list.length - MAX_PER_TAB) + ' 件（タブを開いて確認してください）</div>';
+      }
+      html += '</div>';
+    });
+
+    if (!shown) {
+      results.innerHTML = '<div class="search-empty">「' + esc(raw.trim()) + '」に当たるものはありませんでした。<br>表記ゆれ（例：髙田／高田、PAB／Performing Arts Base）を変えて試してみてください。</div>';
+    } else {
+      results.innerHTML = '<div class="search-meta">' + total + '件見つかりました（' + order.length + 'タブ）</div>' + html;
+    }
+    open();
+    setActive(0);
+  }
+
+  /* ── 開閉 ── */
+  var activeIdx = -1;
+
+  function open()  { results.hidden = false; input.setAttribute('aria-expanded', 'true'); }
+  function close() { results.hidden = true;  input.setAttribute('aria-expanded', 'false'); activeIdx = -1; }
+
+  function setActive(i) {
+    var btns = results.querySelectorAll('.search-hit-btn');
+    if (!btns.length) { activeIdx = -1; return; }
+    if (i < 0) i = btns.length - 1;
+    if (i >= btns.length) i = 0;
+    btns.forEach(function (b) { b.classList.remove('is-active'); });
+    btns[i].classList.add('is-active');
+    btns[i].scrollIntoView({ block: 'nearest' });
+    activeIdx = i;
+  }
+
+  /* ── 結果へ飛ぶ ── */
+  function jump(e) {
+    if (!e) return;
+    if (typeof activateTab === 'function') activateTab(e.tab);
+    history.replaceState(null, '', '#' + e.tab);
+    close();
+    requestAnimationFrame(function () {
+      e.el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      e.el.classList.remove('search-target');
+      void e.el.offsetWidth;
+      e.el.classList.add('search-target');
+      setTimeout(function () { e.el.classList.remove('search-target'); }, 1900);
+    });
+  }
+
+  /* ── 結線 ── */
+  var timer = null;
+  input.addEventListener('input', function () {
+    var v = input.value;
+    clearBt.hidden = !v;
+    if (hintEl) hintEl.hidden = !!v;
+    clearTimeout(timer);
+    timer = setTimeout(function () { run(v); }, 120);
+  });
+
+  input.addEventListener('keydown', function (ev) {
+    if (ev.key === 'Escape') {
+      if (!results.hidden) { close(); } else { input.value = ''; clearBt.hidden = true; if (hintEl) hintEl.hidden = false; input.blur(); }
+      ev.preventDefault();
+    } else if (ev.key === 'ArrowDown') {
+      if (results.hidden) run(input.value); else setActive(activeIdx + 1);
+      ev.preventDefault();
+    } else if (ev.key === 'ArrowUp') {
+      setActive(activeIdx - 1);
+      ev.preventDefault();
+    } else if (ev.key === 'Enter') {
+      jump(hits[activeIdx >= 0 ? activeIdx : 0]);
+      ev.preventDefault();
+    }
+  });
+
+  input.addEventListener('focus', function () { if (input.value && hits.length) open(); });
+
+  results.addEventListener('click', function (ev) {
+    var b = ev.target.closest('.search-hit-btn');
+    if (b) jump(hits[+b.dataset.i]);
+  });
+
+  clearBt.addEventListener('click', function () {
+    input.value = ''; clearBt.hidden = true;
+    if (hintEl) hintEl.hidden = false;
+    close(); input.focus();
+  });
+
+  document.addEventListener('click', function (ev) {
+    if (!ev.target.closest('.search-wrap')) close();
+  });
+
+  /* 「/」または Ctrl/⌘+K で検索欄へ */
+  document.addEventListener('keydown', function (ev) {
+    var t = ev.target;
+    var typing = t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable);
+    if ((ev.key === '/' && !typing) || ((ev.ctrlKey || ev.metaKey) && ev.key.toLowerCase() === 'k')) {
+      ev.preventDefault();
+      input.focus();
+      input.select();
+    }
+  });
+})();
+</script>
+</body>
+</html>

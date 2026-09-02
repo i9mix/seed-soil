@@ -18,7 +18,7 @@ seed-soil/
 ├── .claude/                # Claude Code設定（自動管理）
 ├── .github/                # GitHub Actions設定（自動管理）
 │
-├── dashboard/              # ダッシュボード自動生成システム
+├── dashboard/              # ダッシュボード（src/ から組み立てて自動生成）
 ├── governance/             # 会議・意思決定記録
 ├── docs/                   # 事業ドキュメント
 └── talent/                 # 人材要件定義
@@ -39,19 +39,46 @@ seed-soil/
 
 ---
 
-### `dashboard/` — ダッシュボード（触るファイルを限定する）
+### `dashboard/` — ダッシュボード（編集するのは `src/` だけ）
 
-| ファイル | 役割 |
-|---|---|
-| `template.html` | **唯一の編集対象**。タブ構成・静的コンテンツはすべてここに書く |
-| `generate_dashboard.py` | Slack情報を取得してindex.htmlを生成するスクリプト |
-| `index.html` | 自動生成されるファイル。手動編集禁止 |
+ダッシュボードは **断片から組み立てる** 構成です。`template.html` と `index.html` は生成物なので、手で編集しないでください。
+
+```
+dashboard/
+├── src/                    # ★ 編集するのはここだけ
+│   ├── shell.html          # 骨格：ヘッダ・2階層ナビ・フッタ・スクリプト
+│   ├── styles.css          # 配色・レイアウト（全タブ共通）
+│   └── tabs/               # タブ1枚 = ファイル1つ（14枚）
+│       ├── dashboard.html      # 今週のボード
+│       ├── progress.html / timeline.html / people.html / meetings.html
+│       ├── about.html / verification.html / soil-map.html / hr.html
+│       ├── university-analysis.html / general-education.html
+│       ├── role-specific.html / research-agenda.html
+│       └── pab-plan.html
+├── build.mjs               # src/ → template.html を組み立てる
+├── generate_dashboard.py   # Slack情報を埋めて index.html を生成する
+├── template.html           # 生成物（手で編集しない）
+└── index.html              # 生成物（手で編集しない）
+```
+
+**タブは4つの層に分かれています。** 層はナビ上段、タブは下段に出ます。
+
+| 層 | 中身 | 更新頻度 |
+|---|---|---|
+| いま | 今週のボード | 週次（一部は毎朝自動） |
+| 進行 | プログラム進捗・スケジュール・関係者マップ・会議資料 | 隔週 |
+| 設計 | 事業概要・育成検証企画・①〜⑥ | 随時（低頻度） |
+| 案件 | ⑦ PAB企画・制作進行 | 案件ごと |
 
 **ルール：**
-- 新しいタブを追加する → `template.html` を編集
-- `index.html` は GitHub Actions が自動上書きするため直接編集しない
-- `dashboard/` フォルダにドキュメント類を置かない
 
+- タブの中身を直す → `src/tabs/該当ファイル.html` を編集し、**`cd dashboard && node build.mjs`** を実行する
+- 新しいタブを足す → `src/tabs/新ID.html` を作り、`src/shell.html` に `<!--@TAB:新ID-->` とナビのボタン（`data-tab` と `data-layer`）を追加してビルドする
+- 新しい案件ページ（イベントの制作進行など）は `案件` 層（`data-layer="case"`）に足す
+- 中身を更新したら、そのタブの `data-updated="YYYY-MM-DD"` も必ず直す。60日を超えると自動で「要確認」が出る
+- 横断検索はページ上の**文字**を引く。画像に焼いた表や図の中の語は当たらないので、要点はテキストでも書いておく
+- `template.html` / `index.html` は GitHub Actions が上書きするため直接編集しない
+- `dashboard/` フォルダにドキュメント類を置かない
 ---
 
 ### `governance/` — 会議・意思決定記録
@@ -150,4 +177,4 @@ talent/
 | 事業全体の国際展開戦略 | `docs/strategy/` |
 | 組織図の最新版 | `docs/organization/` |
 | 一般教養講座のカリキュラム案 | `docs/program/general-education/` |
-| ダッシュボードの新タブ追加 | `dashboard/template.html` を編集 |
+| ダッシュボードの新タブ追加 | `dashboard/src/tabs/` に追加 → `node build.mjs` |

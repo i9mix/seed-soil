@@ -16,6 +16,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Build template from src/
+        working-directory: dashboard
+        run: node build.mjs
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -37,7 +46,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           cp dashboard/index.html index.html
-          git add dashboard/index.html index.html
+          git add dashboard/template.html dashboard/index.html index.html
           git diff --staged --quiet || git commit -m "Update dashboard $(date +'%Y/%m/%d %H:%M JST')"
           git pull --rebase origin main
           git push
