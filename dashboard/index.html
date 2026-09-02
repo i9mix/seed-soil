@@ -3,41 +3,68 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--
+  このファイルは dashboard/build.mjs が生成しています。直接編集しないでください。
+    タブの中身      → dashboard/src/tabs/*.html
+    配色・レイアウト → dashboard/src/styles.css
+    ヘッダ・ナビ・JS → dashboard/src/shell.html
+  編集したら dashboard/ で `node build.mjs` を実行します。
+-->
 <title>SEEDダッシュボード</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+/* ══════════════════════════════════════════════════════════
+   SEEDデザインシステム準拠のトークン
+   出典：docs/SEED_デザインシステム.md
+   白地＋グレー階調で構成し、アクセントカラーを持たない。
+   閲覧側のOSがダークモードでも反転させない。
+   ══════════════════════════════════════════════════════════ */
 :root {
-  --bg: #F7F6F2;
-  --surface: #FFFFFF;
-  --border: #E5E3DC;
-  --text-primary: #1A1916;
-  --text-secondary: #6B6860;
-  --text-tertiary: #A8A69F;
-  --soil: #1D9E75;
-  --soil-bg: #E1F5EE;
-  --soil-text: #085041;
-  --seed: #378ADD;
-  --seed-bg: #E6F1FB;
-  --seed-text: #0C447C;
-  --urgent-bg: #FEF0EE;
-  --urgent-text: #C0392B;
-  --urgent-border: #F5C4B3;
-  --wip-bg: #FEF9EE;
-  --wip-text: #9A6500;
-  --wip-border: #FAD894;
-  --plan-bg: #EEF4FE;
-  --plan-text: #1A4FA0;
-  --plan-border: #BDD3F8;
-  --slack: #4A154B;
-  --playwright: #C25219;
-  --playwright-bg: #FEF3E2;
-  --playwright-border: #F5D0A9;
-  --director: #5C3D9E;
-  --director-bg: #F0EDFD;
-  --director-border: #CBBFF8;
-  --producer: #1D9E75;
-  --producer-bg: #E1F5EE;
-  --producer-border: #A8DEC8;
+  color-scheme: only light;
+
+  /* ── 地・面・罫（2章） ── */
+  --ground:         #FFFFFF;   /* 基本の地 */
+  --bg:             #F4F5F6;   /* ページの地。ロゴ台紙と同じグレー */
+  --surface:        #FFFFFF;   /* カード・モーダルの地 */
+  --border:         #E3E5E7;   /* 区切り線・カード枠 */
+  --line-2:         #CFD2D5;   /* 内側のセル枠 */
+  --mark:           #AEB2B5;   /* 番号・装飾の小要素。ロゴマークと同じ色 */
+
+  /* ── 文字（2章） ── */
+  --text-primary:   #1A1C1E;   /* 本文・見出し。純黒は使わない */
+  --text-secondary: #5F6469;   /* 説明文・キャプション */
+  --text-tertiary:  #9AA0A5;   /* 注記・ラベル */
+
+  /* ── UIの選択・強調 ──
+     アクセントカラーを持たないため、選択状態は墨で示す。 */
+  --accent:         #1A1C1E;
+  --accent-on:      #FFFFFF;
+
+  /* ── 書体（4章） ── */
+  --display: "Futura", "Century Gothic", "Avenir Next", "Avenir", "Jost", "Trebuchet MS", "Hiragino Sans", sans-serif;
+  --gothic:  "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic Medium", "Yu Gothic", Meiryo, sans-serif;
+
+  /* ── 角丸（3章・4段階。直角は使わない） ── */
+  --r-pill: 999px;
+  --r-sm:   12px;
+  --r-md:   18px;
+  --r-lg:   28px;
+
+  /* ── 例外1：状態を示す色（内部資料のみ・2章） ── */
+  --urgent-text: #C00000; --urgent-bg: #FCDCDC; --urgent-border: #EFAFAF;
+  --wip-text:    #E97132; --wip-bg:    #FAE2D5; --wip-border:    #F0BC9C;
+  --plan-text:   #0070C0; --plan-bg:   #EAF3FB; --plan-border:   #B8D8EF;
+  --done-text:   #2E7D32; --done-bg:   #E8F5E9; --done-border:   #B4DCB7;
+
+  /* ── 例外2：職能識別色（内部ダッシュボードのみ・2章） ── */
+  --playwright: #C25219; --playwright-bg: #FEF3E2; --playwright-border: #F5D0A9;
+  --director:   #5C3D9E; --director-bg:   #F0EDFD; --director-border:   #CBBFF8;
+  --producer:   #1D9E75; --producer-bg:   #E1F5EE; --producer-border:   #A8DEC8;
+
+  /* ── 事業ラインの識別（SOIL／SEED）──
+     装飾ではなく、どちらの事業の話かを示す機能的なラベル。 */
+  --soil: #1D9E75; --soil-bg: #E1F5EE; --soil-text: #085041;
+  --seed: #378ADD; --seed-bg: #E6F1FB; --seed-text: #0C447C;
+
 }
 * {
   box-sizing: border-box;
@@ -45,7 +72,11 @@
   padding: 0;
 }
 body {
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: var(--gothic);
+  font-variant-numeric: tabular-nums;
+  word-break: auto-phrase;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
   background: var(--bg);
   color: var(--text-primary);
   min-height: 100vh;
@@ -76,12 +107,12 @@ body {
   font-size: 11px;
   font-weight: 500;
   padding: 3px 10px;
-  border-radius: 20px;
+  border-radius: var(--r-pill);
   display: inline-block;
 }
 .badge-slack {
-  background: var(--slack);
-  color: #fff;
+  background: var(--accent);
+  color: var(--accent-on);
 }
 .badge-date {
   background: var(--border);
@@ -109,7 +140,7 @@ body {
   border-bottom: 3px solid transparent;
   margin-bottom: -2px;
   padding: 10px 22px;
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: var(--gothic);
   font-size: 14px;
   font-weight: 500;
   color: var(--text-secondary);
@@ -121,8 +152,8 @@ body {
   color: var(--text-primary);
 }
 .tab-btn.active {
-  color: var(--seed);
-  border-bottom-color: var(--seed);
+  color: var(--accent);
+  border-bottom-color: var(--accent);
   font-weight: 700;
 }
 .tab-content {
@@ -142,7 +173,7 @@ body {
 .metric {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: var(--r-sm);
   padding: 1rem 1.25rem;
 }
 .metric-label {
@@ -155,17 +186,17 @@ body {
 .metric-value {
   font-size: 28px;
   font-weight: 700;
-  font-family: 'DM Mono', monospace;
+  font-family: var(--display);
   letter-spacing: -0.03em;
 }
 .metric-value.red {
-  color: #C0392B;
+  color: var(--urgent-text);
 }
 .metric-value.amber {
-  color: #9A6500;
+  color: var(--wip-text);
 }
 .metric-value.blue {
-  color: #1A4FA0;
+  color: var(--plan-text);
 }
 .legend {
   max-width: 960px;
@@ -196,7 +227,7 @@ body {
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 14px;
+  border-radius: var(--r-md);
   padding: 1.25rem;
 }
 .card-header {
@@ -225,7 +256,7 @@ body {
 .member-date {
   font-size: 11px;
   color: var(--text-tertiary);
-  font-family: 'DM Mono', monospace;
+  font-family: var(--display);
 }
 .group {
   margin-bottom: 9px;
@@ -238,7 +269,7 @@ body {
   font-size: 11px;
   font-weight: 700;
   padding: 3px 9px;
-  border-radius: 20px;
+  border-radius: var(--r-pill);
   margin-bottom: 6px;
 }
 .gl-urgent {
@@ -278,7 +309,7 @@ body {
   font-size: 10px;
   font-weight: 700;
   padding: 1px 6px;
-  border-radius: 8px;
+  border-radius: var(--r-sm);
   flex-shrink: 0;
 }
 .tag-soil {
@@ -290,14 +321,14 @@ body {
   color: var(--seed-text);
 }
 .card-past {
-  border-color: #FAD894;
+  border-color: var(--wip-border);
   opacity: 0.85;
 }
 .badge-past {
   font-size: 10px;
   font-weight: 700;
   padding: 1px 7px;
-  border-radius: 8px;
+  border-radius: var(--r-sm);
   background: var(--wip-bg);
   color: var(--wip-text);
   border: 1px solid var(--wip-border);
@@ -312,7 +343,7 @@ body {
 .hr-intro {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 14px;
+  border-radius: var(--r-md);
   padding: 1.25rem 1.5rem;
   margin-bottom: 1.5rem;
 }
@@ -333,9 +364,9 @@ body {
 .role-tab-btn {
   background: var(--surface);
   border: 1.5px solid var(--border);
-  border-radius: 24px;
+  border-radius: var(--r-pill);
   padding: 8px 22px;
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: var(--gothic);
   font-size: 14px;
   font-weight: 500;
   color: var(--text-secondary);
@@ -371,7 +402,7 @@ body {
   display: block;
 }
 .role-header {
-  border-radius: 14px;
+  border-radius: var(--r-md);
   padding: 1.5rem;
   margin-bottom: 1.25rem;
 }
@@ -408,7 +439,7 @@ body {
   line-height: 1.6;
   padding: 10px 14px;
   background: rgba(255,255,255,0.7);
-  border-radius: 8px;
+  border-radius: var(--r-sm);
   margin-bottom: 10px;
 }
 .role-sub {
@@ -425,7 +456,7 @@ body {
 .req-card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: var(--r-sm);
   padding: 1rem 1.25rem;
 }
 .req-card-title {
@@ -451,7 +482,7 @@ body {
 .req-id {
   font-size: 10px;
   font-weight: 700;
-  font-family: 'DM Mono', monospace;
+  font-family: var(--display);
   color: var(--text-tertiary);
   flex-shrink: 0;
   padding-top: 2px;
@@ -465,7 +496,7 @@ body {
 .special-card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: var(--r-sm);
   padding: 1rem 1.25rem;
   margin-bottom: 1.25rem;
 }
@@ -486,13 +517,13 @@ body {
 }
 .special-item {
   background: var(--bg);
-  border-radius: 8px;
+  border-radius: var(--r-sm);
   padding: 10px 12px;
 }
 .special-id {
   font-size: 10px;
   font-weight: 700;
-  font-family: 'DM Mono', monospace;
+  font-family: var(--display);
   color: var(--text-tertiary);
   margin-bottom: 4px;
 }
@@ -510,7 +541,7 @@ body {
 .insights-card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: var(--r-sm);
   padding: 1rem 1.25rem;
   margin-bottom: 1.25rem;
 }
@@ -537,7 +568,7 @@ body {
 .insight-num {
   font-size: 11px;
   font-weight: 700;
-  font-family: 'DM Mono', monospace;
+  font-family: var(--display);
   background: var(--bg);
   color: var(--text-secondary);
   border-radius: 50%;
@@ -566,7 +597,7 @@ body {
 .summary-card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: var(--r-sm);
   padding: 1rem 1.25rem;
   margin-bottom: 1.25rem;
 }
@@ -602,7 +633,7 @@ body {
   left: 0;
   font-size: 11px;
   font-weight: 700;
-  font-family: 'DM Mono', monospace;
+  font-family: var(--display);
   color: var(--text-tertiary);
   top: 8px;
 }
@@ -617,7 +648,7 @@ body {
 .about-hero {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: var(--r-md);
   padding: 2.5rem 2rem;
   text-align: center;
 }
@@ -626,8 +657,8 @@ body {
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--seed);
-  font-family: 'DM Mono', monospace;
+  color: var(--accent);
+  font-family: var(--display);
   margin-bottom: 0.75rem;
 }
 .about-hero-copy {
@@ -668,7 +699,7 @@ body {
 .about-role-card {
   background: var(--surface);
   border: 1.5px solid var(--border);
-  border-radius: 14px;
+  border-radius: var(--r-md);
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -688,7 +719,7 @@ body {
   font-size: 11px;
   font-weight: 700;
   padding: 3px 10px;
-  border-radius: 20px;
+  border-radius: var(--r-pill);
 }
 .about-role-badge.playwright {
   background: var(--playwright-bg);
@@ -715,7 +746,7 @@ body {
 .about-bg-card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 14px;
+  border-radius: var(--r-md);
   padding: 1.5rem 1.75rem;
 }
 .about-bg-body {
@@ -743,7 +774,7 @@ body {
 }
 .about-ms-date {
   font-size: 12px;
-  font-family: 'DM Mono', monospace;
+  font-family: var(--display);
   color: var(--text-tertiary);
   min-width: 80px;
   padding-top: 2px;
@@ -762,7 +793,7 @@ body {
   background: var(--wip-text);
 }
 .about-ms-dot.plan {
-  background: var(--seed);
+  background: var(--plan-text);
 }
 .about-ms-text {
   font-size: 14px;
@@ -777,7 +808,7 @@ body {
 .about-ms-card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 14px;
+  border-radius: var(--r-md);
   padding: 1.25rem 1.75rem;
 }
 .about-org-grid {
@@ -793,7 +824,7 @@ body {
 .about-org-card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: var(--r-sm);
   padding: 1.1rem 1.25rem;
 }
 .about-org-role {
@@ -817,10 +848,10 @@ body {
 .about-advisor-chip {
   font-size: 12px;
   padding: 5px 14px;
-  border-radius: 20px;
+  border-radius: var(--r-pill);
   background: var(--seed-bg);
   color: var(--seed-text);
-  border: 1px solid #BDD3F8;
+  border: 1px solid var(--plan-border);
   font-weight: 500;
 }
 .about-link-row {
@@ -835,7 +866,7 @@ body {
   font-size: 13px;
   font-weight: 500;
   padding: 8px 18px;
-  border-radius: 10px;
+  border-radius: var(--r-sm);
   border: 1.5px solid var(--border);
   background: var(--surface);
   color: var(--text-secondary);
@@ -843,41 +874,41 @@ body {
   transition: border-color 0.15s, color 0.15s, background 0.15s;
 }
 .about-link-btn:hover {
-  border-color: var(--seed);
-  color: var(--seed);
+  border-color: var(--accent);
+  color: var(--accent);
   background: var(--seed-bg);
 }
 /* ── Ecosystem Analysis (about tab) ── */
 .eco-wrap { display:flex; flex-direction:column; gap:1.5rem; }
 .eco-thesis {
-  background: linear-gradient(135deg, #1A2A44 0%, #24405F 100%);
-  border-radius: 16px;
+  background: var(--bg);
+  border-radius: var(--r-md);
   padding: 2rem;
-  color: #fff;
+  color: var(--text-primary);
   text-align: center;
 }
 .eco-thesis-eyebrow {
   font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
-  color: #8FB4E0; font-family: 'DM Mono', monospace; margin-bottom: 0.9rem;
+  color: var(--text-tertiary); font-family: var(--display); margin-bottom: 0.9rem;
 }
 .eco-thesis-quote { font-size: 20px; font-weight: 700; line-height: 1.6; letter-spacing: -0.01em; }
-.eco-thesis-quote em { color: #F3C24B; font-style: normal; }
+.eco-thesis-quote em { color: var(--text-primary); font-style: normal; border-bottom: 2px solid var(--mark); }
 .eco-thesis-sub {
-  font-size: 12.5px; color: #B9C6D6; line-height: 1.8; margin: 1rem auto 0; max-width: 620px;
+  font-size: 12.5px; color: var(--text-secondary); line-height: 1.8; margin: 1rem auto 0; max-width: 620px;
 }
-.eco-thesis-sub strong { color: #F3C24B; font-weight: 700; }
+.eco-thesis-sub strong { color: var(--text-primary); font-weight: 700; }
 .eco-block-label {
   font-size: 12.5px; font-weight: 700; letter-spacing: 0.03em;
   color: var(--text-secondary); margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
 }
 .eco-block-label .eco-num {
   display: inline-flex; align-items: center; justify-content: center;
-  width: 22px; height: 22px; border-radius: 6px; font-size: 11px;
-  background: var(--seed-bg); color: var(--seed-text); font-family: 'DM Mono', monospace; flex-shrink: 0;
+  width: 22px; height: 22px; border-radius: var(--r-sm); font-size: 11px;
+  background: var(--seed-bg); color: var(--seed-text); font-family: var(--display); flex-shrink: 0;
 }
 .eco-block-note { font-size: 12px; color: var(--text-tertiary); line-height: 1.75; margin-top: 8px; }
 /* 三圏マップ */
-.eco-map { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem; }
+.eco-map { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); padding: 1.25rem; }
 .eco-map-inner { display: flex; gap: 12px; }
 .eco-yaxis {
   writing-mode: vertical-rl; transform: rotate(180deg);
@@ -885,8 +916,8 @@ body {
   padding: 6px 0; letter-spacing: 0.06em; flex-shrink: 0;
 }
 .eco-bands { flex: 1; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
-.eco-band { border-radius: 12px; padding: 12px 14px; border: 1px solid; }
-.eco-band.core { background: #E7F5EF; border-color: #A8DEC8; }
+.eco-band { border-radius: var(--r-sm); padding: 12px 14px; border: 1px solid; }
+.eco-band.core { background: #E7F5EF; border-color: var(--producer-border); }
 .eco-band.adjacent { background: #FAF4E6; border-color: #E8D8B0; }
 .eco-band.upstream { background: #EDF1F7; border-color: #C6D5E8; }
 .eco-band-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
@@ -897,7 +928,7 @@ body {
 .eco-band-desc { font-size: 11px; color: var(--text-tertiary); }
 .eco-players { display: flex; flex-wrap: wrap; gap: 6px; }
 .eco-player {
-  font-size: 11.5px; font-weight: 500; padding: 4px 10px; border-radius: 16px;
+  font-size: 11.5px; font-weight: 500; padding: 4px 10px; border-radius: var(--r-md);
   background: rgba(255,255,255,0.78); border: 1px solid rgba(0,0,0,0.08); color: var(--text-primary);
 }
 .eco-player.star { background: #FBEFC8; border: 1.5px solid #E0B23C; color: #8A6410; font-weight: 700; }
@@ -908,10 +939,10 @@ body {
 .eco-gap {
   display: flex; align-items: center; gap: 8px; justify-content: center;
   font-size: 11px; font-weight: 700; color: #B4791A; background: #FEF6E4;
-  border: 1px dashed #E0B23C; border-radius: 10px; padding: 7px 12px;
+  border: 1px dashed #E0B23C; border-radius: var(--r-sm); padding: 7px 12px;
 }
 /* マトリクス */
-.eco-matrix-scroll { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; }
+.eco-matrix-scroll { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--r-sm); }
 .eco-matrix { border-collapse: collapse; width: 100%; min-width: 660px; font-size: 11.5px; }
 .eco-matrix th, .eco-matrix td { border: 1px solid var(--border); padding: 8px 9px; text-align: left; vertical-align: top; }
 .eco-matrix thead th { background: var(--bg); font-weight: 700; color: var(--text-secondary); font-size: 10.5px; line-height: 1.4; }
@@ -925,77 +956,77 @@ body {
 /* case cards */
 .eco-case-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
 @media (max-width: 700px) { .eco-case-grid { grid-template-columns: 1fr; } }
-.eco-case { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.1rem; border-left: 4px solid var(--border); }
+.eco-case { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 1rem 1.1rem; border-left: 4px solid var(--border); }
 .eco-case.ideal { border-left-color: #1D7A57; }
 .eco-case.warn { border-left-color: var(--urgent-text); }
-.eco-case.ref { border-left-color: var(--seed); }
+.eco-case.ref { border-left-color: var(--plan-text); }
 .eco-case-top { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; flex-wrap: wrap; }
 .eco-case-name { font-size: 14px; font-weight: 700; color: var(--text-primary); }
-.eco-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 12px; white-space: nowrap; }
-.eco-badge.ideal { background: #E1F5EE; color: #1D7A57; }
+.eco-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: var(--r-sm); white-space: nowrap; }
+.eco-badge.ideal { background: var(--producer-bg); color: #1D7A57; }
 .eco-badge.warn { background: var(--urgent-bg); color: var(--urgent-text); }
 .eco-badge.ref { background: var(--seed-bg); color: var(--seed-text); }
 .eco-badge.neutral { background: var(--bg); color: var(--text-tertiary); }
 .eco-case-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.7; }
 /* generic rows */
 .eco-rows { display: flex; flex-direction: column; gap: 8px; }
-.eco-row { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 10px 13px; display: flex; gap: 13px; align-items: flex-start; }
+.eco-row { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 10px 13px; display: flex; gap: 13px; align-items: flex-start; }
 .eco-row-key { font-size: 12.5px; font-weight: 700; color: var(--text-primary); min-width: 132px; flex-shrink: 0; }
 .eco-row-val { font-size: 12px; color: var(--text-secondary); line-height: 1.7; }
 .eco-row-val strong { color: var(--text-primary); }
 @media (max-width: 600px) { .eco-row { flex-direction: column; gap: 4px; } .eco-row-key { min-width: 0; } }
 /* priority ranking */
 .eco-rank { display: flex; flex-direction: column; gap: 8px; }
-.eco-rank-row { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface); }
-.eco-rank-row.first { border-color: #A8DEC8; background: #F1FAF6; }
+.eco-rank-row { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: var(--r-sm); border: 1px solid var(--border); background: var(--surface); }
+.eco-rank-row.first { border-color: var(--producer-border); background: #F1FAF6; }
 .eco-rank-row.avoid { border-color: var(--urgent-border); background: var(--urgent-bg); }
-.eco-rank-pos { font-size: 11px; font-weight: 700; font-family: 'DM Mono', monospace; padding: 3px 9px; border-radius: 8px; white-space: nowrap; flex-shrink: 0; background: var(--bg); color: var(--text-secondary); }
-.eco-rank-row.first .eco-rank-pos { background: #1D7A57; color: #fff; }
-.eco-rank-row.avoid .eco-rank-pos { background: var(--urgent-text); color: #fff; }
+.eco-rank-pos { font-size: 11px; font-weight: 700; font-family: var(--display); padding: 3px 9px; border-radius: var(--r-sm); white-space: nowrap; flex-shrink: 0; background: var(--bg); color: var(--text-secondary); }
+.eco-rank-row.first .eco-rank-pos { background: var(--done-text); color: var(--accent-on); }
+.eco-rank-row.avoid .eco-rank-pos { background: var(--urgent-text); color: var(--accent-on); }
 .eco-rank-body { font-size: 12.5px; color: var(--text-primary); line-height: 1.55; }
 .eco-rank-body span { color: var(--text-tertiary); font-size: 11.5px; }
-.eco-source-note { font-size: 11px; color: var(--text-tertiary); line-height: 1.75; background: var(--bg); border-radius: 8px; padding: 9px 13px; }
-.eco-source-note code { font-family: 'DM Mono', monospace; font-size: 10.5px; background: var(--border); padding: 1px 5px; border-radius: 4px; color: var(--text-secondary); }
+.eco-source-note { font-size: 11px; color: var(--text-tertiary); line-height: 1.75; background: var(--bg); border-radius: var(--r-sm); padding: 9px 13px; }
+.eco-source-note code { font-family: var(--display); font-size: 10.5px; background: var(--border); padding: 1px 5px; border-radius: var(--r-sm); color: var(--text-secondary); }
 /* ── Verification Program (育成検証企画) tab ── */
 .vf-container { max-width: 960px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.75rem; }
-.vf-hero { background: linear-gradient(135deg, #0C447C 0%, #2372C4 100%); border-radius: 16px; padding: 2rem; color: #fff; }
-.vf-hero-label { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #AACBEC; font-family: 'DM Mono', monospace; margin-bottom: 0.75rem; }
+.vf-hero { background: var(--bg); border-radius: var(--r-md); padding: 2rem; color: var(--text-primary); }
+.vf-hero-label { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-tertiary); font-family: var(--display); margin-bottom: 0.75rem; }
 .vf-hero-title { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 0.75rem; line-height: 1.4; }
-.vf-hero-line { font-size: 13.5px; line-height: 1.85; color: #DCE7F5; }
-.vf-hero-line strong { color: #fff; }
+.vf-hero-line { font-size: 13.5px; line-height: 1.85; color: var(--text-secondary); }
+.vf-hero-line strong { color: var(--text-primary); }
 .vf-pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 1.25rem; }
-.vf-pillar { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; padding: 11px 13px; }
-.vf-pillar-h { font-size: 12.5px; font-weight: 700; color: #fff; margin-bottom: 3px; }
-.vf-pillar-d { font-size: 11px; color: #CFE0F2; line-height: 1.6; }
+.vf-pillar { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 11px 13px; }
+.vf-pillar-h { font-size: 12.5px; font-weight: 700; color: var(--text-primary); margin-bottom: 3px; }
+.vf-pillar-d { font-size: 11px; color: var(--text-secondary); line-height: 1.6; }
 @media (max-width: 700px) { .vf-pillars { grid-template-columns: 1fr; } }
 .vf-section-title { font-size: 13px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
 .vf-lead { font-size: 13px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 14px; }
 .vf-lead strong { color: var(--text-primary); }
 .vf-gap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
 @media (max-width: 600px) { .vf-gap-grid { grid-template-columns: 1fr; } }
-.vf-gap-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; border-top: 3px solid var(--urgent-text); padding: 1rem 1.1rem; }
+.vf-gap-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-sm); border-top: 3px solid var(--urgent-text); padding: 1rem 1.1rem; }
 .vf-gap-k { font-size: 13px; font-weight: 700; color: var(--urgent-text); margin-bottom: 5px; }
 .vf-gap-d { font-size: 12px; color: var(--text-secondary); line-height: 1.65; }
 .vf-sc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 @media (max-width: 700px) { .vf-sc-grid { grid-template-columns: 1fr; } }
-.vf-sc { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.1rem; border-top: 4px solid var(--border); }
+.vf-sc { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 1rem 1.1rem; border-top: 4px solid var(--border); }
 .vf-sc.a { border-top-color: var(--producer); }
 .vf-sc.b { border-top-color: var(--director); }
 .vf-sc.c { border-top-color: var(--playwright); }
 .vf-sc-top { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
-.vf-sc-letter { font-size: 16px; font-weight: 800; font-family: 'DM Mono', monospace; width: 26px; height: 26px; border-radius: 7px; display: flex; align-items: center; justify-content: center; color: #fff; flex-shrink: 0; }
+.vf-sc-letter { font-size: 16px; font-weight: 800; font-family: var(--display); width: 26px; height: 26px; border-radius: var(--r-sm); display: flex; align-items: center; justify-content: center; color: #fff; flex-shrink: 0; }
 .vf-sc.a .vf-sc-letter { background: var(--producer); }
 .vf-sc.b .vf-sc-letter { background: var(--director); }
 .vf-sc.c .vf-sc-letter { background: var(--playwright); }
 .vf-sc-name { font-size: 12.5px; font-weight: 700; color: var(--text-primary); }
 .vf-sc-d { font-size: 11.5px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 8px; }
-.vf-sc-lead { font-size: 10.5px; font-weight: 700; padding: 2px 9px; border-radius: 12px; display: inline-block; }
+.vf-sc-lead { font-size: 10.5px; font-weight: 700; padding: 2px 9px; border-radius: var(--r-sm); display: inline-block; }
 .vf-sc.a .vf-sc-lead { background: var(--producer-bg); color: var(--producer); }
 .vf-sc.b .vf-sc-lead { background: var(--director-bg); color: var(--director); }
 .vf-sc.c .vf-sc-lead { background: var(--playwright-bg); color: var(--playwright); }
 .vf-struct { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
 @media (max-width: 600px) { .vf-struct { grid-template-columns: 1fr; } }
-.vf-struct-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; border-left: 4px solid var(--border); }
+.vf-struct-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 12px 14px; border-left: 4px solid var(--border); }
 .vf-struct-card.pw { border-left-color: var(--playwright); }
 .vf-struct-card.dr { border-left-color: var(--director); }
 .vf-struct-card.pr { border-left-color: var(--producer); }
@@ -1003,45 +1034,45 @@ body {
 .vf-struct-card.bs { border-left-color: var(--text-tertiary); }
 .vf-struct-h { font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 .vf-struct-d { font-size: 11.5px; color: var(--text-secondary); line-height: 1.6; }
-.vf-verify-tag { font-size: 9.5px; font-weight: 700; padding: 2px 7px; border-radius: 10px; background: var(--seed-bg); color: var(--seed-text); }
+.vf-verify-tag { font-size: 9.5px; font-weight: 700; padding: 2px 7px; border-radius: var(--r-sm); background: var(--seed-bg); color: var(--seed-text); }
 .vf-pipe { display: flex; flex-direction: column; gap: 6px; }
-.vf-pipe-stage { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 10px 13px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; border-left: 4px solid var(--playwright); }
-.vf-pipe-gate { background: var(--wip-bg); border: 1px dashed var(--wip-border); border-radius: 10px; padding: 7px 13px; display: flex; align-items: center; gap: 10px; font-size: 11.5px; color: var(--wip-text); font-weight: 600; flex-wrap: wrap; }
-.vf-pipe-p { font-size: 11px; font-weight: 800; font-family: 'DM Mono', monospace; color: var(--playwright); background: var(--playwright-bg); border-radius: 6px; padding: 3px 8px; white-space: nowrap; flex-shrink: 0; }
+.vf-pipe-stage { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 10px 13px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; border-left: 4px solid var(--playwright); }
+.vf-pipe-gate { background: var(--wip-bg); border: 1px dashed var(--wip-border); border-radius: var(--r-sm); padding: 7px 13px; display: flex; align-items: center; gap: 10px; font-size: 11.5px; color: var(--wip-text); font-weight: 600; flex-wrap: wrap; }
+.vf-pipe-p { font-size: 11px; font-weight: 800; font-family: var(--display); color: var(--playwright); background: var(--playwright-bg); border-radius: var(--r-sm); padding: 3px 8px; white-space: nowrap; flex-shrink: 0; }
 .vf-pipe-body { flex: 1; min-width: 180px; }
 .vf-pipe-name { font-size: 13px; font-weight: 700; color: var(--text-primary); }
 .vf-pipe-meta { font-size: 11px; color: var(--text-secondary); line-height: 1.55; margin-top: 2px; }
-.vf-pipe-side { font-size: 10.5px; color: var(--text-tertiary); font-family: 'DM Mono', monospace; white-space: nowrap; }
-.vf-hyp { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.1rem 1.2rem; }
+.vf-pipe-side { font-size: 10.5px; color: var(--text-tertiary); font-family: var(--display); white-space: nowrap; }
+.vf-hyp { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 1.1rem 1.2rem; }
 .vf-hyp.dr { border-top: 4px solid var(--director); }
 .vf-hyp.pr { border-top: 4px solid var(--producer); }
 .vf-hyp-top { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
 .vf-hyp-name { font-size: 15px; font-weight: 700; }
 .vf-hyp.dr .vf-hyp-name { color: var(--director); }
 .vf-hyp.pr .vf-hyp-name { color: var(--producer); }
-.vf-tbd-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 12px; background: var(--wip-bg); color: var(--wip-text); border: 1px solid var(--wip-border); }
+.vf-tbd-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: var(--r-sm); background: var(--wip-bg); color: var(--wip-text); border: 1px solid var(--wip-border); }
 .vf-hyp-row { font-size: 12px; color: var(--text-secondary); line-height: 1.7; margin-top: 6px; }
 .vf-hyp-row b { color: var(--text-primary); font-weight: 700; }
 .vf-shi-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
 @media (max-width: 700px) { .vf-shi-grid { grid-template-columns: 1fr; } }
-.vf-shi { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.1rem; border-top: 3px solid var(--seed); }
+.vf-shi { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 1rem 1.1rem; border-top: 3px solid var(--seed); }
 .vf-shi-top { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
-.vf-shi-no { font-size: 13px; font-weight: 800; color: var(--seed); font-family: 'DM Mono', monospace; }
+.vf-shi-no { font-size: 13px; font-weight: 800; color: var(--mark); font-family: var(--display); }
 .vf-shi-name { font-size: 13.5px; font-weight: 700; color: var(--text-primary); }
-.vf-shi-kind { font-size: 10px; font-weight: 700; padding: 1px 8px; border-radius: 10px; background: var(--seed-bg); color: var(--seed-text); margin-left: auto; }
+.vf-shi-kind { font-size: 10px; font-weight: 700; padding: 1px 8px; border-radius: var(--r-sm); background: var(--seed-bg); color: var(--seed-text); margin-left: auto; }
 .vf-shi-d { font-size: 11.5px; color: var(--text-secondary); line-height: 1.65; }
 .vf-shi-lead { font-size: 11px; color: var(--text-tertiary); margin-top: 6px; }
 .vf-shi-lead b { color: var(--text-secondary); }
 .vf-betsu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 @media (max-width: 600px) { .vf-betsu-grid { grid-template-columns: 1fr; } }
-.vf-betsu { background: var(--bg); border: 1px dashed var(--border); border-radius: 12px; padding: 1rem 1.1rem; }
+.vf-betsu { background: var(--bg); border: 1px dashed var(--border); border-radius: var(--r-sm); padding: 1rem 1.1rem; }
 .vf-betsu-h { font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 5px; }
 .vf-betsu-d { font-size: 11.5px; color: var(--text-secondary); line-height: 1.65; }
-.vf-close { background: linear-gradient(135deg, #1A2A44, #24405F); border-radius: 14px; padding: 1.5rem 1.6rem; color: #fff; }
+.vf-close { background: var(--bg); border-radius: var(--r-md); padding: 1.5rem 1.6rem; color: var(--text-primary); }
 .vf-close-h { font-size: 14px; font-weight: 700; margin-bottom: 12px; }
-.vf-close-row { display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.12); font-size: 12.5px; line-height: 1.6; color: #DCE7F5; }
-.vf-close-k { font-weight: 700; color: #F3C24B; min-width: 88px; flex-shrink: 0; }
-.vf-close-spine { margin-top: 12px; background: rgba(243,194,75,0.14); border: 1px solid rgba(243,194,75,0.4); border-radius: 10px; padding: 10px 13px; font-size: 12px; color: #F7E4B0; line-height: 1.65; }
+.vf-close-row { display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 12.5px; line-height: 1.6; color: var(--text-secondary); }
+.vf-close-k { font-weight: 700; color: var(--text-primary); min-width: 88px; flex-shrink: 0; }
+.vf-close-spine { margin-top: 12px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 10px 13px; font-size: 12px; color: var(--text-secondary); line-height: 1.65; }
 /* ── Meetings ── */
 .meetings-container {
   max-width: 960px;
@@ -1063,7 +1094,7 @@ body {
 .meeting-row {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: var(--r-sm);
   padding: 1rem 1.25rem;
   margin-bottom: 8px;
   display: flex;
@@ -1074,11 +1105,11 @@ body {
 .meeting-round {
   font-size: 11px;
   font-weight: 700;
-  font-family: 'DM Mono', monospace;
+  font-family: var(--display);
   background: var(--seed-bg);
   color: var(--seed-text);
   border: 1px solid var(--border);
-  border-radius: 20px;
+  border-radius: var(--r-pill);
   padding: 4px 12px;
   flex-shrink: 0;
   white-space: nowrap;
@@ -1096,7 +1127,7 @@ body {
 .meeting-date {
   font-size: 11px;
   color: var(--text-tertiary);
-  font-family: 'DM Mono', monospace;
+  font-family: var(--display);
 }
 .meeting-docs {
   display: flex;
@@ -1110,7 +1141,7 @@ body {
   font-size: 12px;
   font-weight: 500;
   padding: 6px 14px;
-  border-radius: 8px;
+  border-radius: var(--r-sm);
   border: 1.5px solid var(--border);
   background: var(--surface);
   color: var(--text-secondary);
@@ -1120,8 +1151,8 @@ body {
   white-space: nowrap;
 }
 .doc-btn:hover {
-  border-color: var(--seed);
-  color: var(--seed);
+  border-color: var(--accent);
+  color: var(--accent);
   background: var(--seed-bg);
 }
 .doc-btn-icon {
@@ -1132,7 +1163,7 @@ body {
   color: var(--text-tertiary);
   padding: 10px 4px;
   border: 1.5px dashed var(--border);
-  border-radius: 10px;
+  border-radius: var(--r-sm);
   text-align: center;
   margin-top: 4px;
 }
@@ -1143,7 +1174,7 @@ body {
   transition: border-color 0.15s, box-shadow 0.15s, transform 0.05s;
 }
 .meeting-row.has-detail:hover {
-  border-color: var(--seed);
+  border-color: var(--accent);
   box-shadow: 0 2px 14px rgba(0,0,0,0.06);
 }
 .meeting-row.has-detail:active { transform: translateY(1px); }
@@ -1153,12 +1184,12 @@ body {
   gap: 4px;
   font-size: 10.5px;
   font-weight: 700;
-  font-family: 'DM Mono', monospace;
+  font-family: var(--display);
   letter-spacing: 0.02em;
   color: var(--seed-text);
   background: var(--seed-bg);
   border: 1px solid var(--border);
-  border-radius: 20px;
+  border-radius: var(--r-pill);
   padding: 2px 9px;
   margin-left: 8px;
   vertical-align: middle;
@@ -1169,13 +1200,13 @@ body {
   flex-shrink: 0;
   transition: color 0.15s, transform 0.15s;
 }
-.meeting-row.has-detail:hover .meeting-chevron { color: var(--seed); transform: translateX(3px); }
+.meeting-row.has-detail:hover .meeting-chevron { color: var(--accent); transform: translateX(3px); }
 .doc-btn.doc-btn-primary {
-  border-color: var(--seed);
-  color: var(--seed);
+  border-color: var(--accent);
+  color: var(--accent);
   background: var(--seed-bg);
 }
-.doc-btn.doc-btn-primary:hover { background: var(--seed); color: #fff; }
+.doc-btn.doc-btn-primary:hover { background: var(--accent); color: var(--accent-on); }
 /* ── Meeting summary modal ── */
 .meeting-summary-modal {
   display: none;
@@ -1193,15 +1224,16 @@ body {
   margin: 0 auto;
   background: var(--bg);
   border: 1px solid var(--border);
-  border-radius: 16px;
-  box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+  border-radius: var(--r-md);
+  box-shadow: 0 20px 50px rgba(26,28,30,0.16);
   overflow: hidden;
 }
 .msm-head {
+  border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
-  background: linear-gradient(135deg, #1A2A44, #24405F);
-  color: #fff;
+  background: var(--bg);
+  color: var(--text-primary);
   padding: 1.3rem 1.6rem;
   display: flex;
   align-items: flex-start;
@@ -1210,16 +1242,16 @@ body {
   z-index: 2;
 }
 .msm-head-title { font-size: 17px; font-weight: 800; margin-bottom: 4px; }
-.msm-head-sub { font-size: 12px; color: #C6D4E8; line-height: 1.6; }
+.msm-head-sub { font-size: 12px; color: var(--text-secondary); line-height: 1.6; }
 .msm-close {
+  border: 1px solid var(--border);
   flex-shrink: 0;
-  background: rgba(255,255,255,0.14);
-  border: none;
-  color: #fff;
+  background: var(--surface);
+  color: var(--text-primary);
   font-size: 20px;
   line-height: 1;
   width: 34px; height: 34px;
-  border-radius: 9px;
+  border-radius: var(--r-sm);
   cursor: pointer;
   transition: background 0.15s;
 }
@@ -1228,7 +1260,7 @@ body {
 .msm-toc {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: var(--r-sm);
   padding: 1rem 1.2rem;
   margin-bottom: 1.6rem;
 }
@@ -1239,9 +1271,9 @@ body {
   font-size: 13px;
   line-height: 1.8;
   color: var(--text-secondary);
-  background: rgba(243,194,75,0.1);
-  border: 1px solid rgba(243,194,75,0.35);
-  border-radius: 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
   padding: 1rem 1.2rem;
   margin-bottom: 1.6rem;
 }
@@ -1261,19 +1293,19 @@ body {
 }
 .msm-sec-num {
   flex-shrink: 0;
-  font-family: 'DM Mono', monospace;
+  font-family: var(--display);
   font-size: 12px;
   font-weight: 700;
-  background: var(--seed);
+  background: var(--accent);
   color: #fff;
   width: 26px; height: 26px;
   display: inline-flex; align-items: center; justify-content: center;
-  border-radius: 8px;
+  border-radius: var(--r-sm);
 }
 .msm-sec-h.cross .msm-sec-num { background: #6B4FA0; }
 .msm-cross-tag {
   font-size: 10px; font-weight: 700; color: #6B4FA0;
-  border: 1px solid #6B4FA0; border-radius: 6px; padding: 1px 6px; margin-left: 2px;
+  border: 1px solid #6B4FA0; border-radius: var(--r-sm); padding: 1px 6px; margin-left: 2px;
 }
 .msm-block { margin-bottom: 10px; }
 .msm-block-label {
@@ -1282,15 +1314,12 @@ body {
   font-weight: 700;
   letter-spacing: 0.03em;
   padding: 2px 10px;
-  border-radius: 6px;
+  border-radius: var(--r-sm);
   margin-bottom: 6px;
 }
 .msm-block.msm-gist .msm-block-label { background: #E8EEF6; color: #34506F; }
 .msm-block.msm-issue .msm-block-label { background: #FBE9E7; color: #B4442E; }
 .msm-block.msm-todo .msm-block-label { background: #E4F3EA; color: #2C7A4B; }
-html[data-theme="dark"] .msm-block.msm-gist .msm-block-label { background: rgba(90,130,180,0.25); color: #AFC6E4; }
-html[data-theme="dark"] .msm-block.msm-issue .msm-block-label { background: rgba(180,68,46,0.28); color: #F0A99A; }
-html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(44,122,75,0.28); color: #9BD6B2; }
 .msm-block ul { margin: 0; padding-left: 1.25rem; }
 .msm-block li { font-size: 13px; line-height: 1.75; color: var(--text-secondary); margin-bottom: 5px; }
 .msm-block p { font-size: 13px; line-height: 1.78; color: var(--text-secondary); margin: 0 0 6px; }
@@ -1300,7 +1329,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   margin-top: 0.5rem;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: var(--r-sm);
   padding: 1.1rem 1.3rem;
 }
 .msm-foot-h { font-size: 13px; font-weight: 800; color: var(--text-primary); margin-bottom: 8px; }
@@ -1325,7 +1354,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
 .prog-card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 14px;
+  border-radius: var(--r-md);
   padding: 1.25rem;
 }
 .prog-card-header {
@@ -1389,16 +1418,16 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   margin-top: 5px;
 }
 .dot-done {
-  background: var(--soil);
+  background: var(--done-text);
 }
 .dot-wip {
-  background: #F0A500;
+  background: var(--wip-text);
 }
 .dot-open {
-  background: #C0392B;
+  background: var(--urgent-text);
 }
 .dot-plan {
-  background: #BDD3F8;
+  background: var(--plan-text);
 }
 .prog-legend {
   display: flex;
@@ -1443,7 +1472,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
 }
 .tl-date {
   font-size: 11.5px;
-  font-family: 'DM Mono', monospace;
+  font-family: var(--display);
   color: var(--text-secondary);
   flex-shrink: 0;
   width: 90px;
@@ -1470,7 +1499,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   font-size: 10px;
   font-weight: 700;
   padding: 1px 7px;
-  border-radius: 8px;
+  border-radius: var(--r-sm);
 }
 .chip-pw {
   background: var(--playwright-bg);
@@ -1494,7 +1523,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   border: 1px solid var(--border);
 }
 .chip-key {
-  background: #FEF0EE;
+  background: var(--urgent-bg);
   color: var(--urgent-text);
   border: 1px solid var(--urgent-border);
 }
@@ -1524,7 +1553,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
 .person-card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: var(--r-sm);
   padding: 1rem;
 }
 .person-name {
@@ -1613,7 +1642,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
 .soil-intro-card {
   background:var(--surface);
   border:1px solid var(--border);
-  border-radius:14px;
+  border-radius: var(--r-md);
   padding:1.25rem;
   margin-bottom:1.5rem;
   font-size:13.5px;
@@ -1626,7 +1655,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   font-size:11px;
   color:var(--text-tertiary);
   margin-bottom:8px;
-  font-family:'DM Mono',monospace
+  font-family:var(--display)
 }
 .market-4col {
   display:grid;
@@ -1635,7 +1664,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   margin-bottom:12px
 }
 .market-col {
-  border-radius:12px;
+  border-radius: var(--r-sm);
   padding:1rem;
   border:1.5px solid var(--border);
   background:var(--surface);
@@ -1643,19 +1672,19 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
 }
 .market-col.ip-col {
   background:#EEF4FE;
-  border-color:#BDD3F8
+  border-color:var(--plan-border)
 }
 .market-col.commercial-col {
-  background:#FEF3E2;
-  border-color:#F5D0A9
+  background:var(--playwright-bg);
+  border-color:var(--playwright-border)
 }
 .market-col.contemporary-col {
-  background:#E1F5EE;
-  border-color:#A8DEC8
+  background:var(--producer-bg);
+  border-color:var(--producer-border)
 }
 .market-col.heritage-col {
-  background:#F0EDFD;
-  border-color:#CBBFF8
+  background:var(--director-bg);
+  border-color:var(--director-border)
 }
 .mc-col-title {
   font-size:13px;
@@ -1668,9 +1697,9 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   font-weight:700;
   color:var(--soil);
   background:var(--soil-bg);
-  border:1px solid #A8DEC8;
+  border:1px solid var(--producer-border);
   padding:2px 7px;
-  border-radius:5px;
+  border-radius: var(--r-sm);
   display:inline-block;
   margin-bottom:6px
 }
@@ -1687,12 +1716,12 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   font-size:10px;
   font-weight:700;
   padding:2px 6px;
-  border-radius:5px;
+  border-radius: var(--r-sm);
   display:inline-block;
   margin-bottom:4px
 }
 .jp-present {
-  background:#FEF0EE;
+  background:var(--urgent-bg);
   color:var(--urgent-text)
 }
 .jp-none {
@@ -1713,7 +1742,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   font-size:10px;
   font-weight:700;
   padding:3px 7px;
-  border-radius:6px;
+  border-radius: var(--r-sm);
   display:inline-block;
   margin-top:8px
 }
@@ -1722,8 +1751,8 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   color:#555
 }
 .zone-dead {
-  background:#FFF3CD;
-  color:#856404
+  background:var(--wip-bg);
+  color:var(--wip-text)
 }
 .v-axis-heading {
   font-size:11px;
@@ -1743,14 +1772,14 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   align-items:center;
   gap:8px;
   padding:4px 10px;
-  border-radius:6px;
+  border-radius: var(--r-sm);
   background:var(--bg);
   font-size:12px
 }
 .v-axis-num {
   font-size:10px;
   font-weight:700;
-  font-family:'DM Mono';
+  font-family:var(--display);
   color:var(--text-tertiary);
   width:18px;
   flex-shrink:0
@@ -1762,7 +1791,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   margin-top:10px
 }
 .vzd-card {
-  border-radius:10px;
+  border-radius: var(--r-sm);
   padding:10px 12px
 }
 .vzd-void {
@@ -1771,7 +1800,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
 }
 .vzd-dead {
   background:#FFF9E0;
-  border:1px solid #F5D0A9
+  border:1px solid var(--playwright-border)
 }
 .vzd-tag {
   font-size:10px;
@@ -1787,8 +1816,8 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
 /* ── Transfer Machine ── */
 .transfer-intro-card {
   background:var(--seed-bg);
-  border:1px solid #BDD3F8;
-  border-radius:12px;
+  border:1px solid var(--plan-border);
+  border-radius: var(--r-sm);
   padding:1rem;
   margin-bottom:12px;
   font-size:13px;
@@ -1816,7 +1845,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
 .transfer-inst {
   background:var(--surface);
   border:1px solid var(--border);
-  border-radius:8px;
+  border-radius: var(--r-sm);
   padding:5px 10px;
   font-size:12px;
   color:var(--text-primary);
@@ -1850,7 +1879,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   font-size:10px;
   font-weight:700;
   padding:2px 6px;
-  border-radius:5px;
+  border-radius: var(--r-sm);
   display:inline-block
 }
 .route-lbl-a {
@@ -1862,8 +1891,8 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   color:var(--soil-text)
 }
 .route-lbl-main {
-  background:#FFF3CD;
-  color:#856404
+  background:var(--wip-bg);
+  color:var(--wip-text)
 }
 /* ── Entrance ── */
 .entrance-3col {
@@ -1874,13 +1903,13 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
 .entrance-card {
   background:var(--surface);
   border:1.5px solid var(--border);
-  border-radius:14px;
+  border-radius: var(--r-md);
   padding:1.25rem
 }
 .entrance-letter {
   font-size:26px;
   font-weight:700;
-  font-family:'DM Mono';
+  font-family:var(--display);
   color:var(--seed);
   margin-bottom:6px
 }
@@ -1918,7 +1947,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
 .sc-card {
   background:var(--surface);
   border:1.5px solid var(--border);
-  border-radius:14px;
+  border-radius: var(--r-md);
   padding:1.25rem
 }
 .sc-card.main-sc {
@@ -1931,14 +1960,14 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   background:var(--seed-bg);
   color:var(--seed-text);
   padding:2px 8px;
-  border-radius:8px;
+  border-radius: var(--r-sm);
   display:inline-block;
   margin-bottom:8px
 }
 .sc-letter {
   font-size:22px;
   font-weight:700;
-  font-family:'DM Mono';
+  font-family:var(--display);
   margin-bottom:2px
 }
 .sc-letter.a {
@@ -1970,7 +1999,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   font-size:10px;
   font-weight:700;
   padding:1px 6px;
-  border-radius:5px;
+  border-radius: var(--r-sm);
   flex-shrink:0;
   margin-top:2px
 }
@@ -1998,13 +2027,13 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
 .ge-unit-card {
   background:var(--surface);
   border:1px solid var(--border);
-  border-radius:14px;
+  border-radius: var(--r-md);
   padding:1.25rem
 }
 .ge-unit-id {
   font-size:10px;
   font-weight:700;
-  font-family:'DM Mono';
+  font-family:var(--display);
   color:var(--text-tertiary);
   letter-spacing:.08em;
   margin-bottom:6px
@@ -2032,7 +2061,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   font-weight:600;
   color:var(--soil-text);
   background:var(--soil-bg);
-  border-radius:6px;
+  border-radius: var(--r-sm);
   padding:5px 8px;
   margin-bottom:8px
 }
@@ -2072,12 +2101,12 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   margin-bottom:12px
 }
 .ge-split-card {
-  border-radius:12px;
+  border-radius: var(--r-sm);
   padding:1rem
 }
 .ge-split-left {
   background:var(--seed-bg);
-  border:1px solid #BDD3F8
+  border:1px solid var(--plan-border)
 }
 .ge-split-right {
   background:var(--surface);
@@ -2099,12 +2128,12 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   font-size:10px;
   font-weight:700;
   padding:2px 8px;
-  border-radius:8px;
+  border-radius: var(--r-sm);
   margin-bottom:8px
 }
 .ge-schedule {
   background:var(--bg);
-  border-radius:12px;
+  border-radius: var(--r-sm);
   padding:1rem
 }
 .ge-sched-row {
@@ -2118,7 +2147,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
 }
 .ge-sched-timing {
   font-size:11px;
-  font-family:'DM Mono';
+  font-family:var(--display);
   color:var(--text-tertiary);
   width:110px;
   flex-shrink:0;
@@ -2139,7 +2168,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
 .ge-program-card {
   background:var(--surface);
   border:1px solid var(--border);
-  border-radius:14px;
+  border-radius: var(--r-md);
   padding:1.25rem;
   margin-bottom:1rem;
   overflow:hidden
@@ -2155,9 +2184,9 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   font-size:11px;
   font-weight:700;
   padding:3px 10px;
-  border-radius:20px;
+  border-radius: var(--r-pill);
   flex-shrink:0;
-  font-family:'DM Mono',monospace
+  font-family:var(--display)
 }
 .ge-prog-title {
   font-size:16px;
@@ -2170,7 +2199,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   color:var(--text-secondary);
   background:var(--bg);
   border:1px solid var(--border);
-  border-radius:20px;
+  border-radius: var(--r-pill);
   padding:2px 10px;
   white-space:nowrap
 }
@@ -2190,7 +2219,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
 }
 .ge-prog-meta-item {
   background:var(--bg);
-  border-radius:8px;
+  border-radius: var(--r-sm);
   padding:8px 12px
 }
 .ge-prog-meta-label {
@@ -2223,7 +2252,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   font-size:11.5px;
   font-weight:600;
   padding:4px 10px;
-  border-radius:20px;
+  border-radius: var(--r-pill);
   display:flex;
   align-items:center;
   gap:6px
@@ -2251,7 +2280,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
 .ge-req-ids {
   font-size:10px;
   font-weight:400;
-  font-family:'DM Mono',monospace;
+  font-family:var(--display);
   opacity:.7
 }
 /* ══════ Role-Specific ══════ */
@@ -2263,7 +2292,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
 }
 .rs-tab-btn {
   padding:6px 20px;
-  border-radius:20px;
+  border-radius: var(--r-pill);
   border:1.5px solid var(--border);
   background:var(--surface);
   font-size:13px;
@@ -2271,7 +2300,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   cursor:pointer;
   color:var(--text-secondary);
   transition:all .15s;
-  font-family:'Noto Sans JP',sans-serif
+  font-family:var(--gothic)
 }
 .rs-tab-btn[data-rs-role="producer"].active {
   background:var(--producer-bg);
@@ -2334,7 +2363,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   font-size:10px;
   font-weight:700;
   padding:1px 5px;
-  border-radius:5px;
+  border-radius: var(--r-sm);
   display:inline-block;
   margin-left:4px
 }
@@ -2358,7 +2387,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
 .rs-opp-card {
   background:var(--surface);
   border:1px solid var(--border);
-  border-radius:12px;
+  border-radius: var(--r-sm);
   padding:1rem
 }
 .rs-opp-title {
@@ -2376,13 +2405,13 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   font-size:10px;
   font-weight:700;
   padding:2px 6px;
-  border-radius:5px;
+  border-radius: var(--r-sm);
   display:inline-block;
   margin-bottom:6px
 }
 .rs-curriculum {
   background:var(--bg);
-  border-radius:12px;
+  border-radius: var(--r-sm);
   padding:1rem;
   font-size:12.5px;
   line-height:1.9;
@@ -2418,7 +2447,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
 .pw-box {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 20px;
+  border-radius: var(--r-md);
   padding: 2.5rem 2rem;
   width: 360px;
   text-align: center;
@@ -2429,8 +2458,8 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--seed);
-  font-family: 'DM Mono', monospace;
+  color: var(--accent);
+  font-family: var(--display);
   margin-bottom: 1.25rem;
 }
 .pw-title {
@@ -2447,10 +2476,10 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
 .pw-input {
   width: 100%;
   padding: 10px 14px;
-  border-radius: 10px;
+  border-radius: var(--r-sm);
   border: 1.5px solid var(--border);
   background: var(--bg);
-  font-family: 'DM Mono', monospace;
+  font-family: var(--display);
   font-size: 14px;
   color: var(--text-primary);
   outline: none;
@@ -2460,10 +2489,10 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   letter-spacing: 0.05em;
 }
 .pw-input:focus {
-  border-color: var(--seed);
+  border-color: var(--accent);
 }
 .pw-input.error {
-  border-color: #C0392B;
+  border-color: var(--urgent-text);
   animation: shake 0.3s;
 }
 @keyframes shake {
@@ -2480,11 +2509,11 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
 .pw-btn {
   width: 100%;
   padding: 10px;
-  border-radius: 10px;
+  border-radius: var(--r-sm);
   border: none;
-  background: var(--seed);
+  background: var(--accent);
   color: #fff;
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: var(--gothic);
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
@@ -2495,7 +2524,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
 }
 .pw-error {
   font-size: 12px;
-  color: #C0392B;
+  color: var(--urgent-text);
   margin-top: 0.6rem;
   min-height: 18px;
 }
@@ -2653,7 +2682,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
 .sc-tobe-card {
   background:var(--surface);
   border:1.5px solid var(--border);
-  border-radius:16px;
+  border-radius: var(--r-md);
   padding:1.25rem;
   min-width:0;
   overflow:hidden
@@ -2671,7 +2700,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   font-size:11px;
   font-weight:700;
   padding:3px 10px;
-  border-radius:20px;
+  border-radius: var(--r-pill);
   display:inline-block;
   margin-bottom:8px
 }
@@ -2695,7 +2724,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   line-height:1.5;
   padding:10px;
   background:var(--bg);
-  border-radius:8px
+  border-radius: var(--r-sm)
 }
 .sc-tobe-body {
   display:grid;
@@ -2726,7 +2755,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
 }
 .sc-tobe-rm-item {
   padding:6px 10px;
-  border-radius:8px;
+  border-radius: var(--r-sm);
   background:var(--bg);
   margin-bottom:4px
 }
@@ -2745,7 +2774,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   margin-top:1rem;
   padding:10px 14px;
   background:var(--bg);
-  border-radius:10px;
+  border-radius: var(--r-sm);
   border-left:3px solid var(--director);
   font-size:12px;
   color:var(--text-secondary);
@@ -2803,7 +2832,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   background:var(--surface);
   border:1px solid var(--border);
   border-left:4px solid var(--border);
-  border-radius:12px;
+  border-radius: var(--r-sm);
   padding:1rem
 }
 .pab-event.pab-producer, .pab-block.pab-producer, .pab-todo-card.pab-producer { border-left-color:var(--producer) }
@@ -2821,13 +2850,13 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
 .pab-time {
   font-size:12px;
   color:var(--text-secondary);
-  font-family:'DM Mono',monospace
+  font-family:var(--display)
 }
 .pab-badge {
   font-size:10px;
   font-weight:700;
   padding:2px 8px;
-  border-radius:8px;
+  border-radius: var(--r-sm);
   white-space:nowrap
 }
 .pab-badge.pab-main { background:var(--wip-bg); color:var(--wip-text) }
@@ -2862,7 +2891,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   text-align:right;
   transform:translateY(-0.6em);
   padding-right:4px;
-  font-family:'DM Mono',monospace
+  font-family:var(--display)
 }
 .pab-rule {
   grid-column:1/-1;
@@ -2877,7 +2906,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   background:var(--surface);
   border:1px solid var(--border);
   border-left:4px solid var(--border);
-  border-radius:8px;
+  border-radius: var(--r-sm);
   padding:6px 12px;
   overflow:hidden;
   display:flex;
@@ -2889,7 +2918,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
 .pab-block .pab-b-time {
   font-size:10.5px;
   color:var(--text-tertiary);
-  font-family:'DM Mono',monospace
+  font-family:var(--display)
 }
 .pab-block .pab-b-name {
   font-size:12.5px;
@@ -2906,7 +2935,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   margin:2px 0;
   background:var(--bg);
   border:1.5px dashed var(--text-tertiary);
-  border-radius:8px;
+  border-radius: var(--r-sm);
   padding:12px;
   font-size:11.5px;
   color:var(--text-secondary);
@@ -2924,7 +2953,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
 .pab-block.pab-ops {
   background:var(--bg);
   border:1.5px dashed var(--text-tertiary);
-  border-radius:8px;
+  border-radius: var(--r-sm);
   color:var(--text-secondary)
 }
 .pab-block.pab-ops .pab-b-name {
@@ -2935,14 +2964,14 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   font-size:10px;
   font-weight:700;
   padding:2px 8px;
-  border-radius:8px;
+  border-radius: var(--r-sm);
   white-space:nowrap
 }
 .pab-st-todo { background:var(--bg); color:var(--text-secondary); border:1px solid var(--border) }
 .pab-st-wip { background:var(--wip-bg); color:var(--wip-text) }
 .pab-st-wait { background:var(--plan-bg); color:var(--plan-text) }
 .pab-st-done { background:var(--soil-bg); color:var(--soil-text) }
-.pab-link { color:var(--seed); text-decoration:underline; text-underline-offset:2px }
+.pab-link { color:var(--accent); text-decoration:underline; text-underline-offset:2px }
 .pab-info-grid {
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -2954,7 +2983,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
 .pab-info-card {
   background:var(--surface);
   border:1px solid var(--border);
-  border-radius:12px;
+  border-radius: var(--r-sm);
   padding:12px 14px;
   font-size:12px;
   color:var(--text-secondary);
@@ -2971,7 +3000,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   font-size:15px;
   font-weight:700;
   color:var(--text-primary);
-  font-family:'DM Mono','Noto Sans JP',monospace
+  font-family:var(--display)
 }
 .pab-todo-grid {
   display:grid;
@@ -2985,7 +3014,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   background:var(--surface);
   border:1px solid var(--border);
   border-left:4px solid var(--border);
-  border-radius:12px;
+  border-radius: var(--r-sm);
   padding:12px 14px
 }
 .pab-todo-card .pab-todo-head {
@@ -3028,7 +3057,7 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   font-size:10px;
   font-weight:700;
   padding:2px 8px;
-  border-radius:8px;
+  border-radius: var(--r-sm);
   white-space:nowrap;
   background:var(--urgent-bg);
   color:var(--urgent-text);
@@ -3040,12 +3069,337 @@ html[data-theme="dark"] .msm-block.msm-todo .msm-block-label { background: rgba(
   font-size:10px;
   font-weight:700;
   padding:1px 7px;
-  border-radius:8px;
+  border-radius: var(--r-sm);
   white-space:nowrap
 }
 .pab-chip.pab-chip-p { background:var(--producer-bg); color:var(--producer) }
 .pab-chip.pab-chip-d { background:var(--director-bg); color:var(--director) }
 .pab-chip.pab-chip-pw { background:var(--playwright-bg); color:var(--playwright) }
+
+/* ══════════════════════════════════════
+   NOW タブ ＋ 鮮度メタデータ
+   ══════════════════════════════════════ */
+.now-container { max-width:960px; margin:0 auto; display:flex; flex-direction:column; gap:1.25rem }
+
+/* ① 直近マイルストーン */
+.now-count { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:12px }
+.now-count-card { background:var(--surface); border:1px solid var(--border); border-radius: var(--r-md); padding:14px 16px }
+.now-count-card.is-near { border-color:var(--urgent-border); background:var(--urgent-bg) }
+.now-count-label { font-family:var(--display); font-size:11px; font-weight:500; letter-spacing:.04em; color:var(--text-tertiary); margin-bottom:6px }
+.now-count-days { font-family:var(--display); font-size:30px; font-weight:500; line-height:1.1; letter-spacing:-.02em }
+.now-count-days .unit { font-size:13px; font-weight:400; color:var(--text-secondary); margin-left:4px; letter-spacing:0 }
+.now-count-card.is-near .now-count-days { color:var(--urgent-text) }
+.now-count-name { font-size:13px; font-weight:700; margin-top:8px; line-height:1.5 }
+.now-count-note { font-size:11px; color:var(--text-secondary); margin-top:3px; line-height:1.6 }
+
+/* ブロック共通 */
+.now-block { background:var(--surface); border:1px solid var(--border); border-radius: var(--r-md); padding:1.1rem 1.15rem }
+.now-block-head { display:flex; align-items:baseline; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:.9rem; padding-bottom:.7rem; border-bottom:1px solid var(--border) }
+.now-block-title { font-size:14px; font-weight:700 }
+.now-block-sub { font-size:11px; color:var(--text-tertiary) }
+
+/* ② 期限のあるタスク */
+.now-filter { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:.9rem }
+.now-filter-btn { font-size:11px; font-weight:500; padding:4px 11px; border-radius: var(--r-pill); border:1px solid var(--border); background:var(--bg); color:var(--text-secondary); cursor:pointer; font-family:inherit }
+.now-filter-btn:hover { border-color:var(--text-tertiary) }
+.now-filter-btn.active { background:var(--text-primary); border-color:var(--text-primary); color:#fff }
+.now-overdue-note { font-size:11.5px; line-height:1.7; color:var(--urgent-text); margin-bottom:.85rem; padding:8px 11px; background:var(--urgent-bg); border:1px solid var(--urgent-border); border-radius: var(--r-sm) }
+.now-due-group { margin-bottom:1rem }
+.now-due-group:last-child { margin-bottom:0 }
+.now-due-head { display:flex; align-items:center; gap:9px; margin-bottom:.45rem }
+.now-due-date { font-family:var(--display); font-size:12px; font-weight:500 }
+.now-due-left { font-size:10px; font-weight:700; padding:2px 8px; border-radius: var(--r-sm); background:var(--plan-bg); color:var(--plan-text); white-space:nowrap }
+.now-due-group.is-soon .now-due-left { background:var(--wip-bg); color:var(--wip-text) }
+.now-due-group.is-over .now-due-left { background:var(--urgent-bg); color:var(--urgent-text) }
+.now-due-line { flex:1; height:1px; background:var(--border) }
+.now-task { display:flex; gap:10px; align-items:flex-start; padding:7px 10px; border-radius: var(--r-sm); font-size:12.5px; line-height:1.65 }
+.now-task + .now-task { margin-top:3px }
+.now-task:hover { background:var(--bg) }
+.now-task-owner { flex:none; font-size:10px; font-weight:700; padding:2px 8px; border-radius: var(--r-sm); background:var(--bg); border:1px solid var(--border); color:var(--text-secondary); white-space:nowrap; margin-top:2px }
+.now-due-group.is-over .now-task { background:var(--urgent-bg) }
+.now-due-group.is-over .now-task-owner { background:var(--surface); border-color:var(--urgent-border); color:var(--urgent-text) }
+.now-more { margin-top:.9rem; text-align:center }
+.now-more-btn { font-size:11.5px; font-weight:500; padding:6px 16px; border-radius: var(--r-pill); border:1px solid var(--border); background:var(--bg); color:var(--text-secondary); cursor:pointer; font-family:inherit }
+.now-more-btn:hover { border-color:var(--text-tertiary) }
+.now-empty { font-size:12px; color:var(--text-tertiary); padding:.4rem 0 }
+
+/* ③ 確認中 */
+.now-checks { display:flex; flex-direction:column; gap:8px }
+.now-check { display:flex; gap:11px; align-items:flex-start; padding:10px 12px; background:var(--bg); border:1px solid var(--border); border-radius: var(--r-sm) }
+.now-check-n { font-family:var(--display); font-size:11px; color:var(--text-tertiary); flex:none; margin-top:3px }
+.now-check-t { font-size:12.5px; font-weight:700; line-height:1.55 }
+.now-check-s { display:inline-block; font-size:10px; font-weight:700; padding:1px 8px; border-radius: var(--r-sm); background:var(--wip-bg); color:var(--wip-text); margin-left:8px }
+.now-check-s.is-fixed { background:var(--soil-bg); color:var(--soil-text) }
+.now-check-d { font-size:11.5px; color:var(--text-secondary); line-height:1.7; margin-top:4px }
+
+/* ④ 直近の決定事項 */
+.now-log { display:flex; flex-direction:column; gap:8px }
+.now-log-row { display:flex; gap:11px; align-items:flex-start; font-size:12.5px; line-height:1.7 }
+.now-log-date { font-family:var(--display); font-size:11px; color:var(--text-tertiary); flex:none; margin-top:3px; width:36px }
+
+/* ⑤ Slackデイリーレポート（格下げ） */
+.now-slack { background:var(--surface); border:1px solid var(--border); border-radius: var(--r-md); overflow:hidden }
+.now-slack > summary { cursor:pointer; padding:.85rem 1.15rem; display:flex; align-items:center; gap:14px; flex-wrap:wrap; list-style:none; font-size:13px; font-weight:700 }
+.now-slack > summary::-webkit-details-marker { display:none }
+.now-slack > summary::after { content:'▾'; margin-left:auto; color:var(--text-tertiary); font-size:11px }
+.now-slack[open] > summary::after { content:'▴' }
+.now-slack > summary:hover { background:var(--bg) }
+.now-slack-mini { font-size:11px; font-weight:400; color:var(--text-secondary); display:flex; gap:12px; flex-wrap:wrap }
+.now-slack-mini .num { font-family:var(--display); font-weight:500; color:var(--text-primary) }
+.now-slack-body { padding:0 1.15rem 1.15rem }
+
+/* 鮮度メタデータ */
+.fresh-bar { max-width:960px; margin:0 auto 1.1rem; display:flex; align-items:center; gap:9px; flex-wrap:wrap; font-size:11px; color:var(--text-tertiary); padding-bottom:.6rem; border-bottom:1px dashed var(--border) }
+.fresh-date { font-family:var(--display); color:var(--text-secondary) }
+.fresh-flag { font-weight:700; padding:2px 8px; border-radius: var(--r-sm); background:var(--wip-bg); color:var(--wip-text) }
+.tab-btn .stale-dot { display:inline-block; width:5px; height:5px; border-radius:50%; background:var(--wip-text); margin-left:5px; vertical-align:2px }
+
+@media (max-width:640px) {
+  .now-count { grid-template-columns:1fr 1fr; gap:9px }
+  .now-count-card { padding:12px 13px }
+  .now-count-days { font-size:24px }
+  .now-block { padding:1rem .9rem }
+}
+
+/* ══════════════════════════════════════
+   2階層ナビ（いま／進行／設計／案件）
+   ══════════════════════════════════════ */
+.layer-nav { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px }
+.layer-btn {
+  background:var(--surface); border:1px solid var(--border); border-radius: var(--r-pill);
+  padding:6px 22px; font-family:var(--gothic); font-size:13px; font-weight:700;
+  color:var(--text-secondary); cursor:pointer; white-space:nowrap;
+  transition:background .15s, border-color .15s, color .15s;
+}
+.layer-btn:hover { border-color:var(--text-tertiary); color:var(--text-primary) }
+.layer-btn.active { background:var(--text-primary); border-color:var(--text-primary); color:var(--surface) }
+.layer-btn .stale-dot { background:var(--wip-text) }
+.layer-btn.active .stale-dot { background:var(--wip-border) }
+.tab-nav { border-bottom:2px solid var(--border) }
+.tab-btn[hidden] { display:none }
+
+/* ══════════════════════════════════════
+   タブ横断検索
+   ══════════════════════════════════════ */
+.search-wrap { max-width:960px; margin:0 auto 1.25rem; position:relative }
+.search-box { position:relative; display:flex; align-items:center }
+.search-input {
+  width:100%; font-family:var(--gothic); font-size:13px;
+  padding:9px 46px 9px 15px; border-radius:var(--r-pill);
+  border:1px solid var(--border); background:var(--surface); color:var(--text-primary);
+  transition:border-color .15s;
+}
+.search-input:focus { outline:none; border-color:var(--accent) }
+.search-input::placeholder { color:var(--text-tertiary) }
+.search-input::-webkit-search-cancel-button { -webkit-appearance:none; appearance:none }
+.search-hint {
+  position:absolute; right:13px; pointer-events:none;
+  font-family:var(--display); font-size:10.5px; color:var(--text-tertiary);
+  border:1px solid var(--border); border-radius:var(--r-sm); padding:1px 8px;
+}
+.search-clear {
+  position:absolute; right:11px; background:none; border:none; cursor:pointer;
+  color:var(--text-tertiary); font-size:17px; line-height:1; padding:3px 6px; border-radius:var(--r-pill);
+}
+.search-clear:hover { color:var(--text-primary); background:var(--bg) }
+.search-results {
+  position:absolute; z-index:30; left:0; right:0; top:calc(100% + 6px);
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--r-md);
+  box-shadow:0 16px 40px rgba(26,28,30,.14);
+  max-height:min(62vh,520px); overflow-y:auto; padding:6px;
+}
+.search-meta { font-size:11px; color:var(--text-tertiary); padding:7px 11px 6px }
+.search-group-title {
+  font-size:10.5px; font-weight:700; letter-spacing:.06em; color:var(--text-tertiary);
+  padding:9px 11px 4px; border-top:1px solid var(--border); margin-top:4px;
+}
+.search-results > .search-group:first-of-type .search-group-title { border-top:0; margin-top:0 }
+.search-hit-btn {
+  display:block; width:100%; text-align:left; background:none; border:none; cursor:pointer;
+  font-family:var(--gothic); font-size:12.5px; line-height:1.75; color:var(--text-primary);
+  padding:7px 11px; border-radius:var(--r-sm);
+}
+.search-hit-btn:hover, .search-hit-btn.is-active { background:var(--bg) }
+.search-hit-btn mark { background:var(--wip-bg); color:var(--text-primary); border-radius:3px; padding:0 2px }
+.search-empty { font-size:12.5px; color:var(--text-secondary); padding:14px 11px; line-height:1.7 }
+
+/* 飛んだ先を一瞬光らせる */
+@keyframes search-flash {
+  0%, 100% { background:transparent }
+  20%, 55% { background:var(--wip-bg) }
+}
+.search-target { animation:search-flash 1.7s ease }
+@media (prefers-reduced-motion: reduce) {
+  .search-target { animation:none; outline:2px solid var(--wip-text); outline-offset:3px }
+}
+
+/* ══════════════════════════════════════
+   モバイル（〜640px）
+   ══════════════════════════════════════ */
+@media (max-width:640px) {
+  /* 画面の外周を詰めて、本文に幅を渡す */
+  body { padding: 1rem .9rem 2.5rem }
+
+  /* ヘッダは縦に積む */
+  .page-header { flex-direction: column; align-items: flex-start; gap: 10px; margin-bottom: 1rem }
+  .page-header h1 { font-size: 19px }
+  .header-right { width: 100%; justify-content: space-between; align-items: center }
+  .updated { text-align: left; font-size: 11px; line-height: 1.5 }
+
+  /* 二次ナビは折り返さず横スクロール。
+     「設計」の8枚が4行に伸びて本文を押し下げるのを防ぐ。 */
+  .tab-nav {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tab-nav::-webkit-scrollbar { display: none }
+
+  /* 指で押せる大きさに */
+  .layer-btn { padding: 9px 18px; font-size: 12.5px }
+  .tab-btn { padding: 11px 14px; font-size: 12.5px }
+
+  /* 余白の大きい面を詰める */
+  .eco-thesis, .vf-hero { padding: 1.25rem }
+  .eco-thesis-quote { font-size: 16px }
+  .msm-head { padding: 1rem 1.1rem }
+  .msm-body { padding: 1.1rem 1.1rem 1.6rem }
+  .msm-panel { border-radius: var(--r-sm) }
+
+  /* 検索：ヒントキーは邪魔なので出さない */
+  .search-hint { display: none }
+  .search-input { padding: 10px 40px 10px 14px; font-size: 16px }  /* iOSの自動ズームを防ぐ */
+  .search-results { max-height: 55vh }
+}
+
+/* ══════════════════════════════════════
+   印刷ボタン（画面）
+   ══════════════════════════════════════ */
+.header-right { display:flex; align-items:flex-start; gap:12px }
+.print-btn {
+  font-family:var(--gothic); font-size:12px; font-weight:700;
+  padding:5px 15px; border-radius:var(--r-pill);
+  border:1px solid var(--border); background:var(--surface); color:var(--text-secondary);
+  cursor:pointer; white-space:nowrap;
+  transition:border-color .15s, color .15s;
+}
+.print-btn:hover { border-color:var(--text-primary); color:var(--text-primary) }
+.print-tab-name { display:none }
+
+/* ══════════════════════════════════════
+   印刷（当日の進行表を紙で持つため）
+   いま開いているタブだけを刷る。
+   ══════════════════════════════════════ */
+@media print {
+  @page { size: A4; margin: 12mm 10mm; }
+
+  html, body {
+    background: var(--surface);
+    padding: 0;
+    margin: 0;
+    font-size: 10pt;
+  }
+
+  /* 淡色の背景は状態を示しているので、紙にも出す */
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  /* 画面のためだけの要素は刷らない */
+  #pw-gate,
+  .tab-nav-wrapper,
+  .footer,
+  .print-btn,
+  .search-wrap,
+  .now-filter,
+  .now-more,
+  .fresh-bar,
+  .meeting-chevron,
+  .doc-btn,
+  .pabrs .navbar,
+  .pabrs .picker { display: none !important; }
+
+  /* いま開いているタブだけ */
+  .tab-content { display: none !important; }
+  .tab-content.active { display: block !important; }
+
+  /* 何を刷ったのかが紙の上でわかるように */
+  .print-tab-name {
+    display: block;
+    font-size: 12pt; font-weight: 700;
+    margin: 2mm 0 1mm;
+  }
+  .page-header { margin-bottom: 6mm; padding-bottom: 3mm; border-bottom: 1px solid var(--border) }
+  .page-header h1 { font-size: 13pt }
+  .updated { font-size: 8pt }
+
+  /* 紙幅いっぱいに使う */
+  .now-container, .prog-container, .tl-container, .people-container,
+  .meetings-container, .about-container, .vf-container, .soil-container,
+  .ge-container, .rs-container, .eco-wrap, .pabrs .wrap {
+    max-width: 100% !important;
+  }
+
+  /* 横スクロール領域は畳まず、全部見えるようにする */
+  .scroller, .pabrs .scroller, [style*="overflow-x"] { overflow: visible !important }
+  /* 紙幅に収まらない表は最小幅を解いて折り返させる */
+  table { min-width: 0 !important; width: 100% !important; table-layout: fixed; font-size: 8.5pt }
+  table td, table th { word-break: normal !important; overflow-wrap: anywhere !important }
+  /* 担当マトリクスは紙幅に収まらないので、時間帯ごとのブロックに組み替える */
+  .pabrs #matrix,
+  .pabrs #matrix tbody,
+  .pabrs #matrix tr,
+  .pabrs #matrix th,
+  .pabrs #matrix td { display: block; width: auto }
+  .pabrs #matrix thead { display: none }
+  .pabrs #matrix tr {
+    border: 1px solid var(--border); border-radius: var(--r-sm);
+    padding: 3mm 4mm; margin-bottom: 3mm;
+    break-inside: avoid; page-break-inside: avoid;
+  }
+  .pabrs #matrix tr > th[scope="row"] {
+    font-size: 10.5pt; font-weight: 700; text-align: left;
+    border: 0; padding: 0 0 2mm; background: none;
+  }
+  .pabrs #matrix td {
+    border: 0; padding: 0.8mm 0; font-size: 9pt; line-height: 1.5;
+    display: flex; gap: 3mm; align-items: baseline;
+  }
+  .pabrs #matrix td::before {
+    content: attr(data-name);
+    font-weight: 700; min-width: 15mm; flex: none;
+  }
+
+  /* 途中で割れてほしくないもの */
+  .card, .now-block, .now-count-card, .now-check, .now-due-group,
+  .prog-card, .prog-phase, .person-card, .meeting-row, .tl-row,
+  .pabrs .row, .pabrs .check, .pabrs .card, .pabrs .phase, .pabrs .plan-box {
+    break-inside: avoid; page-break-inside: avoid;
+  }
+  h1, h2, h3, .sec-head, .now-block-head, .people-section-title,
+  .tl-section-title, .prog-card-header, .pabrs .sec-head {
+    break-after: avoid; page-break-after: avoid;
+  }
+
+  /* 紙では影と余白を落とす */
+  .card, .now-block, .prog-card, .msm-panel, .pabrs .card { box-shadow: none !important }
+  .pabrs .sec { padding-top: 4mm; padding-bottom: 4mm }
+
+  /* リンクは下線だけ残す */
+  a { color: inherit; text-decoration: none }
+
+  /* 議事サマリのモーダルは開いているときだけ、単独で刷る */
+  .meeting-summary-modal { display: none !important }
+  body:has(.meeting-summary-modal.open) .tab-content.active { display: none !important }
+  .meeting-summary-modal.open {
+    display: block !important; position: static !important;
+    background: none !important; padding: 0 !important;
+  }
+  .meeting-summary-modal.open .msm-panel {
+    max-height: none !important; box-shadow: none !important; border-radius: 0 !important;
+  }
+  .meeting-summary-modal.open .msm-head { position: static !important }
+  .msm-close { display: none !important }
+}
 </style>
 </head>
 <body>
@@ -3086,56 +3440,121 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 <div class="page-header">
   <div>
     <h1>SEEDダッシュボード</h1>
+    <div class="print-tab-name" id="print-tab-name"></div>
     <div class="meta">
       <span class="badge badge-slack">#101-会議関連</span>
       <span class="badge badge-date">2026/8/31</span>
       <span class="badge badge-date">2名</span>
     </div>
   </div>
-  <div class="updated">最終更新<br>2026/08/31 13:13 JST</div>
+  <div class="header-right">
+    <button type="button" class="print-btn" id="print-btn" title="いま開いているタブを印刷します">印刷</button>
+    <div class="updated">最終更新<br>2026/08/31 13:13 JST</div>
+  </div>
 </div>
 
 <div class="tab-nav-wrapper">
-  <div class="tab-group">
-    <span class="tab-group-label">日次運営</span>
-    <div class="tab-nav">
-      <button class="tab-btn active" data-tab="dashboard">ダッシュボード</button>
-      <button class="tab-btn" data-tab="progress">プログラム進捗</button>
-      <button class="tab-btn" data-tab="timeline">スケジュール</button>
-      <button class="tab-btn" data-tab="meetings">会議資料</button>
-      <button class="tab-btn" data-tab="people">関係者マップ</button>
-    </div>
+  <!-- 一次ナビ：4つの層 -->
+  <div class="layer-nav" role="group" aria-label="表示する層">
+    <button type="button" class="layer-btn active" data-layer="now">いま</button>
+    <button type="button" class="layer-btn" data-layer="track">進行</button>
+    <button type="button" class="layer-btn" data-layer="base">設計</button>
+    <button type="button" class="layer-btn" data-layer="case">案件</button>
   </div>
-  <div class="tab-group">
-    <span class="tab-group-label">戦略・設計</span>
-    <div class="tab-nav">
-      <button class="tab-btn" data-tab="about">事業概要</button>
-      <button class="tab-btn" data-tab="verification">育成検証企画</button>
-      <button class="tab-btn" data-tab="soil-map">① SEED 戦略マップ</button>
-      <button class="tab-btn" data-tab="hr">② 人材要件 v2</button>
-      <button class="tab-btn" data-tab="university-analysis">③ 大学教育に関する分析</button>
-      <button class="tab-btn" data-tab="general-education">④ 一般教養プログラム</button>
-      <button class="tab-btn" data-tab="role-specific">⑤ 職能別個別要件</button>
-      <button class="tab-btn" data-tab="research-agenda">⑥ 追加リサーチ検討</button>
-      <button class="tab-btn" data-tab="pab-plan">⑦ PAB企画・制作進行</button>
-    </div>
+  <!-- 二次ナビ：層のなかのタブ -->
+  <div class="tab-nav">
+    <button class="tab-btn active" data-tab="dashboard" data-layer="now">今週のボード</button>
+    <button class="tab-btn" data-tab="progress" data-layer="track">プログラム進捗</button>
+    <button class="tab-btn" data-tab="timeline" data-layer="track">スケジュール</button>
+    <button class="tab-btn" data-tab="people" data-layer="track">関係者マップ</button>
+    <button class="tab-btn" data-tab="meetings" data-layer="track">会議資料</button>
+    <button class="tab-btn" data-tab="about" data-layer="base">事業概要</button>
+    <button class="tab-btn" data-tab="verification" data-layer="base">育成検証企画</button>
+    <button class="tab-btn" data-tab="soil-map" data-layer="base">① SEED 戦略マップ</button>
+    <button class="tab-btn" data-tab="hr" data-layer="base">② 人材要件 v2</button>
+    <button class="tab-btn" data-tab="university-analysis" data-layer="base">③ 大学教育に関する分析</button>
+    <button class="tab-btn" data-tab="general-education" data-layer="base">④ 一般教養プログラム</button>
+    <button class="tab-btn" data-tab="role-specific" data-layer="base">⑤ 職能別個別要件</button>
+    <button class="tab-btn" data-tab="research-agenda" data-layer="base">⑥ 追加リサーチ検討</button>
+    <button class="tab-btn" data-tab="pab-plan" data-layer="case">⑦ PAB企画・制作進行</button>
   </div>
+</div>
+
+<!-- タブ横断検索 -->
+<div class="search-wrap">
+  <div class="search-box">
+    <input type="search" id="search-input" class="search-input"
+           placeholder="すべてのタブから探す（人名・施策名・日付など）"
+           autocomplete="off" spellcheck="false"
+           aria-label="タブ横断検索" aria-expanded="false" aria-controls="search-results">
+    <span class="search-hint" id="search-hint" aria-hidden="true">/</span>
+    <button type="button" class="search-clear" id="search-clear" aria-label="検索を消す" hidden>×</button>
+  </div>
+  <div class="search-results" id="search-results" role="listbox" aria-label="検索結果" hidden></div>
 </div>
 
 <!-- ════ Dashboard Tab ════ -->
 <div id="tab-dashboard" class="tab-content active">
-  <div class="metrics">
-    <div class="metric"><div class="metric-label">投稿メンバー</div><div class="metric-value">2</div></div>
-    <div class="metric"><div class="metric-label">緊急タスク</div><div class="metric-value red">3</div></div>
-    <div class="metric"><div class="metric-label">進行中タスク</div><div class="metric-value amber">4</div></div>
-    <div class="metric"><div class="metric-label">今後予定</div><div class="metric-value blue">2</div></div>
-  </div>
-  <div class="legend">
-    <div class="leg"><div class="leg-dot" style="background:var(--soil)"></div>SOIL</div>
-    <div class="leg"><div class="leg-dot" style="background:var(--seed)"></div>SEED</div>
-    <div class="leg"><div class="leg-dot" style="background:var(--border)"></div>共通</div>
-  </div>
-  <div class="grid">
+  <div class="now-container">
+
+    <!-- ① 直近マイルストーン -->
+    <div class="now-count" id="now-count"></div>
+
+    <!-- ② 期限のあるタスク -->
+    <div class="now-block">
+      <div class="now-block-head">
+        <div class="now-block-title">期限のあるタスク</div>
+        <div class="now-block-sub">出典：⑦ PAB企画・制作進行（当日制作マスター v0.6）</div>
+      </div>
+      <div class="now-filter" id="now-filter"></div>
+      <div id="now-due"></div>
+    </div>
+
+    <!-- ③ 確認中・回答待ち -->
+    <div class="now-block">
+      <div class="now-block-head">
+        <div class="now-block-title">確認中・回答待ち</div>
+        <div class="now-block-sub">回答が返り次第、⑦タブと進行表を更新</div>
+      </div>
+      <div class="now-checks" id="now-checks"></div>
+    </div>
+
+    <!-- ④ 決定・完了の記録 -->
+    <div class="now-block">
+      <div class="now-block-head">
+        <div class="now-block-title">決定・完了の記録</div>
+        <div class="now-block-sub">8/31 サマースクール定例（当日制作マスター v0.6）以降</div>
+      </div>
+      <div class="now-log">
+        <div class="now-log-row"><span class="now-log-date">9/2</span><span>阿部さんへの<strong>劇作WS 共同進行の正式依頼・進め方のすり合わせが完了</strong>（倉沢）</span></div>
+        <div class="now-log-row"><span class="now-log-date">9/2</span><span>PAB担当者への確認5件（事前レイアウト・701キャパ・弁当数量の締切・ホワイトボード借用・運営取り決め）を<strong>「確認中」へ整理</strong>。回答待ちのため期限つきタスクからは外した</span></div>
+        <div class="now-log-row"><span class="now-log-date">8/31</span><span>お弁当は<strong>無料</strong>のまま。参加者からの集金は行わない（集金に関する記載は全て撤回）</span></div>
+        <div class="now-log-row"><span class="now-log-date">8/31</span><span>参加者上限は<strong>一旦50名で設計</strong>。WS定員合計（劇作20／演出10／プロデューサー20）と同数のため、座談会のみ参加の枠が残らない点は要調整</span></div>
+        <div class="now-log-row"><span class="now-log-date">8/31</span><span>髙田不在に伴う役割再配分：<strong>全体制作統括＝鈴木</strong>、<strong>司会進行＝野村</strong>、<strong>講師アテンド＝横堀</strong>、<strong>お弁当まわり＝遠藤</strong></span></div>
+        <div class="now-log-row"><span class="now-log-date">8/31</span><span>当日の構成を確定：座談会（各30分・計90分）→ 転換・ランチ → 職能別WS 45分 → 全体共有 → 説明会。<strong>12:40〜12:45の転換は全員で入る</strong></span></div>
+        <div class="now-log-row"><span class="now-log-date">8/31</span><span>LPの時間割を新スケジュールに修正</span></div>
+      </div>
+    </div>
+
+    <!-- ⑤ Slackデイリーレポート（NOW内の一セクションへ格下げ） -->
+    <details class="now-slack" id="now-slack" data-count="2">
+      <summary>
+        Slackデイリーレポート
+        <span class="now-slack-mini">
+          <span>2026/8/31</span>
+          <span>投稿 <span class="num">2</span>名</span>
+          <span>緊急 <span class="num">3</span></span>
+          <span>進行中 <span class="num">4</span></span>
+          <span>予定 <span class="num">2</span></span>
+        </span>
+      </summary>
+      <div class="now-slack-body">
+        <div class="legend">
+          <div class="leg"><div class="leg-dot" style="background:var(--soil)"></div>SOIL</div>
+          <div class="leg"><div class="leg-dot" style="background:var(--seed)"></div>SEED</div>
+          <div class="leg"><div class="leg-dot" style="background:var(--border)"></div>共通</div>
+        </div>
+        <div class="grid">
 
         <div class="card card-past">
           <div class="card-header">
@@ -3157,11 +3576,15 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
           </div>
           <div class="group"><div class="group-label gl-urgent">⚠ 緊急（今日中）</div><div class="task ">アドバイザリー資料更新について</div></div><div class="group"><div class="group-label gl-wip">⚡ 進行中</div><div class="task ">PAB当日WSパートの内容調整</div><div class="task ">PAB座談会パートの進行台本</div></div><div class="group"><div class="group-label gl-plan">📅 今後予定</div><div class="task ">学生コミュニティへの連絡</div></div>
         </div>
+        </div>
+      </div>
+    </details>
+
   </div>
 </div><!-- /#tab-dashboard -->
 
 <!-- ════ About Tab ════ -->
-<div id="tab-about" class="tab-content">
+<div id="tab-about" class="tab-content" data-updated="2026-07-22">
   <div class="about-container">
 
     <!-- Hero -->
@@ -3498,7 +3921,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 </div><!-- /#tab-about -->
 
 <!-- ════ Verification Program Tab ════ -->
-<div id="tab-verification" class="tab-content">
+<div id="tab-verification" class="tab-content" data-updated="2026-07-05">
   <div class="vf-container">
 
     <!-- Hero -->
@@ -3658,14 +4081,14 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 </div><!-- /#tab-verification -->
 
 <!-- ════ HR Requirements Tab ════ -->
-<div id="tab-hr" class="tab-content">
+<div id="tab-hr" class="tab-content" data-updated="2026-07-25">
   <div class="hr-container">
 
     <div class="hr-intro">
       <p>
         <strong>SEEDが育てたい3つの職能</strong> ── 劇作家・演出家・プロデューサー。各役割のToBeモデルは、フェーズ0リサーチャー派遣（ソウル・ロンドン・NY）の各報告書・国内ヒアリング・<strong>SOIL国際展開戦略フレームワーク</strong>を統合して改訂。プロデューサーv6・劇作家v4・演出家v2。主軸は<span style="color:var(--seed);font-weight:700">シナリオA（トトロ型：IP × 文化機関共同制作）</span>と<span style="color:var(--soil);font-weight:700">シナリオB（ストンプ型：ノンバーバル × フリンジ転生）</span>。マインドセット（根）→ 知識・スキル（幹）→ 経験（実）の3層構造。
       </p>
-      <div style="margin-top:10px;padding:10px 14px;background:var(--seed-bg);border:1px solid #BDD3F8;border-radius:10px;font-size:12.5px;color:var(--text-secondary);line-height:1.8">
+      <div style="margin-top:10px;padding:10px 14px;background:var(--seed-bg);border:1px solid var(--plan-border);border-radius:var(--r-sm);font-size:12.5px;color:var(--text-secondary);line-height:1.8">
         <strong style="color:var(--seed-text)">🇬🇧 2026年7月更新：時田曜子ロンドンリサーチ統合（プロデューサーv6・劇作家v4）</strong><br>
         報告書（7/19）・報告会（7/23）より、インタビュー10件（Simon Stephens・Richard Twyman・RSC・Fuel・NT Studio・元RC/NT Literary Manager等）＋観劇14本の知見を統合。核心＝<strong>Development（作品が育つ環境のデザイン）／Ecology（相互に育ち合う生態系）</strong>。プロデューサーには<strong>Development Producer機能</strong>（現場運営と分離して作品の「前と後」を担う専門職）、劇作家には<strong>Open Access × Selection・Generation育成・"You belong to the world"</strong> 等を追加。具体提案として <strong>Japan Play Development Lab／New Japanese Voices構想</strong> を受領。
       </div>
@@ -3682,7 +4105,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 
     <!-- ── 劇作家 ── -->
     <div id="role-playwright" class="role-content active">
-      <div style="font-size:13px;color:var(--text-secondary);margin-bottom:1rem;padding:10px 14px;background:var(--bg);border-radius:10px">
+      <div style="font-size:13px;color:var(--text-secondary);margin-bottom:1rem;padding:10px 14px;background:var(--bg);border-radius:var(--r-sm)">
         シナリオによって「何を書くか」「どう届けるか」が根本的に異なる。目指すシナリオを選んでから、対応するToBeモデルを確認してください。
       </div>
       <!-- 劇作家 3シナリオToBe -->
@@ -3772,7 +4195,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
           <div class="req-item"><span class="req-id">M-1</span><span class="req-name">書き続ける意志・作家としてのアイデンティティ</span></div>
           <div class="req-item"><span class="req-id">M-2</span><span class="req-name">自分の文化・社会への深い関心</span></div>
           <div class="req-item"><span class="req-id">M-3</span><span class="req-name">他者と協働することへの開放性</span></div>
-          <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">M-4</span><span class="req-name">自作を「IPとして育てる」長期視点 <span class="chip-pr" style="font-size:10px;padding:1px 5px;border-radius:6px">A</span></span></div>
+          <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">M-4</span><span class="req-name">自作を「IPとして育てる」長期視点 <span class="chip-pr" style="font-size:10px;padding:1px 5px;border-radius:var(--r-sm)">A</span></span></div>
         </div>
         <div class="req-card">
           <div class="req-card-title">◎ 知識（最優先）</div>
@@ -3781,9 +4204,9 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
           <div class="req-item"><span class="req-id">K-3</span><span class="req-name">演劇全体のプロセス理解</span></div>
           <div class="req-item"><span class="req-id">K-4</span><span class="req-name">日本文化・伝統芸能・社会史への理解</span></div>
           <div class="req-item"><span class="req-id">K-5</span><span class="req-name">助成金・企画書・契約の実務知識</span></div>
-          <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">K-6</span><span class="req-name">翻案・アダプテーションの理論と実践 <span class="chip-pr" style="font-size:10px;padding:1px 5px;border-radius:6px">A</span></span></div>
-          <div class="req-item" style="border-left:2px solid var(--soil);padding-left:6px"><span class="req-id">K-7</span><span class="req-name">ノンバーバル作品の構造・視覚的物語設計 <span class="chip-ge" style="font-size:10px;padding:1px 5px;border-radius:6px">B</span></span></div>
-          <div class="req-item" style="border-left:2px solid var(--director);padding-left:6px"><span class="req-id">K-8</span><span class="req-name">国際フェスティバルが評価する「社会的文脈・時代性・固有性」の理解 <span class="chip-dr" style="font-size:10px;padding:1px 5px;border-radius:6px">C'</span></span></div>
+          <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">K-6</span><span class="req-name">翻案・アダプテーションの理論と実践 <span class="chip-pr" style="font-size:10px;padding:1px 5px;border-radius:var(--r-sm)">A</span></span></div>
+          <div class="req-item" style="border-left:2px solid var(--soil);padding-left:6px"><span class="req-id">K-7</span><span class="req-name">ノンバーバル作品の構造・視覚的物語設計 <span class="chip-ge" style="font-size:10px;padding:1px 5px;border-radius:var(--r-sm)">B</span></span></div>
+          <div class="req-item" style="border-left:2px solid var(--director);padding-left:6px"><span class="req-id">K-8</span><span class="req-name">国際フェスティバルが評価する「社会的文脈・時代性・固有性」の理解 <span class="chip-dr" style="font-size:10px;padding:1px 5px;border-radius:var(--r-sm)">C'</span></span></div>
           <div class="req-item"><span class="req-id">K-10</span><span class="req-name">ミュージカル楽曲の構造設計（Intro→Lift→Bridge/Shift→Last Moment）</span></div>
           <div class="req-item"><span class="req-id">K-11</span><span class="req-name">Composer/Orchestrator/Vocal Arranger分業の理解</span></div>
           <div class="req-item"><span class="req-id">K-12</span><span class="req-name">「なぜここで歌うのか」の設計原理（stakes＝感情的極限状態）</span></div>
@@ -3793,10 +4216,10 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
           <div class="req-item"><span class="req-id">S-1</span><span class="req-name">書く技術（セリフ・構造・シーン）</span></div>
           <div class="req-item"><span class="req-id">S-2</span><span class="req-name">自作を語る・言語化する力</span></div>
           <div class="req-item"><span class="req-id">S-3</span><span class="req-name">他者のフィードバックを受け取る力</span></div>
-          <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">S-4</span><span class="req-name">翻案・アダプテーションの実践スキル <span class="chip-pr" style="font-size:10px;padding:1px 5px;border-radius:6px">A</span></span></div>
-          <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">S-5</span><span class="req-name">英訳を前提とした戯曲構造の設計 <span class="chip-pr" style="font-size:10px;padding:1px 5px;border-radius:6px">A</span></span></div>
-          <div class="req-item" style="border-left:2px solid var(--director);padding-left:6px"><span class="req-id">S-6</span><span class="req-name">自社会を普遍的言語に昇華する技術——「なぜ今・なぜここで」を世界に向けて語る <span class="chip-dr" style="font-size:10px;padding:1px 5px;border-radius:6px">C'</span></span></div>
-          <div class="req-item" style="border-left:2px solid var(--director);padding-left:6px"><span class="req-id">S-7</span><span class="req-name">伝統様式・古典を現代語に翻訳する劇作技術 <span class="chip-dr" style="font-size:10px;padding:1px 5px;border-radius:6px">C'</span></span></div>
+          <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">S-4</span><span class="req-name">翻案・アダプテーションの実践スキル <span class="chip-pr" style="font-size:10px;padding:1px 5px;border-radius:var(--r-sm)">A</span></span></div>
+          <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">S-5</span><span class="req-name">英訳を前提とした戯曲構造の設計 <span class="chip-pr" style="font-size:10px;padding:1px 5px;border-radius:var(--r-sm)">A</span></span></div>
+          <div class="req-item" style="border-left:2px solid var(--director);padding-left:6px"><span class="req-id">S-6</span><span class="req-name">自社会を普遍的言語に昇華する技術——「なぜ今・なぜここで」を世界に向けて語る <span class="chip-dr" style="font-size:10px;padding:1px 5px;border-radius:var(--r-sm)">C'</span></span></div>
+          <div class="req-item" style="border-left:2px solid var(--director);padding-left:6px"><span class="req-id">S-7</span><span class="req-name">伝統様式・古典を現代語に翻訳する劇作技術 <span class="chip-dr" style="font-size:10px;padding:1px 5px;border-radius:var(--r-sm)">C'</span></span></div>
           <div class="req-item"><span class="req-id">S-8</span><span class="req-name">Thematic writing——モチーフが全体に機能する設計「Nothing is random」</span></div>
           <div class="req-item"><span class="req-id">S-9</span><span class="req-name">Character Studyと楽曲設計の統合——歌前後でキャラクターが変容</span></div>
           <div class="req-item"><span class="req-id">S-10</span><span class="req-name">Story→Song変換技術——Personal story→詩→structure→song</span></div>
@@ -3806,9 +4229,9 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
           <div class="req-item"><span class="req-id">E-1</span><span class="req-name">演劇の現場を体験してから書く</span></div>
           <div class="req-item"><span class="req-id">E-2</span><span class="req-name">書いた作品が俳優に声に出される経験</span></div>
           <div class="req-item"><span class="req-id">E-3</span><span class="req-name">定期的に書き続ける習慣・反復練習</span></div>
-          <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">E-4</span><span class="req-name">翻案作品の実際の制作・上演体験 <span class="chip-pr" style="font-size:10px;padding:1px 5px;border-radius:6px">A</span></span></div>
-          <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">E-5</span><span class="req-name">自作の国際リーディング・英語上演体験 <span class="chip-pr" style="font-size:10px;padding:1px 5px;border-radius:6px">A</span></span></div>
-          <div class="req-item" style="border-left:2px solid var(--soil);padding-left:6px"><span class="req-id">E-6</span><span class="req-name">ノンバーバル・devising体験 <span class="chip-ge" style="font-size:10px;padding:1px 5px;border-radius:6px">B</span></span></div>
+          <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">E-4</span><span class="req-name">翻案作品の実際の制作・上演体験 <span class="chip-pr" style="font-size:10px;padding:1px 5px;border-radius:var(--r-sm)">A</span></span></div>
+          <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">E-5</span><span class="req-name">自作の国際リーディング・英語上演体験 <span class="chip-pr" style="font-size:10px;padding:1px 5px;border-radius:var(--r-sm)">A</span></span></div>
+          <div class="req-item" style="border-left:2px solid var(--soil);padding-left:6px"><span class="req-id">E-6</span><span class="req-name">ノンバーバル・devising体験 <span class="chip-ge" style="font-size:10px;padding:1px 5px;border-radius:var(--r-sm)">B</span></span></div>
         </div>
       </div>
       <div class="special-card">
@@ -3863,7 +4286,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 
     <!-- ── 演出家 ── -->
     <div id="role-director" class="role-content">
-      <div style="font-size:13px;color:var(--text-secondary);margin-bottom:1rem;padding:10px 14px;background:var(--bg);border-radius:10px">
+      <div style="font-size:13px;color:var(--text-secondary);margin-bottom:1rem;padding:10px 14px;background:var(--bg);border-radius:var(--r-sm)">
         シナリオによって「求められる演出の文法」が根本的に異なる。A=テキスト文法、B=身体文法、C'=社会文脈の文法。
       </div>
       <!-- 演出家 3シナリオToBe -->
@@ -3960,9 +4383,9 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
           <div class="req-item"><span class="req-id">K-2</span><span class="req-name">演技メソッド・共通言語の理解</span></div>
           <div class="req-item"><span class="req-id">K-3</span><span class="req-name">演劇史・世界の演出家への理解</span></div>
           <div class="req-item"><span class="req-id">K-4</span><span class="req-name">日本の文化・伝統芸能・精神的価値観</span></div>
-          <div class="req-item" style="border-left:2px solid var(--soil);padding-left:6px"><span class="req-id">K-5</span><span class="req-name">ムーブメント・身体表現の専門知識 <span class="chip-ge" style="font-size:10px;padding:1px 5px;border-radius:6px">B</span></span></div>
-          <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">K-6</span><span class="req-name">英国・北米商業演劇のシステムと文法 <span class="chip-pr" style="font-size:10px;padding:1px 5px;border-radius:6px">A</span></span></div>
-          <div class="req-item" style="border-left:2px solid var(--director);padding-left:6px"><span class="req-id">K-7</span><span class="req-name">国際フェスティバルのキュレーション思想（何が招聘されるか・評価の文脈） <span class="chip-dr" style="font-size:10px;padding:1px 5px;border-radius:6px">C'</span></span></div>
+          <div class="req-item" style="border-left:2px solid var(--soil);padding-left:6px"><span class="req-id">K-5</span><span class="req-name">ムーブメント・身体表現の専門知識 <span class="chip-ge" style="font-size:10px;padding:1px 5px;border-radius:var(--r-sm)">B</span></span></div>
+          <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">K-6</span><span class="req-name">英国・北米商業演劇のシステムと文法 <span class="chip-pr" style="font-size:10px;padding:1px 5px;border-radius:var(--r-sm)">A</span></span></div>
+          <div class="req-item" style="border-left:2px solid var(--director);padding-left:6px"><span class="req-id">K-7</span><span class="req-name">国際フェスティバルのキュレーション思想（何が招聘されるか・評価の文脈） <span class="chip-dr" style="font-size:10px;padding:1px 5px;border-radius:var(--r-sm)">C'</span></span></div>
         </div>
         <div class="req-card">
           <div class="req-card-title">◎ スキル（最優先）</div>
@@ -3972,9 +4395,9 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
           <div class="req-item"><span class="req-id">S-4</span><span class="req-name">稽古場のリーダーシップ・空気づくり</span></div>
           <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">S-5</span><span class="req-name">英語コミュニケーション・異言語での演出</span></div>
           <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">S-6</span><span class="req-name">文化的翻訳力（普遍的ドラマへの昇華）</span></div>
-          <div class="req-item" style="border-left:2px solid var(--soil);padding-left:6px"><span class="req-id">S-7</span><span class="req-name">ノンバーバル演出技術 <span class="chip-ge" style="font-size:10px;padding:1px 5px;border-radius:6px">B</span></span></div>
-          <div class="req-item" style="border-left:2px solid var(--director);padding-left:6px"><span class="req-id">S-8</span><span class="req-name">社会的文脈・時代性を舞台上で体現する演出技術 <span class="chip-dr" style="font-size:10px;padding:1px 5px;border-radius:6px">C'</span></span></div>
-          <div class="req-item" style="border-left:2px solid var(--director);padding-left:6px"><span class="req-id">S-9</span><span class="req-name">古典文法を理解した上での現代的再解釈の技術 <span class="chip-dr" style="font-size:10px;padding:1px 5px;border-radius:6px">C'</span></span></div>
+          <div class="req-item" style="border-left:2px solid var(--soil);padding-left:6px"><span class="req-id">S-7</span><span class="req-name">ノンバーバル演出技術 <span class="chip-ge" style="font-size:10px;padding:1px 5px;border-radius:var(--r-sm)">B</span></span></div>
+          <div class="req-item" style="border-left:2px solid var(--director);padding-left:6px"><span class="req-id">S-8</span><span class="req-name">社会的文脈・時代性を舞台上で体現する演出技術 <span class="chip-dr" style="font-size:10px;padding:1px 5px;border-radius:var(--r-sm)">C'</span></span></div>
+          <div class="req-item" style="border-left:2px solid var(--director);padding-left:6px"><span class="req-id">S-9</span><span class="req-name">古典文法を理解した上での現代的再解釈の技術 <span class="chip-dr" style="font-size:10px;padding:1px 5px;border-radius:var(--r-sm)">C'</span></span></div>
         </div>
         <div class="req-card">
           <div class="req-card-title">◎ 経験（最優先）</div>
@@ -3982,8 +4405,8 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
           <div class="req-item"><span class="req-id">E-2</span><span class="req-name">実際に演出する経験（規模を問わず）</span></div>
           <div class="req-item"><span class="req-id">E-3</span><span class="req-name">多様な職種・分野との協働創作体験</span></div>
           <div class="req-item"><span class="req-id">E-4</span><span class="req-name">現場体験（劇場で働く・見る）</span></div>
-          <div class="req-item" style="border-left:2px solid var(--soil);padding-left:6px"><span class="req-id">E-5</span><span class="req-name">フィジカルシアター・ノンバーバル制作体験 <span class="chip-ge" style="font-size:10px;padding:1px 5px;border-radius:6px">B</span></span></div>
-          <div class="req-item" style="border-left:2px solid var(--soil);padding-left:6px"><span class="req-id">E-6</span><span class="req-name">国際フェスティバルへの出展・参加体験 <span class="chip-ge" style="font-size:10px;padding:1px 5px;border-radius:6px">B</span></span></div>
+          <div class="req-item" style="border-left:2px solid var(--soil);padding-left:6px"><span class="req-id">E-5</span><span class="req-name">フィジカルシアター・ノンバーバル制作体験 <span class="chip-ge" style="font-size:10px;padding:1px 5px;border-radius:var(--r-sm)">B</span></span></div>
+          <div class="req-item" style="border-left:2px solid var(--soil);padding-left:6px"><span class="req-id">E-6</span><span class="req-name">国際フェスティバルへの出展・参加体験 <span class="chip-ge" style="font-size:10px;padding:1px 5px;border-radius:var(--r-sm)">B</span></span></div>
         </div>
       </div>
       <div class="special-card">
@@ -4035,7 +4458,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 
     <!-- ── プロデューサー ── -->
     <div id="role-producer" class="role-content">
-      <div style="font-size:13px;color:var(--text-secondary);margin-bottom:1rem;padding:10px 14px;background:var(--bg);border-radius:10px">
+      <div style="font-size:13px;color:var(--text-secondary);margin-bottom:1rem;padding:10px 14px;background:var(--bg);border-radius:var(--r-sm)">
         シナリオによって「どこへ・何を使って・誰に届けるか」が全く異なる。プロデューサーはシナリオの「設計者」でもある。
       </div>
       <!-- プロデューサー 3シナリオToBe -->
@@ -4136,10 +4559,10 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
           <div class="req-item"><span class="req-id">K-2</span><span class="req-name">日本の文化・伝統芸能への理解</span></div>
           <div class="req-item"><span class="req-id">K-3</span><span class="req-name">制作実務・プロデュース基礎知識</span></div>
           <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">K-4</span><span class="req-name">SOIL市場構造 + 4成功要因（IP・TR・SP・WOM→WTSF）</span></div>
-          <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">K-5</span><span class="req-name">IPライセンス・著作権の国際実務 <span class="chip-pr" style="font-size:10px;padding:1px 5px;border-radius:6px">A</span></span></div>
-          <div class="req-item" style="border-left:2px solid var(--soil);padding-left:6px"><span class="req-id">K-6</span><span class="req-name">フリンジフェスティバルの構造と経済 <span class="chip-ge" style="font-size:10px;padding:1px 5px;border-radius:6px">B</span></span></div>
-          <div class="req-item" style="border-left:2px solid var(--director);padding-left:6px"><span class="req-id">K-7</span><span class="req-name">国際フェスティバルの文脈・キュレーション思想（Kunsten・Theatertreffen・Avignonが何を選ぶか） <span class="chip-dr" style="font-size:10px;padding:1px 5px;border-radius:6px">C'</span></span></div>
-          <div class="req-item" style="border-left:2px solid var(--director);padding-left:6px"><span class="req-id">K-8</span><span class="req-name">文化外交・公的支援の活用方法（国際交流基金・British Council等との連携） <span class="chip-dr" style="font-size:10px;padding:1px 5px;border-radius:6px">C'</span></span></div>
+          <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">K-5</span><span class="req-name">IPライセンス・著作権の国際実務 <span class="chip-pr" style="font-size:10px;padding:1px 5px;border-radius:var(--r-sm)">A</span></span></div>
+          <div class="req-item" style="border-left:2px solid var(--soil);padding-left:6px"><span class="req-id">K-6</span><span class="req-name">フリンジフェスティバルの構造と経済 <span class="chip-ge" style="font-size:10px;padding:1px 5px;border-radius:var(--r-sm)">B</span></span></div>
+          <div class="req-item" style="border-left:2px solid var(--director);padding-left:6px"><span class="req-id">K-7</span><span class="req-name">国際フェスティバルの文脈・キュレーション思想（Kunsten・Theatertreffen・Avignonが何を選ぶか） <span class="chip-dr" style="font-size:10px;padding:1px 5px;border-radius:var(--r-sm)">C'</span></span></div>
+          <div class="req-item" style="border-left:2px solid var(--director);padding-left:6px"><span class="req-id">K-8</span><span class="req-name">文化外交・公的支援の活用方法（国際交流基金・British Council等との連携） <span class="chip-dr" style="font-size:10px;padding:1px 5px;border-radius:var(--r-sm)">C'</span></span></div>
           <div class="req-item"><span class="req-id">K-9</span><span class="req-name">GM/制作専門職の分業システム（Producer・GM・Company Manager・Casting Director）</span></div>
           <div class="req-item"><span class="req-id">K-10</span><span class="req-name">段階的作品開発プロセス（Reading→29h→Regional→Off-Broadway→Broadway）</span></div>
           <div class="req-item"><span class="req-id">K-11</span><span class="req-name">制作費・財務構造の実態（ミュージカル$15-20M・Tour収益・リクープ期間）</span></div>
@@ -4153,7 +4576,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
           <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">S-4</span><span class="req-name">文化的コンテクストの変換（翻訳・媒介）</span></div>
           <div class="req-item"><span class="req-id">S-6</span><span class="req-name">Taste（審美眼）——どの作品を選び何を届けるかのセンス</span></div>
           <div class="req-item"><span class="req-id">S-7</span><span class="req-name">WOM創出力——観客が「誰かに話したくなる」体験の設計</span></div>
-          <div class="req-item" style="border-left:2px solid var(--director);padding-left:6px"><span class="req-id">S-5</span><span class="req-name">キュレーターとの長期信頼関係の構築（招聘は結果ではなく関係への投資） <span class="chip-dr" style="font-size:10px;padding:1px 5px;border-radius:6px">C'</span></span></div>
+          <div class="req-item" style="border-left:2px solid var(--director);padding-left:6px"><span class="req-id">S-5</span><span class="req-name">キュレーターとの長期信頼関係の構築（招聘は結果ではなく関係への投資） <span class="chip-dr" style="font-size:10px;padding:1px 5px;border-radius:var(--r-sm)">C'</span></span></div>
           <div class="req-item"><span class="req-id">S-8</span><span class="req-name">マーケティング・Audience Development（Influencer・Brand Activation）</span></div>
         </div>
         <div class="req-card">
@@ -4161,8 +4584,8 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
           <div class="req-item"><span class="req-id">E-1</span><span class="req-name">現場体験（観客・作り手双方）</span></div>
           <div class="req-item"><span class="req-id">E-2</span><span class="req-name">協働創作の実践経験</span></div>
           <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">E-3</span><span class="req-name">転生装置との接点体験（フェス・公演視察）</span></div>
-          <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">E-4</span><span class="req-name">国際共同制作への参加・見学 <span class="chip-pr" style="font-size:10px;padding:1px 5px;border-radius:6px">A</span></span></div>
-          <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">E-5</span><span class="req-name">IPホルダーとの交渉・協働経験 <span class="chip-pr" style="font-size:10px;padding:1px 5px;border-radius:6px">A</span></span></div>
+          <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">E-4</span><span class="req-name">国際共同制作への参加・見学 <span class="chip-pr" style="font-size:10px;padding:1px 5px;border-radius:var(--r-sm)">A</span></span></div>
+          <div class="req-item" style="border-left:2px solid var(--seed);padding-left:6px"><span class="req-id">E-5</span><span class="req-name">IPホルダーとの交渉・協働経験 <span class="chip-pr" style="font-size:10px;padding:1px 5px;border-radius:var(--r-sm)">A</span></span></div>
         </div>
       </div>
       <div class="special-card">
@@ -4223,7 +4646,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 </div><!-- /#tab-hr -->
 
 <!-- ════ Meetings Tab ════ -->
-<div id="tab-meetings" class="tab-content">
+<div id="tab-meetings" class="tab-content" data-updated="2026-09-02">
   <div class="meetings-container">
     <div class="meeting-group">
       <div class="meeting-group-title">アドバイザリーボード定例</div>
@@ -4266,6 +4689,18 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
         <div class="meeting-docs">
           <a class="doc-btn" href="governance/meetings/第4回_アドバイザリーボード定例.pdf" target="_blank" onclick="event.stopPropagation()"><span class="doc-btn-icon">📄</span>資料</a>
           <button type="button" class="doc-btn doc-btn-primary" data-summary="msm-ab4" onclick="event.stopPropagation()"><span class="doc-btn-icon">📝</span>議事サマリ</button>
+        </div>
+        <div class="meeting-chevron" aria-hidden="true">›</div>
+      </div>
+      <div class="meeting-row has-detail" data-summary="msm-ab5" role="button" tabindex="0" aria-label="第5回アドバイザリーボード定例の資料アジェンダを開く">
+        <div class="meeting-round">第5回</div>
+        <div class="meeting-info">
+          <div class="meeting-name">アドバイザリーボード定例<span class="meeting-detail-chip">📋 資料アジェンダあり</span></div>
+          <div class="meeting-date">2026/08/31</div>
+        </div>
+        <div class="meeting-docs">
+          <a class="doc-btn" href="governance/meetings/第5回_アドバイザリーボード定例.pdf" target="_blank" onclick="event.stopPropagation()"><span class="doc-btn-icon">📄</span>資料</a>
+          <button type="button" class="doc-btn doc-btn-primary" data-summary="msm-ab5" onclick="event.stopPropagation()"><span class="doc-btn-icon">📋</span>アジェンダ</button>
         </div>
         <div class="meeting-chevron" aria-hidden="true">›</div>
       </div>
@@ -4728,10 +5163,53 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
       </div>
     </div>
   </div><!-- /#msm-ab4 -->
+
+  <!-- ── 第5回 資料アジェンダ モーダル ── -->
+  <div class="meeting-summary-modal" id="msm-ab5" role="dialog" aria-modal="true" aria-labelledby="msm-ab5-title">
+    <div class="msm-panel" onclick="event.stopPropagation()">
+      <div class="msm-head">
+        <div>
+          <div class="msm-head-title" id="msm-ab5-title">第5回アドバイザリーボード定例 ｜ 資料アジェンダ</div>
+          <div class="msm-head-sub">2026/08/31<br>出典：当日資料（全17ページ）。議事サマリは未作成</div>
+        </div>
+        <button type="button" class="msm-close" aria-label="閉じる">×</button>
+      </div>
+      <div class="msm-body">
+
+        <div class="msm-lead">
+          <b>資料に記載の「本日ご相談したいこと」：</b>
+          <ul>
+            <li>05 ── フェーズ0成果物に対するFBにご協力いただけるか</li>
+            <li>06 ── 大学リサーチの対象と手法にご意見をいただきたい</li>
+            <li>07以降 ── 各プログラム内容についてご意見をいただきたい</li>
+          </ul>
+        </div>
+
+        <div class="msm-toc">
+          <div class="msm-toc-h">アジェンダ（全12項目）</div>
+          <ol>
+            <li>事業全体サマリ ── SEEDは何を目指す事業か（前回からの再確認）</li>
+            <li>事業進捗サマリ ── 第4回（7/7）以降に進んだこと</li>
+            <li>大学関連進捗 ── カリキュラム導入・課外活動プログラム</li>
+            <li>リサーチ 全体計画 ── フェーズ0〜2の設計と目的の再定義</li>
+            <li>リサーチ フェーズ0の報告 ── 完了報告と成果物の取扱い方針［ご相談］</li>
+            <li>リサーチ 大学リサーチの進め方 ── フェーズ1（国内・海外）の設計</li>
+            <li>育成検証プログラム 全体像 ── 3職能＋一般教養の建て付け</li>
+            <li>PAB講座（9/26） ── Performing Arts Base 2026 での実施内容</li>
+            <li>劇作家講座</li>
+            <li>演出家講座</li>
+            <li>プロデューサー講座</li>
+            <li>一般教養講座</li>
+          </ol>
+        </div>
+
+      </div>
+    </div>
+  </div>
 </div><!-- /#tab-meetings -->
 
 <!-- ════ Program Progress Tab ════ -->
-<div id="tab-progress" class="tab-content">
+<div id="tab-progress" class="tab-content" data-updated="2026-09-02">
   <div class="prog-container">
     <div class="prog-legend">
       <div class="prog-leg"><div class="status-dot dot-done"></div>確定・完了</div>
@@ -4753,7 +5231,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
           <div class="prog-item"><div class="status-dot dot-wip"></div>柚木麻子・田中幸子へのコンタクト予定</div>
         </div>
         <div class="prog-phase">
-          <div class="prog-phase-name">選考1 — プロット提出（9/20締切）</div>
+          <div class="prog-phase-name">選考1 — プロット提出（Introductory Course後・10月上旬／日程調整中）</div>
           <div class="prog-item"><div class="status-dot dot-done"></div>提出要件・評価基準の骨格確定</div>
           <div class="prog-item"><div class="status-dot dot-wip"></div>評価クライテリアのブラッシュアップ（未完）</div>
           <div class="prog-item"><div class="status-dot dot-open"></div>審査員3名の確定</div>
@@ -4859,7 +5337,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 </div><!-- /#tab-progress -->
 
 <!-- ════ Timeline Tab ════ -->
-<div id="tab-timeline" class="tab-content">
+<div id="tab-timeline" class="tab-content" data-updated="2026-07-05">
   <div class="tl-container">
     <div class="tl-section">
       <div class="tl-section-title">2026年 6〜7月</div>
@@ -4903,7 +5381,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 </div><!-- /#tab-timeline -->
 
 <!-- ════ People Map Tab ════ -->
-<div id="tab-people" class="tab-content">
+<div id="tab-people" class="tab-content" data-updated="2026-07-05">
   <div class="people-container">
     <div class="people-section">
       <div class="people-section-title">portport / SEED 運営チーム</div>
@@ -4973,19 +5451,19 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 </div><!-- /#tab-people -->
 
 <!-- ════ SOIL Map Tab ════ -->
-<div id="tab-soil-map" class="tab-content">
+<div id="tab-soil-map" class="tab-content" data-updated="2026-07-01">
 <div class="soil-container">
 
 <div style="margin-bottom:2rem">
   <div style="font-size:14px;font-weight:700;color:var(--text-primary);margin-bottom:.75rem;display:flex;align-items:center;gap:8px">
     <span>日本の舞台芸術国際展開戦略</span>
-    <span style="font-size:11px;font-weight:400;color:var(--text-tertiary);font-family:'DM Mono',monospace">p.11 — 市場構造マップ</span>
+    <span style="font-size:11px;font-weight:400;color:var(--text-tertiary);font-family:var(--display)">p.11 — 市場構造マップ</span>
   </div>
-  <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.07)">
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.07)">
     <img
       src="dashboard/strategy-p11.png"
       alt="日本の舞台芸術国際展開戦略 p.11 — 市場構造マップ"
-      style="width:100%;display:block;border-radius:14px"
+      style="width:100%;display:block;border-radius:var(--r-md)"
     />
   </div>
 </div>
@@ -5065,7 +5543,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
     <strong>Transfer装置とは：</strong>文化機関と商業劇場の中間に位置する劇場・機関。広い顧客基盤を持つ文化機関が商業Transferの入口になる。<br>
     「エディンバラ・アビニョンに出る理由はそこにいるTransfer装置の人たちに会うため」 ── SOIL戦略の核心。<strong>資本でも言語でも代替できない壁。</strong>
   </div>
-  <div style="background:var(--seed-bg);border:1px solid #BDD3F8;border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:12.5px;color:var(--seed-text);line-height:1.7">
+  <div style="background:var(--seed-bg);border:1px solid var(--plan-border);border-radius:var(--r-sm);padding:10px 14px;margin-bottom:12px;font-size:12.5px;color:var(--seed-text);line-height:1.7">
     <strong>💡 壁の越え方の原則：「日本だけで越えようとしない」</strong><br>
     言語の壁・資本の壁・歴史観の壁——これらをJapan単独で突破しようとするのではなく、<strong>国際共同制作を通じて乗り越えることが戦略の核心。</strong>Transfer装置（NT・Barbican等）との共同制作によって、その機関の信頼性・観客基盤・ブランドが壁を代わりに突破してくれる。壁は「越えるもの」ではなく「共同制作で迂回するもの」。
   </div>
@@ -5162,7 +5640,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
         <div class="sc-role-row"><span class="sc-role-chip chip-dr">D</span><span class="sc-role-text">英国・北米の商業演劇文法・IP制約下の創造性・英語稽古場対応</span></div>
         <div class="sc-role-row"><span class="sc-role-chip chip-pw">PW</span><span class="sc-role-text">IPの翻案力・英訳を前提とした戯曲構造設計</span></div>
       </div>
-      <div style="padding:8px 12px;background:var(--bg);border-radius:8px;border-left:3px solid var(--urgent-border);font-size:11.5px;color:var(--text-secondary);line-height:1.65">
+      <div style="padding:8px 12px;background:var(--bg);border-radius:var(--r-sm);border-left:3px solid var(--urgent-border);font-size:11.5px;color:var(--text-secondary);line-height:1.65">
         <strong style="color:var(--urgent-text)">⚠ 構造的課題：</strong>「次のトトロができるか」——トトロはジブリ × National Theatreの特殊な信頼関係によって実現した。IPホルダー（アニメ会社・出版社）と海外Transfer装置を繋げるブリッジ人材が日本に存在しない。国際共同制作の資金スキームもなく（文化庁補助金は国内向け）、IPライセンスの国際交渉ができる演劇専門エージェントも存在しない。
       </div>
     </div>
@@ -5180,7 +5658,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
         <div class="sc-role-row"><span class="sc-role-chip chip-dr">D</span><span class="sc-role-text">ノンバーバル・身体表現の専門性・観光客向け作品設計</span></div>
         <div class="sc-role-row"><span class="sc-role-chip chip-pw">PW</span><span class="sc-role-text">ノンバーバル構造設計（devisor的役割）</span></div>
       </div>
-      <div style="padding:8px 12px;background:var(--bg);border-radius:8px;border-left:3px solid var(--urgent-border);font-size:11.5px;color:var(--text-secondary);line-height:1.65">
+      <div style="padding:8px 12px;background:var(--bg);border-radius:var(--r-sm);border-left:3px solid var(--urgent-border);font-size:11.5px;color:var(--text-secondary);line-height:1.65">
         <strong style="color:var(--urgent-text)">⚠ 構造的課題：</strong>「国内インバウンドからフリンジTransferへの接続回路がない」——国内に観光向けパフォーマンスは存在するが、それをエジンバラ等のフリンジに持ち込みTransferを設計できる人材・ネットワークがない。STOMPやナンタのような「長期IP化」（30年超の継続展開）を設計・運営できるプロデューサーが育っていない。
       </div>
     </div>
@@ -5201,7 +5679,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
         <div class="sc-role-row"><span class="sc-role-chip chip-dr">D</span><span class="sc-role-text">社会的文脈・時代性を持つ作品制作／古典文法を理解した現代的解釈</span></div>
         <div class="sc-role-row"><span class="sc-role-chip chip-pw">PW</span><span class="sc-role-text">日本社会の今を普遍的言語で語る力／伝統様式の現代語翻訳</span></div>
       </div>
-      <div style="padding:8px 12px;background:var(--bg);border-radius:8px;border-left:3px solid var(--urgent-border);font-size:11.5px;color:var(--text-secondary);line-height:1.65">
+      <div style="padding:8px 12px;background:var(--bg);border-radius:var(--r-sm);border-left:3px solid var(--urgent-border);font-size:11.5px;color:var(--text-secondary);line-height:1.65">
         <strong style="color:var(--urgent-text)">⚠ 構造的課題：</strong>「次のチェルフィッチュが作れていない」「プリコグでも作れていない」——属人性が高く、個人の才能と偶然の出会いに依存している。この課題をSEEDが構造化することがC'シナリオのミッション。
       </div>
     </div>
@@ -5212,16 +5690,16 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 <!-- Section 6: Japan / 足りない構造 -->
 <div class="soil-section">
   <div class="soil-section-title">⑥ 足りない人・構造 ── SEEDが埋める空白</div>
-  <div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:12.5px;color:var(--text-secondary);line-height:1.7;border-left:3px solid var(--seed)">
+  <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 14px;margin-bottom:12px;font-size:12.5px;color:var(--text-secondary);line-height:1.7;border-left:3px solid var(--seed)">
     <strong style="color:var(--text-primary)">原則：壁は「日本だけで越えようとしない」</strong><br>
     言語の壁・資本の壁・歴史観の壁——日本単独で突破しようとすることが最大の失敗パターン。<strong>国際共同制作（Co-production）を通じて乗り越えることが戦略の核心。</strong>Transfer装置（NT・Barbican等）との共同制作によって、その機関の信頼性・観客基盤・ブランドが壁を共に突破してくれる。
   </div>
-  <div class="special-grid" style="grid-template-columns:repeat(2,1fr);display:grid;gap:10px">
-    <div class="special-item"><div class="special-id" style="background:#FEF0EE;color:var(--urgent-text)">人材</div><div class="special-name">国際共同制作の経験があるプロデューサーがほぼいない</div></div>
-    <div class="special-item"><div class="special-id" style="background:#FEF0EE;color:var(--urgent-text)">人材</div><div class="special-name">海外文化機関のキュレーターと個人的信頼関係を持つ人がいない</div></div>
-    <div class="special-item"><div class="special-id" style="background:#FEF0EE;color:var(--urgent-text)">人材</div><div class="special-name">英語で交渉・契約できる演劇専門の弁護士・エージェントがいない</div></div>
-    <div class="special-item"><div class="special-id" style="background:#FEF0EE;color:var(--urgent-text)">人材</div><div class="special-name">IPホルダーと演劇界を繋ぐブリッジ人材がいない</div></div>
-    <div class="special-item"><div class="special-id" style="background:#FEF0EE;color:var(--urgent-text)">人材 C'</div><div class="special-name">チェルフィッチュ以降のC'型を担える次世代がいない ── 属人性の構造化が急務</div></div>
+  <div class="special-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));display:grid;gap:10px">
+    <div class="special-item"><div class="special-id" style="background:var(--urgent-bg);color:var(--urgent-text)">人材</div><div class="special-name">国際共同制作の経験があるプロデューサーがほぼいない</div></div>
+    <div class="special-item"><div class="special-id" style="background:var(--urgent-bg);color:var(--urgent-text)">人材</div><div class="special-name">海外文化機関のキュレーターと個人的信頼関係を持つ人がいない</div></div>
+    <div class="special-item"><div class="special-id" style="background:var(--urgent-bg);color:var(--urgent-text)">人材</div><div class="special-name">英語で交渉・契約できる演劇専門の弁護士・エージェントがいない</div></div>
+    <div class="special-item"><div class="special-id" style="background:var(--urgent-bg);color:var(--urgent-text)">人材</div><div class="special-name">IPホルダーと演劇界を繋ぐブリッジ人材がいない</div></div>
+    <div class="special-item"><div class="special-id" style="background:var(--urgent-bg);color:var(--urgent-text)">人材 C'</div><div class="special-name">チェルフィッチュ以降のC'型を担える次世代がいない ── 属人性の構造化が急務</div></div>
     <div class="special-item"><div class="special-id" style="background:var(--wip-bg);color:var(--wip-text)">構造</div><div class="special-name">Transfer装置との継続的関係構築の仕組みがない</div></div>
     <div class="special-item"><div class="special-id" style="background:var(--wip-bg);color:var(--wip-text)">構造</div><div class="special-name">国際共同制作のための資金スキームがない（文化庁補助金は国内向け）</div></div>
     <div class="special-item"><div class="special-id" style="background:var(--wip-bg);color:var(--wip-text)">構造 C'</div><div class="special-name">C'型の属人性を構造化・再現可能にする育成の仕組みがない ← SEEDの主要ミッション</div></div>
@@ -5232,7 +5710,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 </div><!-- /#tab-soil-map -->
 
 <!-- ════ University Analysis Tab ════ -->
-<div id="tab-university-analysis" class="tab-content">
+<div id="tab-university-analysis" class="tab-content" data-updated="2026-06-08">
 <div class="ge-container">
 
 <div class="soil-intro-card">
@@ -5358,28 +5836,28 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 
   <!-- 海外にあって日本にない科目リスト -->
   <div style="font-size:13px;font-weight:700;color:var(--text-primary);margin-bottom:10px">海外にあって日本にない ── 具体的科目名（SEEDのプログラムで補うべき視点）</div>
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:1.5rem;font-size:11.5px">
-    <div style="padding:10px 12px;background:var(--seed-bg);border-radius:10px;border:1px solid #BDD3F8">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px;margin-bottom:1.5rem;font-size:11.5px">
+    <div style="padding:10px 12px;background:var(--seed-bg);border-radius:var(--r-sm);border:1px solid var(--plan-border)">
       <div style="font-weight:700;color:var(--seed-text);margin-bottom:6px">業界接続の制度化</div>
       <div style="color:var(--text-secondary);line-height:1.7">Bridge to the Profession（Yale/Juilliard・年12回・6単位）<br>Actor Presentations（NY&LA 業界人ショーケース）<br>Industry Practice I/II（Yale・業界に自作を持ち込む）<br>Industry Consultant 常駐（Guildhall）<br>Professional Colloquium（NYU・業界人との議論）</div>
     </div>
-    <div style="padding:10px 12px;background:var(--soil-bg);border-radius:10px;border:1px solid #A8DEC8">
+    <div style="padding:10px 12px;background:var(--soil-bg);border-radius:var(--r-sm);border:1px solid var(--producer-border)">
       <div style="font-weight:700;color:var(--soil-text);margin-bottom:6px">表現・言語化の正式訓練</div>
       <div style="color:var(--text-secondary);line-height:1.7">Teach What You Write（Yale・自作を教える）<br>Criticism Workshop（Yale・3年間継続執筆）<br>Pitching Ideas（Rose Bruford Directing MA）<br>Business Writing for Theater Managers（Yale）<br>Authentic Collaboration（Yale・協働の言語化）<br>Reflective Practice（RADA/Guildhall・省察の習慣化）</div>
     </div>
-    <div style="padding:10px 12px;background:var(--director-bg);border-radius:10px;border:1px solid var(--director-border)">
+    <div style="padding:10px 12px;background:var(--director-bg);border-radius:var(--r-sm);border:1px solid var(--director-border)">
       <div style="font-weight:700;color:var(--director);margin-bottom:6px">起業・経営・政策</div>
       <div style="color:var(--text-secondary);line-height:1.7">Essentials of Entrepreneurship（Juilliard・Year 1-2必修）<br>Elements of Producing（Juilliard・俳優も必修）<br>Producing for the Commercial Theater（Yale）<br>Governance / Labor and Employee Relations（Yale）<br>Cultural Policy（Yale）<br>Fundraising / Budgeting（Rose Bruford）</div>
     </div>
-    <div style="padding:10px 12px;background:var(--playwright-bg);border-radius:10px;border:1px solid var(--playwright-border)">
+    <div style="padding:10px 12px;background:var(--playwright-bg);border-radius:var(--r-sm);border:1px solid var(--playwright-border)">
       <div style="font-weight:700;color:var(--playwright);margin-bottom:6px">国際フェスティバル参加</div>
       <div style="color:var(--text-secondary);line-height:1.7">Year 2 必修参加（RADA：META/Gdansk等）<br>European Theatre Arts（Rose Bruford：6ヶ国留学・675名実績）<br>American Theatre Arts（Rose Bruford：米国主要都市）<br>Theater Now NYC（Yale：業界没入リサーチ）</div>
     </div>
-    <div style="padding:10px 12px;background:var(--bg);border-radius:10px;border:1px solid var(--border)">
+    <div style="padding:10px 12px;background:var(--bg);border-radius:var(--r-sm);border:1px solid var(--border)">
       <div style="font-weight:700;color:var(--text-primary);margin-bottom:6px">3職能横断学習の必修化</div>
       <div style="color:var(--text-secondary);line-height:1.7">DRAM 50a（Yale：劇作家×演出家×俳優×デザイナー×ドラマトゥルグが3週間協働）<br>New Play Lab（Yale/CMU：全職能でフィードバック）<br>Playwrights & Directors Practicum（Yale）<br>Cross-school "undisciplined"（Guildhall：音楽×演劇×デザイン）</div>
     </div>
-    <div style="padding:10px 12px;background:var(--bg);border-radius:10px;border:1px solid var(--border)">
+    <div style="padding:10px 12px;background:var(--bg);border-radius:var(--r-sm);border:1px solid var(--border)">
       <div style="font-weight:700;color:var(--text-primary);margin-bottom:6px">映像・TV・多メディア統合</div>
       <div style="color:var(--text-secondary);line-height:1.7">Episodic Writing I（NYU：TVスペック執筆・劇作家も必修）<br>Writing for Film and Television（Yale Playwriting・必修）<br>Screen Acting / Acting on Camera（RADA・Juilliard・Guildhall）<br>Directing for Camera（Rose Bruford）</div>
     </div>
@@ -5408,7 +5886,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 </div><!-- /#tab-university-analysis -->
 
 <!-- ════ General Education Tab ════ -->
-<div id="tab-general-education" class="tab-content">
+<div id="tab-general-education" class="tab-content" data-updated="2026-06-11">
 <div class="ge-container">
 
 <div class="soil-intro-card">
@@ -5419,7 +5897,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 </div>
 
 <!-- 大学分析 参照カード -->
-<div class="soil-intro-card" style="background:var(--seed-bg);border:1px solid #BDD3F8;margin-bottom:1.5rem">
+<div class="soil-intro-card" style="background:var(--seed-bg);border:1px solid var(--plan-border);margin-bottom:1.5rem">
   <strong>📊 大学教育との差分・海外比較 → タブ③「大学教育に関する分析」で確認</strong><br>
   国内7校（東演連5校・昭和音大・早稲田）と海外8機関（RADA・Guildhall・Rose Bruford・Yale・Juilliard・CMU・K-Arts）の具体的カリキュラムを科目名付きで比較分析しています。<br>
   <span style="color:var(--seed-text);font-size:12.5px;font-weight:600">→ 共通のギャップ：「表現の力（sustained oral discourse）」が国内全大学で圧倒的に不足。それを補うのが以下のプログラムです。</span>
@@ -5476,13 +5954,13 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 <!-- 6ユニット -->
 <div class="ge-section">
   <div class="ge-section-title">6つのプログラムユニット ── 知識系（K）×表現系（E）の二軸設計</div>
-  <div style="font-size:12px;color:var(--text-tertiary);margin-bottom:12px;padding:8px 12px;background:var(--bg);border-radius:8px">
+  <div style="font-size:12px;color:var(--text-tertiary);margin-bottom:12px;padding:8px 12px;background:var(--bg);border-radius:var(--r-sm)">
     📌 大学でカバー済みの「知識（水面下）」を土台に、SEEDの一般教養が「表現（水面）」を積み上げる設計。<br>
     知識系UNITは事前・Day1中心。表現系UNITはDay2以降の実践中心。講座外の継続プログラム（企画1〜3）でさらに定着させる。
   </div>
   <div class="ge-unit-grid">
     <div class="ge-unit-card" style="border-top:3px solid var(--seed)">
-      <div class="ge-unit-id">UNIT K0 ── 事前（オンライン）　<span style="background:#E8F5E9;color:#2E7D32;font-size:9px;padding:2px 6px;border-radius:4px">知識系</span></div>
+      <div class="ge-unit-id">UNIT K0 ── 事前（オンライン）　<span style="background:var(--done-bg);color:var(--done-text);font-size:9px;padding:2px 6px;border-radius:var(--r-sm)">知識系</span></div>
       <div class="ge-unit-theme">氷山を知る ── 日本の演劇が「見える/見えない」理由</div>
       <div class="ge-unit-subtitle">「なぜ今・なぜここから・なぜ自分が」</div>
       <div class="ge-unit-items">①「氷山の一角」モデル：水面下の文化基盤と水面の表現<br>②大学で学んでいること vs SEEDで育てること（差分の認識）<br>③SEEDが生まれた背景・SOILとの連携・3シナリオ概要</div>
@@ -5490,7 +5968,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
       <div class="ge-unit-owner">担当：野村善文・横堀応彦</div>
     </div>
     <div class="ge-unit-card" style="border-top:3px solid var(--seed)">
-      <div class="ge-unit-id">UNIT K1 ── Day 1 午前　<span style="background:#E8F5E9;color:#2E7D32;font-size:9px;padding:2px 6px;border-radius:4px">知識系</span></div>
+      <div class="ge-unit-id">UNIT K1 ── Day 1 午前　<span style="background:var(--done-bg);color:var(--done-text);font-size:9px;padding:2px 6px;border-radius:var(--r-sm)">知識系</span></div>
       <div class="ge-unit-theme">世界市場の地図 ── Transfer装置と3シナリオ</div>
       <div class="ge-unit-subtitle">「世界の舞台芸術市場はどう動いているか」</div>
       <div class="ge-unit-items">①4列マトリックス（SOIL戦略マップ：国際IP/商業招聘/現代演劇/文化資産）<br>②Transfer装置の概念・主要機関（NT/Barbican/Kunsten等）と「壁の越え方」<br>③3シナリオ（A/B/C'）の概要と職能ごとの役割</div>
@@ -5498,7 +5976,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
       <div class="ge-unit-owner">担当：横堀応彦 + SOILリサーチャー（時田/小川等）</div>
     </div>
     <div class="ge-unit-card" style="border-top:3px solid var(--soil)">
-      <div class="ge-unit-id">UNIT K2 ── Day 1 午後　<span style="background:#E8F5E9;color:#2E7D32;font-size:9px;padding:2px 6px;border-radius:4px">知識系</span></div>
+      <div class="ge-unit-id">UNIT K2 ── Day 1 午後　<span style="background:var(--done-bg);color:var(--done-text);font-size:9px;padding:2px 6px;border-radius:var(--r-sm)">知識系</span></div>
       <div class="ge-unit-theme">演劇の共通言語 ── 戯曲を読む・語る・批評する</div>
       <div class="ge-unit-subtitle">「なぜこの作品が世界に届くのか/届かないのか」</div>
       <div class="ge-unit-items">①ドラマトゥルギー基礎概念（コンフリクト・アーク・サブテキスト）<br>②Transfer事例解剖：Six/Come from Away/チェルフィッチュを3職種視点で読む<br>③批評リテラシー入門：海外誌（The Stage等）の記事を読んで議論する</div>
@@ -5506,7 +5984,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
       <div class="ge-unit-owner">担当：倉沢（劇作家）・川名（演出家）</div>
     </div>
     <div class="ge-unit-card" style="border-top:3px solid var(--soil)">
-      <div class="ge-unit-id">UNIT K3 ── 事前（オンライン）　<span style="background:#E8F5E9;color:#2E7D32;font-size:9px;padding:2px 6px;border-radius:4px">知識系</span></div>
+      <div class="ge-unit-id">UNIT K3 ── 事前（オンライン）　<span style="background:var(--done-bg);color:var(--done-text);font-size:9px;padding:2px 6px;border-radius:var(--r-sm)">知識系</span></div>
       <div class="ge-unit-theme">制作の共通言語 ── 知財・GM分業・海外実務</div>
       <div class="ge-unit-subtitle">「演劇の仕事に必要な社会人的知識」</div>
       <div class="ge-unit-items">①著作権・知的財産の基礎（戯曲・楽曲・振付の権利）<br>②海外展開の契約・ライセンス・GM専門職分業の実態（日本との違い）<br>③助成金・資金調達の概要 ／ ハラスメント対策・労働倫理</div>
@@ -5514,7 +5992,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
       <div class="ge-unit-owner">担当：福井健策弁護士・遠藤真有美</div>
     </div>
     <div class="ge-unit-card" style="border-top:3px solid var(--playwright)">
-      <div class="ge-unit-id">UNIT E1 ── Day 2 午前　<span style="background:#F3E5F5;color:#6A1B9A;font-size:9px;padding:2px 6px;border-radius:4px">表現系</span></div>
+      <div class="ge-unit-id">UNIT E1 ── Day 2 午前　<span style="background:#F3E5F5;color:#6A1B9A;font-size:9px;padding:2px 6px;border-radius:var(--r-sm)">表現系</span></div>
       <div class="ge-unit-theme">表現の力① ── 自分の文化・作品を5分で語る</div>
       <div class="ge-unit-subtitle">「日本演劇の何が面白いか」を英語で・説得力を持って語る</div>
       <div class="ge-unit-items">①「氷山を水面に引き上げる」練習：日本の文化的文脈を外国人に説明<br>②30秒→2分→5分の段階的ピッチ訓練（自分の職能・作品・ビジョンを語る）<br>③英語 + 日本語の両方での表現：言語は問わず「届ける意志」を鍛える</div>
@@ -5522,7 +6000,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
       <div class="ge-unit-owner">担当：横堀応彦・SEEDリサーチャーOB・英語ファシリテーター</div>
     </div>
     <div class="ge-unit-card" style="border-top:3px solid var(--director)">
-      <div class="ge-unit-id">UNIT E2 ── Day 2 午後・最終Day　<span style="background:#F3E5F5;color:#6A1B9A;font-size:9px;padding:2px 6px;border-radius:4px">表現系 ★修了基準</span></div>
+      <div class="ge-unit-id">UNIT E2 ── Day 2 午後・最終Day　<span style="background:#F3E5F5;color:#6A1B9A;font-size:9px;padding:2px 6px;border-radius:var(--r-sm)">表現系 ★修了基準</span></div>
       <div class="ge-unit-theme">表現の力② ── 話し続ける・展開する・動かす</div>
       <div class="ge-unit-subtitle">「10分間、業界のプロの前で話し続ける」= 修了基準</div>
       <div class="ge-unit-items">3職種混合グループワーク（仮想プロジェクト設計：どのシナリオで・何を・どう届けるか）<br>Transfer事例ケーススタディ：自分が関わったとしたら何をするか（3職種視点）<br><strong>最終発表：「松田誠（または業界のプロ）の前で10分話す」修了基準パフォーマンス</strong></div>
@@ -5531,7 +6009,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
     </div>
   </div>
 
-  <div style="margin-top:1rem;padding:10px 14px;background:var(--bg);border-radius:10px;border-left:3px solid var(--playwright);font-size:12px;color:var(--text-secondary);line-height:1.8">
+  <div style="margin-top:1rem;padding:10px 14px;background:var(--bg);border-radius:var(--r-sm);border-left:3px solid var(--playwright);font-size:12px;color:var(--text-secondary);line-height:1.8">
     <strong style="color:var(--text-primary)">②「講座外の時間」の設計：</strong>「講座を受けている実際の時間だけで身に付くものではない」（事務局長レビュー）。各UNITの学びを定着させるために、<strong>講座の間に何をするかが重要</strong>。
     <br>・K0〜K3の理解をK3終了後に短い文章で言語化（自習課題）
     ・継続的な英語実践→企画1（海外演劇誌のディスカッション）への接続
@@ -5544,7 +6022,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 <div class="ge-section">
   <div class="ge-section-title">企画概要 ── 各プログラムと育成する人材要件</div>
 
-  <div style="font-size:12px;color:var(--text-secondary);margin-bottom:1.25rem;line-height:1.7;padding:10px 14px;background:var(--bg);border-radius:8px;border-left:3px solid var(--soil)">
+  <div style="font-size:12px;color:var(--text-secondary);margin-bottom:1.25rem;line-height:1.7;padding:10px 14px;background:var(--bg);border-radius:var(--r-sm);border-left:3px solid var(--soil)">
     事務局長・野村善文が構想する3本の企画を軸に設計。<strong>これらはUNITで得た地図と表現の力を「継続的に練習する場」</strong>として機能する。<br>
     いずれも「定期的・継続的に参加できる」形式が特徴。対象は基本的に大学生。有料で社会人（JPASN会員）の受け入れも検討。<br>
     <span style="color:var(--urgent-text)">💡「講座を受けている実際の時間だけで身に付くものではない」——3本の継続プログラムが講座外の定着を支える構造。</span>
@@ -5651,25 +6129,25 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
   </div>
 
   <!-- 補完プログラム（既存ユニットの接続） -->
-  <div style="margin-top:1.5rem;padding:1rem 1.25rem;background:var(--bg);border-radius:12px;border:1px dashed var(--border)">
+  <div style="margin-top:1.5rem;padding:1rem 1.25rem;background:var(--bg);border-radius:var(--r-sm);border:1px dashed var(--border)">
     <div style="font-size:12px;font-weight:700;color:var(--text-secondary);margin-bottom:10px;letter-spacing:.05em">上記3企画を補完するその他のプログラム要素</div>
-    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;font-size:12px">
-      <div style="padding:8px 10px;background:var(--surface);border-radius:8px;border:1px solid var(--border)">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px;font-size:12px">
+      <div style="padding:8px 10px;background:var(--surface);border-radius:var(--r-sm);border:1px solid var(--border)">
         <strong style="color:var(--seed)">知財・制作実務 講義</strong><br>
         <span style="color:var(--text-secondary)">著作権・契約・助成金の基礎概論（福井健策弁護士等）</span><br>
         <span style="font-size:11px;color:var(--text-tertiary)">P:K-3/K-5 / D:K-8 / PW:K-5</span>
       </div>
-      <div style="padding:8px 10px;background:var(--surface);border-radius:8px;border:1px solid var(--border)">
+      <div style="padding:8px 10px;background:var(--surface);border-radius:var(--r-sm);border:1px solid var(--border)">
         <strong style="color:var(--seed)">日本文化の言語化ワーク</strong><br>
         <span style="color:var(--text-secondary)">「日本演劇の面白さ」を英語で5分プレゼンする実践</span><br>
         <span style="font-size:11px;color:var(--text-tertiary)">P:M-2/K-2 / D:M-4/K-4 / PW:M-2/K-4</span>
       </div>
-      <div style="padding:8px 10px;background:var(--surface);border-radius:8px;border:1px solid var(--border)">
+      <div style="padding:8px 10px;background:var(--surface);border-radius:var(--r-sm);border:1px solid var(--border)">
         <strong style="color:var(--seed)">3職種横断グループワーク</strong><br>
         <span style="color:var(--text-secondary)">仮想プロジェクトをシナリオA/Bで設計する混合WS</span><br>
         <span style="font-size:11px;color:var(--text-tertiary)">P:S-1 / D:S-2 / PW:M-3（協働体験）</span>
       </div>
-      <div style="padding:8px 10px;background:var(--surface);border-radius:8px;border:1px solid var(--border)">
+      <div style="padding:8px 10px;background:var(--surface);border-radius:var(--r-sm);border:1px solid var(--border)">
         <strong style="color:var(--seed)">転生事例ケーススタディ</strong><br>
         <span style="color:var(--text-secondary)">トトロ・STOMP・Sixの転生ルートを3職種視点で解剖</span><br>
         <span style="font-size:11px;color:var(--text-tertiary)">P:K-4/E-3 / D・PW：市場地図の理解</span>
@@ -5683,7 +6161,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 </div><!-- /#tab-general-education -->
 
 <!-- ════ Role-Specific Tab ════ -->
-<div id="tab-role-specific" class="tab-content">
+<div id="tab-role-specific" class="tab-content" data-updated="2026-07-05">
 <div class="rs-container">
 
 <div class="soil-intro-card">
@@ -5692,10 +6170,10 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
   ① SOIL戦略マップ（市場構造・Transfer装置・3シナリオ）→ ② 人材要件ToBeモデル（v5/v2/v3）→ ③ 大学教育との差分（何が不足しているか）→ ④ 一般教養プログラム（共通土台・表現の力）<br>
   <strong>→ ⑤ここでは「一般教養を前提として、各職能固有で深める必要があるもの」を整理する</strong>
   </span>
-  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px;font-size:11.5px">
-    <div style="padding:6px 10px;background:var(--seed-bg);border-radius:8px;color:var(--seed-text)"><strong>シナリオA</strong>（トトロ型）：IP × 国際共同制作。壁は単独でなく転生装置との共同制作で越える</div>
-    <div style="padding:6px 10px;background:var(--soil-bg);border-radius:8px;color:var(--soil-text)"><strong>シナリオB</strong>（ストンプ型）：ノンバーバル × フリンジTransfer。インバウンドをテストマーケットに</div>
-    <div style="padding:6px 10px;background:var(--director-bg);border-radius:8px;color:var(--director)"><strong>シナリオC'</strong>（国際文脈展開型）：固有文脈 × 国際フェスティバル発見。次のチェルフィッチュを構造化する</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:6px;margin-top:10px;font-size:11.5px">
+    <div style="padding:6px 10px;background:var(--seed-bg);border-radius:var(--r-sm);color:var(--seed-text)"><strong>シナリオA</strong>（トトロ型）：IP × 国際共同制作。壁は単独でなく転生装置との共同制作で越える</div>
+    <div style="padding:6px 10px;background:var(--soil-bg);border-radius:var(--r-sm);color:var(--soil-text)"><strong>シナリオB</strong>（ストンプ型）：ノンバーバル × フリンジTransfer。インバウンドをテストマーケットに</div>
+    <div style="padding:6px 10px;background:var(--director-bg);border-radius:var(--r-sm);color:var(--director)"><strong>シナリオC'</strong>（国際文脈展開型）：固有文脈 × 国際フェスティバル発見。次のチェルフィッチュを構造化する</div>
   </div>
 </div>
 
@@ -5897,17 +6375,17 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 </div><!-- /#tab-role-specific -->
 
 <!-- ════ Research Agenda Tab ════ -->
-<div id="tab-research-agenda" class="tab-content">
+<div id="tab-research-agenda" class="tab-content" data-updated="2026-08-12">
 <div class="ge-container">
 
 <div class="soil-intro-card">
   <strong>⑥ 追加リサーチ検討：</strong>2026年8月12日のリサーチ分科会（野村・横堀・髙田）で確定した方針にもとづく、リサーチの全体像と担当別タスク。<br>
   <span style="font-size:12.5px;color:var(--text-secondary)">第5回アドバイザリーボード（<strong>8/31・5名合同</strong>）での報告準備と、海外リサーチのまとめ／大学シラバス調査に必要な実務タスクを整理。フェーズ0（定性）をフェーズ1（客観・悉皆）で検証する二層構造が、福井先生の指摘への回答になる。</span>
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px;font-size:11.5px">
-    <div style="padding:6px 10px;background:var(--seed-bg);border-radius:8px;color:var(--seed-text);text-align:center"><strong>フェーズ0</strong><br>海外インデプス（完了へ）</div>
-    <div style="padding:6px 10px;background:var(--soil-bg);border-radius:8px;color:var(--soil-text);text-align:center"><strong>フェーズ0.5</strong><br>国内フィードバック（新設）</div>
-    <div style="padding:6px 10px;background:var(--director-bg);border-radius:8px;color:var(--director);text-align:center"><strong>フェーズ1-A</strong><br>大学シラバス調査</div>
-    <div style="padding:6px 10px;background:var(--playwright-bg);border-radius:8px;color:var(--playwright);text-align:center"><strong>フェーズ1-B</strong><br>モデルケース選定</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px;margin-top:12px;font-size:11.5px">
+    <div style="padding:6px 10px;background:var(--seed-bg);border-radius:var(--r-sm);color:var(--seed-text);text-align:center"><strong>フェーズ0</strong><br>海外インデプス（完了へ）</div>
+    <div style="padding:6px 10px;background:var(--soil-bg);border-radius:var(--r-sm);color:var(--soil-text);text-align:center"><strong>フェーズ0.5</strong><br>国内フィードバック（新設）</div>
+    <div style="padding:6px 10px;background:var(--director-bg);border-radius:var(--r-sm);color:var(--director);text-align:center"><strong>フェーズ1-A</strong><br>大学シラバス調査</div>
+    <div style="padding:6px 10px;background:var(--playwright-bg);border-radius:var(--r-sm);color:var(--playwright);text-align:center"><strong>フェーズ1-B</strong><br>モデルケース選定</div>
   </div>
 </div>
 
@@ -5933,11 +6411,11 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
   <div class="ge-section-title">リサーチ全体像 ── フェーズ0からフェーズ2へ</div>
   <div style="display:flex;flex-direction:column;gap:12px">
 
-    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--seed);border-radius:12px;padding:1rem">
+    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--seed);border-radius:var(--r-sm);padding:1rem">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap">
-        <span style="background:var(--seed-bg);color:var(--seed-text);font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px">フェーズ0</span>
+        <span style="background:var(--seed-bg);color:var(--seed-text);font-size:11px;font-weight:700;padding:2px 8px;border-radius:var(--r-sm)">フェーズ0</span>
         <strong>海外インデプスインタビュー（定性・仮説形成）</strong>
-        <span style="background:var(--soil-bg);color:var(--soil-text);font-size:10px;font-weight:700;padding:1px 6px;border-radius:8px">9/18 でクローズ</span>
+        <span style="background:var(--soil-bg);color:var(--soil-text);font-size:10px;font-weight:700;padding:1px 6px;border-radius:var(--r-sm)">9/18 でクローズ</span>
       </div>
       <div style="font-size:12.5px;color:var(--text-secondary);line-height:1.8">
         2025年度 7名（小栗・阿部・上田・小山・田中・前川・小嶋）＋ 2026年度 3名（井川／NY・時田／ロンドン・小川／NY）＝ <strong>計10名</strong><br>
@@ -5945,11 +6423,11 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
       </div>
     </div>
 
-    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--soil);border-radius:12px;padding:1rem">
+    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--soil);border-radius:var(--r-sm);padding:1rem">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap">
-        <span style="background:var(--soil-bg);color:var(--soil-text);font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px">フェーズ0.5</span>
+        <span style="background:var(--soil-bg);color:var(--soil-text);font-size:11px;font-weight:700;padding:2px 8px;border-radius:var(--r-sm)">フェーズ0.5</span>
         <strong>国内関係者からのフィードバック取得</strong>
-        <span style="background:var(--urgent-bg);color:var(--urgent-text);font-size:10px;font-weight:700;padding:1px 6px;border-radius:8px">新設</span>
+        <span style="background:var(--urgent-bg);color:var(--urgent-text);font-size:10px;font-weight:700;padding:1px 6px;border-radius:var(--r-sm)">新設</span>
       </div>
       <div style="font-size:12.5px;color:var(--text-secondary);line-height:1.8">
         守秘義務付き限定公開 → 所定フォーマット（Excel想定）で示唆・コメントを回収 → AI解析で新たな示唆を抽出。<br>
@@ -5957,11 +6435,11 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
       </div>
     </div>
 
-    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--director);border-radius:12px;padding:1rem">
+    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--director);border-radius:var(--r-sm);padding:1rem">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap">
-        <span style="background:var(--director-bg);color:var(--director);font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px">フェーズ1</span>
+        <span style="background:var(--director-bg);color:var(--director);font-size:11px;font-weight:700;padding:2px 8px;border-radius:var(--r-sm)">フェーズ1</span>
         <strong>客観データによる検証（定量・悉皆）</strong>
-        <span style="background:var(--urgent-bg);color:var(--urgent-text);font-size:10px;font-weight:700;padding:1px 6px;border-radius:8px">8月着手</span>
+        <span style="background:var(--urgent-bg);color:var(--urgent-text);font-size:10px;font-weight:700;padding:1px 6px;border-radius:var(--r-sm)">8月着手</span>
       </div>
       <div style="font-size:12.5px;color:var(--text-secondary);line-height:1.8">
         <strong>1-A 大学シラバス調査</strong>：国内＝既にあるリストをベースに作成／海外＝ロンドン・NY・ソウルの主要校<br>
@@ -5969,9 +6447,9 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
       </div>
     </div>
 
-    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--playwright);border-radius:12px;padding:1rem">
+    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--playwright);border-radius:var(--r-sm);padding:1rem">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap">
-        <span style="background:var(--playwright-bg);color:var(--playwright);font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px">フェーズ2</span>
+        <span style="background:var(--playwright-bg);color:var(--playwright);font-size:11px;font-weight:700;padding:2px 8px;border-radius:var(--r-sm)">フェーズ2</span>
         <strong>To-be／As-Is の差分確定 → 人材要件・カリキュラムへ反映</strong>
       </div>
       <div style="font-size:12.5px;color:var(--text-secondary);line-height:1.8">
@@ -5980,7 +6458,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
     </div>
 
   </div>
-  <div style="background:var(--seed-bg);border:1px solid #BDD3F8;border-radius:10px;padding:10px 14px;margin-top:12px;font-size:12.5px;color:var(--seed-text)">
+  <div style="background:var(--seed-bg);border:1px solid var(--plan-border);border-radius:var(--r-sm);padding:10px 14px;margin-top:12px;font-size:12.5px;color:var(--seed-text)">
     <strong>この構成が福井先生へのアンサーになる理由：</strong>フェーズ0（人が語った情報＝歪みを含む定性）を、フェーズ1（公開シラバス＝客観的・悉皆的なデータ）で検証する<strong>二層構造</strong>であることを、スライド1枚の図で示せる。
   </div>
 </div>
@@ -5992,9 +6470,9 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
   <div style="display:flex;flex-direction:column;gap:14px">
 
     <!-- 横堀 -->
-    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--seed);border-radius:12px;padding:1rem">
+    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--seed);border-radius:var(--r-sm);padding:1rem">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
-        <span style="background:var(--seed-bg);color:var(--seed-text);font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px">横堀さん</span>
+        <span style="background:var(--seed-bg);color:var(--seed-text);font-size:11px;font-weight:700;padding:2px 8px;border-radius:var(--r-sm)">横堀さん</span>
         <strong>リサーチ設計・AB報告資料・限定公開スキーム</strong>
       </div>
       <div style="overflow-x:auto">
@@ -6011,9 +6489,9 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
     </div>
 
     <!-- 髙田 -->
-    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--playwright);border-radius:12px;padding:1rem">
+    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--playwright);border-radius:var(--r-sm);padding:1rem">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
-        <span style="background:var(--playwright-bg);color:var(--playwright);font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px">髙田</span>
+        <span style="background:var(--playwright-bg);color:var(--playwright);font-size:11px;font-weight:700;padding:2px 8px;border-radius:var(--r-sm)">髙田</span>
         <strong>AB進行</strong>
       </div>
       <div style="overflow-x:auto">
@@ -6027,9 +6505,9 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
     </div>
 
     <!-- 野村 -->
-    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--director);border-radius:12px;padding:1rem">
+    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--director);border-radius:var(--r-sm);padding:1rem">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
-        <span style="background:var(--director-bg);color:var(--director);font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px">野村さん</span>
+        <span style="background:var(--director-bg);color:var(--director);font-size:11px;font-weight:700;padding:2px 8px;border-radius:var(--r-sm)">野村さん</span>
         <strong>モデルケース設計</strong>
       </div>
       <div style="overflow-x:auto">
@@ -6044,9 +6522,9 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
     </div>
 
     <!-- その他 -->
-    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--producer);border-radius:12px;padding:1rem">
+    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--producer);border-radius:var(--r-sm);padding:1rem">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
-        <span style="background:var(--producer-bg);color:var(--producer);font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px">川名さん・事務局</span>
+        <span style="background:var(--producer-bg);color:var(--producer);font-size:11px;font-weight:700;padding:2px 8px;border-radius:var(--r-sm)">川名さん・事務局</span>
         <strong>既存資産の棚卸しと収集体制</strong>
       </div>
       <div style="overflow-x:auto">
@@ -6068,7 +6546,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 <div class="ge-section">
   <div class="ge-section-title" style="color:var(--soil-text)">実務タスク① 海外リサーチ（フェーズ0）のまとめと限定公開</div>
 
-  <div style="background:var(--soil-bg);border:1px solid #A8DEC8;border-radius:10px;padding:10px 14px;margin-bottom:12px;font-size:12.5px;color:var(--soil-text)">
+  <div style="background:var(--soil-bg);border:1px solid var(--producer-border);border-radius:var(--r-sm);padding:10px 14px;margin-bottom:12px;font-size:12.5px;color:var(--soil-text)">
     <strong>成果物のかたち：</strong>①各リサーチャーの<strong>原本報告書</strong>／②<strong>音声ローデータは対象外</strong>。
   </div>
 
@@ -6088,7 +6566,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
   </table>
   </div>
 
-  <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--urgent-text);border-radius:12px;padding:1rem;margin-top:12px">
+  <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--urgent-text);border-radius:var(--r-sm);padding:1rem;margin-top:12px">
     <div style="font-size:12px;font-weight:700;color:var(--urgent-text);margin-bottom:6px">設計上の注意（記録しておくべき論点）</div>
     <div style="font-size:12.5px;color:var(--text-secondary);line-height:1.9">
       ・<strong>「レポートを書く目的で渡す」</strong>が原則。閲覧だけを目的とした共有はしない。
@@ -6103,9 +6581,9 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
   <div style="display:flex;flex-direction:column;gap:14px">
 
     <!-- 国内 -->
-    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--director);border-radius:12px;padding:1rem">
+    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--director);border-radius:var(--r-sm);padding:1rem">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-        <span style="background:var(--director-bg);color:var(--director);font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px">(a) 国内</span>
+        <span style="background:var(--director-bg);color:var(--director);font-size:11px;font-weight:700;padding:2px 8px;border-radius:var(--r-sm)">(a) 国内</span>
         <strong>現状把握のため悉皆で</strong>
       </div>
       <div style="font-size:12.5px;color:var(--text-secondary);margin-bottom:10px">前提：2019年以降のシラバスは「大学名＋シラバス」検索でほぼ学外から閲覧可能（横堀・実機で確認済み）。教室番号等の一部項目は非公開。<strong>スクレイピングは技術的には容易だが大学側の反応が読めないため、手作業＋AI補助を基本とし大規模クロールは行わない。</strong></div>
@@ -6124,9 +6602,9 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
     </div>
 
     <!-- 海外 -->
-    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--director);border-radius:12px;padding:1rem">
+    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--director);border-radius:var(--r-sm);padding:1rem">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-        <span style="background:var(--director-bg);color:var(--director);font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px">(b) 海外</span>
+        <span style="background:var(--director-bg);color:var(--director);font-size:11px;font-weight:700;padding:2px 8px;border-radius:var(--r-sm)">(b) 海外</span>
         <strong>主要校＋モデルケース起点で</strong>
       </div>
       <div style="overflow-x:auto">
@@ -6143,15 +6621,15 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
     </div>
 
     <!-- モデルケース -->
-    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--playwright);border-radius:12px;padding:1rem">
+    <div style="background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--playwright);border-radius:var(--r-sm);padding:1rem">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-        <span style="background:var(--playwright-bg);color:var(--playwright);font-size:11px;font-weight:700;padding:2px 8px;border-radius:12px">(c) モデルケース</span>
+        <span style="background:var(--playwright-bg);color:var(--playwright);font-size:11px;font-weight:700;padding:2px 8px;border-radius:var(--r-sm)">(c) モデルケース</span>
         <strong>選定と「源泉」の特定</strong>
       </div>
       <div style="font-size:12.5px;color:var(--text-secondary);margin-bottom:10px">
         <strong>基本設計：</strong>3ジャンル（<strong>ノンバーバル／IP展開／ファインアート</strong>）に分けてモデルケースを選定 → 各ケースを深掘りし、共通して参照されている<strong>教科書・メソッド・教育機関／組織</strong>を探し当てる → その源泉を直接リサーチする（<strong>源泉は必ずしも教育機関ではない</strong>）。
       </div>
-      <div style="background:var(--playwright-bg);border-radius:8px;padding:8px 12px;margin-bottom:10px;font-size:12px;color:var(--playwright)">
+      <div style="background:var(--playwright-bg);border-radius:var(--r-sm);padding:8px 12px;margin-bottom:10px;font-size:12px;color:var(--playwright)">
         <strong>既存資産（参考）：</strong><code>docs/strategy/ecosystem-analysis/</code> に13本のケーススタディが蓄積されている（War Horse／Curious Incident／Matilda(RSC)／Hamilton／Hadestown／Dear Evan Hansen／Marie Curie／Maybe Happy Ending／ノンバーバル横断／鼓童／トトロ／野田／Come From Away）。<strong>ここから選ぶのではなく</strong>、モデルケースを検討する際の参照資料として活用する。
       </div>
       <div style="overflow-x:auto">
@@ -6166,7 +6644,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
         </tbody>
       </table>
       </div>
-      <div style="background:var(--surface);border:1px dashed var(--border);border-radius:10px;padding:10px 14px;margin-top:12px;font-size:12.5px;color:var(--text-secondary);line-height:1.9">
+      <div style="background:var(--surface);border:1px dashed var(--border);border-radius:var(--r-sm);padding:10px 14px;margin-top:12px;font-size:12.5px;color:var(--text-secondary);line-height:1.9">
         <strong style="color:var(--text-primary)">選定時に反映すべき第4回AB指摘</strong><br>
         ・（渡辺ミキ）IP展開は<strong>最低2ケース</strong>：国際共同制作型（トトロ／RSC）と国内ビルド→進出型（デスノート／ホリプロ）を分けること。<br>
         ・（福井・奥山）<strong>なぞるためでなく差分を見出すため</strong>のケーススタディ。展開先を英米に偏らせず韓国・台湾・東南アジアを含める → ソウル（Marie Curie／Maybe Happy Ending は調査済み）が活きる。<br>
@@ -6183,7 +6661,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
   <div class="ge-section-title">AB向けスライド骨子案 <span style="font-size:12px;font-weight:400;color:var(--text-secondary)">（2〜3枚）</span></div>
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px">
 
-    <div style="padding:14px 16px;background:var(--seed-bg);border-radius:12px;border:1px solid #BDD3F8">
+    <div style="padding:14px 16px;background:var(--seed-bg);border-radius:var(--r-sm);border:1px solid var(--plan-border)">
       <div style="font-size:12px;font-weight:700;color:var(--seed-text);margin-bottom:8px">スライド1：リサーチ全体計画とフェーズ0の完了</div>
       <div style="font-size:12px;color:var(--text-secondary);line-height:1.9">
         ・縦軸にフェーズ0→0.5→1→2、横軸に時間のロードマップ1枚<br>
@@ -6192,7 +6670,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
       </div>
     </div>
 
-    <div style="padding:14px 16px;background:var(--soil-bg);border-radius:12px;border:1px solid #A8DEC8">
+    <div style="padding:14px 16px;background:var(--soil-bg);border-radius:var(--r-sm);border:1px solid var(--producer-border)">
       <div style="font-size:12px;font-weight:700;color:var(--soil-text);margin-bottom:8px">スライド2：フェーズ0成果物の取扱い方針</div>
       <div style="font-size:12px;color:var(--text-secondary);line-height:1.9">
         ・3層で整理：<strong>①音声ローデータ＝非公開</strong>（将来は公開前提の新規収録へ）／<strong>②報告書＝守秘義務付き限定共有</strong>／<strong>③統合成果＝人材要件・カリキュラムとして公表</strong><br>
@@ -6201,7 +6679,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
       </div>
     </div>
 
-    <div style="padding:14px 16px;background:var(--director-bg);border-radius:12px;border:1px solid var(--director-border)">
+    <div style="padding:14px 16px;background:var(--director-bg);border-radius:var(--r-sm);border:1px solid var(--director-border)">
       <div style="font-size:12px;font-weight:700;color:var(--director);margin-bottom:8px">スライド3：今後のリサーチ計画</div>
       <div style="font-size:12px;color:var(--text-secondary);line-height:1.9">
         ・2本立てを並置：<strong>(左) 国内＝悉皆／(右) 海外＝主要校＋モデルケース起点</strong><br>
@@ -6218,7 +6696,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 </div><!-- /#tab-research-agenda -->
 
 <!-- ════ PAB Plan Tab ════ -->
-<div id="tab-pab-plan" class="tab-content">
+<div id="tab-pab-plan" class="tab-content" data-updated="2026-09-02">
 <style>
 /* ══════════════════════════════════════
      tokens — SEEDデザインシステム準拠
@@ -6273,7 +6751,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
   .pabrs p { margin: 0; }
   .pabrs ul { margin: 0; padding-left: 1.15em; }
   .pabrs li { margin: 0; }
-  .pabrs :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 4px; }
+  .pabrs :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius:var(--r-sm); }
   .pabrs .visually-hidden {
     position: absolute; width: 1px; height: 1px; overflow: hidden;
     clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
@@ -6746,9 +7224,9 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
     <div class="alert">
       <div class="alert-title">
         <span class="tag-alert">確認中</span>
-        仕込みの時間をどう確保するか
+        PAB担当者への確認事項
       </div>
-      <p style="color:var(--ink-2); font-size:.9rem; margin-bottom:1.1rem;">搬入9:00・開場10:30で、当日の仕込みは90分。島テーブルの設営がボトルネックで、そこに受付設営・講師コールタイム・音のリハ・ブリーフィングを詰めることになります。<strong style="color:var(--ink);">前日に仕込める可能性もあり、あわせて確認中です。</strong>前日仕込みか事前レイアウトの発注が通れば、当日は椅子のシアター化と受付設営だけで済み、一気に楽になります。</p>
+      <p style="color:var(--ink-2); font-size:.9rem; margin-bottom:1.1rem;"><strong style="color:var(--ink);">いちばん効くのは仕込みの時間です。</strong>搬入9:00・開場10:30で、当日の仕込みは90分。島テーブルの設営がボトルネックで、そこに受付設営・講師コールタイム・音のリハ・ブリーフィングを詰めることになります。<strong style="color:var(--ink);">前日に仕込める可能性もあり、あわせて確認中です。</strong>前日仕込みか事前レイアウトの発注が通れば、当日は椅子のシアター化と受付設営だけで済み、一気に楽になります。</p>
 
       <div class="checks">
         <div class="check">
@@ -6766,6 +7244,18 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
         <div class="check">
           <span class="check-n">04</span>
           <span class="check-b"><strong>プロジェクターの手配先<span class="stat">確認中</span></strong><span>701会議室にスクリーンとプロジェクターは常設されていません。スクリーンは会場の備品（100インチ）を2枚借りて左右に投影しますが、<strong style="color:var(--ink)">プロジェクターは備品リストに無い</strong>ため、別の手配先を決める必要があります。</span></span>
+        </div>
+        <div class="check">
+          <span class="check-n">05</span>
+          <span class="check-b"><strong>701会議室のキャパ<span class="stat">PAB担当者に確認中</span></strong><span>参加者上限を50名で設計しているため、収容人数を確認中。回答次第で島の数と配置を確定します。</span></span>
+        </div>
+        <div class="check">
+          <span class="check-n">06</span>
+          <span class="check-b"><strong>ホワイトボード／掲示パネルの借用<span class="stat">PAB担当者に確認中</span></strong><span>パーティションの代替として借りられるかを確認中。視線が切れるだけでも集中は上がります。</span></span>
+        </div>
+        <div class="check">
+          <span class="check-n">07</span>
+          <span class="check-b"><strong>PAB主催との運営取り決め<span class="stat">PAB担当者に確認中</span></strong><span>窓口・館内サイン・搬入出・連絡系統の取り決めを確認中。当日の判断を誰にどう通すかがここで決まります。</span></span>
         </div>
       </div>
     </div>
@@ -7172,13 +7662,6 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
   var SHOW_TASKS = false;
 
   var TASKS = [
-    { due: "8/31", soon: true,  t: "会場に事前レイアウト（島配置）を発注できるか確認", o: "髙田", who: ["髙田"] },
-    { due: "8/31", soon: true,  t: "701会議室のキャパを確認", o: "髙田", who: ["髙田"] },
-    { due: "8/31", soon: true,  t: "弁当数量を9/24のいつまでに出すか確認 → 締切前倒しの可否を決定", o: "髙田", who: ["髙田"] },
-    { due: "8/31", soon: true,  t: "ホワイトボード／掲示パネルの借用可否", o: "髙田", who: ["髙田"] },
-    { due: "8/31", soon: true,  t: "PAB主催との運営取り決め（窓口・館内サイン・搬入出・連絡系統）", o: "髙田", who: ["髙田"] },
-    { due: "8/31", soon: true,  t: "座談会モデレーターの依頼と、各講師への事前連絡", o: "髙田・遠藤", who: ["髙田","遠藤"] },
-    { due: "8/31", soon: true,  t: "阿部さんに劇作WSの共同進行を正式に依頼・進め方のすり合わせ", o: "倉沢", who: ["倉沢"] },
     { due: "9/5",  soon: false, t: "LP時間割の修正（座談会・ランチ表記＋締切の判断を反映）", o: "髙田", who: ["髙田"] },
     { due: "9/5",  soon: false, t: "ワークショップ内容の最終確定（劇作WSは音環境を前提に）", o: "倉沢・川名・赤羽", who: ["倉沢","川名","赤羽"] },
     { due: "9/5",  soon: false, t: "登壇者プロフィール・顔写真の回収 → LP差し替え", o: "髙田", who: ["髙田"] },
@@ -7214,6 +7697,9 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
     { due: "9/25", soon: false, t: "資材梱包・搬入リスト最終確認・9:00集合の徹底連絡", o: "全員", who: [] },
     { due: "9/26", soon: false, t: "本番（搬入9:00／撤収18:00まで）", o: "全員", who: [] }
   ];
+
+  // NOWタブから参照するために公開する（データ源は⑦のこの配列だけ）
+  window.SEED_PAB = { TASKS: TASKS, PEOPLE: PEOPLE, PHASES: PHASES };
 
   var STORE = "pab-run-sheet-person";
   var selected = null;
@@ -7426,25 +7912,71 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 </div><!-- /#tab-pab-plan -->
 
 <div class="footer">
-  <span>Slackデイリーレポートより自動生成（毎朝9:00更新）</span>
+  <span>NOWタブのSlackデイリーレポートのみ自動生成（平日 毎朝9:00）。他のタブは手動更新です</span>
   <span>i9mix/seed-soil</span>
 </div>
 
 <script>
+/* ── 2階層ナビ：層（いま／進行／設計／案件）→ タブ ── */
+var lastTabInLayer = {};
+
+function activateLayer(layer) {
+  document.querySelectorAll('.layer-btn').forEach(b => b.classList.toggle('active', b.dataset.layer === layer));
+  document.querySelectorAll('.tab-btn').forEach(b => { b.hidden = b.dataset.layer !== layer; });
+}
+
 function activateTab(name) {
   const target = document.getElementById('tab-' + name);
   if (!target) return false;
+  const btn = document.querySelector('.tab-btn[data-tab="' + name + '"]');
+  if (btn) {
+    activateLayer(btn.dataset.layer);
+    lastTabInLayer[btn.dataset.layer] = name;
+  }
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
   document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
   target.classList.add('active');
+  /* 紙の上でどのタブを刷ったのかがわかるように、名前を控えておく */
+  const nameEl = document.getElementById('print-tab-name');
+  if (nameEl) {
+    const layerBtn = document.querySelector('.layer-btn.active');
+    const layer = layerBtn ? layerBtn.textContent.trim() : '';
+    const tabName = btn ? btn.textContent.trim() : '';
+    nameEl.textContent = layer && tabName ? layer + '　/　' + tabName : tabName;
+  }
+  /* モバイルでナビが横スクロールしているときは、選んだタブを見える位置へ */
+  if (btn) {
+    const nav = btn.parentElement;
+    if (nav && nav.scrollWidth > nav.clientWidth + 2) {
+      btn.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    }
+  }
   return true;
 }
+
 document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     activateTab(btn.dataset.tab);
     history.replaceState(null, '', '#' + btn.dataset.tab);
   });
 });
+
+document.querySelectorAll('.layer-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const layer = btn.dataset.layer;
+    const remembered = lastTabInLayer[layer];
+    const first = document.querySelector('.tab-btn[data-layer="' + layer + '"]');
+    const name = (remembered && document.getElementById('tab-' + remembered)) ? remembered : (first && first.dataset.tab);
+    if (!name) return;
+    activateTab(name);
+    history.replaceState(null, '', '#' + name);
+  });
+});
+
+const printBtn = document.getElementById("print-btn");
+if (printBtn) printBtn.addEventListener("click", () => window.print());
+
+activateLayer('now');
 if (location.hash) activateTab(location.hash.slice(1));
 window.addEventListener('hashchange', () => activateTab(location.hash.slice(1)));
 
@@ -7492,5 +8024,425 @@ document.querySelectorAll('.msm-close').forEach(btn => btn.addEventListener('cli
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMeetingSummary(); });
 </script>
 
+
+<!-- ══ NOW タブ ＋ 鮮度メタデータ ══ -->
+<script>
+(function () {
+  "use strict";
+
+  var TASK_YEAR  = 2026;  // ⑦ TASKS の期限が属する年
+  var NEAR_DAYS  = 14;    // マイルストーンを強調する残日数
+  var WINDOW_DAYS = 14;   // 期限ボードの既定表示範囲
+  var STALE_DAYS = 60;    // これを超えたタブに「要確認」を付ける
+
+  var today = new Date(); today.setHours(0, 0, 0, 0);
+  function ymd(y, m, d) { var x = new Date(y, m - 1, d); x.setHours(0, 0, 0, 0); return x; }
+  function diff(to) { return Math.round((to - today) / 86400000); }
+  function md(x) { return (x.getMonth() + 1) + '/' + x.getDate(); }
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+  /* ══ ① 直近マイルストーン ══ */
+  var MILESTONES = [
+    { date: ymd(2026, 9, 15), name: '進行表 v1.0 確定・全員へ共有', note: 'PAB当日運営の内部ゲート' },
+    { date: ymd(2026, 9, 26), name: 'PAB SEEDオープン講座 本番',   note: '搬入 9:00 ／ 撤収 18:00' },
+    { date: ymd(2026, 9, 26), name: '劇作家 Introductory Course 開講', note: '9/26〜10/3・最大20名' }
+  ];
+
+  var countEl = document.getElementById('now-count');
+  if (countEl) {
+    countEl.innerHTML = MILESTONES.map(function (m) {
+      var n = diff(m.date);
+      var big = n < 0 ? '終了' : (n === 0 ? '本日' : n + '<span class="unit">日後</span>');
+      return '<div class="now-count-card' + (n >= 0 && n <= NEAR_DAYS ? ' is-near' : '') + '">' +
+               '<div class="now-count-label">' + md(m.date) + '</div>' +
+               '<div class="now-count-days">' + big + '</div>' +
+               '<div class="now-count-name">' + esc(m.name) + '</div>' +
+               '<div class="now-count-note">' + esc(m.note) + '</div>' +
+             '</div>';
+    }).join('');
+  }
+
+  /* ══ ② 期限のあるタスク（⑦ PABタブの TASKS を唯一のデータ源にする） ══ */
+  var dueEl = document.getElementById('now-due');
+  var filterEl = document.getElementById('now-filter');
+  var TASKS = (window.SEED_PAB && window.SEED_PAB.TASKS) || [];
+  var person = 'all';
+  var showAll = false;
+
+  function parseDue(s) {
+    var p = String(s).split('/');
+    return ymd(TASK_YEAR, parseInt(p[0], 10), parseInt(p[1], 10));
+  }
+
+  function renderDue() {
+    if (!dueEl) return;
+
+    var rows = TASKS.map(function (t) {
+      return { d: parseDue(t.due), t: t.t, o: t.o, who: t.who || [] };
+    }).filter(function (r) {
+      if (person === 'all') return true;
+      return r.who.length === 0 || r.who.indexOf(person) !== -1;  // who が空＝全員
+    }).sort(function (a, b) { return a.d - b.d; });
+
+    var overdue = rows.filter(function (r) { return diff(r.d) < 0; });
+    var visible = showAll ? rows : rows.filter(function (r) {
+      var n = diff(r.d);
+      return n < 0 || n <= WINDOW_DAYS;
+    });
+
+    if (!visible.length) {
+      dueEl.innerHTML = '<div class="now-empty">この担当者の期限つきタスクはありません。</div>';
+      return;
+    }
+
+    var html = '';
+    if (overdue.length) {
+      html += '<div class="now-overdue-note"><strong>期限を過ぎたタスクが ' + overdue.length + ' 件あります。</strong>' +
+              '完了済みのものは ⑦ PAB企画・制作進行タブの <code>TASKS</code> を更新してください（このボードは⑦のデータをそのまま読んでいます）。</div>';
+    }
+
+    var groups = [];
+    visible.forEach(function (r) {
+      var key = md(r.d);
+      var g = groups[groups.length - 1];
+      if (!g || g.key !== key) { groups.push({ key: key, date: r.d, items: [r] }); }
+      else { g.items.push(r); }
+    });
+
+    groups.forEach(function (g) {
+      var n = diff(g.date);
+      var cls = n < 0 ? ' is-over' : (n <= 3 ? ' is-soon' : '');
+      var left = n < 0 ? (-n) + '日超過' : (n === 0 ? '本日' : 'あと' + n + '日');
+      html += '<div class="now-due-group' + cls + '">' +
+                '<div class="now-due-head">' +
+                  '<span class="now-due-date">' + g.key + '</span>' +
+                  '<span class="now-due-left">' + left + '</span>' +
+                  '<span class="now-due-line"></span>' +
+                '</div>' +
+                g.items.map(function (r) {
+                  return '<div class="now-task"><span class="now-task-owner">' + esc(r.o) + '</span><span>' + esc(r.t) + '</span></div>';
+                }).join('') +
+              '</div>';
+    });
+
+    var hidden = rows.length - visible.length;
+    if (hidden > 0 || showAll) {
+      html += '<div class="now-more"><button type="button" class="now-more-btn" id="now-more-btn">' +
+              (showAll ? '直近' + WINDOW_DAYS + '日にしぼる' : 'これ以降の期限も表示（残り ' + hidden + ' 件）') +
+              '</button></div>';
+    }
+
+    dueEl.innerHTML = html;
+    var moreBtn = document.getElementById('now-more-btn');
+    if (moreBtn) moreBtn.addEventListener('click', function () { showAll = !showAll; renderDue(); });
+  }
+
+  if (filterEl && TASKS.length) {
+    var names = [];
+    TASKS.forEach(function (t) {
+      (t.who || []).forEach(function (w) { if (names.indexOf(w) === -1) names.push(w); });
+    });
+    filterEl.innerHTML = '<button type="button" class="now-filter-btn active" data-p="all">すべて</button>' +
+      names.map(function (n) {
+        return '<button type="button" class="now-filter-btn" data-p="' + esc(n) + '">' + esc(n) + '</button>';
+      }).join('');
+    filterEl.addEventListener('click', function (e) {
+      var b = e.target.closest('.now-filter-btn');
+      if (!b) return;
+      person = b.dataset.p;
+      showAll = false;
+      filterEl.querySelectorAll('.now-filter-btn').forEach(function (x) { x.classList.toggle('active', x === b); });
+      renderDue();
+    });
+  }
+  renderDue();
+
+  /* ══ ③ 確認中・回答待ち（⑦の「いま確認中のこと」からそのまま拾う） ══ */
+  var checksEl = document.getElementById('now-checks');
+  if (checksEl) {
+    var src = document.querySelectorAll('#check .check');
+    if (!src.length) {
+      checksEl.innerHTML = '<div class="now-empty">確認中の項目はありません。</div>';
+    } else {
+      checksEl.innerHTML = Array.prototype.map.call(src, function (c) {
+        var n = c.querySelector('.check-n');
+        var b = c.querySelector('.check-b');
+        var strong = b ? b.querySelector('strong') : null;
+        if (!strong) return '';
+        var stat = strong.querySelector('.stat');
+        var status = stat ? stat.textContent.trim() : '';
+        var fixed = stat && stat.classList.contains('fixed');
+        var clone = strong.cloneNode(true);
+        var cs = clone.querySelector('.stat'); if (cs) cs.remove();
+        var title = clone.textContent.trim();
+        var desc = b.children.length > 1 ? b.children[b.children.length - 1].innerHTML : '';
+        return '<div class="now-check">' +
+                 '<span class="now-check-n">' + (n ? esc(n.textContent.trim()) : '') + '</span>' +
+                 '<span><span class="now-check-t">' + esc(title) +
+                   (status ? '<span class="now-check-s' + (fixed ? ' is-fixed' : '') + '">' + esc(status) + '</span>' : '') +
+                 '</span><span class="now-check-d">' + desc + '</span></span>' +
+               '</div>';
+      }).join('');
+    }
+  }
+
+  /* ══ ⑤ Slackデイリーレポート：投稿0名の日は出さない ══ */
+  var slackEl = document.getElementById('now-slack');
+  if (slackEl) {
+    var cnt = parseInt(slackEl.dataset.count, 10);
+    if (!(cnt > 0)) slackEl.hidden = true;
+  }
+
+  /* ══ 鮮度メタデータ：各タブに最終更新日と「要確認」を出す ══ */
+  document.querySelectorAll('.tab-content[data-updated]').forEach(function (el) {
+    var iso = el.dataset.updated;
+    var p = iso.split('-');
+    var age = Math.round((today - ymd(+p[0], +p[1], +p[2])) / 86400000);
+    var stale = age >= STALE_DAYS;
+
+    var bar = document.createElement('div');
+    bar.className = 'fresh-bar';
+    bar.innerHTML = 'このタブの最終更新 <span class="fresh-date">' + iso.replace(/-/g, '/') + '</span>（' + age + '日前）' +
+      (stale ? '<span class="fresh-flag">要確認</span><span>' + STALE_DAYS + '日以上更新されていません</span>' : '');
+    el.insertBefore(bar, el.firstChild);
+
+    if (stale) {
+      var btn = document.querySelector('.tab-btn[data-tab="' + el.id.replace(/^tab-/, '') + '"]');
+      if (btn && !btn.querySelector('.stale-dot')) {
+        btn.insertAdjacentHTML('beforeend', '<span class="stale-dot" title="' + STALE_DAYS + '日以上更新なし"></span>');
+      }
+    }
+  });
+
+  /* 層のボタンにも「要確認」のしるしを上げる */
+  document.querySelectorAll('.tab-btn .stale-dot').forEach(function (dot) {
+    var layer = dot.closest('.tab-btn').dataset.layer;
+    var lb = document.querySelector('.layer-btn[data-layer="' + layer + '"]');
+    if (lb && !lb.querySelector('.stale-dot')) {
+      lb.insertAdjacentHTML('beforeend', '<span class="stale-dot" title="この層に' + STALE_DAYS + '日以上更新のないタブがあります"></span>');
+    }
+  });
+
+  /* ══ #now を #dashboard の別名として扱う ══ */
+  function nowAlias() {
+    if (location.hash === '#now' && typeof activateTab === 'function') activateTab('dashboard');
+  }
+  nowAlias();
+  window.addEventListener('hashchange', nowAlias);
+})();
+</script>
+
+<!-- ══ タブ横断検索 ══ -->
+<script>
+(function () {
+  "use strict";
+
+  var input   = document.getElementById('search-input');
+  var results = document.getElementById('search-results');
+  var clearBt = document.getElementById('search-clear');
+  var hintEl  = document.getElementById('search-hint');
+  if (!input || !results) return;
+
+  var MAX_PER_TAB = 5;
+  var MAX_TOTAL   = 40;
+
+  /* 「葉のブロック」＝ブロック要素のうち、中にブロック要素を持たないもの。
+     これを1件の検索対象として扱う。<td><strong>x</strong>y</td> は td が1件になる。 */
+  var BLOCK = {
+    DIV:1, P:1, LI:1, TD:1, TH:1, DD:1, DT:1, SECTION:1, ARTICLE:1,
+    H1:1, H2:1, H3:1, H4:1, H5:1, H6:1, BLOCKQUOTE:1, FIGCAPTION:1, SUMMARY:1, CAPTION:1
+  };
+
+  var index = null;
+
+  function buildIndex() {
+    var out = [];
+    document.querySelectorAll('.tab-content').forEach(function (tab) {
+      var id  = tab.id.replace(/^tab-/, '');
+      var btn = document.querySelector('.tab-btn[data-tab="' + id + '"]');
+      if (!btn) return;
+      var tabName = btn.textContent.trim();
+      var layerBtn = document.querySelector('.layer-btn[data-layer="' + btn.dataset.layer + '"]');
+      var layerName = layerBtn ? layerBtn.textContent.trim() : '';
+
+      tab.querySelectorAll('*').forEach(function (el) {
+        if (!BLOCK[el.tagName]) return;
+        if (el.classList.contains('fresh-bar')) return;          // 鮮度バーは検索対象外
+        if (el.querySelector('style, script')) return;           // ⑦タブの中のCSS/JSを拾わない
+        for (var i = 0; i < el.children.length; i++) {
+          var c = el.children[i];
+          // 中身のあるブロックを持つなら親は葉ではない。
+          // 空のブロック（状態ドット等）は無視して、その親を1件として拾う。
+          if (BLOCK[c.tagName] && c.textContent.trim().length > 0) return;
+        }
+        var t = el.textContent.replace(/\s+/g, ' ').trim();
+        if (t.length < 4 || t.length > 600) return;
+        /* 「倉沢」のように短い見出しだけが当たると読み取れないので、
+           少し上の階層まで遡って、意味のわかる長さの文脈を表示用に持っておく。 */
+        var display = t;
+        if (t.length < 14) {
+          var p = el.parentElement;
+          while (p && p !== tab) {
+            var pt = p.textContent.replace(/\s+/g, ' ').trim();
+            if (pt.length > 300) break;
+            if (pt.length >= 14) { display = pt; break; }
+            p = p.parentElement;
+          }
+        }
+        out.push({ tab: id, tabName: tabName, layerName: layerName, el: el, text: t, display: display, lower: t.toLowerCase() });
+      });
+    });
+    return out;
+  }
+
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function snippet(text, q) {
+    var i = text.toLowerCase().indexOf(q);
+    if (i < 0) return esc(text.slice(0, 90));
+    var start = Math.max(0, i - 28);
+    var end   = Math.min(text.length, i + q.length + 52);
+    return (start > 0 ? '…' : '')
+         + esc(text.slice(start, i))
+         + '<mark>' + esc(text.slice(i, i + q.length)) + '</mark>'
+         + esc(text.slice(i + q.length, end))
+         + (end < text.length ? '…' : '');
+  }
+
+  /* ── 検索して結果を組み立てる ── */
+  var hits = [];
+
+  function run(raw) {
+    var q = raw.replace(/\s+/g, ' ').trim().toLowerCase();
+    if (q.length < 1) { close(); return; }
+    if (!index) index = buildIndex();
+
+    var byTab = {}, order = [], total = 0;
+    for (var i = 0; i < index.length && total < MAX_TOTAL * 3; i++) {
+      var e = index[i];
+      if (e.lower.indexOf(q) < 0) continue;
+      if (!byTab[e.tab]) { byTab[e.tab] = []; order.push(e.tab); }
+      byTab[e.tab].push(e);
+      total++;
+    }
+
+    hits = [];
+    var html = '', shown = 0;
+    order.forEach(function (tabId) {
+      var list = byTab[tabId];
+      var head = list[0];
+      html += '<div class="search-group"><div class="search-group-title">'
+            + esc(head.layerName) + '　/　' + esc(head.tabName)
+            + '（' + list.length + '件）</div>';
+      list.slice(0, MAX_PER_TAB).forEach(function (e) {
+        html += '<button type="button" class="search-hit-btn" role="option" data-i="' + hits.length + '">'
+              + snippet(e.display || e.text, q) + '</button>';
+        hits.push(e);
+        shown++;
+      });
+      if (list.length > MAX_PER_TAB) {
+        html += '<div class="search-meta">ほか ' + (list.length - MAX_PER_TAB) + ' 件（タブを開いて確認してください）</div>';
+      }
+      html += '</div>';
+    });
+
+    if (!shown) {
+      results.innerHTML = '<div class="search-empty">「' + esc(raw.trim()) + '」に当たるものはありませんでした。<br>表記ゆれ（例：髙田／高田、PAB／Performing Arts Base）を変えて試してみてください。</div>';
+    } else {
+      results.innerHTML = '<div class="search-meta">' + total + '件見つかりました（' + order.length + 'タブ）</div>' + html;
+    }
+    open();
+    setActive(0);
+  }
+
+  /* ── 開閉 ── */
+  var activeIdx = -1;
+
+  function open()  { results.hidden = false; input.setAttribute('aria-expanded', 'true'); }
+  function close() { results.hidden = true;  input.setAttribute('aria-expanded', 'false'); activeIdx = -1; }
+
+  function setActive(i) {
+    var btns = results.querySelectorAll('.search-hit-btn');
+    if (!btns.length) { activeIdx = -1; return; }
+    if (i < 0) i = btns.length - 1;
+    if (i >= btns.length) i = 0;
+    btns.forEach(function (b) { b.classList.remove('is-active'); });
+    btns[i].classList.add('is-active');
+    btns[i].scrollIntoView({ block: 'nearest' });
+    activeIdx = i;
+  }
+
+  /* ── 結果へ飛ぶ ── */
+  function jump(e) {
+    if (!e) return;
+    if (typeof activateTab === 'function') activateTab(e.tab);
+    history.replaceState(null, '', '#' + e.tab);
+    close();
+    requestAnimationFrame(function () {
+      e.el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      e.el.classList.remove('search-target');
+      void e.el.offsetWidth;
+      e.el.classList.add('search-target');
+      setTimeout(function () { e.el.classList.remove('search-target'); }, 1900);
+    });
+  }
+
+  /* ── 結線 ── */
+  var timer = null;
+  input.addEventListener('input', function () {
+    var v = input.value;
+    clearBt.hidden = !v;
+    if (hintEl) hintEl.hidden = !!v;
+    clearTimeout(timer);
+    timer = setTimeout(function () { run(v); }, 120);
+  });
+
+  input.addEventListener('keydown', function (ev) {
+    if (ev.key === 'Escape') {
+      if (!results.hidden) { close(); } else { input.value = ''; clearBt.hidden = true; if (hintEl) hintEl.hidden = false; input.blur(); }
+      ev.preventDefault();
+    } else if (ev.key === 'ArrowDown') {
+      if (results.hidden) run(input.value); else setActive(activeIdx + 1);
+      ev.preventDefault();
+    } else if (ev.key === 'ArrowUp') {
+      setActive(activeIdx - 1);
+      ev.preventDefault();
+    } else if (ev.key === 'Enter') {
+      jump(hits[activeIdx >= 0 ? activeIdx : 0]);
+      ev.preventDefault();
+    }
+  });
+
+  input.addEventListener('focus', function () { if (input.value && hits.length) open(); });
+
+  results.addEventListener('click', function (ev) {
+    var b = ev.target.closest('.search-hit-btn');
+    if (b) jump(hits[+b.dataset.i]);
+  });
+
+  clearBt.addEventListener('click', function () {
+    input.value = ''; clearBt.hidden = true;
+    if (hintEl) hintEl.hidden = false;
+    close(); input.focus();
+  });
+
+  document.addEventListener('click', function (ev) {
+    if (!ev.target.closest('.search-wrap')) close();
+  });
+
+  /* 「/」または Ctrl/⌘+K で検索欄へ */
+  document.addEventListener('keydown', function (ev) {
+    var t = ev.target;
+    var typing = t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable);
+    if ((ev.key === '/' && !typing) || ((ev.ctrlKey || ev.metaKey) && ev.key.toLowerCase() === 'k')) {
+      ev.preventDefault();
+      input.focus();
+      input.select();
+    }
+  });
+})();
+</script>
 </body>
 </html>
