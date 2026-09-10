@@ -250,6 +250,23 @@
   @media (min-width: 54rem) {
     .pabrs .dwg { grid-template-columns: 1fr 1fr; gap: 1.6rem; }
   }
+  /* 希望備品リスト */
+  .pabrs .eq-h { margin: 0 0 .5rem; font-size: 1.05rem; font-weight: 600; line-height: 1.5; }
+  .pabrs .eq-block { margin-bottom: 1.6rem; }
+  .pabrs .eq-head {
+    display: flex; align-items: baseline; gap: .7rem; flex-wrap: wrap;
+    font-weight: 600; font-size: .93rem; margin-bottom: .7rem;
+  }
+  .pabrs .eq-head span {
+    font-family: var(--display); font-size: .62rem; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--ink-2);
+    background: var(--ground-2); border-radius: var(--r-pill); padding: .16rem .62rem;
+  }
+  .pabrs table.eq { width: max-content; min-width: 100%; font-size: .84rem; }
+  .pabrs table.eq td { min-width: 6rem; }
+  .pabrs table.eq td:last-child { min-width: 18rem; }
+  .pabrs table.eq tbody th { min-width: 12rem; }
+  .pabrs .eq-note { color: var(--ink-3); font-size: .79rem; line-height: 1.7; margin-top: .5rem; }
   .pabrs .check-b .stat {
     display: inline-block; margin: 0 0 0 .5rem; vertical-align: .06em;
     font-size: .66rem; font-weight: 400; letter-spacing: .04em; line-height: 1.7;
@@ -973,6 +990,73 @@
           <span class="dwg-note">※ この状態に含まれる備品（追加費用なし）：ポータブルステージU H400mm 5台／脚折れテーブル5台／幕板付テーブル1台／椅子110台／ホワイトボード2台／プロジェクター EB-1795F 1台＋台1台／自立式スクリーン100インチ1台。<b>マイクは4本まで</b>（5本目以降は要相談）。投写距離6000mm、3200ルーメン。</span>
         </figcaption>
       </figure>
+    </div>
+
+    <div class="sec-kicker" style="margin:2.4rem 0 .9rem;">Equipment</div>
+    <h3 class="eq-h">PABへお願いする備品リスト</h3>
+    <p class="sec-note" style="margin-bottom:1.3rem;">会場側の基本レイアウト（②）に含まれているものは追加不要です。<strong>そこから足りない分だけ</strong>を申請します。単価と保有数は、赤羽さんの図面に貼られていた貸出備品集の実データから拾っています。</p>
+
+    <div class="eq-block">
+      <div class="eq-head">基本レイアウトに含まれるもの<span>追加の申請は不要</span></div>
+      <div class="scroller">
+        <table class="eq">
+          <thead><tr><th>品名</th><th>数量</th><th>SEEDでの使いみち</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">ポータブルステージU H400mm</th><td>5台</td><td>登壇席。赤羽さん案では<b>2台</b>で組む想定。5台のうち何台を使うかを図面で指定します</td></tr>
+            <tr><th scope="row">椅子</th><td>110台</td><td>参加者50名＋事務局10名＋講師6名でも余裕があります。<b>追加不要</b></td></tr>
+            <tr><th scope="row">ホワイトボード</th><td>2台</td><td>701会議室の常設。ワークショップの仕切りにも使えます</td></tr>
+            <tr><th scope="row">プロジェクター（EPSON EB-1795F）＋専用台</th><td>各1台</td><td>HDMI入力・3200ルーメン。PCはこちらで持ち込みます</td></tr>
+            <tr><th scope="row">自立式スクリーン100インチ</th><td>1台</td><td>投影は1面。位置は図面で指定します</td></tr>
+            <tr><th scope="row">脚折れテーブル</th><td>5台</td><td>島の一部に充当。<b>不足分は下の表で追加申請</b></td></tr>
+            <tr><th scope="row">幕板付テーブル</th><td>1台</td><td>受付に使います（前面が隠れるため）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="eq-block">
+      <div class="eq-head">追加でお願いするもの<span>9/13 提出</span></div>
+      <div class="scroller">
+        <table class="eq">
+          <thead><tr><th>品名</th><th>数量</th><th>単価</th><th>根拠</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">脚折れテーブル</th><td><b>22台</b></td><td>要確認</td><td>島10（1島2台＝20台）＋事務局6台＋受付2台＝<b>28台</b>。基本の脚折れ5台＋幕板付1台を差し引いた数です</td></tr>
+            <tr><th scope="row">カウンターチェア</th><td><b>5脚</b></td><td>220円／1会期</td><td>登壇席。プロデューサー座談会が<b>登壇4名＋モデレーター</b>で最多。保有10脚なので確保できます</td></tr>
+            <tr><th scope="row">三つ折りパーテーション</th><td><b>4枚</b></td><td>1,100円／1日</td><td>ワークショップ3本を同室でやるための仕切り。W1800×H1800・キャスター付き。保有50台</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="eq-note">※ パーテーションは備品集に<b>「パーティ利用時は無料」</b>と注記があります。本件は該当しない前提で見ていますが、あわせて確認しておくとよさそうです。</p>
+      <p class="eq-note">※ ポータブルステージUには<b>「ガラス棟優先」</b>の注記があります。701はガラス棟なので問題ないはずです。</p>
+    </div>
+
+    <div class="alert" style="margin-top:1.6rem;">
+      <div class="alert-title">
+        <span class="tag-alert">要確認</span>
+        提出前に詰めておきたいこと
+      </div>
+      <div class="checks">
+        <div class="check">
+          <span class="check-n">01</span>
+          <span class="check-b"><strong>テーブル22台は島の数しだいで動きます</strong><span>赤羽さんの案は<b>84人・10島</b>で描かれていました。実際は<b>参加者50名・1島5〜6人</b>で組み直すため、島の数が9になれば20台、10のままなら22台です。<strong style="color:var(--ink)">最終図面が固まった時点で数を確定させてください。</strong>1島あたり2台（W1800を2枚並べて6人掛け）で計算しています。</span></span>
+        </div>
+        <div class="check">
+          <span class="check-n">02</span>
+          <span class="check-b"><strong>脚折れテーブルの単価が分かっていません</strong><span>赤羽さんの図面に貼られていたのはカウンターチェア・ステージ・パーテーションの3点だけでした。<strong style="color:var(--ink)">22台となると総額に効くので、単価を確認しておきたいところです。</strong></span></span>
+        </div>
+        <div class="check">
+          <span class="check-n">03</span>
+          <span class="check-b"><strong>ホワイトボードを追加するかどうか</strong><span>常設の2台は仕切りにも使えます。<b>3コースを分けるならもう1〜2台あると確実</b>ですが、パーテーション4枚で足りるかは当日のリハ次第です。迷うなら申請しておくほうが安全です。</span></span>
+        </div>
+        <div class="check">
+          <span class="check-n">04</span>
+          <span class="check-b"><strong>演台が要るかどうか</strong><span>基本レイアウトにも赤羽さん案にも入っていません。開会挨拶・ご来賓ご挨拶・説明会で野村さんが立つ場面があるため、<b>あると収まりがよくなります</b>。備品集には種類が多くありました。</span></span>
+        </div>
+        <div class="check">
+          <span class="check-n">05</span>
+          <span class="check-b"><strong>費用の按分</strong><span>PABからは<b>他団体と重なる備品は按分を検討いただける</b>と伺っています。テーブルとパーテーションは他団体も使う可能性があるので、提出時に一言添えておくと話が早そうです。</span></span>
+        </div>
+      </div>
     </div>
 
   </div>
