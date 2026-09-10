@@ -7332,7 +7332,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
       <li><a href="#check">まず確認したいこと</a></li>
       <li><a href="#run">当日の流れ</a></li>
       <li><a href="#mine">あなたの一日</a></li>
-      <li><a href="#venue">レイアウトと音</a></li>
+      <li><a href="#venue">会場レイアウト</a></li>
       <li><a href="#tasks">準備タスク</a></li>
     </ul>
   </div>
@@ -7675,13 +7675,10 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
 <section class="sec" id="venue">
   <div class="wrap">
     <div class="sec-head">
-      <div class="sec-kicker">Floor &amp; Sound</div>
-      <h2>会場レイアウトと音対策</h2>
-      <p class="sec-note">会場の備品からパーティションを借りられることになりました。島の置き方と「拡声しない」運用に、遮蔽を足して組みます。</p>
+      <div class="sec-kicker">Floor Plan</div>
+      <h2>会場レイアウト</h2>
+      <p class="sec-note">明日のレイアウト議論用に、図面を2枚並べています。画像をクリックすると別タブで原寸が開きます。</p>
     </div>
-
-    <div class="sec-kicker" style="margin-bottom:.9rem;">Drawings</div>
-    <p class="sec-note" style="margin-bottom:1.1rem;">明日のレイアウト議論用に、2枚を並べています。画像をクリックすると別タブで原寸が開きます。</p>
 
     <div class="dwg">
       <figure class="dwg-item">
@@ -7691,7 +7688,6 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
         <figcaption>
           <strong>① SEEDのレイアウト案（赤羽さん作成・9/3）</strong>
           <span>上段が<b>座談会モード</b>、下段が<b>ワークショップ・共有会モード</b>の2案。座談会は島組で、後方にオブザーバー席、入口側に受付、左のグレーの部屋が登壇者控室。ワークショップは劇作家5島・演出家2島・プロデューサー4島に分け、<b>三つ折りパーテーション4枚</b>で区切ります。新規に要るのは<b>カウンターチェア5脚</b>と<b>パーテーション4枚</b>。</span>
-          <span class="dwg-note">※ <b>プロジェクターとスクリーンは未記載</b>（作成時点では未確定だったため）。位置は調整中です。席数は84人で描かれていますが、<b>実際は参加者50名・1島5〜6人</b>で組み直します。</span>
         </figcaption>
       </figure>
       <figure class="dwg-item">
@@ -7706,62 +7702,6 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
       </figure>
     </div>
 
-    <div class="grid two" style="margin-bottom:1.6rem;">
-      <div class="card">
-        <h3>テーブルは終日動かしません</h3>
-        <p>仕込みの時点でテーブルを<strong>ステージに対して90度</strong>の島配置で確定させ、座談会中は椅子の向きだけを正面に変えます。転換は椅子の振りを戻すだけの5分。</p>
-        <p style="margin-top:.7rem;">テーブルの大移動をすると10〜15分かかり、終了が15:15までずれます。これを避けるための設計です。</p>
-      </div>
-      <div class="card">
-        <h3>島は職能単位で組みます</h3>
-        <ul>
-          <li>劇作：20名 → 4〜5卓</li>
-          <li>演出：10名 → 2〜3卓</li>
-          <li>プロデューサー：20名 → 5卓（4人前後×5チーム）</li>
-          <li>座談会のみ参加の方は、ランチ以降は後方に集約</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="plan" role="img" aria-label="701会議室の島配置。奥に演出と劇作、手前入口側にプロデューサー。間に通路を広く取る。">
-      <div class="plan-cap">Screen / Stage</div>
-      <div class="plan-stage">スクリーン（100インチ・1面）・登壇席</div>
-      <div class="plan-pair">
-        <div class="plan-box"><b>演出</b><span>10名・2〜3卓</span></div>
-        <div class="plan-box"><b>劇作</b><span>20名・4〜5卓／最奥・静かな側</span></div>
-      </div>
-      <div class="plan-gap">← 通路を広く空けて緩衝帯にする →</div>
-      <div class="plan-pair" style="grid-template-columns:1fr;">
-        <div class="plan-box"><b>プロデューサー</b><span>20名・5卓／入口側・議論が最も大きい</span></div>
-      </div>
-      <div class="plan-cap">Entrance / Reception</div>
-    </div>
-
-    <div style="margin-top:1.8rem;">
-      <div class="sec-kicker">Sound</div>
-      <div class="grid two" style="margin-top:.9rem;">
-        <div class="card">
-          <h3>拡声しない</h3>
-          <p>各WSでハンドマイクを一切使いません。1つでも拡声すると他2本が対抗して拡声し、45分間ずっと音量競争になります。ファシリの地声で届く島間隔にします。ブリーフィングで全ファシリに明言します。</p>
-        </div>
-        <div class="card">
-          <h3>アナウンスは鈴木さんに一本化</h3>
-          <p>「残り5分」などの合図は鈴木さんが1回だけ全体に出します。各WSが個別に大声を出さないでください。</p>
-        </div>
-        <div class="card">
-          <h3>パーティションで区切ります</h3>
-          <p>会場の備品に三つ折り・キャスター付きのパーティションがあるので、3〜4枚を島の間に立てます。視線が切れるだけでも集中は上がります。<strong>ホワイトボードは701会議室に2台が常設</strong>されているので、あわせて仕切りに使えます。</p>
-        </div>
-        <div class="card">
-          <h3>ワークショップは会場内で完結させます</h3>
-          <p>廊下は<strong>備品を一時的に出す程度なら使えます</strong>が、<strong>会場としては使えません</strong>。プロデューサーWSの2分プレゼン練習も含め、すべて701会議室の中で実施します。</p>
-        </div>
-        <div class="card">
-          <h3>劇作WSは「音がある環境」前提で</h3>
-          <p>静かな個人執筆よりも、グループでの声出し中心のほうがこの環境では成立しやすくなります。阿部さんに進め方をすり合わせておきたいところです。BGMは流しません（かえって全体の声量が上がるため）。</p>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
