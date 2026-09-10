@@ -7310,6 +7310,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
   <div class="navbar-scroll">
     <ul>
       <li><a href="#check">まず確認したいこと</a></li>
+      <li><a href="#bento">お弁当</a></li>
       <li><a href="#run">当日の流れ</a></li>
       <li><a href="#mine">あなたの一日</a></li>
       <li><a href="#venue">会場レイアウト</a></li>
@@ -7358,7 +7359,7 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
           <div class="fold-body">図面左側のグレーの部屋を、9/26はSEEDの控室として使えます。備品費用は原則各団体持ちで、他団体と重なるものは按分を検討いただけるとのこと。</div>
         </details>
         <details class="check fold">
-          <summary><span class="check-n">07</span><strong>お弁当は9/18時点の申込数＋スタッフ分の予備で発注する</strong></summary>
+          <summary><span class="check-n">07</span><strong>お弁当はSEEDが発注する（発注数の考え方は「お弁当」の項へ）</strong></summary>
           <div class="fold-body">数量変更期限（9/18 10:00）に合わせ、その時点の申込数に<strong>スタッフ・関係者分を予備として上乗せ</strong>して発注します。<strong style="color:var(--ink)">9/19以降にお申し込みがあった場合は、この予備から回します。</strong>これで参加者は全員分そろい、告知ページの「参加者全員にご用意します」とも整合します。スタッフ分が足りなくなった場合はスタッフ側で調整します。</div>
         </details>
         <details class="check fold">
@@ -7385,6 +7386,73 @@ document.getElementById('pw-input').addEventListener('keydown', function(e) {
         <div class="check">
           <span class="check-n">02</span>
           <span class="check-b"><strong>ご来賓（文化庁）のお名前とご肩書<span class="stat">未定</span></strong><span>11:10からの3分のご挨拶です。司会の野村さんがご紹介するため、当日までに必要です。</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ お弁当 ══ -->
+<section class="sec alt" id="bento">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">Lunch Box</div>
+      <h2>お弁当の発注</h2>
+      <p class="sec-note">シルバーウィークを挟むため、締切が通常より早まっています。<strong>発注は9月14日（月）10:00</strong>まで。</p>
+    </div>
+
+    <div class="grid two" style="margin-bottom:1.6rem;">
+      <div class="card">
+        <span class="lead-n">Deadline</span>
+        <h3>期限は2段階</h3>
+        <ul>
+          <li><b>9/14（月）10:00</b> ── 発注期限</li>
+          <li><b>9/18（金）10:00</b> ── 数量変更の期限</li>
+        </ul>
+        <p style="margin-top:.7rem;">東京国際フォーラム指定のケータリングを使います。申込書はPAB事務局へ返信し、先方から会場へ申し込む流れです。<a href="https://www.t-i-forum.co.jp/organizer/service/catering/lunch_box/" target="_blank" rel="noopener">メニューはこちら</a>。</p>
+      </div>
+      <div class="card">
+        <span class="lead-n">Count</span>
+        <h3>発注数の考え方</h3>
+        <p><b>9/18時点のお弁当申込人数</b>に、下の3つを足した数で発注します。</p>
+        <ul>
+          <li>事務局 <b>10名</b></li>
+          <li>講師 <b>6名</b></li>
+          <li>バッファ <b>5名分</b></li>
+        </ul>
+        <p style="margin-top:.7rem;">＝ <b>申込人数 ＋ 21食</b></p>
+      </div>
+    </div>
+
+    <div class="alert" style="margin-bottom:1.6rem;">
+      <div class="alert-title">
+        <span class="tag-alert">運用</span>
+        直前に申込が伸びて足りなくなったら
+      </div>
+      <p style="color:var(--ink-2); font-size:.9rem;"><strong style="color:var(--ink);">事務局の分を学生に回します。</strong>9/19以降のお申し込みはこの枠から充てるため、参加者は全員分そろいます。告知ページの「お弁当は参加者全員にご用意します（無料）」とも整合します。バッファ5食を先に使い、それでも足りなければ事務局分から回す順です。</p>
+    </div>
+
+    <div class="alert">
+      <div class="alert-title">
+        <span class="tag-alert">確認</span>
+        明日のMTGで決めたいこと
+      </div>
+      <div class="checks">
+        <div class="check">
+          <span class="check-n">01</span>
+          <span class="check-b"><strong>予算（1食あたりの上限）</strong><span>メニューに幅があるため、<strong style="color:var(--ink)">どのあたりまで選んでよいか</strong>を決めたいところです。申込人数がまだ動くので、単価×食数で総額が振れます。</span></span>
+        </div>
+        <div class="check">
+          <span class="check-n">02</span>
+          <span class="check-b"><strong>事務局10名の内訳</strong><span>Slackの記載では<strong style="color:var(--ink)">事務局10名</strong>ですが、当日スタッフとして進行表に入っているのは<strong style="color:var(--ink)">9名</strong>（野村・鈴木・横堀・遠藤・倉沢・川名・赤羽・佐々木・大野）です。<strong>伊藤さんが当日いらっしゃる前提</strong>で10名でしょうか。そうであれば進行表の当日スタッフも見直します。</span></span>
+        </div>
+        <div class="check">
+          <span class="check-n">03</span>
+          <span class="check-b"><strong>外注カメラマンの分</strong><span>10:00に入って終演まで入っていただく予定です。<strong style="color:var(--ink)">1食を見込むかどうか</strong>。見込む場合は事務局分に足すか、バッファから充てるかを決めておきます。</span></span>
+        </div>
+        <div class="check">
+          <span class="check-n">04</span>
+          <span class="check-b"><strong>業者の選定</strong><span>会場からは<strong style="color:var(--ink)">まい泉は直前の数量変更に応じてもらえるケースが多い</strong>と伺っています。9/18以降も動く可能性を考えると、融通の利く業者を選ぶ利点があります。</span></span>
         </div>
       </div>
     </div>
