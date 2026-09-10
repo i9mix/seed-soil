@@ -210,6 +210,46 @@
   .pabrs .check-b strong { display: block; font-weight: 600; font-size: .95rem; line-height: 1.5; }
   .pabrs .check-b span { display: block; color: var(--ink-2); font-size: .84rem; line-height: 1.6; margin-top: .15rem; }
   /* 状況ラベル。色に頼らず文字で状態を示す（デザインシステムの方針） */
+  /* 「回答あり」の各項目は折りたたむ。既定は閉じた状態。 */
+  .pabrs details.fold { background: var(--surface); padding: 0; display: block; }
+  .pabrs details.fold > summary {
+    display: flex; gap: .8rem; align-items: baseline;
+    padding: .85rem 1rem; cursor: pointer; list-style: none;
+  }
+  .pabrs details.fold > summary::-webkit-details-marker { display: none; }
+  .pabrs details.fold > summary strong {
+    flex: 1 1 auto; font-weight: 600; font-size: .95rem; line-height: 1.5;
+  }
+  .pabrs details.fold > summary::after {
+    content: ""; flex: none; width: .5rem; height: .5rem; margin-top: .35rem;
+    border-right: 1.5px solid var(--ink-3); border-bottom: 1.5px solid var(--ink-3);
+    transform: rotate(45deg); transition: transform .15s ease;
+  }
+  .pabrs details.fold[open] > summary::after { transform: rotate(-135deg); margin-top: .6rem; }
+  .pabrs details.fold > summary:hover { background: var(--ground-2); }
+  .pabrs details.fold .fold-body {
+    padding: 0 1rem 1rem calc(1rem + .78rem + .8rem);
+    color: var(--ink-2); font-size: .84rem; line-height: 1.7;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pabrs details.fold > summary::after { transition: none; }
+  }
+  /* 会場図面 */
+  .pabrs .dwg { display: grid; gap: 1.4rem; margin-bottom: 2rem; }
+  .pabrs .dwg-item { margin: 0; }
+  .pabrs .dwg-item a {
+    display: block; border: 1px solid var(--line); border-radius: var(--r-md);
+    overflow: hidden; background: var(--surface);
+  }
+  .pabrs .dwg-item a:hover { border-color: var(--ink-3); }
+  .pabrs .dwg-item img { width: 100%; height: auto; display: block; }
+  .pabrs .dwg-item figcaption { padding: .8rem .2rem 0; display: grid; gap: .35rem; }
+  .pabrs .dwg-item figcaption strong { font-size: .92rem; font-weight: 600; line-height: 1.5; }
+  .pabrs .dwg-item figcaption span { color: var(--ink-2); font-size: .84rem; line-height: 1.75; }
+  .pabrs .dwg-item .dwg-note { color: var(--ink-3); font-size: .79rem; }
+  @media (min-width: 54rem) {
+    .pabrs .dwg { grid-template-columns: 1fr 1fr; gap: 1.6rem; }
+  }
   .pabrs .check-b .stat {
     display: inline-block; margin: 0 0 0 .5rem; vertical-align: .06em;
     font-size: .66rem; font-weight: 400; letter-spacing: .04em; line-height: 1.7;
@@ -529,38 +569,38 @@
         PABからの回答で決まったこと（9/9）
       </div>
       <div class="checks">
-        <div class="check">
-          <span class="check-n">01</span>
-          <span class="check-b"><strong>前日仕込みは不可。ただしレイアウトは施設側が設置してくれる</strong><span>9/25は別団体の利用のため、入りは当日のみ。701会議室は<strong>9:00〜20:00</strong>で、9:00開室のため朝一番は開錠を少し待つ場合があります。<strong>事前に図面を送れば、テーブルと椅子は組まれた状態から始められます。</strong></span></span>
-        </div>
-        <div class="check">
-          <span class="check-n">02</span>
-          <span class="check-b"><strong>プロジェクターとスクリーンは会場備品で確定</strong><span>EPSON EB-1795F（HDMI入力・3200ルーメン）と自立式スクリーン100インチが各1台。<strong>投影は1面のみ</strong>です。PCは持ち込みで、HDMI端子がない場合は変換アダプタを持参します。位置は調整中。</span></span>
-        </div>
-        <div class="check">
-          <span class="check-n">03</span>
-          <span class="check-b"><strong>お弁当はSEEDが発注する</strong><span>PAB全体での用意はなく、東京国際フォーラム指定のケータリングを使います。<strong>発注期限 9/14（月）10:00 ／ 数量変更期限 9/18（金）10:00。</strong>まい泉は直前の数量変更に応じてもらえるケースが多いとのことです。費用はSEED負担。</span></span>
-        </div>
-        <div class="check">
-          <span class="check-n">04</span>
-          <span class="check-b"><strong>受付はSEED側で対応。PABからは開場帯に1名</strong><span>各団体で受付を持つ方針です。PABからは<strong>開場時間帯にサポート1名</strong>。ほかに7Fラウンジ含む全体案内スタッフが2〜3名いますが、SEED専属ではありません。</span></span>
-        </div>
-        <div class="check">
-          <span class="check-n">05</span>
-          <span class="check-b"><strong>館内の貼りものは不可。案内は701入口前のみ</strong><span>7階の廊下と壁は共用通路のため掲出できません。<strong>701入口前のサインスタンド（A3横・会議室に1台無料付属）</strong>だけが使えます。</span></span>
-        </div>
-        <div class="check">
-          <span class="check-n">06</span>
-          <span class="check-b"><strong>控室が用意される／備品費用は各団体負担</strong><span>図面左側のグレーの部屋を、9/26はSEEDの控室として使えます。備品費用は原則各団体持ちで、他団体と重なるものは按分を検討いただけるとのこと。</span></span>
-        </div>
-        <div class="check">
-          <span class="check-n">07</span>
-          <span class="check-b"><strong>お弁当は9/18時点の申込数＋スタッフ分の予備で発注する</strong><span>数量変更期限（9/18 10:00）に合わせ、その時点の申込数に<strong>スタッフ・関係者分を予備として上乗せ</strong>して発注します。<strong style="color:var(--ink)">9/19以降にお申し込みがあった場合は、この予備から回します。</strong>これで参加者は全員分そろい、告知ページの「参加者全員にご用意します」とも整合します。スタッフ分が足りなくなった場合はスタッフ側で調整します。</span></span>
-        </div>
-        <div class="check">
-          <span class="check-n">08</span>
-          <span class="check-b"><strong>照明の調光ができる</strong><span>スクリーン側だけ落とせるため、<strong>3200ルーメンで100インチでも投影は問題なく見えます。</strong>当日の仕込みで、客席の明るさとのバランスを一度合わせておきます。</span></span>
-        </div>
+        <details class="check fold">
+          <summary><span class="check-n">01</span><strong>前日仕込みは不可。ただしレイアウトは施設側が設置してくれる</strong></summary>
+          <div class="fold-body">9/25は別団体の利用のため、入りは当日のみ。701会議室は<strong>9:00〜20:00</strong>で、9:00開室のため朝一番は開錠を少し待つ場合があります。<strong>事前に図面を送れば、テーブルと椅子は組まれた状態から始められます。</strong></div>
+        </details>
+        <details class="check fold">
+          <summary><span class="check-n">02</span><strong>プロジェクターとスクリーンは会場備品で確定</strong></summary>
+          <div class="fold-body">EPSON EB-1795F（HDMI入力・3200ルーメン）と自立式スクリーン100インチが各1台。<strong>投影は1面のみ</strong>です。PCは持ち込みで、HDMI端子がない場合は変換アダプタを持参します。位置は調整中。</div>
+        </details>
+        <details class="check fold">
+          <summary><span class="check-n">03</span><strong>お弁当はSEEDが発注する</strong></summary>
+          <div class="fold-body">PAB全体での用意はなく、東京国際フォーラム指定のケータリングを使います。<strong>発注期限 9/14（月）10:00 ／ 数量変更期限 9/18（金）10:00。</strong>まい泉は直前の数量変更に応じてもらえるケースが多いとのことです。費用はSEED負担。</div>
+        </details>
+        <details class="check fold">
+          <summary><span class="check-n">04</span><strong>受付はSEED側で対応。PABからは開場帯に1名</strong></summary>
+          <div class="fold-body">各団体で受付を持つ方針です。PABからは<strong>開場時間帯にサポート1名</strong>。ほかに7Fラウンジ含む全体案内スタッフが2〜3名いますが、SEED専属ではありません。</div>
+        </details>
+        <details class="check fold">
+          <summary><span class="check-n">05</span><strong>館内の貼りものは不可。案内は701入口前のみ</strong></summary>
+          <div class="fold-body">7階の廊下と壁は共用通路のため掲出できません。<strong>701入口前のサインスタンド（A3横・会議室に1台無料付属）</strong>だけが使えます。</div>
+        </details>
+        <details class="check fold">
+          <summary><span class="check-n">06</span><strong>控室が用意される／備品費用は各団体負担</strong></summary>
+          <div class="fold-body">図面左側のグレーの部屋を、9/26はSEEDの控室として使えます。備品費用は原則各団体持ちで、他団体と重なるものは按分を検討いただけるとのこと。</div>
+        </details>
+        <details class="check fold">
+          <summary><span class="check-n">07</span><strong>お弁当は9/18時点の申込数＋スタッフ分の予備で発注する</strong></summary>
+          <div class="fold-body">数量変更期限（9/18 10:00）に合わせ、その時点の申込数に<strong>スタッフ・関係者分を予備として上乗せ</strong>して発注します。<strong style="color:var(--ink)">9/19以降にお申し込みがあった場合は、この予備から回します。</strong>これで参加者は全員分そろい、告知ページの「参加者全員にご用意します」とも整合します。スタッフ分が足りなくなった場合はスタッフ側で調整します。</div>
+        </details>
+        <details class="check fold">
+          <summary><span class="check-n">08</span><strong>照明の調光ができる</strong></summary>
+          <div class="fold-body">スクリーン側だけ落とせるため、<strong>3200ルーメンで100インチでも投影は問題なく見えます。</strong>当日の仕込みで、客席の明るさとのバランスを一度合わせておきます。</div>
+        </details>
         <div class="check">
           <span class="check-n">09</span>
           <span class="check-b"><strong>当日の連絡先</strong><span>PAB制作担当 佐々木一美さん 090-9535-2305 ／ JPASNコンテンツ担当 田村美紀さん 090-7333-4309（基本的に7Fラウンジ）。<strong>当日の入り時間と人数は、関係者パスの手配のため先方へ連絡が必要です。</strong></span></span>
@@ -854,6 +894,32 @@
       <div class="sec-kicker">Floor &amp; Sound</div>
       <h2>会場レイアウトと音対策</h2>
       <p class="sec-note">会場の備品からパーティションを借りられることになりました。島の置き方と「拡声しない」運用に、遮蔽を足して組みます。</p>
+    </div>
+
+    <div class="sec-kicker" style="margin-bottom:.9rem;">Drawings</div>
+    <p class="sec-note" style="margin-bottom:1.1rem;">明日のレイアウト議論用に、2枚を並べています。画像をクリックすると別タブで原寸が開きます。</p>
+
+    <div class="dwg">
+      <figure class="dwg-item">
+        <a href="dashboard/pab-layout-seed-v0.png" target="_blank" rel="noopener">
+          <img src="dashboard/pab-layout-seed-v0.png" alt="赤羽さん作成のSEED会場レイアウト案。上段が座談会モードで島組84人、下段がワークショップ・共有会モードで劇作家コース5島・演出家コース2島・プロデューサーコース4島をパーティションで区切る構成。">
+        </a>
+        <figcaption>
+          <strong>① SEEDのレイアウト案（赤羽さん作成・9/3）</strong>
+          <span>上段が<b>座談会モード</b>、下段が<b>ワークショップ・共有会モード</b>の2案。座談会は島組で、後方にオブザーバー席、入口側に受付、左のグレーの部屋が登壇者控室。ワークショップは劇作家5島・演出家2島・プロデューサー4島に分け、<b>三つ折りパーテーション4枚</b>で区切ります。新規に要るのは<b>カウンターチェア5脚</b>と<b>パーテーション4枚</b>。</span>
+          <span class="dwg-note">※ <b>プロジェクターとスクリーンは未記載</b>（作成時点では未確定だったため）。位置は調整中です。席数は84人で描かれていますが、<b>実際は参加者50名・1島5〜6人</b>で組み直します。</span>
+        </figcaption>
+      </figure>
+      <figure class="dwg-item">
+        <a href="dashboard/pab-layout-venue-0909.png" target="_blank" rel="noopener">
+          <img src="dashboard/pab-layout-venue-0909.png" alt="会場側から届いた701会議室の基本レイアウト図。シアター形式90席、前方にポータブルステージとスクリーン、左右にホワイトボード、右手に控室エリア。">
+        </a>
+        <figcaption>
+          <strong>② 会場側の基本レイアウト（PAB提供・ver.0909）</strong>
+          <span>前日9/25時点の基本形です。<b>シアター形式90席</b>で、前方にポータブルステージ（H400mm）とスクリーン、左右にホワイトボード。<b>ここから変えたい部分を図面にして9/13までに出すと、施設側が設置してくれます。</b></span>
+          <span class="dwg-note">※ この状態に含まれる備品（追加費用なし）：ポータブルステージU H400mm 5台／脚折れテーブル5台／幕板付テーブル1台／椅子110台／ホワイトボード2台／プロジェクター EB-1795F 1台＋台1台／自立式スクリーン100インチ1台。<b>マイクは4本まで</b>（5本目以降は要相談）。投写距離6000mm、3200ルーメン。</span>
+        </figcaption>
+      </figure>
     </div>
 
     <div class="grid two" style="margin-bottom:1.6rem;">
