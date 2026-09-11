@@ -267,6 +267,36 @@
   .pabrs table.eq td:last-child { min-width: 18rem; }
   .pabrs table.eq tbody th { min-width: 12rem; }
   .pabrs .eq-note { color: var(--ink-3); font-size: .79rem; line-height: 1.7; margin-top: .5rem; }
+  /* 本日のアジェンダ */
+  .pabrs .ag-date {
+    margin-left: .7rem; font-family: var(--display); font-size: .72rem;
+    letter-spacing: .14em; color: var(--ink-3); font-variant-numeric: tabular-nums;
+    font-weight: 400; white-space: nowrap;
+  }
+  .pabrs ol.agenda {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; gap: 1px; background: var(--line);
+    border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden;
+  }
+  .pabrs ol.agenda > li { background: var(--surface); padding: 1rem 1.15rem 1.1rem; }
+  .pabrs .ag-h {
+    display: flex; align-items: baseline; gap: .7rem; flex-wrap: wrap; margin-bottom: .35rem;
+  }
+  .pabrs .ag-n {
+    font-family: var(--display); font-size: .78rem; color: var(--mark);
+    font-variant-numeric: tabular-nums; flex: none;
+  }
+  .pabrs .ag-h strong { flex: 1 1 12rem; font-size: .98rem; font-weight: 600; line-height: 1.5; }
+  .pabrs .ag-due {
+    flex: none; font-size: .68rem; letter-spacing: .04em; color: var(--ink-2);
+    background: var(--ground-2); border-radius: var(--r-pill); padding: .12rem .6rem;
+    white-space: nowrap;
+  }
+  .pabrs ol.agenda p {
+    color: var(--ink-2); font-size: .87rem; line-height: 1.75;
+    padding-left: calc(.78rem + .7rem);
+  }
+  .pabrs ol.agenda a { text-decoration: underline; text-underline-offset: .18em; }
   .pabrs .check-b .stat {
     display: inline-block; margin: 0 0 0 .5rem; vertical-align: .06em;
     font-size: .66rem; font-weight: 400; letter-spacing: .04em; line-height: 1.7;
@@ -562,7 +592,9 @@
 <nav class="navbar" aria-label="ページ内の移動">
   <div class="navbar-scroll">
     <ul>
+      <li><a href="#agenda">本日のアジェンダ</a></li>
       <li><a href="#check">まず確認したいこと</a></li>
+      <li><a href="#waitlist">申込・キャンセル待ち</a></li>
       <li><a href="#bento">お弁当</a></li>
       <li><a href="#run">当日の流れ</a></li>
       <li><a href="#mine">あなたの一日</a></li>
@@ -571,6 +603,40 @@
     </ul>
   </div>
 </nav>
+
+<!-- ══ 本日のアジェンダ ══ -->
+<section class="sec" id="agenda">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">Today</div>
+      <h2>本日のMTG アジェンダ<span class="ag-date">2026.09.11</span></h2>
+      <p class="sec-note">締切が近い順に並べています。<strong>①は②③④すべてに効く</strong>ので、先に決めておきたいところです。</p>
+    </div>
+
+    <ol class="agenda">
+      <li>
+        <div class="ag-h"><span class="ag-n">01</span><strong>演出家ワークショップの定員を15名にするか</strong><span class="ag-due">後続に波及</span></div>
+        <p>川名さん・田中さんから<b>15名まで可能</b>とのご判断をいただいています。上げる場合、告知ページの「定員10名」（<b>5箇所</b>）の修正に加えて、島の数・備品の数・お弁当の数にも効きます。<a href="#waitlist">申込・キャンセル待ち</a>に詳細をまとめました。</p>
+      </li>
+      <li>
+        <div class="ag-h"><span class="ag-n">02</span><strong>キャンセル待ちの繰り上げをどう案内するか</strong><span class="ag-due">運用</span></div>
+        <p><b>随時案内するか、日を決めて一気に繰り上げるか。</b>いま待っている2名への連絡をいつ出すかも含めて決めます。赤羽さんからは「現段階なら随時で問題ないが、今後を考えると日を決める手もある」とのご意見をいただいています。</p>
+      </li>
+      <li>
+        <div class="ag-h"><span class="ag-n">03</span><strong>希望備品リストを確定する</strong><span class="ag-due">9/13（日）提出</span></div>
+        <p>テーブルの台数（島の数しだいで20〜24台）、ホワイトボードを足すか、演台が要るか。<a href="#venue">会場レイアウト</a>にリストと論点を置いています。図面もあわせて確定が必要です。</p>
+      </li>
+      <li>
+        <div class="ag-h"><span class="ag-n">04</span><strong>お弁当の予算（1食あたりの上限）</strong><span class="ag-due">9/14（月）10:00 発注</span></div>
+        <p>メニューに幅があるため、どのあたりまで選んでよいかを決めます。<b>発注は申込人数＋22食</b>。<a href="#bento">お弁当</a>に内訳があります。</p>
+      </li>
+      <li>
+        <div class="ag-h"><span class="ag-n">05</span><strong>残りの確認事項</strong><span class="ag-due">随時</span></div>
+        <p>会場のマイクは4本までで、プロデューサー座談会は5本要ります（<b>本日PABへ確認</b>）。ご来賓（文化庁）のお名前とご肩書も、司会のご紹介で必要になります。</p>
+      </li>
+    </ol>
+  </div>
+</section>
 
 <!-- ══ まず確認したいこと ══ -->
 <section class="sec" id="check">
@@ -639,6 +705,82 @@
         <div class="check">
           <span class="check-n">02</span>
           <span class="check-b"><strong>ご来賓（文化庁）のお名前とご肩書<span class="stat">未定</span></strong><span>11:10からの3分のご挨拶です。司会の野村さんがご紹介するため、当日までに必要です。</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 申込・キャンセル待ち ══ -->
+<section class="sec" id="waitlist">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">Waitlist</div>
+      <h2>申込とキャンセル待ち</h2>
+      <p class="sec-note">演出家ワークショップの定員と、キャンセル待ちの繰り上げ方について。本日のMTGで決めます。</p>
+    </div>
+
+    <div class="grid two" style="margin-bottom:1.6rem;">
+      <div class="card">
+        <span class="lead-n">Status</span>
+        <h3>いまの状況</h3>
+        <ul>
+          <li>演出家コースの定員は告知上 <b>10名</b></li>
+          <li>川名さん・田中さんのご判断で <b>15名まで可能</b></li>
+          <li>空き枠 <b>4枠</b>／キャンセル待ち <b>2名</b></li>
+        </ul>
+        <p style="margin-top:.7rem;">2名を繰り上げると、残りは<b>2枠</b>になります。</p>
+      </div>
+      <div class="card">
+        <span class="lead-n">Plan</span>
+        <h3>出ている案</h3>
+        <ul>
+          <li>キャンセル待ちの受付は<b>そのまま続ける</b></li>
+          <li><b>15名までは受け入れ</b>、それ以降は見学へ振り分ける</li>
+          <li>いま待っている2名には「枠が確保できた」とご連絡する</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="alert" style="margin-bottom:1.6rem;">
+      <div class="alert-title">
+        <span class="tag-alert">論点</span>
+        繰り上げ案内のタイミング
+      </div>
+      <div class="checks">
+        <div class="check">
+          <span class="check-n">A</span>
+          <span class="check-b"><strong>随時、空きが出たらすぐ案内する</strong><span>待っている方をお待たせしません。いまは2名なので<b>この規模なら問題なさそう</b>というのが赤羽さんのご意見です。ただし今後キャンセルが重なると、連絡のたびに手が動きます。</span></span>
+        </div>
+        <div class="check">
+          <span class="check-n">B</span>
+          <span class="check-b"><strong>日を決めて一気に繰り上げる</strong><span>連絡を一度にまとめられ、記録も残しやすくなります。<b>申込締切（9/24）や、お弁当の数量を固める9/18</b>と揃えると、数の管理とも噛み合います。待っている方には少しお時間をいただくことになります。</span></span>
+        </div>
+      </div>
+      <p class="eq-note">※ お弁当の数量は<b>9/18（金）10:00時点の申込数</b>で確定します。繰り上げをこの日より後に回すと、その分はバッファから充てることになります。</p>
+    </div>
+
+    <div class="alert">
+      <div class="alert-title">
+        <span class="tag-alert">波及</span>
+        定員を15名にすると動くところ
+      </div>
+      <div class="checks">
+        <div class="check">
+          <span class="check-n">01</span>
+          <span class="check-b"><strong>告知ページの「定員10名」5箇所</strong><span>ワークショップの詳細、申込方法のステップ、開催概要、モーダルの中と、<strong style="color:var(--ink)">計5箇所</strong>に出てきます。直すなら合わせて修正し、デプロイし直します。</span></span>
+        </div>
+        <div class="check">
+          <span class="check-n">02</span>
+          <span class="check-b"><strong>参加者の上限が50名から55名へ</strong><span>劇作20＋演出15＋プロデューサー20で<b>55名</b>。いまのレイアウトは<b>50名・1島5〜6人</b>で設計しているため、島の数が増えます（演出2島→3島、全体10島→11島）。</span></span>
+        </div>
+        <div class="check">
+          <span class="check-n">03</span>
+          <span class="check-b"><strong>備品のテーブルが2台増える</strong><span>1島＝脚折れテーブル2台なので、島が1つ増えると<strong style="color:var(--ink)">22台→24台</strong>。<b>9/13の提出に直接効くため、今日決めておきたいところです。</b>椅子は110台あるので問題ありません。</span></span>
+        </div>
+        <div class="check">
+          <span class="check-n">04</span>
+          <span class="check-b"><strong>お弁当は申込数に連動</strong><span>発注数は「申込人数＋22食」なので、式そのものは変わりません。定員が増えたぶん<b>申込人数が伸びる可能性</b>があるという話です。</span></span>
         </div>
       </div>
     </div>
