@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>SEED PAB特別プログラム＆講座説明会｜2026.9.26（土）東京国際フォーラム</title>
-<meta name="description" content="劇作家・演出家・プロデューサーという舞台をつくる三つの仕事を、座談会・ワークショップ・説明会の3パートで体験できる一日。学生を中心にどなたでも参加OK・参加無料。2026年9月26日（土）11:00〜15:15、東京国際フォーラム ガラス棟7F 701会議室（Performing Arts Base 2026 内）。">
+<meta name="description" content="劇作家・演出家・プロデューサーという舞台をつくる三つの仕事を、座談会・ワークショップ・説明会の3パートで体験できる一日。学生を中心にどなたでも参加OK・参加無料。2026年9月26日（土）11:00〜15:30、東京国際フォーラム ガラス棟7F 701会議室（Performing Arts Base 2026 内）。">
 <meta name="theme-color" content="#ffffff">
 
 <!-- v3：一日の流れを最上位に置き、三つの講座を「ワークショップ」の時間帯の中に入れた統合版 -->
@@ -337,6 +337,63 @@
   .spk-photo .ph { display: none !important; }
   /* ▲▲▲ 公開用スイッチ ここまで ▲▲▲ */
 
+  /* ══════════════════════════════════════════════════
+     ▼▼▼ 受付状況スイッチ ▼▼▼
+
+     各ワークショップの受付状況は、<body> タグの属性だけで切り替わります。
+     このCSSもHTML本文も、触る必要はありません。
+
+       <body data-seat-pw="open" data-seat-dr="open" data-seat-pr="open">
+              ├ pw = 劇作家   ├ dr = 演出家   └ pr = プロデューサー
+
+       open … 通常（バッジなし）
+       few  … 「残りわずか」バッジ
+       wait … 「満席・キャンセル待ち」バッジ ＋ キャンセル待ちの流れの説明
+       full … 「満席」バッジ ＋ 受付終了の注記
+
+     例：演出家がキャンセル待ちになったら data-seat-dr を "wait" に書き換えるだけ。
+     バッジは 一日の流れ／参加方法／詳細モーダル／よくある質問／開催概要 の
+     5箇所に同時に反映されます。
+     ══════════════════════════════════════════════════ */
+  .seat {
+    display: none;
+    font-size: .7rem; letter-spacing: .04em; line-height: 1.5;
+    padding: .16em .7em; border-radius: var(--r-pill);
+    white-space: nowrap; vertical-align: .1em; margin-left: .45em;
+  }
+  .seat-few  { border: 1px solid var(--ink-2); color: var(--ink); }
+  .seat-wait { background: var(--ink-2); color: var(--ground); }
+  .seat-full { background: var(--ink); color: var(--ground); }
+
+  [data-seat-pw="few"]  .seat-pw.seat-few,
+  [data-seat-dr="few"]  .seat-dr.seat-few,
+  [data-seat-pr="few"]  .seat-pr.seat-few,
+  [data-seat-pw="wait"] .seat-pw.seat-wait,
+  [data-seat-dr="wait"] .seat-dr.seat-wait,
+  [data-seat-pr="wait"] .seat-pr.seat-wait,
+  [data-seat-pw="full"] .seat-pw.seat-full,
+  [data-seat-dr="full"] .seat-dr.seat-full,
+  [data-seat-pr="full"] .seat-pr.seat-full { display: inline-block; }
+
+  /* 講座ごとの説明（その講座がキャンセル待ちのときだけ出る。詳細モーダル内で使用） */
+  .seatmsg { display: none; font-size: .84rem; color: var(--ink-2); line-height: 1.8; margin-top: .5rem; }
+  [data-seat-pw="wait"] .seatmsg-pw,
+  [data-seat-dr="wait"] .seatmsg-dr,
+  [data-seat-pr="wait"] .seatmsg-pr { display: block; }
+
+  /* いずれかの講座が満席（受付終了）のときだけ出る注記 */
+  .seat-note { display: none; margin-top: .7rem; }
+  [data-seat-pw="full"] .seat-note,
+  [data-seat-dr="full"] .seat-note,
+  [data-seat-pr="full"] .seat-note { display: block; }
+
+  /* いずれかの講座がキャンセル待ちのときだけ出る注記 */
+  .wait-note { display: none; margin-top: .7rem; }
+  [data-seat-pw="wait"] .wait-note,
+  [data-seat-dr="wait"] .wait-note,
+  [data-seat-pr="wait"] .wait-note { display: block; }
+  /* ▲▲▲ 受付状況スイッチ ここまで ▲▲▲ */
+
   /* 差し替え用マーカー：本番公開時はこの class を外す */
   .tbd {
     border: 1px dashed var(--line-2); background: var(--ground-2);
@@ -405,12 +462,40 @@
   footer { background: var(--ground-2); border-top: 1px solid var(--line); }
   footer .wrap {
     padding-top: 1.7rem; padding-bottom: 2rem;
-    display: grid; gap: 1.2rem;
+    display: grid; gap: 1.5rem;
     font-size: .78rem; color: var(--ink-3);
   }
+  footer .f-main { padding-top: 1.4rem; border-top: 1px solid var(--line-2); }
   footer .f-brand { display: grid; gap: .5rem; justify-items: start; }
   footer .f-logo { height: 30px; width: auto; }
   footer .f-name { font-family: var(--display); font-size: .95rem; letter-spacing: .14em; color: var(--ink); }
+
+  /* ══ 助成クレジット（文化庁／日本芸術文化振興会） ══
+     シンボルマークは各ガイドラインで色・比率・最小サイズが定められているため、
+     このページのグレースケール配色の例外として原色のまま掲載する。
+     クリアスペースを確保するため .f-mark には余白を持たせている。 */
+  .f-credit { display: grid; gap: 1.1rem; }
+  .f-cred-list { margin: 0; display: grid; gap: .55rem; }
+  .f-cred-row { display: grid; gap: .1rem; }
+  .f-cred-row dt {
+    font-family: var(--display); font-size: .68rem; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--ink-3);
+  }
+  .f-cred-row dd { margin: 0; color: var(--ink-2); line-height: 1.75; }
+  /* 「｜独立行政法人日本芸術文化振興会」は区切り記号ごと1かたまりで折り返す
+     （行末に｜だけが取り残されるのを防ぐ） */
+  .nw { white-space: nowrap; }
+  .f-marks {
+    display: flex; flex-wrap: wrap; align-items: center;
+    gap: .6rem 1.6rem;
+  }
+  /* 各マークのクリアスペース：ガイドラインの最小余白を下回らないよう内側に確保する。
+     box-sizing を content-box に戻し、padding がマーク自体の描画サイズを削らないようにする
+     （border-box のままだと height から余白分が引かれ、最小サイズを割ってしまう） */
+  .f-mark { width: auto; display: block; box-sizing: content-box; }
+  .f-mark-jcsf { height: 104px; padding: 10px 14px; }   /* 基本形・テーマ2行：最小 高さ27mm 相当 */
+  .f-mark-bunka { height: 46px; padding: 10px 12px; }   /* 和文・横配置：保護エリア分を確保 */
+  .f-credit-foot { color: var(--ink-3); line-height: 1.7; }
 
   /* ══ モバイル固定CTA ══ */
   .sticky-cta {
@@ -449,7 +534,9 @@
     .outline-row { grid-template-columns: 8.5rem 1fr; gap: .2rem 1.4rem; }
     .apply { padding: 2rem 1.8rem 2.2rem; }
     .speakers { gap: 1.7rem 1.3rem; }
-    footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 1rem 2rem; }
+    footer .f-main { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 1rem 2rem; }
+    .f-credit { grid-template-columns: 1fr auto; align-items: center; gap: 1rem 2.4rem; }
+    .f-cred-row { grid-template-columns: 4.6rem 1fr; gap: .2rem 1rem; align-items: baseline; }
 
     /* 申込バー（可動フッター）：画面幅いっぱいをやめ、中央に浮かぶ操作パネルにする */
     .sticky-cta {
@@ -493,6 +580,11 @@
   }
   .fit-list li::before { content: "✓"; font-family: var(--display); color: var(--ink); flex: none; }
   .fit-note { font-size: .85rem; color: var(--ink-3); }
+  /* 助成事業としての明記。本文より一段引いた注記として扱う */
+  .fund-note {
+    font-size: .8rem; color: var(--ink-3); line-height: 1.85;
+    padding-top: .9rem; border-top: 1px solid var(--line);
+  }
 
   .sub-h { font-size: 1.05rem; font-weight: 700; letter-spacing: .04em; margin: 1.2rem 0 0; }
   /* 統合セクション内の区切り。長い1セクションでも段落構造が読めるようにする */
@@ -650,7 +742,9 @@
 </style>
 </head>
 
-<body>
+<!-- 受付状況：pw=劇作家／dr=演出家／pr=プロデューサー。値は open・few・full の3つ。
+     満席になったら該当する値を "full" に書き換えるだけ（詳細は <style> 内の《受付状況スイッチ》） -->
+<body data-seat-pw="open" data-seat-dr="wait" data-seat-pr="open">
 
 <header class="mast">
   <div class="wrap">
@@ -683,7 +777,7 @@
       </div>
       <div class="fact">
         <dt>Time</dt>
-        <dd>11:00 – 15:15<span class="sm">開場 10:30</span></dd>
+        <dd>11:00 – 15:30<span class="sm">開場 10:30</span></dd>
       </div>
       <div class="fact">
         <dt>Venue</dt>
@@ -703,7 +797,9 @@
       <a class="btn" href="https://form.run/@seed-pab" target="_blank" rel="noopener"><span>参加を申し込む</span><span class="arr" aria-hidden="true">→</span><span class="visually-hidden">（別タブで開きます）</span></a>
       <span class="btn-note">申込締切 9月24日（木）<br>定員に達し次第、受付を終了します</span>
     </div>
-    <p class="hero-host rise">主催：SEED（JPASN）／Performing Arts Base 2026 のプログラムとして開催</p>
+    <!-- 主催は文化庁・日本芸術文化振興会・JPASNの3者（ページ下部のクレジット参照）。
+         ヒーローでは「SEEDが実施する講座」であることだけを示し、主催表記の重複・齟齬を避ける。 -->
+    <p class="hero-host rise">SEED（JPASN）による講座／Performing Arts Base 2026 のプログラムとして開催</p>
   </div>
 </div>
 
@@ -727,7 +823,7 @@
         <div class="how-item">
           <span class="how-tag">02 Workshop ── ワークショップ</span>
           <span class="h">午後・3つ同時進行 ── <b>参加はひとつだけ</b></span>
-          <span class="d">職能ごとのテーブルに分かれて、実際に手を動かします。申込時にひとつお選びください。<br><b>対象：25歳まで</b>（26歳以上の方も見学できます）<br><b>定員：10〜20名</b>（講座により異なります）</span>
+          <span class="d">職能ごとのテーブルに分かれて、実際に手を動かします。申込時にひとつお選びください。<br><b>対象：25歳まで</b>（26歳以上の方も見学できます）<br><b>定員：15〜20名</b>（講座により異なります）</span>
         </div>
         <div class="how-item">
           <span class="how-tag">03 Guidance ── 説明会</span>
@@ -743,15 +839,22 @@
           <div class="tt-body"><div class="tt-name">開場・受付</div></div>
         </div>
         <div class="tt-row">
-          <div class="tt-time">11:00 – 12:40</div>
+          <div class="tt-time">11:00 – 11:20</div>
+          <div class="tt-body">
+            <div class="tt-name">開会・ごあいさつ</div>
+            <div class="tt-desc">SEEDという事業のご説明と、ご来賓のごあいさつ。そのあと、同じテーブルになった方どうしで少しだけ言葉を交わす時間を取ります。<b>この日は一日、同じテーブルで過ごしていただきます。</b></div>
+          </div>
+        </div>
+        <div class="tt-row">
+          <div class="tt-time">11:20 – 13:00</div>
           <div class="tt-body">
             <div class="tt-name">座談会</div>
             <span class="fmt">順番に3本 ── すべて聴けます</span>
             <div class="talk-grid">
               <div class="talk-cell">
-                <div class="tc-head"><span class="tc-n">01</span><span class="tc-r">Playwright</span><span class="tc-t">25 min</span></div>
-                <p class="tc-d">物語の種はどこにあるのか。イギリスでのリサーチ報告と、戯曲の書き始め方がわかる劇作入門講座。</p>
-                <p class="tc-s">登壇：<b>阿部 のぞみ</b></p>
+                <div class="tc-head"><span class="tc-n">01</span><span class="tc-r">Producer</span><span class="tc-t">40 min</span></div>
+                <p class="tc-d">日本の舞台芸術の海外展開を最前線で牽引するプロデューサーたちに、なぜ今の仕事をしているのかから現場の今まで、幅広く伺います。</p>
+                <p class="tc-s">登壇：<b>井川 荃芬</b>（ホリプロ）／<b>小嶋 麻倫子</b>（東宝）／<b>松本 美千穂</b>（ネルケプランニング）／<b>高橋 戦車</b>（劇団鹿殺し）</p>
               </div>
               <div class="talk-cell">
                 <div class="tc-head"><span class="tc-n">02</span><span class="tc-r">Director</span><span class="tc-t">25 min</span></div>
@@ -759,24 +862,24 @@
                 <p class="tc-s">登壇：<b>田中 麻衣子</b>（演出家）</p>
               </div>
               <div class="talk-cell">
-                <div class="tc-head"><span class="tc-n">03</span><span class="tc-r">Producer</span><span class="tc-t">40 min</span></div>
-                <p class="tc-d">日本の舞台芸術の海外展開を最前線で牽引するプロデューサーたちに、なぜ今の仕事をしているのかから現場の今まで、幅広く伺います。</p>
-                <p class="tc-s">登壇：<b>井川 荃芬</b>（ホリプロ）／<b>小嶋 麻倫子</b>（東宝）／<b>松本 美千穂</b>（ネルケプランニング）</p>
+                <div class="tc-head"><span class="tc-n">03</span><span class="tc-r">Playwright</span><span class="tc-t">25 min</span></div>
+                <p class="tc-d">物語の種はどこにあるのか。イギリスでのリサーチ報告と、戯曲の書き始め方がわかる劇作入門講座。</p>
+                <p class="tc-s">登壇：<b>阿部 のぞみ</b></p>
               </div>
             </div>
-            <div class="tt-foot">※ 実施順は変更になる場合があります。</div>
+            <div class="tt-foot">※ 登壇者は追加予定です。決定次第このページで公開します。</div>
           </div>
         </div>
         <div class="tt-row">
-          <div class="tt-time">12:45 – 13:30</div>
+          <div class="tt-time">13:00 – 13:45</div>
           <div class="tt-body">
             <div class="tt-name">ランチ交流</div>
             <span class="fmt">講師と同じテーブルで</span>
-            <div class="tt-desc">講師陣が各テーブルに分かれて、45分間のランチ交流。<b>お弁当は参加者全員にご用意します（無料）。</b>持ち物は不要です。</div>
+            <div class="tt-desc">講師陣が各テーブルをまわります。<b>午後のワークショップと同じメンバー</b>なので、ここで自己紹介を済ませておくと午後が動きやすくなります。<b>お弁当は参加者全員にご用意します（無料）。</b>持ち物は不要です。</div>
           </div>
         </div>
         <div class="tt-row">
-          <div class="tt-time">13:30 – 14:15</div>
+          <div class="tt-time">13:45 – 14:30</div>
           <div class="tt-body">
             <div class="tt-name">ワークショップ</div>
             <span class="fmt">3つ同時に進行 ── 参加はいずれかひとつ</span>
@@ -790,7 +893,8 @@
                   <dt>Workshop</dt>
                   <dd>グループでひとつの物語を書き上げるライティングワークショップ。戯曲の執筆経験は問いません。</dd>
                   <dt>参加できる人</dt>
-                  <dd><b>25歳まで</b>・<b>定員20名</b></dd>
+                  <dd><b>25歳まで</b>・<b>定員20名</b>
+                    <span class="seat seat-pw seat-few">残りわずか</span><span class="seat seat-pw seat-wait">満席・キャンセル待ち</span><span class="seat seat-pw seat-full">満席</span></dd>
                 </dl>
                 <span class="course-more">詳細を見る <span class="arr" aria-hidden="true">→</span></span>
               </article>
@@ -802,7 +906,8 @@
                   <dt>Workshop</dt>
                   <dd>既存戯曲を用いて、演出家目線で作品プランを考えます。グループで発表・フィードバックを行い、ブラッシュアップ。最後は各グループから数人が全体に向けて発表します。</dd>
                   <dt>参加できる人</dt>
-                  <dd><b>25歳まで</b>・<b>定員10名</b></dd>
+                  <dd><b>25歳まで</b>・<b>定員15名</b>
+                    <span class="seat seat-dr seat-few">残りわずか</span><span class="seat seat-dr seat-wait">満席・キャンセル待ち</span><span class="seat seat-dr seat-full">満席</span></dd>
                 </dl>
                 <span class="course-more">詳細を見る <span class="arr" aria-hidden="true">→</span></span>
               </article>
@@ -814,17 +919,17 @@
                   <dt>Workshop</dt>
                   <dd>くじで引いた条件（テーマ・ターゲットなど）をもとに、4人前後のチームで企画を立ち上げ、最後は2分間のプレゼンテーション。登壇者による総評つき。</dd>
                   <dt>参加できる人</dt>
-                  <dd><b>25歳まで</b>・<b>定員20名</b></dd>
+                  <dd><b>25歳まで</b>・<b>定員20名</b>
+                    <span class="seat seat-pr seat-few">残りわずか</span><span class="seat seat-pr seat-wait">満席・キャンセル待ち</span><span class="seat seat-pr seat-full">満席</span></dd>
                 </dl>
                 <span class="course-more">詳細を見る <span class="arr" aria-hidden="true">→</span></span>
               </article>
 
             </div>
-            <ul class="notes"><li>登壇者は追加予定です。決定次第このページで公開します。</li></ul>
           </div>
         </div>
         <div class="tt-row">
-          <div class="tt-time">14:15 – 14:55</div>
+          <div class="tt-time">14:30 – 15:10</div>
           <div class="tt-body">
             <div class="tt-name">全体共有</div>
             <span class="fmt">一本の舞台ができる順番で</span>
@@ -832,7 +937,7 @@
           </div>
         </div>
         <div class="tt-row">
-          <div class="tt-time">14:55 – 15:15</div>
+          <div class="tt-time">15:10 – 15:30</div>
           <div class="tt-body">
             <div class="tt-name">この続きのご案内 ── SEED育成プログラム説明会</div>
           </div>
@@ -896,6 +1001,9 @@
         <p>劇作家・演出家・プロデューサーの3職能を対象に、国際的に通用するスキルとマインドセットを備えた人材を育成するためのプログラムを開発しています。この一年は、国内外の現場をまわるリサーチを重ねてきました。</p>
         <p>9月26日は、その成果を交えた<b>座談会</b>、実際に手を動かす<b>ワークショップ</b>、そして今後のプログラムをご案内する<b>説明会</b>の3つを、一日で行います。</p>
         <p class="fit-note">学校・部活動・ゼミなどでのご紹介も歓迎しています。</p>
+        <!-- 助成事業としての明記。文言は指定どおり（文末のみ体裁を整えている）。
+             事業名はフッターのクレジットと同じ正式名称に統一している。 -->
+        <p class="fund-note">本事業は、文化庁の補助金により、独立行政法人日本芸術文化振興会に設置されたもとで進められる文化芸術活動基盤強化基金（クリエイター等支援事業（育成プログラム構築・実践））の委託事業として実施しています。</p>
       </div>
 
       <div class="note-card">
@@ -984,7 +1092,9 @@
         </details>
         <details>
           <summary>定員はありますか？</summary>
-          <div class="a">ワークショップに定員があります。劇作家 <b>20名</b>／演出家 <b>10名</b>／プロデューサー <b>20名</b>です。定員に達し次第、受付を終了しますので、参加をお考えの方はお早めにお申し込みください。</div>
+          <div class="a">ワークショップに定員があります。劇作家 <b>20名</b><span class="seat seat-pw seat-few">残りわずか</span><span class="seat seat-pw seat-wait">満席・キャンセル待ち</span><span class="seat seat-pw seat-full">満席</span>／演出家 <b>15名</b><span class="seat seat-dr seat-few">残りわずか</span><span class="seat seat-dr seat-wait">満席・キャンセル待ち</span><span class="seat seat-dr seat-full">満席</span>／プロデューサー <b>20名</b><span class="seat seat-pr seat-few">残りわずか</span><span class="seat seat-pr seat-wait">満席・キャンセル待ち</span><span class="seat seat-pr seat-full">満席</span>です。定員に達し次第、受付を終了しますので、参加をお考えの方はお早めにお申し込みください。
+            <div class="wait-note">※ <b>満席・キャンセル待ち</b>と表示されている講座は、キャンセル待ちでのお申し込みをお受けしています。枠が空き次第SEED事務局からメールでご連絡し、ご返信をいただいた時点で参加が確定となります。</div>
+          </div>
         </details>
         <details>
           <summary>会場はどこですか？迷わず行けますか？</summary>
@@ -997,6 +1107,10 @@
         <details>
           <summary>お昼ごはんはどうすればいいですか？</summary>
           <div class="a"><b>お弁当を参加者全員にご用意します（無料）。</b>持ってくる必要はありません。ランチの時間は講師陣が各テーブルに分かれて参加者と交流するので、ぜひこの時間もご参加ください。</div>
+        </details>
+        <details>
+          <summary>写真や映像の撮影は入りますか？</summary>
+          <div class="a">はい。当日は<b>記録と広報のための撮影</b>が入り、撮影された写真は後日のイベントレポートなどに使わせていただく場合があります。<b>写りたくない方は、当日の受付でお申し出ください。</b>目印をお渡しし、撮影の際に配慮します。事前のご連絡は不要です。</div>
         </details>
         <details>
           <summary>申込後に参加できなくなった場合は？</summary>
@@ -1019,37 +1133,44 @@
 
           <div class="apply-step">
             <div class="st-h">座談会に参加するか決める</div>
-            <div class="st-d">11:00〜12:40。三職能の座談会が順番に開催されるので、参加すれば3本すべて聴けます。ワークショップだけの参加もできます。</div>
+            <div class="st-d">11:20〜13:00。三職能の座談会が順番に開催されるので、参加すれば3本すべて聴けます。ワークショップだけの参加もできます。</div>
           </div>
 
           <div class="apply-step">
             <div class="st-h">ワークショップの職能をひとつ選ぶ</div>
             <div class="st-d">
-              13:30〜14:15。3つのワークショップは同じ時間帯に並行して行われるため、参加できるのはひとつだけです。いずれも<b>対象は25歳まで</b>で、定員は講座ごとに異なります。
+              13:45〜14:30。3つのワークショップは同じ時間帯に並行して行われるため、参加できるのはひとつだけです。いずれも<b>対象は25歳まで</b>で、定員は講座ごとに異なります。
               <ul class="ws-choices">
                 <li>
                   <span class="ws-role">Playwright</span>
                   <span class="ws-title">物語が生まれる場所<br>―戯曲のSEEDを書いてみる―</span>
-                  <span class="ws-cap">定員 <b>20名</b></span>
+                  <span class="ws-cap">定員 <b>20名</b>
+                    <span class="seat seat-pw seat-few">残りわずか</span><span class="seat seat-pw seat-wait">満席・キャンセル待ち</span><span class="seat seat-pw seat-full">満席</span></span>
                 </li>
                 <li>
                   <span class="ws-role">Director</span>
                   <span class="ws-title">入り口に立つ<br>―演出家目線で公演を考えてみる―</span>
-                  <span class="ws-cap">定員 <b>10名</b></span>
+                  <span class="ws-cap">定員 <b>15名</b>
+                    <span class="seat seat-dr seat-few">残りわずか</span><span class="seat seat-dr seat-wait">満席・キャンセル待ち</span><span class="seat seat-dr seat-full">満席</span></span>
                 </li>
                 <li>
                   <span class="ws-role">Producer</span>
                   <span class="ws-title">アイディアを支えるフレームワーク<br>―企画をつくる・伝える―</span>
-                  <span class="ws-cap">定員 <b>20名</b></span>
+                  <span class="ws-cap">定員 <b>20名</b>
+                    <span class="seat seat-pr seat-few">残りわずか</span><span class="seat seat-pr seat-wait">満席・キャンセル待ち</span><span class="seat seat-pr seat-full">満席</span></span>
                 </li>
               </ul>
               座談会のみのご参加も歓迎です。26歳以上の方も、ワークショップを見学していただけます。
+              <!-- いずれかの講座が満席のときだけ自動で表示される -->
+              <!-- いずれかの講座がキャンセル待ちのときだけ自動で表示される -->
+              <div class="wait-note">※ <b>満席・キャンセル待ち</b>の講座は定員に達しています。お申し込みはキャンセル待ちとしてお受けし、枠が空き次第SEED事務局からメールでご連絡します。<b>事務局からのメールにご返信いただいた時点で参加が確定</b>となります。</div>
+              <div class="seat-note">※ <b>満席</b>の講座は、申込フォームでお選びいただけません。ほかの講座・座談会・説明会は引き続き受付中です。満席の講座も<b>見学</b>はできます。</div>
             </div>
           </div>
 
           <div class="apply-step">
             <div class="st-h">説明会に出るかを選ぶ</div>
-            <div class="st-d">14:55〜15:15。この秋から始まる職能別の育成プログラムの内容と参加方法をご案内します。「この続き」に興味がある方はぜひ。</div>
+            <div class="st-d">15:10〜15:30。この秋から始まる職能別の育成プログラムの内容と参加方法をご案内します。「この続き」に興味がある方はぜひ。</div>
           </div>
 
         </div>
@@ -1077,14 +1198,17 @@
       </div>
       <dl class="outline">
         <div class="outline-row"><dt>名称</dt><dd>SEED PAB特別プログラム＆講座説明会（Performing Arts Base 2026 内）</dd></div>
-        <div class="outline-row"><dt>日時</dt><dd><b>2026年9月26日（土）11:00〜15:15</b>（開場 10:30）</dd></div>
+        <div class="outline-row"><dt>日時</dt><dd><b>2026年9月26日（土）11:00〜15:30</b>（開場 10:30）</dd></div>
         <div class="outline-row"><dt>内容</dt><dd>3職能（劇作家・演出家・プロデューサー）ごとの座談会・ワークショップに加えて、今後SEEDが実施するプログラムに関する説明会を実施</dd></div>
         <div class="outline-row"><dt>会場</dt><dd><b>東京国際フォーラム ガラス棟7F 701会議室</b><br>東京都千代田区丸の内3-5-1<br>JR有楽町駅より徒歩1分／東京駅より徒歩5分、東京メトロ有楽町線 有楽町駅直通<br><a href="https://maps.google.com/?q=東京国際フォーラム" target="_blank" rel="noopener">地図を開く</a></dd></div>
         <div class="outline-row"><dt>対象</dt><dd>学生を中心に、誰でも参加OK。座談会・説明会はどなたでも。ワークショップのみ<b>25歳まで</b>の方が対象です（3講座とも同じ）。26歳以上の方も、ワークショップを見学していただけます。</dd></div>
         <div class="outline-row"><dt>参加費</dt><dd><b>無料</b>（昼食のお弁当も事務局でご用意します）</dd></div>
-        <div class="outline-row"><dt>定員</dt><dd>ワークショップ　劇作家 <b>20名</b>／演出家 <b>10名</b>／プロデューサー <b>20名</b><br>定員に達し次第、受付を終了します</dd></div>
+        <div class="outline-row"><dt>定員</dt><dd>ワークショップ　劇作家 <b>20名</b><span class="seat seat-pw seat-few">残りわずか</span><span class="seat seat-pw seat-wait">満席・キャンセル待ち</span><span class="seat seat-pw seat-full">満席</span>／演出家 <b>15名</b><span class="seat seat-dr seat-few">残りわずか</span><span class="seat seat-dr seat-wait">満席・キャンセル待ち</span><span class="seat seat-dr seat-full">満席</span>／プロデューサー <b>20名</b><span class="seat seat-pr seat-few">残りわずか</span><span class="seat seat-pr seat-wait">満席・キャンセル待ち</span><span class="seat seat-pr seat-full">満席</span><br>定員に達し次第、受付を終了します</dd></div>
+        <div class="outline-row"><dt>撮影</dt><dd>当日は<b>記録と広報のための写真・映像の撮影</b>が入ります。撮影された写真は、後日のイベントレポートなどに使わせていただく場合があります。<b>写りたくない方は、当日の受付でお申し出ください。</b>目印をお渡しし、撮影の際に配慮します。</dd></div>
         <div class="outline-row"><dt>申込締切</dt><dd>2026年9月24日（木）</dd></div>
-        <div class="outline-row"><dt>主催</dt><dd>SEED（JPASN）</dd></div>
+        <div class="outline-row"><dt>主催</dt><dd>文化庁、独立行政法人日本芸術文化振興会、一般社団法人 緊急事態舞台芸術ネットワーク</dd></div>
+        <div class="outline-row"><dt>事業</dt><dd>文化芸術活動基盤強化基金（クリエイター等支援事業（育成プログラム構築・実践））<span class="nw">｜独立行政法人日本芸術文化振興会</span></dd></div>
+        <div class="outline-row"><dt>企画・運営</dt><dd>SEED（JPASN）</dd></div>
         <div class="outline-row"><dt>お問い合わせ</dt><dd>SEED事務局　<a href="mailto:seed@jpasn.net">seed@jpasn.net</a></dd></div>
       </dl>
       <ul class="notes">
@@ -1099,13 +1223,44 @@
 
 <footer>
   <div class="wrap">
-    <div class="f-brand">
-      <img class="f-logo" src="seed-logo.svg" alt="SEED" width="437" height="200"
-           onerror="this.remove(); document.getElementById('f-fallback').hidden = false;">
-      <span class="f-name" id="f-fallback" hidden>SEED</span>
-      <span>次世代を担う舞台芸術人材育成プログラム／JPASN</span>
+
+    <!-- ══ 助成クレジット ══
+         文化庁シンボルマーク／クリエイター支援シンボルマーク（紫＝育成プログラム構築・実践）は
+         それぞれ公式ガイドラインに従い、色・比率を変更せず掲載している。差し替え時の注意：
+           ・色の入れ替え・変形・回転・アウトライン付与は禁止
+           ・最小サイズ … JCSF基本形（テーマ2行）は高さ27mm相当／文化庁 和文横配置は保護エリアを確保
+           ・原寸データは docs/program/pab-lp/ 内の logo-*.png（公式PNGを縮小したのみ）
+         ガイドライン：creator.ntj.jac.go.jp（クリエイター支援）／www.bunka.go.jp/bunkacho/symbolmark/（文化庁） -->
+    <div class="f-credit">
+      <dl class="f-cred-list">
+        <div class="f-cred-row">
+          <dt>主催</dt>
+          <dd>文化庁、独立行政法人日本芸術文化振興会、一般社団法人 緊急事態舞台芸術ネットワーク</dd>
+        </div>
+        <div class="f-cred-row">
+          <dt>事業</dt>
+          <dd>文化芸術活動基盤強化基金（クリエイター等支援事業（育成プログラム構築・実践））<span class="nw">｜独立行政法人日本芸術文化振興会</span></dd>
+        </div>
+      </dl>
+      <div class="f-marks">
+        <img class="f-mark f-mark-jcsf" src="logo-jcsf-creator-development.png"
+             width="399" height="250" loading="lazy"
+             alt="Japan Creator Support Fund — FOR CREATOR DEVELOPMENT">
+        <img class="f-mark f-mark-bunka" src="logo-bunkacho.png"
+             width="457" height="140" loading="lazy" alt="文化庁">
+      </div>
     </div>
-    <span>お問い合わせ：SEED事務局 <a href="mailto:seed@jpasn.net" style="color:var(--ink-2);text-underline-offset:.2em">seed@jpasn.net</a></span>
+
+    <div class="f-main">
+      <div class="f-brand">
+        <img class="f-logo" src="seed-logo.svg" alt="SEED" width="437" height="200"
+             onerror="this.remove(); document.getElementById('f-fallback').hidden = false;">
+        <span class="f-name" id="f-fallback" hidden>SEED</span>
+        <span>次世代を担う舞台芸術人材育成プログラム／JPASN</span>
+      </div>
+      <span>お問い合わせ：SEED事務局 <a href="mailto:seed@jpasn.net" style="color:var(--ink-2);text-underline-offset:.2em">seed@jpasn.net</a></span>
+    </div>
+
   </div>
 </footer>
 
@@ -1206,7 +1361,9 @@
       </div>
       <div class="md-row">
         <dt>定員</dt>
-        <dd><b>20名</b>（定員に達し次第、受付を終了します）</dd>
+        <dd><b>20名</b>（定員に達し次第、受付を終了します）
+          <span class="seat seat-pw seat-few">残りわずか</span><span class="seat seat-pw seat-wait">満席・キャンセル待ち</span><span class="seat seat-pw seat-full">満席</span></dd>
+        <dd class="seatmsg seatmsg-pw">定員に達したため、現在は<b>キャンセル待ち</b>での受付です。枠が空き次第、SEED事務局からメールでご連絡します。ご返信をいただいた時点で参加が確定となります。</dd>
       </div>
       <div class="md-row">
         <dt>持ち物</dt>
@@ -1234,7 +1391,9 @@
       </div>
       <div class="md-row">
         <dt>定員</dt>
-        <dd><b>10名</b>（定員に達し次第、受付を終了します）</dd>
+        <dd><b>15名</b>（定員に達し次第、受付を終了します）
+          <span class="seat seat-dr seat-few">残りわずか</span><span class="seat seat-dr seat-wait">満席・キャンセル待ち</span><span class="seat seat-dr seat-full">満席</span></dd>
+        <dd class="seatmsg seatmsg-dr">定員に達したため、現在は<b>キャンセル待ち</b>での受付です。枠が空き次第、SEED事務局からメールでご連絡します。ご返信をいただいた時点で参加が確定となります。</dd>
       </div>
       <div class="md-row">
         <dt>持ち物</dt>
@@ -1262,7 +1421,9 @@
       </div>
       <div class="md-row">
         <dt>定員</dt>
-        <dd><b>20名</b>（4人前後×5チーム／定員に達し次第、受付を終了します）</dd>
+        <dd><b>20名</b>（4人前後×5チーム／定員に達し次第、受付を終了します）
+          <span class="seat seat-pr seat-few">残りわずか</span><span class="seat seat-pr seat-wait">満席・キャンセル待ち</span><span class="seat seat-pr seat-full">満席</span></dd>
+        <dd class="seatmsg seatmsg-pr">定員に達したため、現在は<b>キャンセル待ち</b>での受付です。枠が空き次第、SEED事務局からメールでご連絡します。ご返信をいただいた時点で参加が確定となります。</dd>
       </div>
       <div class="md-row">
         <dt>持ち物</dt>
